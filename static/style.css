@@ -1,0 +1,95 @@
+ @import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@100&family=Quicksand:wght@300&display=swap');
+body{
+   
+ margin:0;
+ padding:0;
+ height: 100%;
+ margin: 0;
+ font-family: 'Chivo Mono', monospace;
+ background: #f4f4f6;
+ overflow:auto;
+}
+
+.options{
+    margin: 1.25rem auto ;
+    width: 25rem;
+    height: 25rem;
+ cursor:pointer;
+    display: grid;
+    grid-template-columns: 12.5rem 12.5rem;
+    grid-row: auto auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+  }
+.cont{
+  max-width: 960px;
+  width: 100% ;
+  width: calc(100% - 1rem) ;
+  margin: 50px auto;
+  padding: 50px;
+  background: #fcfff9
+}
+  .options .box {
+   background-color:#55efc4;
+    padding: 1.1rem;
+    border-radius: 0.8rem;
+    color: black;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rempx;
+    font-family: sans-serif;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 1px rgba(0,0,0,0.09), 
+              0 4px 2px rgba(0,0,0,0.09), 
+              0 8px 4px rgba(0,0,0,0.09), 
+              0 16px 8px rgba(0,0,0,0.09),
+              0 32px 16px rgba(0,0,0,0.09);
+  }
+  .box:hover {
+    transform: scale(1.1);
+  }
+
+  /* Create the hidden pseudo-element */
+  /* include the shadow for the end state */
+  .box::after {
+  
+    z-index: -1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+ 
+  button a{
+    color:white;
+    text-decoration: none;
+  }
+
+  
+  /* Scale up the box */
+  .box:hover {
+    transform: scale(1.1);
+  }
+  
+ 
+  .box:hover::after {
+    opacity: 1;
+  }
+
+  
+  @media (max-width:500px){
+    .options{
+        display:flex;
+        width:100%;
+        flex-direction: column;
+    }
+    .cont{
+        display:block;
+        width:100%;
+    }
+    .box:hover {
+      transform: none;
+    }
+    
+   
+}
