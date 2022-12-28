@@ -1,8 +1,0 @@
-{
-    "editor.tabCompletion": "on",
-    "diffEditor.codeLens": true,
-    "files.associations": {
-        "iostream": "cpp"
-    },
-    "git.ignoreLimitWarning": true
-}

@@ -1,1 +1,0 @@
-{"name":"Local: index","url":"c:\\Users\\acs\\Desktop\\Projects\\intern\\index.cpp","tests":[{"id":1671630316180,"input":"2\n3\n5 2\n11 6 3","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\acs\\Desktop\\Projects\\intern\\index.cpp","group":"local","local":true}

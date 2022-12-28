@@ -1,8 +1,5 @@
 from flask import Flask,jsonify,render_template
-import requests
-import simplejson 
-import json
-import os,random
+
 
 app = Flask(__name__)
 
