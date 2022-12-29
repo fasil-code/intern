@@ -314,24 +314,7 @@ const posts=[
       "unicode_version": "6.0",
       "ios_version": "6.0"
       },
-      {
-      "emoji": "🤕",
-      "description": "face with head-bandage",
-      "category": "Smileys & Emotion",
-      "aliases": ["face_with_head_bandage"],
-      "tags": ["hurt"],
-      "unicode_version": "8.0",
-      "ios_version": "9.1"
-      },
-      {
-      "emoji": "",
-      "description": "nauseated face",
-      "category": "Smileys & Emotion",
-      "aliases": ["nauseated_face"],
-      "tags": ["sick", "barf", "disgusted"],
-      "unicode_version": "9.0",
-      "ios_version": "10.2"
-      },
+     
       
       
       
@@ -367,15 +350,7 @@ const posts=[
       
       },
       
-      {
-      "emoji": "🧐",
-      "description": "face with monocle",
-      "category": "Smileys & Emotion",
-      "aliases": ["monocle_face"],
-      "tags": [],
-      "unicode_version": "11.0",
-      "ios_version": "12.1"
-      },
+     
       {
       "emoji": "😕",
       "description": "confused face",
@@ -633,15 +608,7 @@ const posts=[
       "unicode_version": "6.0",
       "ios_version": "6.0"
       },
-      {
-      "emoji": "☠️",
-      "description": "skull and crossbones",
-      "category": "Smileys & Emotion",
-      "aliases": ["skull_and_crossbones"],
-      "tags": ["danger", "pirate"],
-      "unicode_version": "",
-      "ios_version": "9.1"
-      },
+      
       
       
       {
@@ -752,7 +719,7 @@ let score=0
 function renderEmoji(){
       let arr=[]
       while(arr.length < 4){
-          var r = Math.floor(Math.random() * 80) + 1;
+          var r = Math.floor(Math.random() * 73) + 1;
           if(arr.indexOf(r) === -1) arr.push(r);
       }
      return arr;
@@ -803,7 +770,7 @@ const buttonGroupPressed = e => {
            }
            if(e.target.id=="option1"|| e.target.id=="option2"|| e.target.id=="option3"|| e.target.id=="option0"){
      document.getElementById(e.target.id).style.border='1px solid blue'
-     document.getElementById(e.target.id).style.background='#e7f6d5'
+     document.getElementById(e.target.id).style.background='#cce5ff'
        clicked=true;
        choosen=e.target.id;
            }
