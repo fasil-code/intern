@@ -9,7 +9,7 @@ def home():
 
 @app.route("/emoji",methods=['GET','POST'])
 def emoji():
-   return render_template('emoji.html')
+   return render_template('Emoji/emoji.html')
 
 @app.route("/last",methods=['GET','POST'])
 def last():
