@@ -1,11 +1,13 @@
 const buttonGroup = document.getElementById("option11");
+const form= document.getElementById("form");
 const option1=document.querySelector('#option0')
 const option2=document.querySelector('#option1')
 const option3=document.querySelector('#option2')
 const option4=document.querySelector('#option3')
 const option5=document.querySelector('#heading')
 const submit=document.querySelector('#submit')
-const sco=document.querySelector('#score')
+const scored=document.querySelector('#scored')
+
 
 const posts=[
       {
@@ -826,8 +828,10 @@ loadQuestion();
 
 }
 else{
+      submit.innerHTML='Submit'
+     scored.innerHTML= "Your score is "+score
+     form.style.display='none'
       
-      sco.innerHTML=score
 }
       }
       else{
