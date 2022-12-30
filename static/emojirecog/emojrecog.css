@@ -1,4 +1,4 @@
-body{
+ body{
     background-color:#eee;
 }
 
@@ -44,4 +44,4 @@ label.radio input:checked + span {
 .btn:active {
   outline: 0 !important;
   box-shadow: none !important;
-}
+} 

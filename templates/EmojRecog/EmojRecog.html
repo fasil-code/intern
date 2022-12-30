@@ -14,7 +14,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{{ url_for('static', filename='emojrecog.css')}}"
+      href="{{ url_for('static', filename='emojirecog/emojrecog.css')}}"
     />
   </head>
   <body>
@@ -28,44 +28,44 @@
               >
                 <h4>ERT Test</h4>
                 <span>(5 of 20)</span>
-                
               </div>
-             
             </div>
 
-        
-            <div class="question   bg-white p-3 border-bottom">
-              <div class="  big  align-items-center question-title">
-               <div>
-                <h5 class=" head mt-1 ml-2">
-                  Which of the following represents the given emotion?
-                </h5>
-            </div>
+            <div class="question bg-white p-3 border-bottom">
+              <div class="big align-items-center question-title">
+                <div>
+                  <h5 class="head mt-1 ml-2">
+                    Which of the following represents the given emotion?
+                  </h5>
+                </div>
                 <div class="img-con">
-                    <img class =" img img-thumbnail img-fluid" src="{{url_for('static', filename='FEAR.jpg')}}" />
+                  <img
+                    class="img img-thumbnail img-fluid"
+                    src="{{url_for('static', filename='emojirecog/FEAR.jpg')}}"
+                  />
                 </div>
               </div>
               <div class="option ans ml-2">
                 <label class="radio">
-                  <input type="radio" name="brazil" value="brazil" />
+                  <input type="radio" name="option" value="brazil" />
                   <span>Brazil</span>
                 </label>
               </div>
-              <div class="option  ans ml-2">
+              <div class="option ans ml-2">
                 <label class="radio">
-                  <input type="radio" name="Germany" value="Germany" />
+                  <input type="radio" name="option" value="Germany" />
                   <span>Germany</span>
                 </label>
               </div>
-              <div class="option  ans ml-2">
+              <div class="option ans ml-2">
                 <label class="radio">
-                  <input type="radio" name="Indonesia" value="Indonesia" />
+                  <input type="radio" name="option" value="Indonesia" />
                   <span>Indonesia</span>
                 </label>
               </div>
-              <div class=" option  ans ml-2">
+              <div class="option ans ml-2">
                 <label class="radio">
-                  <input type="radio" name="Russia" value="Russia" />
+                  <input type="radio" name="option" value="Russia" />
                   <span>Russia</span>
                 </label>
               </div>
@@ -80,7 +80,7 @@
                 <i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button
               ><button
                 class="btn btn-primary border-success align-items-center btn-success"
-                type="button"
+                type="button"  onclick="fun()"
               >
                 Next<i class="fa fa-angle-right ml-2"></i>
               </button>
@@ -94,5 +94,6 @@
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
+    <script type = "text/javascript" src = "{{ url_for('static', filename = 'emojirecog/emojrecog.js') }}" ></script>
   </body>
 </html>
