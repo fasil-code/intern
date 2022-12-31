@@ -1,0 +1,34 @@
+body{
+    background-color:#eedd82 ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.main{
+    text-align: center;
+
+}
+h1{
+    font-size: 2.4rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+    color: black;
+    margin:2% 0;
+
+}
+h2{
+    font-size: 1.8rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:white;
+}
+.words{
+    margin-top: 7%;
+    padding: 0 14%;
+}
+#next{
+    margin: 5%;
+}
+
+
+      
