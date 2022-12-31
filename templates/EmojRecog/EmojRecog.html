@@ -18,6 +18,7 @@
     />
   </head>
   <body>
+    {% block content %}
     <div class="container mt-5">
       <div class="d-flex justify-content-center row">
         <div class="col-md-10 col-lg-10">
@@ -26,7 +27,8 @@
               <div
                 class="d-flex flex-row justify-content-between align-items-center mcq"
               >
-                <h4>ERT Test</h4>
+                <h4> {{data['questions'][count]['correct']}} </h4>
+              
                 <span>(5 of 20)</span>
               </div>
             </div>
@@ -41,32 +43,32 @@
                 <div class="img-con">
                   <img
                     class="img img-thumbnail img-fluid"
-                    src="{{url_for('static', filename='emojirecog/FEAR.jpg')}}"
+                    src="{{url_for('static', filename='images/' +path)}}"
                   />
                 </div>
               </div>
               <div class="option ans ml-2">
                 <label class="radio">
                   <input type="radio" name="option" value="brazil" />
-                  <span>Brazil</span>
+                  <span>{{data['questions'][count]['options'][0]}}</span>
                 </label>
               </div>
               <div class="option ans ml-2">
                 <label class="radio">
                   <input type="radio" name="option" value="Germany" />
-                  <span>Germany</span>
+                  <span>{{data['questions'][count]['options'][1]}}</span>
                 </label>
               </div>
               <div class="option ans ml-2">
                 <label class="radio">
                   <input type="radio" name="option" value="Indonesia" />
-                  <span>Indonesia</span>
+                  <span>{{data['questions'][count]['options'][2]}}</span>
                 </label>
               </div>
               <div class="option ans ml-2">
                 <label class="radio">
                   <input type="radio" name="option" value="Russia" />
-                  <span>Russia</span>
+                  <span>{{data['questions'][count]['options'][3]}}</span>
                 </label>
               </div>
             </div>
@@ -89,6 +91,7 @@
         </div>
       </div>
     </div>
+    {% endblock content %}
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
