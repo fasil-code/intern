@@ -6,8 +6,9 @@ body{
  height: 100%;
  margin: 0;
  font-family: 'Chivo Mono', monospace;
- background: #f4f4f6;
+ background-color:rgb(128, 6, 6);
  overflow:auto;
+
 }
 
 .options{
@@ -27,7 +28,8 @@ body{
   width: calc(100% - 1rem) ;
   margin: 50px auto;
   padding: 50px;
-  background: #fcfff9
+
+ 
 }
   .options .box {
    background-color:#55efc4;
@@ -39,7 +41,7 @@ body{
     align-items: center;
     justify-content: center;
     font-size: 2.5rempx;
-    font-family: sans-serif;
+ 
     transition: all 0.3s ease-in-out;
     box-shadow: 0 2px 1px rgba(0,0,0,0.09), 
               0 4px 2px rgba(0,0,0,0.09), 
@@ -92,4 +94,7 @@ body{
     }
     
    
+}
+body{
+  background-color:rgb(107, 0, 0);
 }
