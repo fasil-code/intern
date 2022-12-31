@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route("/",methods=['GET','POST'])
 def home():
    return render_template('home.html')
-#Emoji
+#Emoji=
 @app.route("/emoji",methods=['GET','POST'])
 def emoji():
    return render_template('Emoji/emoji.html')

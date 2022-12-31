@@ -23,7 +23,13 @@ function audioToText(num){
   const msg = new SpeechSynthesisUtterance(
     words[arr[num]]
   );
-  window.speechSynthesis.speak(msg);
+  msg.lang = "hi-IN";
+
+const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "hi-IN");
+      msg.voice = voices[0];
+
+      window.speechSynthesis.speak(msg);
+  
 
 }
 
