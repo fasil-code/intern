@@ -17,6 +17,10 @@ def emoji():
 @app.route("/emojrecog",methods=['GET','POST'])
 def emojrecog():
    return render_template('EmojRecog/EmojRecog.html')
+   #EMOJI
+@app.route("/ACE")
+def ace():
+   return render_template('ACE/attention2.html')
 
 
 if __name__ == "__main__":
