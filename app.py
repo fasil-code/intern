@@ -30,10 +30,12 @@ def emojrecog():
    
    return render_template('EmojRecog/EmojRecog.html',data=data,count=count,path=path)
 #4 Ace
-@app.route("/ACE")
+@app.route("/ace")
 def ace():
    return render_template('ACE/attention2.html')
-    
+@app.route("/ace2")
+def ace2():
+   return render_template('ACE/attention3.html')  
 
 if __name__ == "__main__":
     app.run(debug = True)

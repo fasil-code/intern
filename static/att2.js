@@ -18,26 +18,72 @@ function memorize(){
     document.getElementById("w3").innerHTML=words[arr[2]];
 }
 memorize();
-function audioToText(num){
-   
+
+function textToAudio(num){
   const msg = new SpeechSynthesisUtterance(
     words[arr[num]]
+    
   );
   msg.lang = "hi-IN";
 
 const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "hi-IN");
-      msg.voice = voices[0];
-
+      msg.voice = voices[1];
+      msg.volume = 1;
+      msg.rate=0.8;
+      msg.pitch = 0.8;
+      window.speechSynthesis.cancel(msg);
       window.speechSynthesis.speak(msg);
-  
+
+}
+function repeat(message){
+  const msg = new SpeechSynthesisUtterance(
+    "You said"+message
+    
+  );
+  msg.lang = "en-in";
+
+const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-in");
+      msg.voice = voices[0];
+      msg.volume = 1;
+      msg.rate = 0.5;
+      msg.pitch = 0.8;
+      window.speechSynthesis.cancel(msg);
+      window.speechSynthesis.speak(msg);
 
 }
 
+let res=new Array(3);
 
+// Define a function to start speech recognition
+function audioToText(i){
+  let message;
+  const recognition = new webkitSpeechRecognition();
+  recognition.interimResults = true;
+  recognition.lang = 'en-in';
 
+  // Set up event listeners for the Web Speech API
+  recognition.addEventListener('start', () => {
+    // Display a message when recognition starts
+    document.getElementById('recognition-status').textContent = '🔴 Voice Recognition started';
+  });
+  recognition.addEventListener('result', (event) => {
+    // Get the transcribed text
+    const transcript = event.results[0][0].transcript;
 
-
-
-
-
+    // Display the transcribed text
+    document.getElementById('text'+i).textContent = transcript;
+    message=transcript;
+    // Check if the recognition process has completed
+    if (event.results[0].isFinal) {
+      // Stop recognition if the process has completed
+      recognition.stop();
+    }
+  });
+  recognition.addEventListener('end', () => {
+    // Display a message when recognition ends
+    document.getElementById('recognition-status').textContent = '🟢 Voice Recognition ended';
+    repeat(message);
+  });
+  recognition.start();
+}
 

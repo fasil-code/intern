@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+    crossorigin="anonymous"
+  />
+    <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='att3.css')}}">
+</head>
+  <body>
+    <div class="container">
+        <div class="d-flex justify-content-center align-items-center row">
+          <div class="col-md-8 col-lg-8">
+             <div class="border">
+              <div class="p-5 bg-primary text-white border-bottom">
+                <div id="heading">
+                  <h3 >Record three words which I asked you to remember</h3>
+                  
+                
+                <h5 id="recognition-status"></h5>
+              </div>
+               </div>
+      
+              <div class="q1 bg-white p-4 border-bottom">
+                <div
+                  class="d-flex flex-row justify-content-between align-items-center q1"
+                  >
+                  <h5>Record first word </h5>
+                  <h5 id="text0" class="word"></h5>
+                    <span><button onclick="audioToText(0)" type="button"  class="btn btn-outline-primary">Record</button></span>
+                </div>
+              </div>
+                <div class="q2 bg-white p-4 border-bottom">
+                    <div
+                      class="d-flex flex-row justify-content-between align-items-center q2"
+                      >
+                      <h5>Record second word </h5>
+                      <h5 id="text1" class="word"></h5>
+                      <span><button onclick="audioToText(1)" type="button"  class="btn btn-outline-primary">Record</button></span>
+                    </div>
+                </div>
+                <div class="q3 bg-white p-4 border-bottom">
+                    <div
+                      class="d-flex flex-row justify-content-between align-items-center q3"
+                    >
+                      <h5>Record third word </h5>
+                      <h5 id="text2" class="word"></h5>
+                      <span><button onclick="audioToText(2)" type="button" class="btn btn-outline-primary">Record</button></span>
+                    </div>
+                </div>
+                <div class="score bg-white p-4 border-bottom">
+                    <div
+                      class="d-flex flex-row justify-content-between align-items-center q3"
+                    >
+                      <!-- <h5>Score </h5> -->
+                     
+                    </div>
+
+                </div>
+                <div class="bg-white p-4 border-bottom button">
+                    
+                    <button type="button" class="px-5 btn btn-lg btn-primary">Next</button> 
+                
+                </div>
+                
+             </div>
+            </div>
+        </div>
+    </div>
+  </body>
+  <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script type = "text/javascript" src = "{{ url_for('static', filename = 'att2.js') }}" ></script>
+    
+</html>
