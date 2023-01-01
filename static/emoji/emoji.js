@@ -759,9 +759,12 @@ function rem(){
      }
 
 
+   
+
 const buttonGroupPressed = e => { 
-     
+   
          for (const child of buttonGroup.children) {
+       
            child.style.border='none'
            child.style.transition='none'
            child.style.transform='none'
@@ -773,6 +776,7 @@ const buttonGroupPressed = e => {
      document.getElementById(e.target.id).style.background='#cce5ff'
        clicked=true;
        choosen=e.target.id;
+      
            }
        
       
