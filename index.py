@@ -17,28 +17,49 @@ class emotiondata(object):
                       ,
                       {
     'options':['happy','angry','surprised','neutral'],
-      'correct':'angry',
+      'correct':'surprised',
       
                    }
                       ,
                       {
                            
-    'options':['surprised','disgusted','scared','neutral'],
-      'correct':'surprised',
+    'options':['contempt','disgusted','scared','neutral'],
+      'correct':'contempt',
        },
          {
               
-    'options':['surprised','disgusted','scared','neutral'],  
-    'correct':'disgusted',
+    'options':['surprised','disgusted','fear','neutral'],  
+    'correct':'fear',
          },           
          {           
-    'options':['surprised','disgusted','scared','neutral'],           
-    'correct':'scared',
-         }
-                     
+    'options':['angry','happy','scared','neutral'],           
+    'correct':'angry',
+         },
+               {           
+    'options':['angry','happy','scared','neutral'],           
+    'correct':'angry',
+         },         
+                                {
+                           
+    'options':['contempt','disgusted','scared','neutral'],
+      'correct':'contempt',
+       },      
                    
-                   
-                   
+                                         {
+                           
+    'options':['contempt','disgusted','scared','neutral'],
+      'correct':'contempt',
+       },        
+                                             {
+                           
+    'options':['contempt','disgusted','scared','neutral'],
+      'correct':'contempt',
+       },        
+                                                     {
+                           
+    'options':['contempt','disgusted','scared','neutral'],
+      'correct':'contempt',
+       },                                        
   
                ]
           }
