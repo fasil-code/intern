@@ -45,6 +45,20 @@ def emojrecog():
 def ace():
    return render_template('ACE/attention2.html')
     
+@app.route("/ace2")
+def ace2():
+   return render_template('ACE/attention3.html')  
+
+    
+@app.route("/language",methods=['GET','POST'])
+def lang():
+
+   return render_template('language.html')
+
+@app.route('/results', methods=['GET','POST'])
+def submit():
+ 
+  return render_template('results.html')
 
 if __name__ == "__main__":
     app.run(debug = True)
