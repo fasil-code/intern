@@ -41,15 +41,24 @@ def emojrecog():
        path=type+'/subject'+random_number+'.jpg'
        return render_template('EmojRecog/EmojRecog.html',data=data,count=count,path=path,random_number=random_number)
 #4 Ace
-@app.route("/ace")
-def ace():
-   return render_template('ACE/attention2.html')
+@app.route("/ace1")
+def ace1():
+   return render_template('ACE/attention/attention1.html')
     
 @app.route("/ace2")
 def ace2():
-   return render_template('ACE/attention3.html')  
+   return render_template('ACE/attention/attention2.html') 
+@app.route("/ace3") 
+def ace3():
+   return render_template('ACE/attention/attention3.html') 
+@app.route("/ace4") 
+def ace4():
+   return render_template('ACE/attention/attention4.html')  
+@app.route("/ace5") 
+def ace5():
+   return render_template('ACE/memory/memory1.html')    
 
-    
+
 @app.route("/language",methods=['GET','POST'])
 def lang():
 
