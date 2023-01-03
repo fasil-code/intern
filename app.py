@@ -69,6 +69,12 @@ def submit():
  
   return render_template('results.html')
 
+#5 Pulse Tracking Test (PTT)
+@app.route("/pulse-tracking")
+def ptt():
+   return render_template('PTT/ptt.html')
+
+
 if __name__ == "__main__":
     app.run(debug = True)
     
