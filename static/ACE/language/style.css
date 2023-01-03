@@ -51,7 +51,14 @@
 #errorMessage {
   color: red;
 }
-
+#mar {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #1d36dd;
+  display: flex;
+  justify-content: center;
+  margin-top: 20%;
+  font-size: 70px;
+}
 
 #form button {
   width: 100px;

@@ -113,7 +113,7 @@
            d1.style.display='none'
         form.style.display='none'
         errmsg.style.display='none'
-          mark1.innerHTML="Your Score is :"+marks;
+          mark1.innerHTML="Your Score is : "+marks;
          // marksDiv.innerHTML = `Marks: ${marks}`;
         });
       }
