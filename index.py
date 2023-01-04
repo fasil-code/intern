@@ -3,7 +3,7 @@ class emotiondata(object):
           self.data={
                'questions':[
                    {
-     'path':'FEAR.jpg',
+    
     'options':['sad','happy','angry','surprised'],
       'correct':'happy',
       
@@ -41,25 +41,21 @@ class emotiondata(object):
          },         
                                 {
                            
-    'options':['contempt','disgusted','scared','neutral'],
-      'correct':'contempt',
+    'options':['contempt','disgusted','fear','neutral'],
+      'correct':'fear',
        },      
                    
                                          {
                            
-    'options':['contempt','disgusted','scared','neutral'],
-      'correct':'contempt',
+    'options':['contempt','disgusted','sad','neutral'],
+      'correct':'sad',
        },        
                                              {
                            
-    'options':['contempt','disgusted','scared','neutral'],
-      'correct':'contempt',
+    'options':['contempt','disgusted','surprised','neutral'],
+      'correct':'surprised',
        },        
-                                                     {
-                           
-    'options':['contempt','disgusted','scared','neutral'],
-      'correct':'contempt',
-       },                                        
+                                        
   
                ]
           }

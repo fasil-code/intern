@@ -18,9 +18,7 @@ def emoji():
 #3 Emoji Recog
 
  
-@app.route("/result",methods=['GET','POST'])
-def result():
-    return "<p>Hello, World!</p>"
+
  
 @app.route("/emojrecog",methods=['GET','POST'])
 def emojrecog():
@@ -34,7 +32,7 @@ def emojrecog():
    random_number=str(random_number)
    if 9>=int(random_number):
       random_number="0"+str(random_number)
-   if  count>10:
+   if  count>=10:
        return render_template('EmojRecog/result.html')
    else :
        type=data['questions'][count]['correct']
@@ -77,5 +75,4 @@ def ptt():
 
 if __name__ == "__main__":
     app.run(debug = True)
-    
     

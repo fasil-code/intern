@@ -17,9 +17,9 @@
       href="{{ url_for('static', filename='emojirecog/emojrecog.css')}}"
     />
   </head>
-  <body>
-    {% block content %}
-    
+  <body >
+  {% block content %}
+  <h1 id="scored"></h1>
     <div class="container mt-5">
       <div class="d-flex justify-content-center row">
         <div class="col-md-10 col-lg-10">
@@ -28,10 +28,11 @@
               <div
                 class="d-flex flex-row justify-content-between align-items-center mcq"
               >
-                <h4> {{data['questions'][count]['correct']}} </h4>
+                <!-- <h4 id="correct" value="{{data['questions'][count]['correct']}}">{{data['questions'][count]['correct']}}</h4> -->
               
-                <span>({{count}} of 10)</span>
-                <span>{{random_number}}</span>
+                
+                <span>{{count+1}} of 10</span>
+                
               </div>
             </div>
 
@@ -49,27 +50,28 @@
                   />
                 </div>
               </div>
+              <form method="POST" action="/emojrecog">
               <div class="option ans ml-2">
                 <label class="radio">
-                  <input type="radio" name="option" value="brazil" />
+                  <input type="radio" name="optiond" value="{{data['questions'][count]['options'][0]}}" />
                   <span>{{data['questions'][count]['options'][0]}}</span>
                 </label>
               </div>
               <div class="option ans ml-2">
                 <label class="radio">
-                  <input type="radio" name="option" value="Germany" />
+                  <input type="radio" name="optiond" value="{{data['questions'][count]['options'][1]}}" />
                   <span>{{data['questions'][count]['options'][1]}}</span>
                 </label>
               </div>
               <div class="option ans ml-2">
                 <label class="radio">
-                  <input type="radio" name="option" value="Indonesia" />
+                  <input type="radio" name="optiond" value="{{data['questions'][count]['options'][2]}}" />
                   <span>{{data['questions'][count]['options'][2]}}</span>
                 </label>
               </div>
               <div class="option ans ml-2">
                 <label class="radio">
-                  <input type="radio" name="option" value="Russia" />
+                  <input type="radio" name="optiond" value="{{data['questions'][count]['options'][3]}}" />
                   <span>{{data['questions'][count]['options'][3]}}</span>
                 </label>
               </div>
@@ -92,17 +94,69 @@
                 Next<i class="fa fa-angle-right ml-2"></i>
                 
               </button> -->
-              <a class="btn btn-primary border-success align-items-center btn-success" class="ml-2" href="{{ url_for('emojrecog') }}?count={{count+1}}">Next</a>
+              <a  type="submit" value="submit" class="btn btn-primary border-success align-items-center btn-success" onclick="fun()" class="ml-2" 
+              href="javascript:void()" >Next</a>
             </div>
           </div>
         </div>
       </div>
     </div>
-
+  </form>
     {% endblock content %}
    
   
       
+    <script type = "text/javascript" src = "{{ url_for('static', filename = 'emojrecog/emojrecog.js') }}" ></script>
+
+<script>
+  var s=0;
+
+ function fun(){
+  if("{{count}}"==0){
+  
+    localStorage.clear()
+  }
+
+
+  var checkRadio = document.querySelector(
+    'input[name="optiond"]:checked');
+ const sfg=document.getElementById('scx')
+ s=localStorage.getItem("scor");
+if(checkRadio != null) {
+  let CheckedValue=checkRadio.value.toLowerCase();
+ 
+  let Correct="{{data['questions'][count]['correct']}}"
+
+  if(CheckedValue===Correct){
+
+s++;
+
+localStorage.setItem("scor", s);
+
+
+  }
+ 
+  
+  window.location.href="{{url_for('emojrecog') }}?count={{count+1}}"
+
+}
+else {
+    alert("select option")
+
+}
+sfg.innerHTML=s;
+
+
+
+
+ } 
+
+
+
+</script>
+
+
+
 
     <script type = "text/javascript" src = "{{ url_for('static', filename = 'emojirecog/emojrecog.js') }}" ></script>
   </body>
