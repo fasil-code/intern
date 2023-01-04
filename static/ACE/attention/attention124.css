@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@100&family=Quicksand:wght@300&display=swap');
+
 html {
     box-sizing: border-box;
 }
@@ -9,8 +11,8 @@ html {
 body {
     font-family: sans-serif;
     padding: 1rem;
-    background-color: rgb(40, 28, 42);
-    color: #ffff;
+    background-color:#eee;
+    color:black;
 }
 h1{
     align-items: center;
