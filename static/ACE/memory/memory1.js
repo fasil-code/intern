@@ -39,6 +39,10 @@ function repeat(message){
       // Display the transcribed text
       document.getElementById('text'+i).textContent = transcript;
       message=transcript;
+      message=message.toLowerCase();
+      if(message[message.length-1]==="."){
+      message=message.slice(0,-1);
+      }
       ans[i]=message;
       // Check if the recognition process has completed
       if (event.results[0].isFinal) {
