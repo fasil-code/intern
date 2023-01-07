@@ -1,0 +1,29 @@
+body{
+    background-color:#eee;
+}
+.container{
+    margin-top: 6%;
+}
+.button{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+.heading{
+    text-align: center;
+}
+.heading h3{
+    line-height: 1.8;
+}
+h4{
+    font-size: 1.6rem;
+}
+.btn {
+    margin: 0  0  0 20px; /* Adds a 10px margin to the left and right of each button */
+}
+
+@media (max-width:500px){
+    h4{
+        font-size: 1.3rem;
+    }
+}

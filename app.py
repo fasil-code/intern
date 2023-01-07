@@ -56,6 +56,9 @@ def ace4():
 def ace5():
    return render_template('ACE/memory/memory1.html')    
 
+@app.route("/ace6") 
+def ace6():
+   return render_template('ACE/language/language2.html') 
 
 @app.route("/language",methods=['GET','POST'])
 def lang():
