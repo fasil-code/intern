@@ -68,13 +68,10 @@ function repeat(message){
            arr.splice(ind,1);
        }
     }
-    var elems = document.getElementsByClassName('container');
-    for (var i=0;i<elems.length;i++){
-        elems[i].style.display = 'none';
-    }
+
     let x=document.getElementById("result");
     x.innerHTML="Your Score is "+score +" /3";
-    x.style.textAlign = 'center';
-    x.style.fontSize = '80px';
+    x.style.fontSize = '2rem';
+    x.style.textAlign='center';
     x.style.color = 'red';
   }
