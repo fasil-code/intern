@@ -12,9 +12,13 @@
     <a class="ml-2" href="{{ url_for('ace1') }}">ACE-III</a>
     <a class="ml-2" href="{{ url_for('lang') }}">lang</a>
     <a class="ml-2" href="{{ url_for('ptt') }}">Pulse-Tracking</a>
-    <h1>Commit</h1>
-    <h1>next</h1>
-    <h1>third</h1>
-    <h1>Hello</h1>
+    <script>
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
+
+
+    </script>
 </body>
 </html>

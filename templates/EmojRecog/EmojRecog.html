@@ -1,163 +1,100 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width"> 
+   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Document</title>
+  <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='emojirecog/emojrecog.css')}}">
+    <!-- FontAweome CDN Link for Icons -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ url_for('static', filename='emojirecog/emojrecog.css')}}"
-    />
-  </head>
-  <body >
-  {% block content %}
-  <h1 id="scored"></h1>
-    <div class="container mt-5">
-      <div class="d-flex justify-content-center row">
-        <div class="col-md-10 col-lg-10">
-          <div class="border">
-            <div class="question bg-white p-3 border-bottom">
-              <div
-                class="d-flex flex-row justify-content-between align-items-center mcq"
-              >
-                <!-- <h4 id="correct" value="{{data['questions'][count]['correct']}}">{{data['questions'][count]['correct']}}</h4> -->
-              
-                
-                <span>{{count+1}} of 10</span>
-                
-              </div>
-            </div>
+</head>
+<body>
+  
 
-            <div class="question bg-white p-3 border-bottom">
-              <div class="big align-items-center question-title">
-                <div>
-                  <h5 class="head mt-1 ml-2">
-                    Which of the following represents the given emotion?
-                  </h5>
-                </div>
-                <div class="img-con">
-                  <img
-                    class="img img-thumbnail img-fluid"
-                    src="{{url_for('static', filename='images/' +path)}}"
-                  />
-                </div>
-              </div>
-              <form method="POST" action="/emojrecog">
-              <div class="option ans ml-2">
-                <label class="radio">
-                  <input type="radio" name="optiond" value="{{data['questions'][count]['options'][0]}}" />
-                  <span>{{data['questions'][count]['options'][0]}}</span>
-                </label>
-              </div>
-              <div class="option ans ml-2">
-                <label class="radio">
-                  <input type="radio" name="optiond" value="{{data['questions'][count]['options'][1]}}" />
-                  <span>{{data['questions'][count]['options'][1]}}</span>
-                </label>
-              </div>
-              <div class="option ans ml-2">
-                <label class="radio">
-                  <input type="radio" name="optiond" value="{{data['questions'][count]['options'][2]}}" />
-                  <span>{{data['questions'][count]['options'][2]}}</span>
-                </label>
-              </div>
-              <div class="option ans ml-2">
-                <label class="radio">
-                  <input type="radio" name="optiond" value="{{data['questions'][count]['options'][3]}}" />
-                  <span>{{data['questions'][count]['options'][3]}}</span>
-                </label>
-              </div>
-            </div>
-            <div
-              class="d-flex flex-row justify-content-between align-items-center p-3 bg-white"
-            >
-              <!-- <button
-                class="btn btn-primary d-flex align-items-center btn-danger"
-                type="button"
-              >
-                <i class="fa fa-angle-left mt-1 mr-1"></i>&nbsp;previous</button
-              >
-             
-              <button
-                class="btn btn-primary border-success align-items-center btn-success"
-                  
-              >
 
-                Next<i class="fa fa-angle-right ml-2"></i>
-                
-              </button> -->
-              <a  type="submit" value="submit" class="btn btn-primary border-success align-items-center btn-success" onclick="fun()" class="ml-2" 
-              href="javascript:void()" >Next</a>
-            </div>
-          </div>
+
+  <title> Create a Quiz App With Timer Using </title>
+    <!-- start Quiz button -->
+    <div class="start_btn"><button>Start Quiz</button></div>
+
+    <!-- Info Box -->
+    <div class="info_box">
+        <div class="info-title"><span>Some Rules of this Quiz</span></div>
+        <div class="info-list">
+            <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
+            <div class="info">2. Once you select your answer, it can't be undone.</div>
+            <div class="info">3. You can't select any option once time goes off.</div>
+            <div class="info">4. You can't exit from the Quiz while you're playing.</div>
+            <div class="info">5. You'll get points on the basis of your correct answers.</div>
         </div>
-      </div>
+        <div class="buttons">
+            <button class="quit">Exit Quiz</button>
+            <button class="restart">Continue</button>
+        </div>
     </div>
-  </form>
-    {% endblock content %}
-   
-  
+
+    <!-- Quiz Box -->
+
+    <div class="quiz_box  bg-white">
+        <div class="header" >
+            <div class="title">Awesome Quiz Application</div>
+            <div class="timer">
+                <div class="time_left_txt">Time Left</div>
+                <div class="timer_sec">15</div>
+            </div>
+            <!-- <div class="time_line"></div> -->
+          </div>
+    
+        <section>
+            <div class="que_text">
+            </div>
+              <div class="img-con text-center">
+                <img
+                id="main-img"
+                  class=" img img-thumbnail img-fluid"
+                 
+                />
+              </div> 
+               
+           
+            <div class="ml-2 option_list">
+        
+            </div>
+        </section>
+
       
-    <script type = "text/javascript" src = "{{ url_for('static', filename = 'emojrecog/emojrecog.js') }}" ></script>
+        <footer>
+            <div class="total_que">
+              
+            </div>
+            <button class="next_btn">Next</button>
+        </footer>
+    </div>
 
-<script>
-  var s=0;
-
- function fun(){
-  if("{{count}}"==0){
-  
-    localStorage.clear()
-  }
-
-
-  var checkRadio = document.querySelector(
-    'input[name="optiond"]:checked');
- const sfg=document.getElementById('scx')
- s=localStorage.getItem("scor");
-if(checkRadio != null) {
-  let CheckedValue=checkRadio.value.toLowerCase();
- 
-  let Correct="{{data['questions'][count]['correct']}}"
-
-  if(CheckedValue===Correct){
-
-s++;
-
-localStorage.setItem("scor", s);
-
-
-  }
- 
-  
-  window.location.href="{{url_for('emojrecog') }}?count={{count+1}}"
-
-}
-else {
-    alert("select option")
-
-}
-sfg.innerHTML=s;
-
-
-
-
- } 
-
-
-
-</script>
-
-
-
-
+    <!-- Result Box -->
+    <div class="result_box">
+        <div class="icon">
+            <i class="fas fa-crown"></i>
+        </div>
+        <div class="complete_text">You've completed the Quiz!</div>
+        <div class="score_text">
+          
+        </div>
+        <div class="buttons">
+            <button class="restart">Replay Quiz</button>
+            <button class="quit">Quit Quiz</button>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script type = "text/javascript" src = "{{ url_for('static', filename = 'emojirecog/emojrecog.js') }}" ></script>
-  </body>
+</body>
 </html>
+
