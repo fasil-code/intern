@@ -39,6 +39,10 @@ function repeat(message){
       // Display the transcribed text
       document.getElementById('text'+i).textContent = transcript;
       message=transcript;
+      message=message.toLowerCase();
+      if(message[message.length-1]==="."){
+      message=message.slice(0,-1);
+      }
       ans[i]=message;
       // Check if the recognition process has completed
       if (event.results[0].isFinal) {
@@ -64,13 +68,10 @@ function repeat(message){
            arr.splice(ind,1);
        }
     }
-    var elems = document.getElementsByClassName('container');
-    for (var i=0;i<elems.length;i++){
-        elems[i].style.display = 'none';
-    }
+
     let x=document.getElementById("result");
     x.innerHTML="Your Score is "+score +" /3";
-    x.style.textAlign = 'center';
-    x.style.fontSize = '80px';
+    x.style.fontSize = '2rem';
+    x.style.textAlign='center';
     x.style.color = 'red';
   }
