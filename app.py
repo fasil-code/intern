@@ -75,6 +75,11 @@ def submit():
 def ptt():
    return render_template('PTT/ptt.html')
 
+#6 Trail Making Test (TMT I & II)
+@app.route("/trail-making")
+def tmt():
+    return render_template('TMT/TMT.html')
+
 
 if __name__ == "__main__":
     app.run(debug = True)
