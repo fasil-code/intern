@@ -1,0 +1,36 @@
+body{
+    background-color:#eee;
+}
+.container{
+    margin-top: 6%;
+}
+.button{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+.heading{
+    text-align: center;
+}
+.heading h3{
+    line-height: 1.8;
+}
+h4{
+    font-size: 1.4rem;
+}
+.btn {
+   margin: 7% 5%;
+}
+.audio-btn{
+    flex-shrink: 0;
+    
+}
+.border{
+    width: 90%;
+}
+@media (max-width: 500px) {
+    
+  }
+  
+ 
+  
