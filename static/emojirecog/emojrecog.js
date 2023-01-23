@@ -1,4 +1,5 @@
-
+let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
+let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
 let questions=[
     {
 
@@ -68,7 +69,7 @@ const continue_btn = info_box.querySelector(".buttons .restart");
 const quiz_box = document.querySelector(".quiz_box");
 const result_box = document.querySelector(".result_box");
 const option_list = document.querySelector(".option_list");
-const time_line = document.querySelector("header .time_line");
+const time_line = document.querySelector(".header .time_line");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 
@@ -192,8 +193,7 @@ function showQuetions(index){
     }
 }
 // creating the new div tags which for icons
-let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
-let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
+
 
 //if user clicked on option
 function optionSelected(answer){
@@ -279,14 +279,15 @@ function startTimer(time){
         }
     }
 }
-var w = .5*window.innerWidth;
-let res=w/30;
+var length=quiz_box.clientWidth;
+var speed=length/28;
+
 function startTimerLine(time){
-    counterLine = setInterval(timer, res);
+    counterLine = setInterval(timer, speed);
     function timer(){
         time += 1; //upgrading time value with 1
         time_line.style.width = time + "px"; //increasing width of time_line with px by time value
-        if(time > w ){ //if time value is greater than 549
+        if(time > length){ 
             clearInterval(counterLine); //clear counterLine
         }
     }

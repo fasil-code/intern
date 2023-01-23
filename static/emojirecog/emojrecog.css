@@ -392,7 +392,12 @@ footer button.show{
     color: #fff;
     background: #007bff;
 }
+@media (max-width:950px){
+.quiz_box{
+    width:80vw;
+}
 
+}
 
 
 @media (max-width:450px){
