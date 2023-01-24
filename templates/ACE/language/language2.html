@@ -19,53 +19,68 @@
           <div class="p-4 bg-primary text-white border-bottom">
            
              <span class="heading">
-              <h3 >Repeat and Record given words</h3>
+              <h4 >Repeat and Record given words</h4>
               <h5 id="recognition-status"> </h5>
             </span>
             </div>
           
-  
-          <div class="words bg-white p-4 border-bottom">
-            <div
-              class="mr-5 d-flex flex-row justify-content-between align-items-center q1"
-              >
-              <h4 id="w1"> </h4>
-              <span><button onclick="textToAudio(0)" type="button" class="audio-btn btn btn-primary">🔊 Audio</button>
-              <button onclick="audioToText(0)" type="button"  class="record-btn btn btn-outline-danger">Record</button></span>
-        
-            </div>
-           
-          </div>
-            <div class="words bg-white p-4 border-bottom">
-                <div
-                  class=" mr=5 d-flex flex-row justify-content-between align-items-center"
-                  >
-                  <h4 id="w2"> </h4> 
-                  <span><button onclick="textToAudio(1)" type="button" class=" audio-btn btn btn-primary">🔊 Audio</button>
-                  <button onclick="audioToText(1)" type="button"  class="record-btn btn btn-outline-danger">Record</button></span>
+            <div class="words bg-white p-3 border-bottom">
+              <div class="container-fluid">
+                <div class="row align-items-center">
+                  <div class="col-md-8 col-lg-9">
+                    <h5 id="w1"> </h5>
+                  </div>
+                  <div class="col-md-4 col-lg-3">
+                    <div class="mr-5 d-flex flex-row  justify-content-between align-items-center">
+                      <button onclick="textToAudio(0)" type="button" class="audio-btn btn btn-primary">🔊 Audio</button>
+                      <button onclick="audioToText(0)" type="button"  class="record-btn btn btn-outline-danger">Record</button>
+                    </div>
+                  </div>
                 </div>
-            </div>
-            <div class="words bg-white p-4 border-bottom">
-                <div
-                  class="d-flex flex-row justify-content-between align-items-center q3"
-                >
-                <h4 id="w3"> </h4>
-                  <span><button onclick="textToAudio(2)" type="button" class="audio-btn btn btn-primary">🔊 Audio</button>
-                  <button onclick="audioToText(2)" type="button"  class="record-btn btn btn-outline-danger">Record</button></span>
-                </div>
-            </div>
-            <!-- score display -->
-            <div class="bg-white p-4 border-bottom">
-                <div id="result"> </div>
-          </div>
-            <!-- //buttons -->
-            <div class="words bg-white p-4 border-bottom">
-              <div
-                class="d-flex flex-row justify-content-between align-items-center"
-              >
-              <span><button type="button" onclick="scoring()"  class="px-5 btn btn-lg btn-primary">Score</button> </span>
-              <span><a class="px-5 btn btn-lg btn-primary" href="{{ url_for('ace7') }}">Next</a></span>
               </div>
+              
+          </div>
+          
+          <div class="words bg-white p-3 border-bottom">
+            <div class="container-fluid">
+              <div class="row align-items-center">
+                <div class="col-md-8 col-lg-9">
+                  <h5 id="w2"> </h5>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                  <div class="mr-5 d-flex flex-row  justify-content-between align-items-center">
+                    <button onclick="textToAudio(1)" type="button" class="audio-btn btn btn-primary">🔊 Audio</button>
+                    <button onclick="audioToText(1)" type="button"  class="record-btn btn btn-outline-danger">Record</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+        </div>
+      
+        <div class="words bg-white p-3 border-bottom">
+          <div class="container-fluid">
+            <div class="row align-items-center">
+              <div class="col-md-8 col-lg-9">
+                <h5 id="w3"> </h5>
+              </div>
+              <div class="col-md-4 col-lg-3">
+                <div class="mr-5 d-flex flex-row  justify-content-between align-items-center">
+                  <button onclick="textToAudio(2)" type="button" class="audio-btn btn btn-primary">🔊 Audio</button>
+                  <button onclick="audioToText(2)" type="button"  class="record-btn btn btn-outline-danger">Record</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+      </div>
+    
+            <!-- //buttons -->
+            <div class="next-btn words bg-white p-4 border-bottom">
+              
+              <!-- <span><button type="button" onclick="scoring()"  class="px-5 btn btn-lg btn-primary">Score</button> </span> -->
+              <a class="px-5 btn btn-lg btn-primary" href="{{ url_for('ace7') }}">Next</a>
+              
           </div>
          </div>
         </div>

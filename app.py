@@ -49,7 +49,7 @@ def ace2():
 @app.route("/ace3") 
 def ace3():
    return render_template('ACE/attention/attention3.html') 
-@app.route("/ace4") 
+@app.route("/ace4")  
 def ace4():
    return render_template('ACE/attention/attention4.html')  
 @app.route("/ace5") 
@@ -62,7 +62,22 @@ def ace6():
 @app.route("/ace7") 
 def ace7():
    return render_template('ACE/language/language3.html') 
-   
+@app.route("/ace8",methods=['GET','POST']) 
+def ace8():
+   return render_template('ACE/language/language4.html') 
+@app.route("/ace9") 
+def ace9():
+   return render_template('ACE/memory/memory2.html') 
+@app.route("/ace10") 
+def ace10():
+   return render_template('ACE/memory/memory3.html',url="/") 
+@app.route("/ace11") 
+def ace11():
+   return render_template('ACE/memory/memory4.html') 
+@app.route("/ace12") 
+def ace12():
+   return render_template('ACE/fluency/fluency2.html') 
+
 @app.route("/language",methods=['GET','POST'])
 def lang():
 

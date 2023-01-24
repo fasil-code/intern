@@ -1,29 +1,70 @@
 body{
     background-color:#eee;
 }
-.container{
-    margin-top: 6%;
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
 }
-.button{
-    display: flex;
-    align-items: center;
-    justify-content:center;
+.border{
+    
+    box-shadow: 0px 0px 10px #888;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    background: linear-gradient(to bottom, #f9f9f9, #eee);
+    
 }
+.next-btn{
+    text-align: center;
+}
+
 .heading{
     text-align: center;
 }
-.heading h3{
-    line-height: 1.8;
+
+.audio-btn{
+    flex-shrink: 0;
+    margin: 7% 5%;
+    text-align: center;
+    
 }
-h4{
-    font-size: 1.6rem;
+.record-btn{
+    margin: 7% 5%;
+    text-align: center;
+ }
+
+
+@media (max-width: 500px) {
+    
 }
-.btn {
-    margin: 0  0  0 20px; /* Adds a 10px margin to the left and right of each button */
+@media only screen and (max-width: 800px) {
+  .container {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+ h5{
+  font-size: 14px;
+ }
+ 
 }
 
-@media (max-width:500px){
-    h4{
-        font-size: 1.3rem;
-    }
+@media only screen and (max-width: 340px) {
+  .content{
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .btn {
+    margin-top: 10px !important;
+    font-size: 10px;
+  }
 }
+
+
+
+
+  
