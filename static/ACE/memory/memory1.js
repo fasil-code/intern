@@ -12,7 +12,7 @@ function repeat(message){
   const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "hi-IN");
         msg.voice = voices[0];
         msg.volume = 1;
-        msg.rate = 0.6;
+        msg.rate = 0.8;
         msg.pitch = 1;
         window.speechSynthesis.cancel(msg);
         window.speechSynthesis.speak(msg);

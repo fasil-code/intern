@@ -1,0 +1,109 @@
+body{
+    background-color: #eee;
+}
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.border{
+    
+    box-shadow: 0px 0px 10px #888;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    background: linear-gradient(to bottom, #f9f9f9, #eee);
+    
+}
+.next-btn{
+    text-align: center;
+}
+.content {
+    display: flex;
+    flex-wrap: wrap;
+}
+    @media only screen and (max-width: 800px) {
+        .container {
+          position: relative;
+          top: 0;
+          left: 0;
+          transform: none;
+        }
+       h5{
+        font-size: 14px;
+       }
+       
+      }
+
+      @media only screen and (max-width: 340px) {
+        .content{
+          flex-direction: column !important;
+          align-items: flex-start !important;
+        }
+        .btn {
+          margin-top: 10px !important;
+          font-size: 12px;
+        }
+      }
+      
+      
+.heading{
+  text-align: center;
+}
+
+input[type="text"] {
+    width: 100%; 
+    padding: 12px 20px;
+    margin: 24px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 8px; 
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.3s ease-in-out; 
+    background-color: #f9f9f9; 
+}
+
+/* Define input focus styles */
+input[type="text"]:focus {
+    border: 2px solid #555;
+    box-shadow: 0 0 10px #555; 
+    outline: none;
+}
+
+label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #555;
+}
+.button{
+    text-align: center;
+}
+.display{
+    color:red;
+    font-weight: bold;
+}
+#result{
+    font-size:1.4rem;
+    text-align: center;
+}
+/* Media Queries for smaller screens */
+@media (max-width: 768px) {
+    input[type="text"] {
+        font-size: 14px; /* decreased font-size for smaller screens */
+    }
+    label {
+        font-size: 17px; /* decreased font-size for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    input[type="text"] {
+        font-size: 12px; /* decreased font-size for smaller screens */
+    }
+    label {
+        font-size: 15px; /* decreased font-size for smaller screens */
+    }
+}

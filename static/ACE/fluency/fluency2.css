@@ -1,12 +1,7 @@
 body{
-    background-color:#eee;
+    background-color: #eee;
 }
-.container {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-}
+
 .border{
     
     box-shadow: 0px 0px 10px #888;
@@ -48,26 +43,4 @@ body{
         }
       }
       
-      
-.button{
-    display: flex;
-    align-items: center;
-    justify-content:center;
-}
-.heading{
-    text-align: center;
-}
-.heading h3{
-    line-height: 1.8;
-}
-h4{
-    font-size: 1.6rem;
-}
-@media (max-width:500px){
-    h4{
-        font-size: 1.3rem;
-    }
-}
-
-
       

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='ACE/language/language4.css')}}">
+   
+    <title>Grammar</title>
+</head>
+<body>
+  {% block content %}
+  <div class="container">
+    <div class="d-flex justify-content-center align-items-center row">
+      <div class="col-md-8 col-lg-8">
+         <div class="border">
+          <div class="p-4 bg-primary text-white border-bottom">
+              <h4 class="heading">Write two complete sentences about yourself</h4>
+              <h5 id="error"></h5>
+            </div>
+          
+        <form id="myForm" method="POST">
+          <div class="words bg-white p-2 border-bottom">
+            
+              <div class="mr-5 d-flex flex-row justify-content-between align-items-center q1">
+                <label for="first">Write first sentence</label>
+              </div>
+              <input type="text" id="first" name="first-sentence" placeholder="Type text here" maxlength="130">
+            </div>
+
+              <div class="words bg-white p-2 border-bottom">
+                <div class="mr-5 d-flex flex-row justify-content-between align-items-center">
+                  <label for="second">Write second sentence</label>
+                </div>
+                <input type="text" id="second" name="second-sentence" placeholder="Type text here" maxlength="130">
+              </div>
+
+             
+              <!-- score display -->
+            <div class="display bg-white p-4 border-bottom">
+              <div id="first-error"> </div>
+              <div id="second-error"> </div>
+              <div id="result"> </div>
+             </div>
+          <!-- //buttons -->
+           <div class="words bg-white p-4 border-bottom">
+            <div
+              class="d-flex flex-row justify-content-between align-items-center"
+            >
+            <span><button  type="button" id="next-btn" class="px-5 btn btn-lg btn-primary">Score</button> </span>
+            <span><a class="px-5 btn btn-lg btn-primary" href="{{ url_for('ace9') }}">Next</a></span>
+            </div>
+        </div>
+              
+            </form>
+   
+         </div>
+        </div>
+    </div>
+  </div>
+
+   {% endblock content %} 
+</body>
+<script type = "text/javascript" src = "{{ url_for('static', filename = '/ACE/language/language4.js') }}" ></script>
+</html>

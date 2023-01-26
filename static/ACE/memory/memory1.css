@@ -1,9 +1,30 @@
 body{
     background-color:#eee;
 }
-.container{
-    margin-top: 6%;
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
 }
+.border{
+    
+    box-shadow: 0px 0px 10px #888;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    background: linear-gradient(to bottom, #f9f9f9, #eee);
+    
+}
+.next-btn{
+    text-align: center;
+}
+.content {
+    display: flex;
+    flex-wrap: wrap;
+}
+    
 .button{
     display: flex;
     align-items: center;
@@ -25,3 +46,29 @@ body{
 .word{
     color: red;
 }
+
+@media only screen and (max-width: 800px) {
+    .container {
+      position: relative;
+      top: 0;
+      left: 0;
+      transform: none;
+    }
+   h5{
+    font-size: 14px;
+   }
+   
+  }
+
+  @media only screen and (max-width: 340px) {
+    .content{
+      flex-direction: column !important;
+      align-items: flex-start !important;
+    }
+    .btn {
+      margin-top: 10px !important;
+      font-size: 12px;
+    }
+  }
+  
+  

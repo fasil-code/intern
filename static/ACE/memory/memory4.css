@@ -1,5 +1,5 @@
 body{
-    background-color:#eee;
+    background-color: #eee;
 }
 .container {
     position: absolute;
@@ -47,27 +47,4 @@ body{
           font-size: 12px;
         }
       }
-      
-      
-.button{
-    display: flex;
-    align-items: center;
-    justify-content:center;
-}
-.heading{
-    text-align: center;
-}
-.heading h3{
-    line-height: 1.8;
-}
-h4{
-    font-size: 1.6rem;
-}
-@media (max-width:500px){
-    h4{
-        font-size: 1.3rem;
-    }
-}
-
-
       
