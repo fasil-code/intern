@@ -118,10 +118,11 @@ body{
     border-radius: 5px;
     transform: translate(-50%, -50%) scale(0.9);
     opacity: 0;
-    margin-top:5rem;
+    margin-top:15rem;
     pointer-events: none;
     transition: all 0.3s ease;
     overflow-x: hidden;
+    
 }
 
 .quiz_box .header{

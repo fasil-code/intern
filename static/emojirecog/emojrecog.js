@@ -279,8 +279,9 @@ function startTimer(time){
         }
     }
 }
-var length=quiz_box.clientWidth;
-var speed=length/28;
+var length=(quiz_box.clientWidth);
+var speed=(23*length)/683;
+console.log(typeof(length))
 
 function startTimerLine(time){
     counterLine = setInterval(timer, speed);
