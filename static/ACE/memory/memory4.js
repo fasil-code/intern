@@ -1,4 +1,7 @@
 // repeats back spoken words
+function refreshPage(){
+  window.location.reload();
+} 
 function repeat(message){
     let text;
     if (message === "") {
@@ -60,6 +63,7 @@ function audioToText(i){
   recognition.start();
 }
 function scoring(){
+  document.getElementById("hidden").style.display="block";
   let score=0;
   l=['delhi','tiger','salman khan','mahatma gandhi'];
   if(ans[0]==='new delhi'){
@@ -70,6 +74,6 @@ function scoring(){
       score+=1;
     }
   }
-  document.getElementById("btn-score").innerHTML=`<h1>Your Score is ${score}</h1>`
-  document.getElementById("score").innerText=score;
+  document.getElementById("result").innerHTML = `<h1>Your Score is ${score}</h1>`
+    document.getElementById("score").innerText = score;
 }

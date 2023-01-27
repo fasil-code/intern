@@ -24,27 +24,35 @@ body{
     display: flex;
     flex-wrap: wrap;
 }
-    @media only screen and (max-width: 800px) {
-        .container {
-          position: relative;
-          top: 0;
-          left: 0;
-          transform: none;
-        }
-       h5{
-        font-size: 14px;
-       }
-       
-      }
+@media only screen and (max-width: 800px) {
+  .container {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+ h5{
+  font-size: 1.2rem;
+ }
+ .btn {
+  margin-top: 10px !important;
+  font-size: 12px;
+}
+}
 
-      @media only screen and (max-width: 340px) {
-        .content{
-          flex-direction: column !important;
-          align-items: flex-start !important;
-        }
-        .btn {
-          margin-top: 10px !important;
-          font-size: 12px;
-        }
-      }
+@media only screen and (max-width: 320px) {
+  .content{
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .btn {
+    margin-top: 10px !important;
+    font-size: 10px;
+  }
+  h5{
+    font-size: 1rem;
+   }
+}
+
+
       

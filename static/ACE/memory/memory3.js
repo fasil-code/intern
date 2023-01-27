@@ -44,7 +44,15 @@ if(rand){
     rand = parseInt(rand);
    
 }
+let score = localStorage.getItem("score");
 
+//Check if the item is present in the local storage
+if(score){
+    //Parse the random number back to an integer
+    score = parseInt(score);
+    console.log(score);
+   
+}
 let objectSize =Object.values(addressBook[rand]).length;
 let count=0;
 document.getElementById("next-btn").addEventListener("click", function(event){

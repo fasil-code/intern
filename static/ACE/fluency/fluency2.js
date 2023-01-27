@@ -175,7 +175,6 @@ l = [
     "Rhinoceros",
     "Rook",
     "Salamander",
-    "Salmon",
     "Sand Dollar",
     "Sandpiper",
     "Sardine",
@@ -203,8 +202,6 @@ l = [
     "Tarsier",
     "Termite",
     "Tiger",
-    "Toad",
-    "Trout",
     "Turkey",
     "Turtle",
     "Viper",
@@ -214,7 +211,6 @@ l = [
     "Wasp",
     "Weasel",
     "Whale",
-    "Wildcat",
     "Wolf",
     "Wolverine",
     "Wombat",
@@ -225,6 +221,9 @@ l = [
     "Yak",
     "Zebra"
 ]
+function refreshPage(){
+    window.location.reload();
+} 
 // repeats back spoken words
 function repeat(message) {
     let text;
@@ -271,7 +270,7 @@ function audioToText(i) {
         if (message[message.length - 1] === ".") {
             message = message.slice(0, -1);
         }
-        ans[i] = message;
+        ans.push(message)
         // Check if the recognition process has completed
         if (event.results[0].isFinal) {
             // Stop recognition if the process has completed
@@ -287,11 +286,12 @@ function audioToText(i) {
     recognition.start();
 }
 function scoring() {
+    document.getElementById("hidden").style.display="block";
     let score = 0;
     let ind = 0;
     let found = [];
     if (ans.length > 0) {
-        while (ind < 7) {
+        while (ind < ans.length) {
             let flag = 0;
             let str = ans[ind];
             for (var i = 0; i < l.length; i++) {
@@ -307,6 +307,32 @@ function scoring() {
             ind++;
         }
     }
-    document.getElementById("btn-score").innerHTML = `<h1>Your Score is ${score}</h1>`
+    let a;
+    if(score==0){
+        a=0;
+    }
+    else if(score>=1 && score<=2){
+        a=1;
+    }
+    else if(score>=3 && score<=5){
+        a=2;
+    }
+    else if(score>=6 && score<=7){
+        a=3;
+    }
+    else if(score>=8 && score<=10){
+        a=4;
+    }
+    else if(score>=11 && score<=13){
+        a=5;
+    }
+    else if(score>=14 && score<=16){
+        a=6;
+    }
+    else if(score>16){
+        a=7;
+    }
+    score=a;
+    document.getElementById("result").innerHTML = `<h1>Your Score is ${score}</h1>`
     document.getElementById("score").innerText = score;
 }

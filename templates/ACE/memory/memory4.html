@@ -6,7 +6,8 @@
   <title>Memory Test</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ACE/memory/memory4.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ACE/memory/memory4.css')}}">
   <style>
     body{
       background-color: #eee;
@@ -16,12 +17,23 @@
 <body>
   <div class="container">
     <div class="d-flex justify-content-center align-items-center row">
-      <div class="col-md-8 col-lg-8">
+      <div class="col-md-8 col-lg-8 column">
+        <div class="card text-center" style="width: 20rem; margin-bottom: 0.8rem; margin-left: auto; margin-right: auto;">
+          <div class="card-body">
+            <h2 class="card-title">Instructions</h2>
+            <p class="card-text">Answer the following four questions...</p>
+            <!-- <a href="" class="btn btn-primary">Read More...</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center row">
+      <div class="col-md-8 col-lg-8 column">
         <div class="border">
           <div class="p-5 bg-primary text-white border-bottom">
             <!-- heading -->
             <div id="heading">
-              <h4>Memory Related Questions</h4>
+              <h3>Memory Related Questions</h3>
 
 
               <h5 id="recognition-status"></h5>
@@ -33,8 +45,8 @@
               <!-- write question in h5 -->
               <h5>What is the Capital of India?</h5>
               <h5 id="text0" class="word"></h5>
-              <span><button onclick="audioToText(0)" type="button"
-                  class="btn btn-outline-primary">Record</button></span>
+              <span><button onclick="audioToText(0)" type="button" class="btn btn-outline-primary"><i
+                    class="fa fa-microphone"></i></button></span>
             </div>
           </div>
 
@@ -43,36 +55,38 @@
             <div class="d-flex flex-row justify-content-between align-items-center q2">
               <h5>Which is the National Animal of India?</h5>
               <h5 id="text1" class="word"></h5>
-              <span><button onclick="audioToText(1)" type="button"
-                  class="btn btn-outline-primary">Record</button></span>
+              <span><button onclick="audioToText(1)" type="button" class="btn btn-outline-primary"><i
+                    class="fa fa-microphone"></i></button></span>
             </div>
           </div>
           <div class="q3 bg-white p-4 border-bottom">
             <div class="d-flex flex-row justify-content-between align-items-center q3">
               <h5>Name the actor who was hero in the film 'Ek tha Tiger'</h5>
               <h5 id="text2" class="word"></h5>
-              <span><button onclick="audioToText(2)" type="button"
-                  class="btn btn-outline-primary">Record</button></span>
+              <span><button onclick="audioToText(2)" type="button" class="btn btn-outline-primary"><i
+                    class="fa fa-microphone"></i></button></span>
             </div>
           </div>
           <div class="q3 bg-white p-4 border-bottom">
             <div class="d-flex flex-row justify-content-between align-items-center q3">
               <h5>Name the Father of our Nation</h5>
               <h5 id="text3" class="word"></h5>
-              <span><button onclick="audioToText(3)" type="button"
-                  class="btn btn-outline-primary">Record</button></span>
+              <span><button onclick="audioToText(3)" type="button" class="btn btn-outline-primary"><i
+                    class="fa fa-microphone"></i></button></span>
             </div>
           </div>
 
           <!-- score display -->
-          <div class="bg-white p-4 border-bottom">
+          <div class="bg-white p-4 border-bottom" id="hidden" style="display: none;">
             <div id="result"> </div>
           </div>
           <!-- //buttons -->
           <div class="words bg-white p-4 border-bottom">
             <div class="d-flex flex-row justify-content-between align-items-center">
-              <span id="btn-score"><button type="button" onclick="scoring()" class="px-5 btn btn-lg btn-primary">Score</button> </span>
-              <span><a class="px-5 btn btn-lg btn-primary" href="{{ url_for('ace12') }}">Next</a></span>
+              <span id="btn-score"><button type="button" onclick="refreshPage()" class="px-5 btn btn-lg btn-primary"> <i
+                    class="fa fa-refresh"></i></button> </span>
+              <span id="btn-score"><button type="button" onclick="scoring()"
+                  class="px-5 btn btn-lg btn-danger">Stop</button> </span>
             </div>
           </div>
 

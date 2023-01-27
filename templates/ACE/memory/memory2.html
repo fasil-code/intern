@@ -18,56 +18,101 @@
          <div class="border">
           <div class="p-4 bg-primary text-white border-bottom">
            
-             <span class="heading">
+             <div class="heading">
               <h4 >Repeat name and address three times</h4>
-            </span>
+              <h5 id="recognition-status"> </h5>
+             </div>
             </div>
           
-  
-          <div class="words bg-white p-4 border-bottom">
-            <div
-              class="mr-5 d-flex flex-row justify-content-between align-items-center content"
-              >
-              <h5 id="w0"></h5>
-                <button onclick="textToAudio(0)" type="button" class="btn btn-primary">🔊 Audio</button>
-            </div>
-          </div>
-            <div class="words bg-white p-4 border-bottom">
-                <div
-                  class=" mr=5 d-flex flex-row justify-content-between align-items-center content">
-                  <h5 id="w1"></h5>
-                  <button onclick="textToAudio(1)" type="button" class="btn btn-primary">🔊 Audio</button>
+            <div class="words bg-white p-3 border-bottom">
+              <div class="container-fluid">
+                <div class="row align-items-center">
+                  <div class="col-md-6 col-lg-8">
+                    <h5 id="w0"></h5>
+                  </div>
+                  <div class="col-md-6 col-lg-4">
+                    <div class="mr-5 d-flex flex-row  justify-content-between align-items-center">
+                      <button onclick="textToAudio(0)" type="button" class="audio-btn btn btn-primary">🔊 Audio</button>
+                      <button onclick="audioToText(0)" type="button"  class="record-btn btn btn-outline-danger">Record</button>
+                    </div>
+                  </div>
                 </div>
-            </div>
-
-            <div class="words bg-white p-4 border-bottom">
-              <div
-                class=" mr=5 d-flex flex-row justify-content-between align-items-center content">
-                <h5 id="w2"></h5>
-                <button onclick="textToAudio(2)" type="button" class="btn btn-primary">🔊 Audio</button>
               </div>
-          </div> 
-           
-          <div class="words bg-white p-4 border-bottom">
-            <div
-              class=" mr=5 d-flex flex-row justify-content-between align-items-center content">
-              <h5 id="w3"></h5>
-              <button onclick="textToAudio(3)" type="button" class="btn btn-primary">🔊 Audio</button>
-            </div>
-        </div> 
-
-        <div class="words bg-white p-4 border-bottom">
-          <div
-            class=" mr=5 d-flex flex-row justify-content-between align-items-center content">
-            <h5 id="w4"></h5>
-            <button onclick="textToAudio(4)" type="button" class="btn btn-primary">🔊 Audio</button>
+              
           </div>
-      </div> 
 
-            <div class="next-btn bg-white p-4 border-bottom button">
+          <div class="words bg-white p-3 border-bottom">
+            <div class="container-fluid">
+              <div class="row align-items-center">
+                <div class="col-md-6 col-lg-8">
+                  <h5 id="w1"> </h5>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <div class="mr-5 d-flex flex-row  justify-content-between align-items-center">
+                    <button onclick="textToAudio(1)" type="button" class="audio-btn btn btn-primary">🔊 Audio</button>
+                    <button onclick="audioToText(1)" type="button"  class="record-btn btn btn-outline-danger">Record</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+        </div>
+
+        <div class="words bg-white p-3 border-bottom">
+          <div class="container-fluid">
+            <div class="row align-items-center">
+              <div class="col-md-6 col-lg-8">
+                <h5 id="w2"> </h5>
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="mr-5 d-flex flex-row  justify-content-between align-items-center">
+                  <button onclick="textToAudio(2)" type="button" class="audio-btn btn btn-primary">🔊 Audio</button>
+                  <button onclick="audioToText(2)" type="button"  class="record-btn btn btn-outline-danger">Record</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+      </div>
+           
+      <div class="words bg-white p-3 border-bottom">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col-md-6 col-lg-8">
+              <h5 id="w3"> </h5>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="mr-5 d-flex flex-row  justify-content-between align-items-center">
+                <button onclick="textToAudio(3)" type="button" class="audio-btn btn btn-primary">🔊 Audio</button>
+                <button onclick="audioToText(3)" type="button"  class="record-btn btn btn-outline-danger">Record</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+
+    <div class="words bg-white p-3 border-bottom">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-md-6 col-lg-8">
+            <h5 id="w4"> </h5>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="mr-5 d-flex flex-row  justify-content-between align-items-center">
+              <button onclick="textToAudio(4)" type="button" class="audio-btn btn btn-primary">🔊 Audio</button>
+              <button onclick="audioToText(4)" type="button"  class="record-btn btn btn-outline-danger">Record</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+  </div>
+
+      <div class="next-btn bg-white p-4 border-bottom button">
                 
-                <!-- <button type="button"  class="px-5 btn btn-lg btn-primary">Next</button>  -->
-                <a class="px-5 btn  btn-primary" href="{{ url_for('ace10') }}">Next</a>
+                <button onclick="scoring()" type="button"  class="px-5 btn btn-lg btn-primary">Next</button> 
+                
             </div>
             
          </div>
@@ -77,5 +122,9 @@
   
    {% endblock content %} 
 </body>
+<script>
+  var nextUrl = "{{url}}";
+</script>
+
 <script type = "text/javascript" src = "{{ url_for('static', filename = 'ACE/memory/memory2.js') }}" ></script>
 </html>

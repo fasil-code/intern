@@ -67,7 +67,7 @@ def ace8():
    return render_template('ACE/language/language4.html') 
 @app.route("/ace9") 
 def ace9():
-   return render_template('ACE/memory/memory2.html') 
+   return render_template('ACE/memory/memory2.html',url="ace10") 
 @app.route("/ace10") 
 def ace10():
    return render_template('ACE/memory/memory3.html',url="/") 

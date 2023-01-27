@@ -54,12 +54,17 @@ h5{
     color:black;
 }
 li{
-    list-style-type: none;
+    list-style-type: none; /* removes bullet points */
+    padding: 0; /* removes any default padding */
+   font-size: 1.2rem; /* changes the font size to 1.2 times the default size */
+   line-height: 1.5; /* increases the space between lines of text */
+   color: #777; /* changes the text color to a light gray */
+   text-align: center;
 }
 h4{
     text-align: center;
 }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 800px) {
         .container {
           position: relative;
           top: 0;
@@ -67,7 +72,7 @@ h4{
           transform: none;
         }
        h5{
-        font-size: 14px;
+        font-size: 1.2rem;
        }
        input[type="text"] {
         font-size: 14px;
@@ -76,17 +81,20 @@ h4{
        label {
         font-size: 17px; 
        }
-       
+       .btn {
+        margin-top: 10px !important;
+        font-size: 12px;
+      }
       }
 
-      @media only screen and (max-width: 340px) {
+      @media only screen and (max-width: 320px) {
         .content{
           flex-direction: column !important;
           align-items: flex-start !important;
         }
         .btn {
           margin-top: 10px !important;
-          font-size: 12px;
+          font-size: 10px;
         }
         input[type="text"] {
             font-size: 12px;
@@ -95,4 +103,7 @@ h4{
         label {
             font-size: 15px; 
         }
+        h5{
+            font-size: 1rem;
+           }
       }

@@ -58,9 +58,7 @@ h4{
 .border{
     width: 85%;
 }
-@media (max-width: 500px) {
-    
-  }
+
   @media only screen and (max-width: 800px) {
     .container {
       position: relative;
@@ -69,19 +67,25 @@ h4{
       transform: none;
     }
    h5{
-    font-size: 14px;
+    font-size: 1.2rem;
    }
-   
+   .btn {
+    margin-top: 10px !important;
+    font-size: 12px;
+  }
   }
 
-  @media only screen and (max-width: 340px) {
+  @media only screen and (max-width: 320px) {
     .content{
       flex-direction: column !important;
       align-items: flex-start !important;
     }
     .btn {
       margin-top: 10px !important;
-      font-size: 12px;
+      font-size: 10px;
+    }
+    h5{
+        font-size: 1rem;
     }
   }
   
