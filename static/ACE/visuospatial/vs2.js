@@ -35,20 +35,20 @@
       const que_text = document.querySelector(".que_text");
       const input_box=document.querySelector(" .input input")
       // if startQuiz button clicked
-      next_btn.style.display="none";
-      inputElement.style.display="none";
-      result_box.style.display='none';
-      quiz_box.style.display='none';
-       // on clicking start button
-      start_btn.onclick = ()=>{
-        showImages(0); 
-        next_btn.style.display="block";
-        input_box.style.display="block";
-        start_btn.style.display="none"; 
-        quiz_box.style.display='block';
-    }
+    //   next_btn.style.display="none";
+    //   inputElement.style.display="none";
+       result_box.style.display='none';
+    //   quiz_box.style.display='none';
+    //    // on clicking start button
+    //   start_btn.onclick = ()=>{
+    //     showImages(0); 
+    //     next_btn.style.display="block";
+    //     input_box.style.display="block";
+    //     start_btn.style.display="none"; 
+    //     quiz_box.style.display='block';
+    // }
     // random function
-   
+    showImages(0);
     // show Images
       function showImages(index){
         const img = document.querySelector("#main-img");

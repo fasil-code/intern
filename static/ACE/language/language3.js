@@ -140,3 +140,6 @@ function scoring(){
   x.style.textAlign='center';
   x.style.color = 'red';
 } 
+
+
+

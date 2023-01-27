@@ -4,25 +4,99 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FTD</title>
+    <style>
+/*
+  AUTO GRID
+  Set the minimum item size with `--auto-grid-min-size` and you'll
+  get a fully responsive grid with no media queries.
+*/
+.auto-grid {
+    --auto-grid-min-size: 20rem;
+    
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+    grid-gap: 1rem;
+    margin-right:2rem;
+  }
+  
+  
+  /* Presentational styles */
+  
+  body {
+    background: #efefef;
+   
+    line-height: 1.4;
+    font-family: sans-serif;
+  }
+  
+  a {
+    padding:5rem 5rem 5rem 5rem;
+  
+    text-align: center;
+    font-size: 1.2rem;
+    list-style-type: none;
+ 
+    background:white;
+   
+  
+  }
+a{
+    text-decoration: none;
+    transition: all 0.4s ease-in-out;
+    -webkit-box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12);
+}
+a:hover {
+    scale: 1.05;
+    transition: all 0.4s ease-in-out;
+    
+      }
+
+      
+@media(max-width:450px){
+    body{
+        font-size: 60%;
+    }
+    .auto-grid{
+        --auto-grid-min-size: 100%;
+   
+    }
+    a{
+        
+        padding:3rem;
+        margin:0;
+    }
+    
+
+}
+
+    </style>
 </head>
 <body>
-    <a class="ml-2" href="{{ url_for('emoji') }}">emoji</a>
-    <a class="ml-2" href="{{ url_for('emojrecog') }}">emojirecog</a>
-    <a class="ml-2" href="{{ url_for('ace1') }}">ACE-I</a>
-    <a class="ml-2" href="{{ url_for('ace3') }}">ACE-II</a>
-    <a class="ml-2" href="{{ url_for('language1') }}">language1</a>
-    <a class="ml-2" href="{{ url_for('ptt') }}">Pulse Tracking Test</a>
-    <a class="ml-2" href="{{ url_for('tmt') }}">Trail Making Test</a>
-    <a class="ml-2" href="{{url_for('vs1')}}">VisuoSpatial1</a>
-    <a class="ml-2" href="{{url_for('vs2')}}">VisuoSpatial2</a>
-    <script>
-        history.pushState(null, null, location.href);
-        window.onpopstate = function () {
-            history.go(1);
-        };
+   
+    <ul class="auto-grid">
+        <a  href="{{ url_for('layout') }}?name=emoji"> <li>Emoji Game</li></a>
+       <a   href="{{ url_for('emojrecog') }}"> <li>Emotion Recognisation Test</li></a>
+        <a    href="{{url_for('layout') }}?name=ace1"> <li>ACE-III</li></a>
+      <a    href="{{ url_for('layout') }}?name=ace3" > <li>ACE-III</li></a>
+       <a  href="{{ url_for('layout') }}?name=lang" > <li>Language Test</li></a>
+       <a   href="{{ url_for('layout') }}?name=ptt"> <li>Pulse Tracking Test</li></a>
+       <a href="{{ url_for('layout') }}?name=tmt"> <li>Trail Making test</li></a>
+       <a  href="{{ url_for('layout') }}?name=vs1" > <li>Visuo-Spatial I</li></a>
+       <a  href="{{ url_for('layout') }}?name=vs2" > <li>Visuo-Spatial II</li></a>
+      </ul>
+      <script>
+        document.querySelectorAll('.opt').forEach(function(element) {
+          element.addEventListener('click', function(event) {
+              var selectedOption = event.currentTarget.textContent;
+           console.log(selectedOption);
+
+          });
+      });
 
 
-    </script>
+
+      </script>
 </body>
 </html>

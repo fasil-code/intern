@@ -759,10 +759,9 @@ function rem(){
      }
 
 
-   
 
 const buttonGroupPressed = e => { 
-   
+      
          for (const child of buttonGroup.children) {
        
            child.style.border='none'
