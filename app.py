@@ -63,15 +63,20 @@ def ace6():
 def ace7():
    return render_template('ACE/language/language3.html') 
    
-@app.route("/language",methods=['GET','POST'])
-def lang():
+@app.route("/language1",methods=['GET','POST'])
+def language1():
 
    return render_template('ACE/language/language1.html')
+# visuo-spatial  tests
+@app.route("/vs1",methods=['GET','POST'])
+def vs1():
 
-@app.route('/results', methods=['GET','POST'])
-def submit():
- 
-  return render_template('results.html')
+   return render_template('ACE/visuospatial/vs1.html')
+
+@app.route("/vs2",methods=['GET','POST'])
+def vs2():
+
+   return render_template('ACE/visuospatial/vs2.html')
 
 #5 Pulse Tracking Test (PTT)
 @app.route("/pulse-tracking")

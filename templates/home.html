@@ -11,9 +11,11 @@
     <a class="ml-2" href="{{ url_for('emojrecog') }}">emojirecog</a>
     <a class="ml-2" href="{{ url_for('ace1') }}">ACE-I</a>
     <a class="ml-2" href="{{ url_for('ace3') }}">ACE-II</a>
-    <a class="ml-2" href="{{ url_for('lang') }}">lang</a>
+    <a class="ml-2" href="{{ url_for('language1') }}">language1</a>
     <a class="ml-2" href="{{ url_for('ptt') }}">Pulse Tracking Test</a>
     <a class="ml-2" href="{{ url_for('tmt') }}">Trail Making Test</a>
+    <a class="ml-2" href="{{url_for('vs1')}}">VisuoSpatial1</a>
+    <a class="ml-2" href="{{url_for('vs2')}}">VisuoSpatial2</a>
     <script>
         history.pushState(null, null, location.href);
         window.onpopstate = function () {
