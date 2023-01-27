@@ -1,87 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='ACE/language/style.css')}}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ACE/language/language1.css')}}">
+  <title>Language Test1</title>
 </head>
+
 <body>
-    <div id="diagrams">
-        <div class="diagram">
-          <img src="static\12figs\book.png" alt="book">
-          <label for="diagram1">Name:</label>
-          <input  type="text" id="diagram1" name="diagram1">
+  <!-- <div class="start_btn"><button>Start Test</button></div> -->
+  
+<!-- Info Box -->
+    <!-- <div class="info_box">
+        <div class="info-title"><span>Some Rules of this Test</span></div>
+        <div class="info-list">
+            <div class="info">1. You will be shown a set of 12 images about any object,animal etc.</div>
+            <div class="info">2. You have to type the name of object shown in picture.You can't keep it blank.</div>
+            <div class="info">3. There is no time limit.</div>
+            <div class="info">4. For each correct answer yu will get a point.</div>
+            <div class="info">5. Result will be shown at the end.</div>
+          </div>
+        <div class="buttons">
+            <button class="quit">Exit Quiz</button>
+            <button class="restart">Continue</button>
         </div>
-        <div class="diagram">
-          <img src="static/12figs/spoon.png" alt="spoon">
-          <label for="diagram2">Name:</label>
-          <input type="text" id="diagram2" name="diagram2">
-        </div>
-        <div class="diagram">
-          <img src="static/12figs/goat.png" alt="goat">
-          <label for="diagram3">Name:</label>
-          <input type="text" id="diagram3" name="diagram3">
-        </div>
-        <div class="diagram">
-          <img src="static/12figs/candle.png" alt="candle">
-          <label for="diagram4">Name:</label>
-          <input type="text" id="diagram4" name="diagram4">
-        </div>
-        <div class="diagram">
-          <img src="static/12figs/flag.png" alt="flag">
-          <label for="diagram5">Name:</label>
-          <input type="text" id="diagram5" name="diagram5">
-        </div>
-        <div class="diagram">
-          <img src="static/12figs/camel.png" alt="camel">
-          <label for="diagram6">Name:</label>
-          <input type="text" id="diagram6" name="diagram6">
-        </div>
-        <div class="diagram">
-          <img src="static/12figs/sickle.png" alt="sickle">
-          <label for="diagram7">Name:</label>
-          <input type="text" id="diagram7" name="diagram7">
-        </div>
-        <div class="diagram">
-          <img src="static/12figs/giraffe.png" alt="giraffe">
-          <label for="diagram8">Name:</label>
-          <input type="text" id="diagram8" name="diagram8">
-        </div>
-        <div class="diagram">
-          <img src="static/12figs/timpani.png" alt="timpani">
-          <label for="diagram9">Name:</label>
-          <input type="text" id="diagram9" name="diagram9">
-        </div>
-        <div class="diagram">
-          <img src="static/12figs/umbrella.png" alt="umbrella">
-          <label for="diagram10">Name:</label>
-          <input type="text" id="diagram10" name="diagram10">
-        </div>
-        <div class="diagram">
-          <img src="static/12figs/pig.png" alt="pig">
-          <label for="diagram11">Name:</label>
-          <input type="text" id="diagram11" name="diagram11">
-        </div>
-        <div class="diagram">
-          <img src="static/12figs/crocodile.png" alt="crocodile">
-          <label for="diagram12">Name:</label>
-          <input type="text" id="diagram12" name="diagram12">
-        </div>
-        <!-- Add more div elements for the remaining diagrams -->
+    </div> -->
+
+  <!-- Quiz box -->
+  <div class="quiz_box">
+
+    <section>
+      <div class=" que_text">
       </div>
-      
-      <form id="form" >
-        <button type="submit">Submit</button>
-      </form>
-      <div id="errorMessage">
-        
+      <div class="img-con text-center">
+        <img id="main-img" class=" img img-thumbnail img-fluid" />
       </div>
-     <h2 id="mar"></h2>
-      <script type = "text/javascript" src = "{{ url_for('static', filename = 'ACE/language/diagrams.js') }}" ></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>  
+
+      <div class="input">
+        <input type="text" name="diagram" placeholder="Name" id="">
+        <p id="errorMessage"></p>
+      </div>
+    </section>
+    <footer>
+      <div class="total_que">
+
+      </div>
+      <button class="next_btn">Next</button>
+    </footer>
+  </div>
+
+
+  <!-- Result box -->
+  <div class="result_box">
+    <div class="icon">
+      <i class="fas fa-crown"></i>
+    </div>
+    <div class="complete_text">You've completed the Test!</div>
+    <div class="score_text">
+
+    </div>
+  </div>
+  <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/language/language1.js') }}"></script>
 </body>
+
 </html>
