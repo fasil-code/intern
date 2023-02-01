@@ -129,7 +129,9 @@ def ptt():
 @app.route("/tmt",methods=['GET','POST'])
 def tmt():
     return render_template('TMT/TMT.html')
-
+@app.route("/tmt-2",methods=['GET','POST'])
+def tmt2():
+    return render_template('TMT/TMT2.html')
 
 if __name__ == "__main__":
     app.run(debug = True)
