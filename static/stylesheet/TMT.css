@@ -1,37 +1,3 @@
-.prompt {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.instruction {
-    background-color: aliceblue;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-#instruction-title {
-    font-size: 24px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-#instruction-content {
-    text-align: left;
-    font-size: 18px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
 .btn {
     padding: 10px 20px;
     background-color: #2a47ec;
@@ -46,11 +12,12 @@
     margin-top: 1rem;
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(10, 3rem);
-    grid-template-rows: repeat(10, 3rem);
-    column-gap: 6rem;
-    row-gap: 3rem;
-    }
+    grid-template-columns: repeat(10, 4vh);
+    grid-template-rows: repeat(10, 4vh);
+    column-gap: 6vw;
+    row-gap: 4vh;
+    font-size: 2vh;
+}
 
 .box { 
     display: flex;
@@ -112,4 +79,22 @@ top: 50%;
 left: 50%;
 -ms-transform: translate(-50%, -50%);
 transform: translate(-50%, -50%);
+}
+
+@media (max-width: 768px) {
+    .grid {
+        margin-top: 1rem;
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(10, 4vw);
+        grid-template-rows: repeat(10, 4vw);
+        column-gap: 4vw;
+        row-gap: 5vh;
+        font-size: 2vh;
+    }
+    .result{
+        width: 60%;
+        height: 60%;
+        font-size: 2.5vw;
+    }
 }
