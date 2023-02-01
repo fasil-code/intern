@@ -3,10 +3,8 @@ const grid = document.getElementById('grid');
 
 let startTime;
 let timeTaken;
-document.getElementById('proceed').addEventListener('click', function () {
-    startTime = Date.now();
-    document.getElementById('prompt').style.display = 'none';
-});
+
+startTime = Date.now();
 
 for (let i = 1; i <= nCircle; i++) {
     const cell = document.createElement('div');
