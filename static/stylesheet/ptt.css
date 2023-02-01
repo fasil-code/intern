@@ -1,3 +1,48 @@
+body {
+    background-color: #EEE;
+}
+
+.prompt {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.instruction {
+    background-color: aliceblue;
+    padding: 2px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: aliceblue;
+    color: #007BFF;
+    border-radius: 5px;
+    border: 0px solid #007BFF;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
+}
+
+#guide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #b8daff;
+    background-color: #cce5ff;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.5vw;
+    color: #004085;
+}
+
 .grid{
     display: flex;
     height: 70vh;
@@ -6,12 +51,12 @@
 }
 
 .box{
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     border: 2px solid black;
-    width: 12rem;
-    height: 12rem;
+    width: 20vh;
+    height: 20vh;
     border-radius: 100%;
     box-shadow: 0 8px 12px rgba(0, 0, 0, 1);
     transform:
@@ -39,16 +84,63 @@
     font-size: 1.5vw;
 }
 
+
+#timer-box{
+    margin: auto;
+    margin-top: 5vh;
+    color: #004085;
+    background: #cce5ff;
+    border: 1px solid #b8daff;
+    height: 70px;
+    width: 200px;
+    padding: 0 19px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  
+}
+
+#time-left-txt{
+    font-weight: 400;
+    font-size: 20px;
+    user-select: none;
+}
+
 #timer{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: auto;
-    margin-top: 5rem;
-    width: 6rem;
-    height: 6rem;
-    border: 2px solid black;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+    height: 50px;
+    width: 70px;
+    color: #fff;
+    border-radius: 5px;
+    line-height: 30px;
+    text-align: center;
+    background: #343a40;
+    border: 1px solid #343a40;
+    user-select: none;
+}
+
+@media (max-width: 768px) {
+    #timer-box{
+        height: 55px;
+        width: 140px;
+    }
+    #timer{
+        height: 40px;
+        width: 40px;
+        font-size: 12px;
+    }
+    #timer-left-txt{
+        font-size: 12px;
+    }
+    .result{
+        width: 60%;
+        height: 60%;
+        font-size: 2.5vw;
+    }
 }
 
 table {
