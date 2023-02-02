@@ -9,12 +9,30 @@
     <title>pulse-tracker-test</title>
 </head>
 <body>
-    <h3>Click the blue circle once!</h3>
-    <div id="timer"></div>
+    <div class="prompt" id="prompt">
+        <div class="instruction">
+            <button id="proceed" class="btn">Start</button> 
+        </div>
+    </div>
+
+    <div id="guide">
+        <h3>Click the blue circle once!</h3>
+    </div>
+
+    <div id="timer-box">
+        <div id="time-left-txt">Time Left</div>
+        <div id="timer"></div>
+    </div>
+
     <div class="grid" id="grid">
         <button class="box" id="box1"></button>
         <button class="box" id="box2"></button> 
     </div>
     <div class="result" id="result"></div>
+    <div id="container">
+        <div class="center">
+            <a href="/"><button id="route" class="btn">Proceed to Home</button></a>
+        </div>
+    </div>
 </body>
 </html>

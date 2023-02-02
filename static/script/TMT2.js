@@ -5,12 +5,23 @@ let startTime;
 let timeTaken;
 
 startTime = Date.now();
+let flag_num = 1;
+let num = 1;
+let alpha = 'A';
 
 for (let i = 1; i <= nCircle; i++) {
     const cell = document.createElement('div');
     cell.classList.add(`box${i}`);
     cell.classList.add(`box`);
-    cell.innerText = i;
+    if(flag_num == 1) {
+        cell.innerText = num;
+        num++;
+        flag_num = 0;
+    } else {
+        cell.innerText = alpha;
+        alpha = String.fromCharCode(alpha.charCodeAt(0) + 1);
+        flag_num = 1;
+    }
     grid.appendChild(cell);
 }
 
@@ -75,6 +86,8 @@ document.addEventListener('click', function (event) {
                 `;
             result.innerHTML = resultTable;
             let router = document.getElementById('container');
+            let proceed_btn = document.getElementById('route');
+            proceed_btn.innerHTML = 'Back to Home';
             router.style.display = 'flex';
 
         }
