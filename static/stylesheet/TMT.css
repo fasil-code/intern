@@ -10,13 +10,16 @@
 
 .grid {
     margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(10, 4vh);
-    grid-template-rows: repeat(10, 4vh);
-    column-gap: 6vw;
+    grid-template-columns: repeat(10, 5vh);
+    grid-template-rows: repeat(10, 5vh);
+    column-gap: 3vw;
     row-gap: 4vh;
-    font-size: 2vh;
+    font-size: 2.5vh;
 }
 
 .box { 
@@ -81,14 +84,17 @@ left: 50%;
 transform: translate(-50%, -50%);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 481px) {
     .grid {
-        margin-top: 1rem;
+        margin-top: 0.2vw;
+        margin-left: 0.05vw;
+        margin-right: 0.05vw;
+        margin-bottom: 0.2vw;
         display: grid;
         justify-content: center;
-        grid-template-columns: repeat(10, 4vw);
-        grid-template-rows: repeat(10, 4vw);
-        column-gap: 4vw;
+        grid-template-columns: repeat(10, 9vw);
+        grid-template-rows: repeat(10, 9vw);
+        column-gap: 0.5vw;
         row-gap: 5vh;
         font-size: 2vh;
     }

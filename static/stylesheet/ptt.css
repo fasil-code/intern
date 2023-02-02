@@ -84,6 +84,19 @@ body {
     font-size: 1.5vw;
 }
 
+#container {
+    display: none;
+    height: 200px;
+    position: relative;
+}
+.center {
+margin: 0;
+position: absolute;
+top: 50%;
+left: 50%;
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+}
 
 #timer-box{
     margin: auto;
@@ -124,6 +137,9 @@ body {
 }
 
 @media (max-width: 768px) {
+    #guide {
+        font-size: 3vw;
+    }
     #timer-box{
         height: 55px;
         width: 140px;
