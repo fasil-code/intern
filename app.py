@@ -3,7 +3,7 @@ app = Flask(__name__)
 import random
 import geonamescache
 # for emotion data
-from index import emotiondata
+
 gc=geonamescache.GeonamesCache()
 countries = gc.get_countries()
 from flask import render_template
@@ -29,28 +29,16 @@ def emoji():
  
 @app.route("/emojrecog",methods=['GET','POST'])
 def emojrecog():
-   obj=emotiondata()
-   if "count" in request.args:
-     count=int(request.args['count'])
-   else:
-      count=0
-   random_number = random.randint(1, 15)
-   data=obj.get()
-   random_number=str(random_number)
-   if 9>=int(random_number):
-      random_number="0"+str(random_number)
-   if  count>=10:
-       return render_template('EmojRecog/result.html')
-   else :
-       type=data['questions'][count]['correct']
-       path=type+'/subject'+random_number+'.jpg'
-       return render_template('EmojRecog/EmojRecog.html',data=data,count=count,path=path,random_number=random_number)
+   
+  
+   
+   return render_template('EmojRecog/EmojRecog.html')
 #4 Ace
 @app.route("/layout",methods=['GET','POST'])
 def layout():
    name = request.args.get('name')
    
-   return render_template('ACE/attention/layout.html',url=name)
+   return render_template('layout.html',url=name)
 #5 Ace2)
 @app.route("/ace1")
 def ace1():

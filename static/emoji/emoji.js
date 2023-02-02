@@ -8,7 +8,6 @@ const option5=document.querySelector('#heading')
 const submit=document.querySelector('#submit')
 const scored=document.querySelector('#scored')
 
-
 const posts=[
       {
             "emoji": "😀",
@@ -712,8 +711,13 @@ const posts=[
       "ios_version": "6.0"
       }
      
+  
+  ];
+  
+  
+  
 
-]
+
 let score=0
 
 function renderEmoji(){
@@ -726,7 +730,7 @@ function renderEmoji(){
 
 }
 var correct;
-let question=10;
+let question=8;
 function renderCorrect(){
     
      correct = Math.floor(Math.random() * ((3)+1));
@@ -739,10 +743,10 @@ function loadQuestion(){
        renderCorrect();
       
 option5.innerHTML=posts[arr[correct]].description
-option1.innerHTML=posts[arr[0]].emoji  
-option2.innerHTML=posts[arr[1]].emoji  
-option3.innerHTML=posts[arr[2]].emoji  
-option4.innerHTML=posts[arr[3]].emoji  
+option1.innerHTML=posts[arr[0]].emoji
+option2.innerHTML=posts[arr[1]].emoji
+option3.innerHTML=posts[arr[2]].emoji 
+option4.innerHTML=posts[arr[3]].emoji
 
 
 }
