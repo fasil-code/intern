@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='ACE/attention/attention124.css')}}">
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
+   <title>Attention Test</title>
+</head>
+<style>
+    html,
+body {
+  padding:0;
+  margin:0;
+  height:100%;
+  width:100%;
+
+  
+
+}
+.start_btn,
+.info_box,
+.quiz_box,
+.result_box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.info_box.activeInfo,
+.quiz_box.activeQuiz,
+.result_box.activeResult{
+    opacity: 1;
+    z-index: 5;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.start_btn button{
+    font-size: 25px;
+    font-weight: 500;
+    color: #007bff;
+    padding: 15px 30px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.info_box{
+    width: 540px;
+    background: #fff;
+    border-radius: 5px;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.info_box .info-title{
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    border-radius: 5px 5px 0 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.info_box .info-list{
+    padding: 15px 30px;
+}
+
+.info_box .info-list .info{
+    margin: 5px 0;
+    font-size: 17px;
+}
+
+.info_box .info-list .info span{
+    font-weight: 600;
+    color: #007bff;
+}
+.info_box .buttons{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 30px;
+    border-top: 1px solid lightgrey;
+}
+
+.info_box .buttons button{
+    margin: 0 5px;
+    height: 40px;
+    width: 100px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    transition: all 0.3s ease;
+}
+
+
+@media (max-width:450px){
+
+    .info_box {
+        width:100vw;
+        }
+
+
+}
+
+
+
+</style>
+<body>
+   
+   <div class="start_btn"><button>Start ACE III</button></div>
+
+
+  <div class="info_box">
+      <div class="info-title"><span>Some Rules of this Test</span></div>
+      <div class="info-list">
+          <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
+          <div class="info">2. Once you select your answer, it can't be undone.</div>
+          <div class="info">3. You can't select any option once time goes off.</div>
+          <div class="info">4. You can't exit from the Test while you're opting.</div>
+          <div class="info">5. You'll get points on the basis of your correct answers.</div>
+      </div>
+      <div class="buttons ">
+          <button class="bg-primary quit">Exit Test</button>
+          <button class="bg-primary restart">Continue</button>
+      </div>
+  </div> 
+          
+   
+    </div>  
+         
+  </div>   
+    
+ 
+   
+    <script type = "text/javascript" src = "{{ url_for('static', filename = 'ACE/attention/attention1.js') }}" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- Datepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script>
+    var nexturl="{{url}}"
+    let buttonText;
+    if(nexturl=='emoji'){
+        buttonText="Emoji Game";
+    }
+    else if(nexturl=='ace1'){
+        buttonText="ACE III Test"
+    }
+    else if(nexturl=='ace3'){
+        buttonText="ACE III Test"
+    }
+    else if(nexturl=='lang'){
+        buttonText="Language Test"
+    }
+    else if(nexturl=='tmt'){
+        /*
+            // Before: Title of webpage ==> Attention Test
+            // After:  Title of webpage ==> TMT Test
+        */
+        document.querySelector("title").textContent="TMT-I Test";
+        buttonText="TMT-I Test"
+        // Rules of the test are changed
+        const info = document.getElementsByClassName("info");
+        info[0].innerHTML="1. Click the circles in the <span>Ascending Order</span> according to the numbers assigned.";
+        info[1].innerHTML="2. Numbers range from <span>1 to 25</span>.";
+        info[2].innerHTML="3. You <span>will be guided</span> if you click a wrong circle.";
+        info[3].innerHTML="4. When you feel stuck click any circle that is not green.";
+        info[4].innerHTML="5. Time taken to complete the task is noted.";
+    }
+    else if(nexturl=='tmt-2') {
+        /*
+            // Before: Title of webpage ==> Attention Test
+            // After:  Title of webpage ==> TMT Test
+        */
+        document.querySelector("title").textContent="TMT-II Test";
+        buttonText="TMT-II Test"
+        // Rules of the test are changed
+        const info = document.getElementsByClassName("info");
+        info[0].innerHTML="1. Click the circles <span>alternatively</span> between numbers and letters.";
+        info[1].innerHTML="2. Numbers are to be cliocked in <span>Ascending Order</span>.";
+        info[2].innerHTML="3. Letters are to be clicked in <span>Alphabetical Order</span>.";
+        info[3].innerHTML="4. You <span>will be guided</span> if you click a wrong circle.";
+        info[4].innerHTML="5. Time taken to complete the task is noted.";
+    }
+    else if(nexturl=='ptt'){
+        /*
+            // Before: Title of webpage ==> Attention Test
+            // After:  Title of webpage ==> PTT Test
+        */
+        document.querySelector("title").textContent="PTT Test";
+        buttonText="PTT Test"
+        // Rules of the test are changed
+        const info = document.getElementsByClassName("info");
+        info[0].innerHTML="1. You have to click <span>Blue circle</span> only once in every iteration.";
+        info[1].innerHTML="2. You are given <span>5 seconds</span> to click Blue circle.";
+        info[2].innerHTML="3. Wrong and multiple clicks will be penalised.";
+        info[3].innerHTML="4. A <span>10 second</span> rest time is given after every iteration. DO NOT click during this time.";
+        info[4].innerHTML="5. After <span>5 iterations</span> you will be given a <span>30 second</span> rest time. DO NOT click during this time.";
+    }
+    else if(nexturl=='vs1'){
+        buttonText="Visuo-Spatial TestI"
+        
+    }
+    else if(nexturl=='vs2'){
+        buttonText="Visuo-Spatial TestII"
+    }
+    
+
+
+      const starter = document.querySelector(".start_btn");
+      const start_btn = document.querySelector(".start_btn button");
+      const main= document.querySelector(".main");
+      
+      const info_box = document.querySelector(".info_box");
+      const exit_btn = info_box.querySelector(".buttons .quit");
+      const continue_btn = info_box.querySelector(".buttons .restart");
+       
+   
+start_btn.innerHTML= "Start "+buttonText;
+      // if startQuiz button clicked
+      start_btn.onclick = ()=>{
+          info_box.classList.add("activeInfo");
+          info_box.style.display="block"
+          starter.style.display="none";
+     
+           //show info box
+           
+      }
+      
+      // if exitQuiz button clicked
+      exit_btn.onclick = ()=>{
+          info_box.classList.remove("activeInfo"); //hide info box
+          info_box.style.display="none"
+          starter.style.display="block"
+        
+      }
+      
+      // if continueQuiz button clicked
+      continue_btn.onclick = ()=>{
+          info_box.style.display="none"
+          window.location.href=nexturl;
+          info_box.classList.remove("activeInfo"); //hide info box
+      
+      }
+      
+    
+    
+</script>
+
+
+</body>
+
+
+</html> 
+

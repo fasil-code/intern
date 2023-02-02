@@ -101,6 +101,8 @@ function Game() {
     grid.style.height   = '0vh';
     // display results
     result.style.display = 'flex';
+    let router = document.getElementById('container');
+    router.style.display = 'flex';
     const resultTable = `
       <table>
         <tr>

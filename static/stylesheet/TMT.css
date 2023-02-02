@@ -10,14 +10,25 @@
 
 .grid {
     margin-top: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
     display: grid;
     justify-content: center;
+<<<<<<< HEAD
     grid-template-columns: repeat(10, 4rem);
     grid-template-rows: repeat(10, 1rem);
     column-gap: 3rem;
     row-gap: 3rem;
   
     font-size: 1.5rem;
+=======
+    grid-template-columns: repeat(10, 5vh);
+    grid-template-rows: repeat(10, 5vh);
+    column-gap: 3vw;
+    row-gap: 4vh;
+    font-size: 2.5vh;
+>>>>>>> 4bc16a5352c7fe869835a91e8ebdb78e41c54aae
 }
 
 .box { 
@@ -83,16 +94,27 @@ left: 50%;
 transform: translate(-50%, -50%);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 481px) {
     .grid {
-        margin-top: 1rem;
+        margin-top: 0.2vw;
+        margin-left: 0.05vw;
+        margin-right: 0.05vw;
+        margin-bottom: 0.2vw;
         display: grid;
         justify-content: center;
+<<<<<<< HEAD
         grid-template-columns: repeat(10, 4rem);
         grid-template-rows: repeat(10, 4rem);
         column-gap: 4rem;
         row-gap: 4rem;
         font-size: 18px;
+=======
+        grid-template-columns: repeat(10, 9vw);
+        grid-template-rows: repeat(10, 9vw);
+        column-gap: 0.5vw;
+        row-gap: 5vh;
+        font-size: 2vh;
+>>>>>>> 4bc16a5352c7fe869835a91e8ebdb78e41c54aae
     }
     .result{
         width: 60%;
