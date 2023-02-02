@@ -32,12 +32,12 @@ let questions=[
 },           
 {
 
-    'options':['surprised','disgusted','fear','neutral'],  
-    'answer':'fear',
+    'options':['surprised','happy','anger','disgust'],  
+    'answer':'disgust',
     },   
 {           
-'options':['angry','happy','scared','neutral'],           
-'answer':'angry',
+'options':['angry','happy','scared','contempt'],           
+'answer':'contempt',
 },         
                  {
             
@@ -47,13 +47,13 @@ let questions=[
     
                           {
             
-'options':['contempt','disgusted','sad','neutral'],
+'options':['sad','disgusted','sad','neutral'],
 'answer':'sad',
 },        
                               {
             
-'options':['contempt','disgusted','surprised','neutral'],
-'answer':'surprised',
+'options':['contempt','angry','surprised','neutral'],
+'answer':'angry',
 },        
                          
 
@@ -135,9 +135,22 @@ restart_quiz.onclick = ()=>{
     timeText.textContent = "Time Left"; //change the text of timeText to Time Left
     next_btn.classList.remove("show"); //hide the next button
 }
+const mp={};
 
+    
+        mp['happy']=69
+        mp['sad']=37        
+        mp['angry']=45
+        mp['surprised']=83
+        mp['disgust']=59
+        mp['fear']=25
+            mp['contempt']=18
+
+    
 // if quitQuiz button clicked
 quit_quiz.onclick = ()=>{
+
+
     window.location.reload(); //reload the current window
 }
 
@@ -163,10 +176,12 @@ next_btn.onclick = ()=>{
         showResult(); //calling showResult function
     }
 }
-function random(){
-    let r= Math.floor(Math.random() * 9) + 1
-    r="0"+r;
-    path='/subject'+r+'.jpg'
+function random(option){
+    let maxi=mp[option];
+    
+    let r= Math.floor(Math.random() * maxi) + 1
+    
+    path='/subject'+' ('+r+')'+'.png'
     return path
 }
 // getting questions and options from array
@@ -175,8 +190,9 @@ function showQuetions(index){
     const img = document.querySelector("#main-img");
     //creating a new span and div tag for question and option and passing the value using array index
     let que_tag = '<span class="rem">Identify the type of emotion in the image below:</span><div class="que_img"><img src="'+'</span>';
-  let path= questions[que_count].answer+random()
-    img.src='static/images/'+path;
+  let correct1=questions[que_count].answer;
+    let path= correct1+random(correct1)
+    img.src='static/images/dataset/'+path;
     console.log(img.src)
     let option_tag = '<div class="option"><span>'+ questions[index].options[0] +'</span></div>'
     + '<div class="option"><span>'+ questions[index].options[1] +'</span></div>'
@@ -279,9 +295,10 @@ function startTimer(time){
         }
     }
 }
+// setting timer 
 var length=(quiz_box.clientWidth);
-var speed=(23*length)/683;
-console.log(typeof(length))
+var speed=(683*23)/(length);
+
 
 function startTimerLine(time){
     counterLine = setInterval(timer, speed);
@@ -294,6 +311,7 @@ function startTimerLine(time){
     }
 }
 
+// Question counter
 function queCounter(index){
    
     let totalQueCounTag = '<span><p>'+ index +'</p> of <p>'+ questions.length +'</p> Questions</span>';
