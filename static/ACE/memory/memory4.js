@@ -61,6 +61,10 @@ function audioToText(i){
     
   });
   recognition.start();
+  // Stop recognition after 5 seconds
+  setTimeout(() => {
+    recognition.stop();
+  }, 5000);
 }
 function scoring(){
   document.getElementById("hidden").style.display="block";

@@ -2,6 +2,7 @@ from flask import Flask,jsonify,render_template,request
 app = Flask(__name__)
 import random
 import geonamescache
+import os
 # for emotion data
 from index import emotiondata
 gc=geonamescache.GeonamesCache()
@@ -15,8 +16,11 @@ from flask import render_template
 #1  Home
 @app.route("/",methods=['GET','POST'])
 def home():
-   
    return render_template('home.html')
+@app.route("/api-key")
+def get_api_key():
+    api_key = os.environ.get("API_KEY")
+    return api_key
 #2 Emoji
 @app.route("/emoji",methods=['GET','POST'])
 def emoji():
@@ -97,14 +101,16 @@ def ace9():
    return render_template('ACE/memory/memory2.html',url="ace10") 
 @app.route("/ace10") 
 def ace10():
-   return render_template('ACE/memory/memory3.html',url="/") 
+   return render_template('ACE/memory/memory3.html',url="ace13") 
 @app.route("/ace11",methods=['GET','POST']) 
 def ace11():
    return render_template('ACE/memory/memory4.html') 
 @app.route("/ace12",methods=['GET','POST']) 
 def ace12():
-   return render_template('ACE/fluency/fluency2.html') 
-
+   return render_template('ACE/fluency/fluency2.html')
+@app.route("/ace13",methods=['GET','POST'])  
+def ace13():
+   return render_template('ACE/fluency/fluency1.html') 
 @app.route("/lang",methods=['GET','POST'])
 def language1():
 

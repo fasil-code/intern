@@ -16,7 +16,7 @@ let addressBook = [
     {
     Name: "suresh sharma",
     Street: "rajendra nagar",
-    Locality: "gandhi nagar",
+    Locality: "rajendra park",
     District: "new delhi",
     State: "delhi"
     },
@@ -87,9 +87,9 @@ document.getElementById("next-btn").addEventListener("click", function(event){
         document.getElementById("heading").style.display="none";
         let modalBody = document.querySelector(".modal-body");
         for(let i=0;i<arr.length;i++){
-            let str=Object.values(addressBook[rand])[i];
+            let str=Object.values(addressBook[rand])[arr[i]];
             let li = document.createElement("li");
-            li.textContent =i+1+": "+Object.entries(addressBook[rand])[i][0]+" starts with "+str.slice(0,2);
+            li.textContent =i+1+": "+Object.entries(addressBook[rand])[arr[i]][0]+" starts with "+str.slice(0,2);
             modalBody.appendChild(li);
         }
         for(let i=0;i<arr.length;i++){

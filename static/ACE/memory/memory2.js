@@ -36,6 +36,8 @@ let addressBook = [
     }
    
 ];
+let isAudioPlaying = false;
+let isRecording = false;
 let size=addressBook.length;
 let objsize =Object.values(addressBook[0]).length;
 let rand=Math.floor(Math.random()*size);
@@ -47,6 +49,11 @@ for(let i=0;i<objsize;i++){
 
 }
 function textToAudio(num){
+  if (isRecording) {
+    // Display an error message or return from the function
+    document.getElementById('recognition-status').textContent="🔴 Voice recognition is currently in progress";
+    return;
+  }
     const msg = new SpeechSynthesisUtterance(
       Object.values(addressBook[rand])[num]
       
@@ -61,7 +68,13 @@ function textToAudio(num){
         msg.pitch = 0.8;
         window.speechSynthesis.cancel(msg);
         window.speechSynthesis.speak(msg);
-  
+        // Set the flag to true when the audio starts playing
+        isAudioPlaying = true;
+        // Set the flag to false when the audio ends
+        msg.addEventListener('end', () => {
+          isAudioPlaying = false;
+  });
+       
   }
   // repeats back spoken words
 function repeat(message){
@@ -88,6 +101,14 @@ const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "hi-IN
 let ans=new Array();
 // Define a function to start speech recognition
 function audioToText(i){
+  if (isAudioPlaying) {
+    // Display an error message or return from the function
+
+    document.getElementById('recognition-status').textContent="🔴 Audio is currently playing";
+    return;
+  }
+   // Set the flag to true when the recognition starts
+   isRecording = true;
 let message="";
 const recognition = new webkitSpeechRecognition() || window.SpeechRecognition();
 recognition.interimResults = true;
@@ -118,9 +139,14 @@ recognition.addEventListener('end', () => {
   // Display a message when recognition ends
   document.getElementById('recognition-status').textContent = '🟢 Voice Recognition ended';
   repeat(message);
-  
+  // Set the flag to false when the recognition ends
+  isRecording = false;
 });
 recognition.start();
+// Stop recognition after 5 seconds
+  setTimeout(() => {
+  recognition.stop();
+}, 5000);
 }
 function scoring(){
   let score=0;
