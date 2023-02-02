@@ -92,7 +92,8 @@
             if (inputValue === diagrams[dg_count].dot_count) {
               marks++;
           } 
-            showResult();
+            // showResult();
+            window.location.href =  nextUrl;
            } //calling showResult function
         }
         console.log(marks);

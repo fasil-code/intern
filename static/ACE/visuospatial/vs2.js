@@ -91,7 +91,8 @@
             if (inputValue.toLowerCase() === diagrams[dg_count].correct_name.toLowerCase()) {
               marks++;
           } 
-            showResult();
+            // showResult();
+            window.location.href=nextUrl;
            } //calling showResult function
         }
         console.log(marks);

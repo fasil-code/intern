@@ -86,10 +86,10 @@ def ace8():
    return render_template('ACE/language/language4.html') 
 @app.route("/ace9",methods=['GET','POST']) 
 def ace9():
-   return render_template('ACE/memory/memory2.html',url="ace10") 
+   return render_template('ACE/memory/memory2.html',url="ace11") 
 @app.route("/ace10") 
 def ace10():
-   return render_template('ACE/memory/memory3.html',url="ace13") 
+   return render_template('ACE/memory/memory3.html',url="/") 
 @app.route("/ace11",methods=['GET','POST']) 
 def ace11():
    return render_template('ACE/memory/memory4.html') 
@@ -102,17 +102,17 @@ def ace13():
 @app.route("/lang",methods=['GET','POST'])
 def language1():
 
-   return render_template('ACE/language/language1.html')
+   return render_template('ACE/language/language1.html',url="layout")
 # visuo-spatial  tests
 @app.route("/vs1",methods=['GET','POST'])
 def vs1():
 
-   return render_template('ACE/visuospatial/vs1.html')
+   return render_template('ACE/visuospatial/vs1.html',url="vs2")
 
 @app.route("/vs2",methods=['GET','POST'])
 def vs2():
 
-   return render_template('ACE/visuospatial/vs2.html')
+   return render_template('ACE/visuospatial/vs2.html',url="ace10")
 
 #5 Pulse Tracking Test (PTT)
 @app.route("/ptt",methods=['GET','POST'])

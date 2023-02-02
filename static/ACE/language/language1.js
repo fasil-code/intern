@@ -61,6 +61,7 @@
           "correctName": "Crocodile"
         }
       ]
+     
       let dg_count = 0;
       let marks = 0;
       const quiz_box=document.querySelector('.quiz_box');
@@ -157,7 +158,9 @@ showImages(0);
             if (inputValue.toLowerCase() === diagrams[dg_count].correctName.toLowerCase()) {
               marks++;
           } 
-            showResult();
+            // showResult();
+            
+            window.location.href =  nextUrl;
            } //calling showResult function
         }
     }
