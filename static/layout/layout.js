@@ -3,13 +3,27 @@
   let buttonText;
   if (nexturl == "emoji") {
       buttonText = "Emoji Game";
-  } else if (nexturl == "ace1") {
-      buttonText = "ACE III Test";
-  } else if (nexturl == "ace3") {
-      buttonText = "ACE III Test";
-  } else if (nexturl == "lang") {
+  }  else if (nexturl == "lang") {
       buttonText = "Language Test";
-  } else if (nexturl == "tmt") {
+  }
+  else if (nexturl == "ace1") {
+    buttonText = "Attention Test";
+} else if (nexturl == "ace3") {
+    buttonText = "ACE III Test";
+}
+  else if(nexturl=="ace13"){
+           buttonText="Fluency Test"
+  }
+ else if(nexturl=="ace9"){
+        buttonText="Memory Test"
+   }
+   else if(nexturl=="ace8"){
+    buttonText="Language Test"
+}
+else if (nexturl == "vs1") {
+    buttonText = "Visuo-Spatial Test";
+} 
+  else if (nexturl == "tmt") {
       /*
           // Before: Title of webpage ==> Attention Test
           // After:  Title of webpage ==> TMT Test
@@ -63,11 +77,7 @@
           "4. A <span>10 second</span> rest time is given after every iteration. DO NOT click during this time.";
       info[4].innerHTML =
           "5. After <span>5 iterations</span> you will be given a <span>30 second</span> rest time. DO NOT click during this time.";
-  } else if (nexturl == "vs1") {
-      buttonText = "Visuo-Spatial TestI";
-  } else if (nexturl == "vs2") {
-      buttonText = "Visuo-Spatial TestII";
-  }
+  } 
 
   const starter = document.querySelector(".start_btn");
   const start_btn = document.querySelector(".start_btn button");
