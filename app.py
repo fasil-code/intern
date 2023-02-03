@@ -1,10 +1,12 @@
 from flask import Flask,jsonify,render_template,request
+from flask import Flask,render_template,url_for,flash,redirect
+from forms import RegistrationForm,LoginForm
 app = Flask(__name__)
 import random
 import geonamescache
 import os
 # for emotion data
-
+app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 gc=geonamescache.GeonamesCache()
 countries = gc.get_countries()
 from flask import render_template
@@ -126,6 +128,28 @@ def tmt():
 @app.route("/tmt-2",methods=['GET','POST'])
 def tmt2():
     return render_template('TMT/TMT2.html')
+
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}!', 'success')
+        return redirect(url_for('home'))
+    return render_template('register.html', title='Register', form=form)
+
+
+@app.route("/login",methods=['GET','POST'])
+def login():
+    form=LoginForm()
+    if form.validate_on_submit():
+        if(form.email.data=='zargerfasil123@gmail.com' and form.password.data=='asdf'):
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login Unsuccessful. Please check username and password', 'danger')
+    return render_template('login.html',title='Login',form=form)
+
 
 if __name__ == "__main__":
     app.run(debug = True)
