@@ -15,7 +15,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        vertical-align: middle;
+        margin-top:15px;
     }
     .login{
     padding:20px 30px;
@@ -29,10 +29,23 @@ background-color: white;
     }
 </style>
 <body>
+    <div style="text-align: center;">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+          {% endwith %}
+        
+      </div>
     <div class="login">
 {% block content %}
 
 <div class=" content-section">
+
     <form method="POST" action="">
 {{form.hidden_tag()}}
 <fieldset class="form-group">
