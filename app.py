@@ -1,7 +1,7 @@
 from flask import Flask,jsonify,render_template,request
 from flask import Flask,render_template,url_for,flash,redirect
 from forms import RegistrationForm,LoginForm,ResetRequestForm,ResetPassword
-from flask_mail import Mail, Message
+
 app = Flask(__name__)
 import random
 import geonamescache
@@ -11,7 +11,7 @@ import math
 import random
 import smtplib
 from flask_mysqldb import MySQL
-from itsdangerous import TimedJSONWebSignatureSerializer
+
 
 app = Flask(__name__)
 mysql = MySQL(app)
@@ -134,7 +134,7 @@ def send_otp(email):
     s.login("zargerfasil123@gmail.com", "wnkkbihlwomebczv")
     emailid = email
     s.sendmail('ftd',emailid,msg)
-    
+email_sent = "" 
 @app.route('/reset_password',methods=['GET','POST'])
 def reset_password():
     form=ResetRequestForm()
@@ -142,7 +142,8 @@ def reset_password():
     
     if form.validate_on_submit():
         email = form.email.data
-        
+        global email_sent
+        email_sent=email
         # Connect to the database
         conn = mysql.connect
         cursor = conn.cursor()
@@ -176,7 +177,7 @@ def set_password():
         if entered_otp != otp_sent:
             flash('Incorrect OTP. Please try again.', 'danger')
             return redirect(url_for('set_password'))
-        email='zargerfasil123@gmail.com' 
+        email=email_sent 
         # If OTP is correct, update the password in the database
         conn = mysql.connect
         cursor = conn.cursor()
