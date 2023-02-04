@@ -1,11 +1,17 @@
 from flask import Flask,jsonify,render_template,request
 from flask import Flask,render_template,url_for,flash,redirect
-from forms import RegistrationForm,LoginForm,ResetRequestForm
+from forms import RegistrationForm,LoginForm,ResetRequestForm,ResetPassword
+from flask_mail import Mail, Message
 app = Flask(__name__)
 import random
 import geonamescache
 import os
+
+import math
+import random
+import smtplib
 from flask_mysqldb import MySQL
+from itsdangerous import TimedJSONWebSignatureSerializer
 
 app = Flask(__name__)
 mysql = MySQL(app)
@@ -20,6 +26,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+
 
 def create_database():
     conn = mysql.connector.connect(
@@ -45,6 +52,12 @@ create_database()
 app.config['MYSQL_DB'] = 'ftd'
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 mysql = MySQL(app)
+
+
+
+   
+    
+
 
 
 
@@ -106,14 +119,76 @@ def login():
         return redirect(url_for('home'))
         
     return render_template('login.html', title='Login', form=form)
+otp_sent = ""   
+def send_otp(email):
+    digits="0123456789"
+    OTP=""
+    for i in range(6):    
+       OTP+=digits[math.floor(random.random()*10)]
+    global otp_sent
+    otp_sent = OTP   
+    otp = OTP + " is your OTP"
+    msg= otp
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    s.starttls()
+    s.login("zargerfasil123@gmail.com", "wnkkbihlwomebczv")
+    emailid = email
+    s.sendmail('ftd',emailid,msg)
     
-
 @app.route('/reset_password',methods=['GET','POST'])
 def reset_password():
     form=ResetRequestForm()
+   
     
+    if form.validate_on_submit():
+        email = form.email.data
+        
+        # Connect to the database
+        conn = mysql.connect
+        cursor = conn.cursor()
+        
+        # Check if the email exists in the user table
+        cursor.execute("SELECT * FROM user WHERE email=%s", (email,))
+        result = cursor.fetchone()
+        
+        # If there is no matching email, show error message
+        if not result:
+            flash('No account with this email found.', 'danger')
+            return redirect(url_for('reset_password'))
+        
+        # If email exists, show success message and reset password process
+        send_otp(email)
+        flash('Password reset instructions have been sent to your email', 'success')
+        return redirect(url_for('set_password'))
     return render_template('reset_request.html',title='Reset Request',form=form)
 
+
+
+@app.route('/set_password',methods=['GET','POST'])
+def set_password():
+    form=ResetPassword()
+    if form.validate_on_submit():
+        # get the entered OTP value
+        entered_otp = form.otp.data
+        password = form.password.data
+        
+        # compare the entered OTP with the stored OTP
+        if entered_otp != otp_sent:
+            flash('Incorrect OTP. Please try again.', 'danger')
+            return redirect(url_for('set_password'))
+        email='zargerfasil123@gmail.com' 
+        # If OTP is correct, update the password in the database
+        conn = mysql.connect
+        cursor = conn.cursor()
+        cursor.execute("UPDATE user SET password=%s WHERE email=%s", (password, email))
+        conn.commit()
+        
+        flash('Password has been reset successfully.', 'success')
+        return redirect(url_for('login'))
+    return render_template('reset.html',title='Reset Request',form=form)
+ 
+        
+        
 
 
 #1  Home

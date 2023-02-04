@@ -29,6 +29,7 @@ background-color: white;
     }
 </style>
 <body>
+    <h1>{{result}}</h1>
     <div style="text-align: center;">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
