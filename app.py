@@ -1,17 +1,118 @@
 from flask import Flask,jsonify,render_template,request
 from flask import Flask,render_template,url_for,flash,redirect
-from forms import RegistrationForm,LoginForm
+from forms import RegistrationForm,LoginForm,ResetRequestForm
 app = Flask(__name__)
 import random
 import geonamescache
 import os
-# for emotion data
-app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+from flask_mysqldb import MySQL
+
+app = Flask(__name__)
+mysql = MySQL(app)
+import mysql.connector
+
 gc=geonamescache.GeonamesCache()
 countries = gc.get_countries()
 from flask import render_template
 
 
+app = Flask(__name__)
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+
+def create_database():
+    conn = mysql.connector.connect(
+        host=app.config['MYSQL_HOST'],
+        user=app.config['MYSQL_USER'],
+        password=app.config['MYSQL_PASSWORD']
+    )
+
+    cursor = conn.cursor()
+    
+    cursor.execute("CREATE DATABASE IF NOT EXISTS ftd")
+    cursor.execute("USE ftd")
+    cursor.execute(
+        "CREATE TABLE IF NOT EXISTS user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(80) NOT NULL UNIQUE, email VARCHAR(120) NOT NULL UNIQUE, password VARCHAR(120) NOT NULL)"
+    )
+
+    cursor.close()
+    conn.close()
+
+# Call this function once in your application code to create the database and table.
+create_database()
+
+app.config['MYSQL_DB'] = 'ftd'
+app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+mysql = MySQL(app)
+
+
+
+# for emotion data
+
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        username=form.username.data
+        email=form.email.data
+        password=form.password.data
+         # Connect to the database
+        conn = mysql.connect
+        cursor = conn.cursor()
+        # Check if the email already exists
+        cursor.execute("SELECT * FROM user WHERE email=%s", (email,))
+        result = cursor.fetchone()
+        
+        # If email already exists, show error message
+        if result:
+            flash('Email already exists, please use a different email address.', 'danger')
+            return redirect(url_for('register'))
+        # Insert form data into the user table
+        cursor.execute("INSERT INTO user (username, email, password) VALUES (%s, %s, %s)", (username, email, password))
+        conn.commit()
+        
+        # Close the cursor and connection
+        cursor.close()
+        conn.close()
+        flash(f'Account created for {username}!', 'success')
+        return redirect(url_for('home'))
+    return render_template('register.html', title='Register', form=form)
+
+
+@app.route("/login",methods=['GET','POST'])
+def login():
+    form=LoginForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+        
+        # Connect to the database
+        conn = mysql.connect
+        cursor = conn.cursor()
+        
+        # Check if the email and password match a record in the user table
+        cursor.execute("SELECT * FROM user WHERE email=%s AND password=%s", (email, password))
+        result = cursor.fetchone()
+        
+        # If there is no matching record, show error message
+        if not result:
+            flash('Login Unsuccessful. Please check email and password.', 'danger')
+            return redirect(url_for('login'))
+        
+        # If login is successful, show success message
+        flash('You have been logged in!', 'success')
+        return redirect(url_for('home'))
+        
+    return render_template('login.html', title='Login', form=form)
+    
+
+@app.route('/reset_password',methods=['GET','POST'])
+def reset_password():
+    form=ResetRequestForm()
+    
+    return render_template('reset_request.html',title='Reset Request',form=form)
 
 
 
@@ -130,25 +231,6 @@ def tmt2():
     return render_template('TMT/TMT2.html')
 
 
-@app.route("/register", methods=['GET', 'POST'])
-def register():
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('home'))
-    return render_template('register.html', title='Register', form=form)
-
-
-@app.route("/login",methods=['GET','POST'])
-def login():
-    form=LoginForm()
-    if form.validate_on_submit():
-        if(form.email.data=='zargerfasil123@gmail.com' and form.password.data=='asdf'):
-            flash('You have been logged in!', 'success')
-            return redirect(url_for('home'))
-        else:
-            flash('Login Unsuccessful. Please check username and password', 'danger')
-    return render_template('login.html',title='Login',form=form)
 
 
 if __name__ == "__main__":
