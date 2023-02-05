@@ -25,7 +25,7 @@ from flask import render_template
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = 'alchemist'
 
 
 def create_database():
@@ -191,8 +191,25 @@ def set_password():
         
         
 
+@app.route("/send_score", methods=["POST"])
+def send_score():
+    score= request.form.get("score")
+    column= request.form.get("column")
+   #   Connect to the database
+    conn = mysql.connect
+    cursor = conn.cursor()
+   
+   #  Insert the score into the database
+    cursor.execute(f"INSERT INTO scores ({column}) VALUES (%s)", (score,))
+    conn.commit()
 
+    # Close the connection
+    cursor.close()
+    conn.close()
+
+    return "Score received: " + score + " for " + column
 #1  Home
+
 @app.route("/",methods=['GET','POST'])
 def home():
    return render_template('home.html')
@@ -246,7 +263,7 @@ def ace2():
    return render_template('ACE/attention/attention2.html') 
 @app.route("/ace3",methods=['GET','POST']) 
 def ace3():
-   return render_template('ACE/attention/attention3.html') 
+   return render_template('ACE/attention/attention3.html',url="ace4") 
 @app.route("/ace4") 
 def ace4():
    return render_template('ACE/attention/attention4.html')  
