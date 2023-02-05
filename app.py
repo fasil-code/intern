@@ -1,7 +1,6 @@
 from flask import Flask,jsonify,render_template,request
 from flask import Flask,render_template,url_for,flash,redirect
 from forms import RegistrationForm,LoginForm,ResetRequestForm,ResetPassword
-
 app = Flask(__name__)
 import random
 import geonamescache
@@ -207,8 +206,7 @@ def set_password():
     return render_template('reset.html',title='Reset Request',form=form)
  
         
-        # move data from lang1 to app.py
-
+        
 
 
 #1  Home
