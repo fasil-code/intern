@@ -124,7 +124,9 @@ function audioToText(i){
 }, 5000);
 }   
  //scoring
-function scoring(){
+
+ function scoring(){
+  let sent=false;
   let score=0;
   for(let i=0;i<3;i++){
       let ind=arr.indexOf(ans[i]);
@@ -133,14 +135,25 @@ function scoring(){
          arr.splice(ind,1);
      }
   }
- 
-  // var elems = document.getElementsByClassName('container');
-  // for (var i=0;i<elems.length;i++){
-  //     elems[i].style.display = 'none';
-  // }
-  let x=document.getElementById("result");
-  x.innerHTML="Your Score is "+score +" /3";
-  x.style.fontSize = '2rem';
-  x.style.textAlign='center';
-  x.style.color = 'red';
-} 
+  $.ajax({
+     type: "POST",
+     url: "/send_score",
+     data: { 
+        score: score,
+        column: "ace3"
+     },
+     success: function(response) {
+        console.log(response);
+        sent=true; 
+        redirect(sent);     
+     } 
+     
+  });
+}
+function redirect(sent){
+  if(sent===true){
+    window.location.href=nextUrl;
+  }
+}
+
+
