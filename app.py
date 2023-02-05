@@ -23,7 +23,7 @@ from flask import render_template
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = '7006022139'
 
 
 def create_database():
@@ -207,7 +207,8 @@ def set_password():
     return render_template('reset.html',title='Reset Request',form=form)
  
         
-        
+        # move data from lang1 to app.py
+
 
 
 #1  Home
@@ -258,6 +259,17 @@ def ace1():
    list.insert(0,"Choose your country")
    return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states)
 
+@app.route("/send_data", methods=['GET','POST'])
+def send_data():
+   marks= request.form.get("marks")
+   return "Score received: " + marks 
+  # return render_template('send_data.html',marks=marks)
+
+@app.route("/navbar", methods=['GET','POST'])
+def navbar():
+   
+   return render_template('send_data.html')
+    
     
 @app.route("/ace2")
 def ace2():

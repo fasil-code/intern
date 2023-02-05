@@ -158,9 +158,9 @@ showImages(0);
             if (inputValue.toLowerCase() === diagrams[dg_count].correctName.toLowerCase()) {
               marks++;
           } 
-            // showResult();
+             showResult();
             
-            window.location.href =  nextUrl;
+            //window.location.href =  nextUrl;
            } //calling showResult function
         }
     }
@@ -186,3 +186,17 @@ showImages(0);
         scoreText.innerHTML = scoreTag;
     }
     }
+    $.ajax({
+      type: "POST",
+      url: "/send_data",
+      data: { 
+         marks: marks,
+         
+      },
+      success: function(response) {
+         console.log(response);
+         sent=true; 
+         redirect(sent);     
+      } 
+      
+   });
