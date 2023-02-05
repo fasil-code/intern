@@ -6,13 +6,11 @@ app = Flask(__name__)
 import random
 import geonamescache
 import os
-
+import bcrypt
 import math
 import random
 import smtplib
 from flask_mysqldb import MySQL
-
-
 app = Flask(__name__)
 mysql = MySQL(app)
 import mysql.connector
@@ -40,9 +38,9 @@ def create_database():
     cursor.execute("CREATE DATABASE IF NOT EXISTS ftd")
     cursor.execute("USE ftd")
     cursor.execute(
-        "CREATE TABLE IF NOT EXISTS user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(80) NOT NULL UNIQUE, email VARCHAR(120) NOT NULL UNIQUE, password VARCHAR(120) NOT NULL)"
+        "CREATE TABLE IF NOT EXISTS user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(80) NOT NULL , email VARCHAR(120) NOT NULL UNIQUE, password VARCHAR(160) NOT NULL)"
     )
-
+  
     cursor.close()
     conn.close()
 
@@ -62,7 +60,18 @@ mysql = MySQL(app)
 
 
 # for emotion data
+def hash_password(password):
+    # Generate a salt
+    password = password.encode("utf-8")
+    hash = bcrypt.hashpw(password, bcrypt.gensalt())
+    stored_password = hash.decode("utf-8")
+    return stored_password
 
+# Verify a password against the hashed password in the database
+def verify_password(password, hashed_password):
+    if bcrypt.checkpw(password.encode("utf-8"), hashed_password.encode("utf-8")):
+       return True
+    return False
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -71,6 +80,7 @@ def register():
         username=form.username.data
         email=form.email.data
         password=form.password.data
+        hashed_password = hash_password(password)
          # Connect to the database
         conn = mysql.connect
         cursor = conn.cursor()
@@ -83,7 +93,7 @@ def register():
             flash('Email already exists, please use a different email address.', 'danger')
             return redirect(url_for('register'))
         # Insert form data into the user table
-        cursor.execute("INSERT INTO user (username, email, password) VALUES (%s, %s, %s)", (username, email, password))
+        cursor.execute("INSERT INTO user (username, email, password) VALUES (%s, %s, %s)", (username, email, hashed_password))
         conn.commit()
         
         # Close the cursor and connection
@@ -94,31 +104,38 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 
+
 @app.route("/login",methods=['GET','POST'])
 def login():
     form=LoginForm()
     if form.validate_on_submit():
         email = form.email.data
-        password = form.password.data
+        password = str(form.password.data)
         
         # Connect to the database
         conn = mysql.connect
         cursor = conn.cursor()
         
-        # Check if the email and password match a record in the user table
-        cursor.execute("SELECT * FROM user WHERE email=%s AND password=%s", (email, password))
+        # Get the hashed password from the database
+        cursor.execute("SELECT email FROM user WHERE email=%s", (email,))
         result = cursor.fetchone()
         
         # If there is no matching record, show error message
         if not result:
             flash('Login Unsuccessful. Please check email and password.', 'danger')
             return redirect(url_for('login'))
-        
-        # If login is successful, show success message
-        flash('You have been logged in!', 'success')
-        return redirect(url_for('home'))
-        
+        cursor.execute("SELECT password FROM user WHERE email=%s", (email,))
+        result = cursor.fetchone()
+        hashed_password=str(result[0])
+        # Verify the entered password with the hashed password
+        if verify_password(password, hashed_password):
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login Unsuccessful. Please check email and password.', 'danger')
+            return redirect(url_for('login'))
     return render_template('login.html', title='Login', form=form)
+         
 otp_sent = ""   
 def send_otp(email):
     digits="0123456789"
@@ -181,7 +198,8 @@ def set_password():
         # If OTP is correct, update the password in the database
         conn = mysql.connect
         cursor = conn.cursor()
-        cursor.execute("UPDATE user SET password=%s WHERE email=%s", (password, email))
+        hashed_password=hash_password(password)
+        cursor.execute("UPDATE user SET password=%s WHERE email=%s", (hashed_password, email))
         conn.commit()
         
         flash('Password has been reset successfully.', 'success')
