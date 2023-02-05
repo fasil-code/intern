@@ -1,7 +1,6 @@
 from flask import Flask,jsonify,render_template,request
 from flask import Flask,render_template,url_for,flash,redirect
 from forms import RegistrationForm,LoginForm,ResetRequestForm,ResetPassword
-
 app = Flask(__name__)
 import random
 import geonamescache
@@ -207,7 +206,23 @@ def set_password():
     return render_template('reset.html',title='Reset Request',form=form)
  
         
-        
+@app.route("/send_score", methods=['GET','POST'])
+def send_score():
+    score= request.form.get("score")
+    column= request.form.get("column")
+   #   Connect to the database
+    conn = mysql.connect
+    cursor = conn.cursor()
+   
+   #  Insert the score into the database
+    cursor.execute(f"INSERT INTO scores ({column}) VALUES (%s)", (score,))
+    conn.commit()
+
+    # Close the connection
+    cursor.close()
+    conn.close()
+
+    return "Score received: " + score + " for " + column       
 
 
 #1  Home
