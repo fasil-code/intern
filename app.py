@@ -1,4 +1,4 @@
-from flask import Flask,jsonify,render_template,request
+from flask import Flask,jsonify,render_template,request,session
 from flask import Flask,render_template,url_for,flash,redirect
 from forms import RegistrationForm,LoginForm,ResetRequestForm,ResetPassword
 app = Flask(__name__)
@@ -8,6 +8,7 @@ import os
 import bcrypt
 import math
 import random
+from functools import wraps
 import smtplib
 from flask_mysqldb import MySQL
 app = Flask(__name__)
@@ -114,7 +115,7 @@ def login():
         # Connect to the database
         conn = mysql.connect
         cursor = conn.cursor()
-        
+        log=False
         # Get the hashed password from the database
         cursor.execute("SELECT email FROM user WHERE email=%s", (email,))
         result = cursor.fetchone()
@@ -128,6 +129,7 @@ def login():
         hashed_password=str(result[0])
         # Verify the entered password with the hashed password
         if verify_password(password, hashed_password):
+            session['logged_in'] = True
             flash('You have been logged in!', 'success')
             return redirect(url_for('home'))
         else:
@@ -205,6 +207,7 @@ def set_password():
         return redirect(url_for('login'))
     return render_template('reset.html',title='Reset Request',form=form)
  
+        
 @app.route("/send_score", methods=["POST"])
 def send_score():
     score= request.form.get("score")
@@ -223,12 +226,30 @@ def send_score():
 
     return "Score received: " + score + " for " + column     
         
-
+      
+@app.route("/home", methods=['GET','POST'])
+@app.route("/", methods=['GET','POST'])
+def home():
+   if 'logged_in' in session:
+        return render_template('navbar.html', logged_in=True)
+  
+   return render_template('navbar.html', logged_in=False)
+@app.route('/logout')
+def logout():
+    
+    # Remove the logged_in key from the session
+    session.pop('logged_in', None)
+    return render_template('navbar.html', logged_in=False)
 
 #1  Home
-@app.route("/",methods=['GET','POST'])
-def home():
-   return render_template('home.html')
+@app.route("/tests",methods=['GET','POST'])
+
+def tests():
+   if 'logged_in' in session:
+        return render_template('home.html')
+  
+   
+   return redirect('login')
 @app.route("/api-key")
 def get_api_key():
     api_key = os.environ.get("API_KEY")
@@ -256,6 +277,7 @@ def layout():
    
    return render_template('layout.html',url=name)
 #5 Ace2)
+
 @app.route("/ace1")
 def ace1():
    days=["Choose the day today","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
@@ -273,12 +295,6 @@ def ace1():
    list.insert(0,"Choose your country")
    return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states)
 
-
-@app.route("/navbar", methods=['GET','POST'])
-def navbar():
-   
-   return render_template('navbar.html')
-    
     
 @app.route("/ace2")
 def ace2():
