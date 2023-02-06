@@ -22,7 +22,7 @@ from flask import render_template
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = 'alchemist'
 
 
 def create_database():
@@ -205,7 +205,23 @@ def set_password():
         return redirect(url_for('login'))
     return render_template('reset.html',title='Reset Request',form=form)
  
-        
+@app.route("/send_score", methods=["POST"])
+def send_score():
+    score= request.form.get("score")
+    column= request.form.get("column")
+   # #   Connect to the database
+   #  conn = mysql.connect
+   #  cursor = conn.cursor()
+   
+   # #  Insert the score into the database
+   #  cursor.execute(f"INSERT INTO scores ({column}) VALUES (%s)", (score,))
+   #  conn.commit()
+
+   #  # Close the connection
+   #  cursor.close()
+   #  conn.close()
+
+    return "Score received: " + score + " for " + column     
         
 
 
@@ -257,11 +273,6 @@ def ace1():
    list.insert(0,"Choose your country")
    return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states)
 
-@app.route("/send_data", methods=['GET','POST'])
-def send_data():
-   marks= request.form.get("marks")
-   return "Score received: " + marks 
-  # return render_template('send_data.html',marks=marks)
 
 @app.route("/navbar", methods=['GET','POST'])
 def navbar():
@@ -274,10 +285,10 @@ def ace2():
    return render_template('ACE/attention/attention2.html') 
 @app.route("/ace3",methods=['GET','POST']) 
 def ace3():
-   return render_template('ACE/attention/attention3.html') 
+   return render_template('ACE/attention/attention3.html',url="ace4") 
 @app.route("/ace4") 
 def ace4():
-   return render_template('ACE/attention/attention4.html')  
+   return render_template('ACE/attention/attention4.html',url="ace5")  
 @app.route("/ace5") 
 def ace5():
    return render_template('ACE/memory/memory1.html')    
@@ -296,13 +307,13 @@ def ace9():
    return render_template('ACE/memory/memory2.html',url="ace11") 
 @app.route("/ace10") 
 def ace10():
-   return render_template('ACE/memory/memory3.html',url="/") 
+   return render_template('ACE/memory/memory3.html',url="layout") 
 @app.route("/ace11",methods=['GET','POST']) 
 def ace11():
-   return render_template('ACE/memory/memory4.html') 
+   return render_template('ACE/memory/memory4.html',url="ace10") 
 @app.route("/ace12",methods=['GET','POST']) 
 def ace12():
-   return render_template('ACE/fluency/fluency2.html')
+   return render_template('ACE/fluency/fluency2.html',url="layout")
 @app.route("/ace13",methods=['GET','POST'])  
 def ace13():
    return render_template('ACE/fluency/fluency1.html') 

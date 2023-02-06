@@ -61,9 +61,31 @@ function getScore() {
     return score;
 }
 function returnScore() {
-    document.getElementById("Cmyresults").innerHTML =
-        "Your score is " + getScore()+ "/" + tot;
+     tot=getScore();
     if (getScore() > 2) {
         console.log("Bravo");
     }
+    $.ajax({
+        type: "POST",
+        url: "/send_score",
+        data: { 
+           score: tot,
+           column: "ace4"
+        },
+        success: function(response) {
+           console.log(response);
+           sent=true;
+           redirect(sent);
+        }           
+    });
+};
+        //    setTimeout(function() {
+        //      redirect(sent);
+        //    }, 5000); 
+                
+     
+   function redirect(sent){
+     if(sent===true){
+       window.location.href=nextUrl;
+     }
 }
