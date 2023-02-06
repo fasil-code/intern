@@ -266,7 +266,7 @@ def send_data():
 @app.route("/navbar", methods=['GET','POST'])
 def navbar():
    
-   return render_template('send_data.html')
+   return render_template('navbar.html')
     
     
 @app.route("/ace2")
