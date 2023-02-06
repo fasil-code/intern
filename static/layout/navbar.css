@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
 body {
     margin: 0;
     padding: 0;
@@ -115,7 +115,8 @@ nav ul li ul li a {
 
     nav {
         width: 100%;
-        padding: 55px 0 15px;
+        padding: 55px 0 2px;
+     
     }
 
     nav ul {
@@ -253,20 +254,8 @@ nav ul li ul li a {
     .carousel{
         border: #4199fe;
     }
-    /**
-* Template Name: eNno - v4.10.0
-* Template URL: https://bootstrapmade.com/enno-free-simple-bootstrap-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
-body {
-    font-family: "Open Sans", sans-serif;
-    color: #444444;
-  }
+
   
   a {
     color: #14c871;
@@ -347,96 +336,37 @@ body {
     max-height: 40px;
   }
   
-  @media (max-width: 991px) {
-    #header {
-      padding: 12px 0;
-    }
-  }
-  @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Luckiest+Guy&family=Montserrat:wght@700&family=Nosifer&family=Oswald:wght@400;600&family=Roboto:wght@100;300&family=Rubik+Glitch&display=swap');
-body{
-   margin: 0;
-}
-*{
-    box-sizing: border-box;
 
-}
-.main{
+  @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Luckiest+Guy&family=Montserrat:wght@700&family=Nosifer&family=Oswald:wght@400;600&family=Roboto:wght@100;300&family=Rubik+Glitch&display=swap');
+ .maini{
     margin: 0;
     justify-content: center;
     height: 45rem;
-    background-color: blueviolet; /* For browsers that do not support gradients */
-    background-image: linear-gradient(170deg, blueviolet 0%, blueviolet 60%, white 60.1%);
+    background-color:#74b4fe; 
+    background-image: linear-gradient(170deg, #74b4fe 0%, #74b4fe 60%, white 60.1%);
+    object-fit: cover;
 
 }
-.img{
-    width: 50px;
-    height: 50px;
+img{
+    width: 450px;
+    height: 500px; 
+    border-radius: 10px;; 
 }
-.rightimage{
+
+.rightimage,.lefttext{
     width: 50%;
     height: 70%;
     display: flex;
+  
     float: right;
     margin: 2% 10px 0px 0px;
 }
-.rightimage img{
-    margin-left: 15%;
-    border: 2px solid white;
+.rightimage{
+display: flex;
 
+justify-content: center;
 }
-.lefttext{
-    width: 40%;
-    height: 70%;
-    justify-content: center;
-    display:flex;
-    float: left ;   
-    margin: 2% 0px 0px 5%;
-    text-align: center;
-    overflow: hidden;
-}
-.lefttext .textwrap{
-    margin: 25% 10px 0px 0px;
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-}
-.lefttext .textwrap h1{
-    width: 100%;
-    overflow-wrap: break-word;
-    font-size: 50px;
-    font-family: 'Nosifer', cursive;
-    padding: 0;
-    color: white;
-    justify-content: center;
-    text-align: center;
-    margin: 0 ;
-}
-.lefttext .textwrap p{
-    margin: 0px 20px 0px 20px;
-    font-size: 20px;
-    font-family: 'Oswald', cursive;
-    padding: 0;
-    color: whitesmoke;
-    justify-content: center;
-    text-align: center;
-}
-.lefttext .textwrap button{
-    font-size: 30px;
-    margin-top: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border: 0;
-    border-radius: 5px;
-    background-color: skyblue;
-    font-family: 'Oswald', cursive;
-    justify-content: center;
-    text-align: center;
-}
-.lefttext .textwrap button:hover{
-    color: rgb(255, 12, 126);
-    background-color: #F7DBF0;
-    border: 2px solid black;
-}
+
 #navicon{
     margin-left: 100px;
     font-size: 20px;
@@ -446,17 +376,3 @@ body{
     float: left;
 }
 
-@media screen and (max-width: 600px) {
-    .lefttext{
-
-        padding: 0;
-        display: flex;
-        width: 100%;
-        margin-top: -10%;
-    }
-    .rightimage{
-        display: flex;
-        width: 100%;
-        margin-top: 0;
-    }
-}

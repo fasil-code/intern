@@ -9,7 +9,87 @@
     <title>Navbar</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='layout/navbar.css')}}" />
 </head>
+<style>
+  body{
+    margin:0;
+    padding:0;
+    
+  }
+  .maini{
+   
+  
+   display: flex;
+   justify-content: center;
+   
+  }
+  .lefttext{
+
+    width:600px;
+    height:400px;
+    display:flex;
+    justify-content: center;
+ 
+    flex-direction: column;
+
+  }
+.rightimage{
+  height:700px;
+  align-items: center;
+}
+  h1{
+    padding:5px;
+    align-items: center;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+   
+    padding-bottom: 5px;
+    
+   
+    font-family: 'Ubuntu', sans-serif;
+    color: #fff;
+
+  }
+  p{
+   padding:5px;
+    align-items: end;
+    text-align: center;
+
+   font-size: 24px;
+    font-family:  sans-serif;
+    color: #fff;
+  }
+
+
+@media(max-width:800px){
+  .maini{
+    flex-direction: column;
+    width:100%;
+  }
+  .lefttext{
+    width:100%;
+
+  }
+  .rightimage{
+    width:100%;
+  }
+  img{
+    width:auto;
+    overflow: hidden;
+  }
+}
+@media(max-width:400px){
+h1{
+  font-size:25px;
+}
+p{
+  font-size: 18px;;
+}
+}
+
+    </style>
 <body>
+
     <section class="navigation">
         <div class="nav-container">
           <div class="brand">
@@ -50,21 +130,16 @@
           </nav>
         </div>
       </section>
-      <div class="lefttext">
-        <div class="textwrap">
-            <h1>
-                Lionel Messi
-            </h1>
-            <p>
-                Lionel Andrés Messi (born 24 June 1987), also known as Leo Messi, is an Argentine professional footballer who captains the Argentina national team and plays for Ligue 1 club Paris Saint-Germain.
-            </p>
-            <button>World Cup 2022</button>
+      <div class="maini">
+        <div class="lefttext">
+          <h1>Fronto Temporal Dementia (FTD)</h1>
+          <p>Hello this  website is about various tests associated with FTD like memory ,inteliggence fluency emotion</p>
         </div>
         
 
-    </div>
+  
     <div class="rightimage">
-        <img src="https://www.alzheimercalgary.ca/content/image/200109-101334/LEARN_-_Types_of_Dementia-_IMAGE_-_lobes_of_the_brain.jpg">
+        <img src="https://img.freepik.com/free-vector/alzheimer-concept-illustration_114360-7556.jpg">
     </div>
 </div>
       

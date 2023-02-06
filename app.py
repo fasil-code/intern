@@ -22,7 +22,7 @@ from flask import render_template
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '7006022139'
+app.config['MYSQL_PASSWORD'] = 'Zargar@123'
 
 
 def create_database():
