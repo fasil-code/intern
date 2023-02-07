@@ -337,6 +337,29 @@ function scoring() {
         a=7;
     }
     score=a;
-    document.getElementById("result").innerHTML = `<h1>Your Score is ${score}</h1>`
-    document.getElementById("score").innerText = score;
+    $.ajax({
+        type: "POST",
+        url: "/send_score",
+        data: { 
+           score: score,
+           column: "ace12"
+        },
+        success: function(response) {
+           console.log(response);
+           sent=true;
+           redirect(sent);
 }
+    });
+};
+        //    setTimeout(function() {
+        //      redirect(sent);
+        //    }, 5000); 
+                
+     
+   function redirect(sent){
+     if(sent===true){
+       window.location.href=nextUrl;
+     }
+   }
+
+

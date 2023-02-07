@@ -160,7 +160,7 @@ showImages(0);
           } 
              showResult();
             
-            //window.location.href =  nextUrl;
+            window.location.href =  nextUrl;
            } //calling showResult function
         }
     }

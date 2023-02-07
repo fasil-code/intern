@@ -8,14 +8,54 @@
   }
   else if (nexturl == "ace1") {
     buttonText = "Attention Test";
+     // Rules of the test are changed
+     const info = document.getElementsByClassName("info");
+     info[0].innerHTML =
+         "1.  Read the instructions carefully, which are provided in the heading section of each page.";
+     info[1].innerHTML = "2. In some questions, you will have the option to respond through audio recording.";
+     info[2].innerHTML =
+         "3.  Make sure there is minimal background noise, while recording";
+     info[3].innerHTML =
+         "4. Before recording, take a brief pause before speaking to ensure clear audio.";
+     info[4].innerHTML = "5. Once you have clicked on the Next button, you will not be able to go back ";
 } else if (nexturl == "ace3") {
     buttonText = "ACE III Test";
+    // Rules of the test are changed
+    const info = document.getElementsByClassName("info");
+    info[0].innerHTML =
+        "1.  Read the instructions carefully, which are provided in the heading section of each page.";
+    info[1].innerHTML = "2. In some questions, you will have the option to respond through audio recording.";
+    info[2].innerHTML =
+        "3.  Make sure there is minimal background noise, while recording";
+    info[3].innerHTML =
+        "4.  Before recording, take a brief pause before speaking to ensure clear audio.";
+    info[4].innerHTML = "5. Once you have clicked on the Next button, you will not be able to go back ";
 }
   else if(nexturl=="ace13"){
            buttonText="Fluency Test"
+           // Rules of the test are changed
+     const info = document.getElementsByClassName("info");
+     info[0].innerHTML =
+         "1.  Read the instructions carefully, which are provided in the heading section of each page.";
+     info[1].innerHTML = "2. In some questions, you will have the option to respond through audio recording.";
+     info[2].innerHTML =
+         "3.  Make sure there is minimal background noise, while recording";
+     info[3].innerHTML =
+         "4.  Before recording, take a brief pause before speaking to ensure clear audio.";
+     info[4].innerHTML = "5. Once you have clicked on the Next button, you will not be able to go back ";
   }
  else if(nexturl=="ace9"){
         buttonText="Memory Test"
+        // Rules of the test are changed
+     const info = document.getElementsByClassName("info");
+     info[0].innerHTML =
+         "1.  Read the instructions carefully, which are provided in the heading section of each page.";
+     info[1].innerHTML = "2. In some questions, you will have the option to respond through audio recording.";
+     info[2].innerHTML =
+         "3.  Make sure there is minimal background noise, while recording";
+     info[3].innerHTML =
+         "4.  Before recording, take a brief pause before speaking to ensure clear audio.";
+     info[4].innerHTML = "5. Once you have clicked on the Next button, you will not be able to go back ";
    }
    else if(nexturl=="ace8"){
     buttonText="Language Test"

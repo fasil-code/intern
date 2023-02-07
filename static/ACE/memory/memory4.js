@@ -23,7 +23,7 @@ function repeat(message){
   
 }
 // audio to text
-let ans=new Array();
+let ans=new Array(4);
 // Define a function to start speech recognition
 function audioToText(i){
   let message="";
@@ -47,7 +47,7 @@ function audioToText(i){
     if(message[message.length-1]==="."){
     message=message.slice(0,-1);
     }
-    ans[i]=message;
+    
     // Check if the recognition process has completed
     if (event.results[0].isFinal) {
       // Stop recognition if the process has completed
@@ -58,7 +58,7 @@ function audioToText(i){
     // Display a message when recognition ends
     document.getElementById('recognition-status').textContent = '🟢 Voice Recognition ended';
     repeat(message);
-    
+    ans[i]=message;
   });
   recognition.start();
   // Stop recognition after 5 seconds
@@ -67,7 +67,7 @@ function audioToText(i){
   }, 5000);
 }
 function scoring(){
-  document.getElementById("hidden").style.display="block";
+
   let score=0;
   l=['delhi','tiger','salman khan','mahatma gandhi'];
   if(ans[0]==='new delhi'){
@@ -78,6 +78,27 @@ function scoring(){
       score+=1;
     }
   }
-  document.getElementById("result").innerHTML = `<h1>Your Score is ${score}</h1>`
-    document.getElementById("score").innerText = score;
+  $.ajax({
+    type: "POST",
+    url: "/send_score",
+    data: { 
+       score: score,
+       column: "ace11"
+    },
+    success: function(response) {
+       console.log(response);
+       sent=true;
+       redirect(sent);
+    }           
+});
+};
+    //    setTimeout(function() {
+    //      redirect(sent);
+    //    }, 5000); 
+            
+ 
+function redirect(sent){
+ if(sent===true){
+   window.location.href=nextUrl;
+ }
 }
