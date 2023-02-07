@@ -10,6 +10,7 @@ import math
 import random
 from functools import wraps
 import smtplib
+from flask_session import Session
 from flask_mysqldb import MySQL
 app = Flask(__name__)
 mysql = MySQL(app)
@@ -24,7 +25,8 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Zargar@123'
-
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 
 def create_database():
     conn = mysql.connector.connect(
@@ -103,7 +105,9 @@ def register():
         return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
-
+def before_request():
+    if not session.get('logged_in') and request.endpoint in ['index', 'secret']:
+        return redirect(url_for('login'))
 
 @app.route("/login",methods=['GET','POST'])
 def login():
@@ -223,6 +227,10 @@ def logout():
     # Remove the logged_in key from the session
     session.pop('logged_in', None)
     return render_template('navbar.html', logged_in=False)
+@app.after_request
+def after_request(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    return response
 
 #1  Home
 @app.route("/tests",methods=['GET','POST'])
