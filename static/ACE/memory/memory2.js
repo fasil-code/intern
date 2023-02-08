@@ -16,7 +16,7 @@ let addressBook = [
     {
     Name: "suresh sharma",
     Street: "rajendra nagar",
-    Locality: "gandhi nagar",
+    Locality: "rajendra park",
     District: "new delhi",
     State: "delhi"
     },
@@ -149,7 +149,7 @@ recognition.start();
 }, 5000);
 }
 function scoring(){
-  let score=0;
+  let score=0,sent=false;
   for(let i=0;i<5;i++){
      if(ans[i]==Object.values(addressBook[rand])[i]){
               if(i==0){
@@ -160,9 +160,27 @@ function scoring(){
               }
       } 
   }
-    console.log(score);
-    window.location.href=nextUrl;
     localStorage.setItem("score", score);
-}
+    $.ajax({
+      type: "POST",
+      url: "/send_score",
+      data: { 
+         score: score,
+         column: "ace9"
+      },
+      success: function(response) {
+         console.log(response);
+         sent=true; 
+         redirect(sent);     
+      } 
+      
+   });
+ }
+ function redirect(sent){
+   if(sent===true){
+     window.location.href=nextUrl;
+   }
+ }
+
 
 

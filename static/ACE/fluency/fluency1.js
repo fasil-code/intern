@@ -67,7 +67,7 @@ function animateText() {
  //do scoring
  
  function scoring(){
-  let count= 0,score=0;
+  let count= 0,score=0,sent=false;
   const checkWord = (word) => {
     return new Promise((resolve) => {
       const URL = `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`;
@@ -86,9 +86,6 @@ function animateText() {
     });
   };
 
-  if (!answers || !answers.length){
-    return;
-  } 
   const promises = [];
   for (let i = 0; i < answers.length; i++) {
     let word = answers[i];
@@ -124,10 +121,31 @@ function animateText() {
     else{
       score=0;
     }
-    console.log(score);
-  });
-  
+    
+ 
+  $.ajax({
+    type: "POST",
+    url: "/send_score",
+    data: { 
+       score: score,
+       column: "ace13"
+    },
+    success: function(response) {
+       console.log(response);
+       sent=true; 
+       redirect(sent);     
+    } 
+    
+ });
+});
 }
+
+function redirect(sent){
+  if(sent===true){
+    window.location.href=nextUrl;
+  }
+}
+
 //timer functions 
 function startTimer(time){
   counter = setInterval(timer, 1000);

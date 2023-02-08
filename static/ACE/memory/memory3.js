@@ -55,6 +55,7 @@ if(score){
 }
 let objectSize =Object.values(addressBook[rand]).length;
 let count=0;
+let sent=false;
 document.getElementById("next-btn").addEventListener("click", function(event){
     event.preventDefault();
     count++;
@@ -104,11 +105,44 @@ document.getElementById("next-btn").addEventListener("click", function(event){
         score=score+correctAnswers;
         console.log(score);
         if(count==2){
-        window.location.href =  nextUrl;
+            $.ajax({
+                type: "POST",
+                url: "/send_score",
+                data: { 
+                   score: score,
+                   column: "ace10"
+                },
+                success: function(response) {
+                   console.log(response);
+                   sent=true; 
+                   redirect(sent);  
+                
+   
+                } 
+                
+             });
         }
     }
     else{
         score+=5;
-        window.location.href =  nextUrl;
+        $.ajax({
+            type: "POST",
+            url: "/send_score",
+            data: { 
+               score: score,
+               column: "ace10"
+            },
+            success: function(response) {
+               console.log(response);
+               sent=true; 
+               redirect(sent);    
+            } 
+            
+         });
     }
 })
+function redirect(sent){
+    if(sent===true){
+      window.location.href=nextUrl;
+    }
+  }
