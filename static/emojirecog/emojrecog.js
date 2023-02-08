@@ -47,7 +47,7 @@ let questions=[
     
                           {
             
-'options':['sad','disgusted','sad','neutral'],
+'options':['sad','disgusted','happy','neutral'],
 'answer':'sad',
 },        
                               {
