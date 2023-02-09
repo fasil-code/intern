@@ -13,14 +13,17 @@
 </head>
 <style>
   body {
-    height: 100vh;
-    display: grid;
-    place-items: center;
+    margin: 0;
+    padding: 0;
+
   }
 
   .maini {
+
+
     display: flex;
     justify-content: center;
+
   }
 
   .lefttext {
@@ -29,6 +32,7 @@
     height: 400px;
     display: flex;
     justify-content: center;
+
     flex-direction: column;
 
   }
@@ -72,9 +76,11 @@
 
     .lefttext {
       width: 100%;
-
+      margin-top:8rem;
     }
-
+    h1 {
+      font-size: 30px;
+    }
     .rightimage {
       width: 100%;
     }
@@ -85,274 +91,7 @@
     }
   }
 
-  section {
-    padding: 80px 0;
-    /* min-height: 100vh;*/
-  }
-
-  .sec-title {
-    position: relative;
-    z-index: 1;
-    margin-bottom: 100px;
-  }
-
-  .sec-title .title {
-    position: relative;
-    display: block;
-    font-size: 40px;
-    line-height: 24px;
-    color: #00aeef;
-    font-weight: 500;
-    margin-bottom: 15px;
-  }
-
-  .sec-title h2 {
-    position: relative;
-    display: block;
-    font-size: 40px;
-    line-height: 1.28em;
-    color: #222222;
-    font-weight: 600;
-    padding-bottom: 18px;
-  }
-
-  .sec-title h2:before {
-    position: absolute;
-    content: '';
-    left: 0px;
-    bottom: 0px;
-    width: 50px;
-    height: 3px;
-    background-color: #d1d2d6;
-  }
-
-  .sec-title .text {
-    position: relative;
-    font-size: 16px;
-    line-height: 26px;
-    color: #848484;
-    font-weight: 400;
-    margin-top: 55px;
-  }
-
-  .sec-title.light h2 {
-    color: #ffffff;
-  }
-
-  .sec-title.text-center h2:before {
-    left: 50%;
-    margin-left: -25px;
-  }
-
-  .list-style-one {
-    position: relative;
-  }
-
-  .list-style-one li {
-    position: relative;
-    font-size: 16px;
-    line-height: 26px;
-    color: #222222;
-    font-weight: 400;
-    padding-left: 35px;
-    margin-bottom: 12px;
-  }
-
-  .list-style-one li:before {
-    content: "\f058";
-    position: absolute;
-    left: 0;
-    top: 0px;
-    display: block;
-    font-size: 18px;
-    padding: 0px;
-    color: #ff2222;
-    font-weight: 600;
-    -moz-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1.6;
-    font-family: "Font Awesome 5 Free";
-  }
-
-  .list-style-one li a:hover {
-    color: #44bce2;
-  }
-
-  .btn-style-one {
-    position: relative;
-    display: inline-block;
-    font-size: 17px;
-    line-height: 30px;
-    color: #ffffff;
-    padding: 10px 30px;
-    font-weight: 600;
-    overflow: hidden;
-    letter-spacing: 0.02em;
-    background-color: #00aeef;
-  }
-
-  .btn-style-one:hover {
-    background-color: #0794c9;
-    color: #ffffff;
-  }
-
-  .about-section {
-    position: relative;
-    padding: 120px 0 70px;
-  }
-
-  .about-section .sec-title {
-    margin-bottom: 45px;
-  }
-
-  .about-section .content-column {
-    position: relative;
-    margin-bottom: 50px;
-  }
-
-  .about-section .content-column .inner-column {
-    position: relative;
-    padding-left: 30px;
-  }
-
-  .about-section .text {
-    margin-bottom: 20px;
-    font-size: 16px;
-    line-height: 26px;
-    color: #848484;
-    font-weight: 400;
-  }
-
-  .about-section .list-style-one {
-    margin-bottom: 45px;
-  }
-
-  .about-section .btn-box {
-    position: relative;
-  }
-
-  .about-section .btn-box a {
-    padding: 15px 50px;
-  }
-
-  .about-section .image-column {
-    position: relative;
-  }
-
-  .about-section .image-column .text-layer {
-    position: absolute;
-    right: -110px;
-    top: 50%;
-    font-size: 325px;
-    line-height: 1em;
-    color: #ffffff;
-    margin-top: -175px;
-    font-weight: 500;
-  }
-
-  .about-section .image-column .inner-column {
-    position: relative;
-    padding-left: 80px;
-    padding-bottom: 0px;
-  }
-
-  .about-section .image-column .inner-column .author-desc {
-    position: absolute;
-    bottom: 16px;
-    z-index: 1;
-    background: orange;
-    padding: 10px 15px;
-    left: 96px;
-    width: calc(100% - 152px);
-    border-radius: 50px;
-  }
-
-  .about-section .image-column .inner-column .author-desc h2 {
-    font-size: 21px;
-    letter-spacing: 1px;
-    text-align: center;
-    color: #fff;
-    margin: 0;
-  }
-
-  .about-section .image-column .inner-column .author-desc span {
-    font-size: 16px;
-    letter-spacing: 6px;
-    text-align: center;
-    color: #fff;
-    display: block;
-    font-weight: 400;
-  }
-
-  .about-section .image-column .inner-column:before {
-    content: '';
-    position: absolute;
-    width: calc(50% + 80px);
-    height: calc(100% + 160px);
-    top: -80px;
-    left: -3px;
-    background: transparent;
-    z-index: 0;
-    border: 44px solid #00aeef;
-  }
-
-  .about-section .image-column .image-1 {
-    position: relative;
-  }
-
-  .about-section .image-column .image-2 {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-  }
-
-  .about-section .image-column .image-2 img,
-  .about-section .image-column .image-1 img {
-    box-shadow: 0 30px 50px rgba(8, 13, 62, .15);
-    border-radius: 46px;
-  }
-
-  .about-section .image-column .video-link {
-    position: absolute;
-    left: 70px;
-    top: 170px;
-  }
-
-  .about-section .image-column .video-link .link {
-    position: relative;
-    display: block;
-    font-size: 22px;
-    color: #191e34;
-    font-weight: 400;
-    text-align: center;
-    height: 100px;
-    width: 100px;
-    line-height: 100px;
-    background-color: #ffffff;
-    border-radius: 50%;
-    box-shadow: 0 30px 50px rgba(8, 13, 62, .15);
-    -webkit-transition: all 300ms ease;
-    -moz-transition: all 300ms ease;
-    -ms-transition: all 300ms ease;
-    -o-transition: all 300ms ease;
-    transition: all 300ms ease;
-  }
-
-  .about-section .image-column .video-link .link:hover {
-    background-color: #191e34;
-    color: rgba(93, 186, 182, 0.2)
-  }
-
-  @media screen and (max-width: 990px) {
-    .title {
-      margin-top: 90px;
-    }
-  }
-
-  @media(max-width:400px) {
+  @media(max-width:450px) {
     h1 {
       font-size: 25px;
     }
@@ -369,10 +108,10 @@
   <section class="navigation">
     <div class="nav-container">
       <div class="brand">
-        <a href="">FTD</a>
+        <a href="/">FTD</a>
       </div>
       <nav>
-        <div class="nav-mobile"><a id="navbar-toggle" href="#!"><span></span></a></div>
+        <div class="nav-mobile"><a id="navbar-toggle" ><span></span></a></div>
         <ul class="nav-list">
           <li>
             <a href="/">Home</a>
@@ -438,81 +177,7 @@
     </div>
   </div>
   <!-- About US -->
-  <section class="about-section d-flex flex-column flex-wrap">
-    <div class="container">
-      <div class="row">
-        <div class="content-column col-lg-6 col-md-12 col-sm-12 order-2">
-          <div class="inner-column">
-            <div class="sec-title">
-              <h2 class="title">About Dementia</h2>
-            </div>
-            <div class="text">Frontotemporal dementia is an uncommon type of dementia that causes problems
-              with
-              behaviour and language.Dementia is the name for problems with mental abilities caused by
-              gradual
-              changes and damage in the brain.
 
-              Frontotemporal dementia affects the front and sides of the brain (the frontal and
-              temporal
-              lobes)..</div>
-            <div class="text">
-              Dementia mostly affects people over 65, but frontotemporal dementia tends to start at a
-              younger age. Most cases are diagnosed in people aged 45-65, although it can also affect
-              younger or older people.
-
-              Like other types of dementia, frontotemporal dementia tends to develop slowly and get
-              gradually worse over several years.
-            </div>
-            <div class="btn-box">
-              <a href="https://en.wikipedia.org/wiki/Frontotemporal_dementia" class="theme-btn btn-style-one"
-                style="text-decoration: none;">Read More...</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Image Column -->
-        <div class="image-column col-lg-6 col-md-12 col-sm-12">
-          <div class="inner-column wow fadeInLeft">
-            <figure class="image-1"><a href="#" class="lightbox-image" data-fancybox="images"><img
-                  title="Frontotemporal"
-                  src="{{ url_for('static', filename = './images/dataset/frontotemporaldementia.jpg') }}" alt=""></a>
-            </figure>
-          </div>
-        </div>
-
-      </div>
-      <div class="sec-title">
-        <!-- <span class="title">Symptoms of frontotemporal dementia</span> -->
-        <h2 style="color:#00aeef">Signs of frontotemporal dementia can include:</h2>
-      </div>
-      <div class="text">
-        personality and behaviour changes – acting inappropriately or impulsively, appearing selfish or
-        unsympathetic, neglecting personal hygiene, overeating, or loss of motivation
-      </div>
-      <div class="text">
-        language problems – speaking slowly, struggling to make the right sounds when saying a word, getting
-        words in the wrong order, or using words incorrectly
-      </div>
-      <div class="text">
-        problems with mental abilities – getting distracted easily, struggling with planning and
-        organisation
-      </div>
-      <div class="text">
-        memory problems – these only tend to occur later on, unlike more common forms of dementia, such as
-        Alzheimer's disease
-      </div>
-    </div>
-  </section>
-  </div>
-  <footer class="bg-light text-center text-lg-start" style="width:100%">
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: #00aeef; color: white;">
-      ©2023 Copyright:
-      <a class="text-dak" href="http://www.iitkgp.ac.in" style="text-decoration: none; color: white;">IIT
-        Kharagpur</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename = 'layout/navbar.js') }}"></script>
