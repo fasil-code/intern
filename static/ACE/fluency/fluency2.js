@@ -351,10 +351,6 @@ function scoring() {
 }
     });
 };
-        //    setTimeout(function() {
-        //      redirect(sent);
-        //    }, 5000); 
-                
      
    function redirect(sent){
      if(sent===true){

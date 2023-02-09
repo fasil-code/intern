@@ -60,10 +60,12 @@ function repeat(message){
     // Stop recognition after 5 seconds
     setTimeout(() => {
     recognition.stop();
-  }, 5000);
+  }, 4000);
   }
+  let score=0;
   function scoring(){
-    let score=0;
+    let sent=false;
+   
     let arr = JSON.parse(localStorage.getItem('arr'));
     for(let i=0;i<3;i++){
         let ind=arr.indexOf(ans[i]);
@@ -72,10 +74,23 @@ function repeat(message){
            arr.splice(ind,1);
        }
     }
-
-    let x=document.getElementById("result");
-    x.innerHTML="Your Score is "+score +" /3";
-    x.style.fontSize = '2rem';
-    x.style.textAlign='center';
-    x.style.color = 'red';
-  }
+    $.ajax({
+      type: "POST",
+      url: "/send_score",
+      data: { 
+         score: score,
+         column: "ace5"
+      },
+      success: function(response) {
+         console.log(response);
+         sent=true; 
+         redirect(sent);     
+      } 
+      
+   });
+ }
+ function redirect(sent){
+   if(sent===true){
+     window.location.href=nextUrl;
+   }
+ }

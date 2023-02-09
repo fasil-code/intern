@@ -16,7 +16,7 @@ function memorize(){
     }
     document.getElementById("w1").innerHTML=arr[0];
     document.getElementById("w2").innerHTML=arr[1];
-    document.getElementById("w3").innerHTML=arr[2];
+    // document.getElementById("w3").innerHTML=arr[2];
 }
 memorize();
 
@@ -117,7 +117,7 @@ function audioToText(i){
     repeat(message);
      // Set the flag to false when the recognition ends
      isRecording = false;
-     console.log(ans[i]);
+    //  console.log(ans[i]);
     
   });
   recognition.start();
@@ -129,6 +129,7 @@ function audioToText(i){
  //scoring
 function scoring(){
   let score=0;
+  let sent=false;
   for(let i=0;i<3;i++){
       let ind=arr.indexOf(ans[i]);
      
@@ -138,12 +139,28 @@ function scoring(){
      }
   }
  
-  let x=document.getElementById("result");
-  x.innerHTML="Your Score is "+score +" /2";
-  x.style.fontSize = '2rem';
-  x.style.textAlign='center';
-  x.style.color = 'red';
-} 
+  
+  $.ajax({
+    type: "POST",
+    url: "/send_score",
+    data: { 
+       score: score,
+       column: "ace7"
+    },
+    success: function(response) {
+       console.log(response);
+       sent=true;
+       redirect(sent);
+}
+});
+}
+ 
+function redirect(sent){
+ if(sent===true){
+   window.location.href=nextUrl;
+ }
+}
+
 
 
 

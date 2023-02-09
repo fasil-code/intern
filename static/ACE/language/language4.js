@@ -9,6 +9,8 @@ $.ajax({
         let firstErrorMessage = "";
         let secondErrorMessage = "";
         let s1=0,s2=0;
+        let count=0;
+        let firstLen,secondLen;
         document.getElementById("next-btn").addEventListener("click", function(event){
             event.preventDefault();
             let first = document.getElementById("first").value;
@@ -17,32 +19,25 @@ $.ajax({
             second=second.toLowerCase();
             first=first.charAt(0).toUpperCase() + first.slice(1);
             second=second.charAt(0).toUpperCase() + second.slice(1);
-            let firstLen=first.split(" ");
-            let secondLen=second.split(" ");
+            firstLen=first.split(" ");
+            secondLen=second.split(" ");
+            
             try {
-                if(firstLen.length<3){
-                    firstErrorMessage="First sentence is incomplete"
-                    document.getElementById("first-error").innerHTML =firstErrorMessage ;
-                }
-                else{
-                    checkText(first, "first-sentence");
-                }
-                    
-                if(secondLen.length<3){
-                    secondErrorMessage="Second sentence is incomplete"
-                    document.getElementById("second-error").innerHTML =secondErrorMessage ;
-                }
-                else{
-                    checkText(second, "second-sentence");
-                }
                 
+                checkText(first, "first-sentence");
+                   
+                 checkText(second, "second-sentence");
+                  
+                  
             } catch (error) {
                 console.error(error);
                 alert("An error occured while checking text, please try again later.");
             }
+           
         });
         function checkText(message, type){
-            
+           
+           
             const encodedParams = new URLSearchParams();
             encodedParams.append("language", "en-US");
             encodedParams.append("text", message);
@@ -65,7 +60,8 @@ $.ajax({
                 return response.json();
             })
             .then(data => {
-                console.log(data);
+                count++;
+                // console.log(data);
                 if (data.matches.length > 0) {
                     let errorMessage = "Errors found in " + type + ": ";
                     data.matches.forEach(function(match) {
@@ -76,36 +72,56 @@ $.ajax({
                     } else {
                         secondErrorMessage = errorMessage;
                     }
-                } else {
-                    
-                    console.log("No errors found in " + type);
                 }
-                if(firstErrorMessage !== "") {
-                    document.getElementById("first-error").innerHTML = firstErrorMessage;
-                } else {
-                    document.getElementById("first-error").innerHTML = "No errors found in first sentence";
+                if(type==="first-sentence" && firstLen.length>=3 && data.matches.length==0){
+                   
+                    // document.getElementById("first-error").innerHTML = "No errors found in first sentence";
                     s1++;
+                  
                 }
-                if(secondErrorMessage !== "") {
-                    document.getElementById("second-error").innerHTML = secondErrorMessage;
-                } else {
-                    document.getElementById("second-error").innerHTML = "No errors found in second sentence";
+                if(type==="second-sentence" && secondLen.length>=3 && data.matches.length==0) {
+                    // document.getElementById("second-error").innerHTML = "No errors found in second sentence";
                     s2++;
+                   
                 }
-                document.getElementById("result").innerHTML="Your Score is "+(s1+s2)+"/2";
-                s1=0,s2=0;
+                if(count==2){
+                   
+                    scoring(s1+s2);
+                }
+                
             })
-    
+           
             .catch(error => {
                 console.error(error);
                 document.getElementById("error").innerHTML = "An error occurred while checking " + type + ", please try again later.";
             });
+           
        }
+       
     }
 })
-function scoring(){
-    console.log("hello");
-    let score=s1+s2;
+function scoring(score){
+   let sent=false;
     
+    $.ajax({
+        type: "POST",
+        url: "/send_score",
+        data: { 
+           score: score,
+           column: "ace8"
+        },
+    success: function(response) {
+           console.log(response);
+           sent=true;
+           redirect(sent);
 }
+    });
+}
+     
+   function redirect(sent){
+     if(sent===true){
+       window.location.href=nextUrl;
+     }
+   }
+
 

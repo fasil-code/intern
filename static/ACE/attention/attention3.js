@@ -12,6 +12,7 @@ function memorize(){
         }
        
     }
+    localStorage.setItem('arr', JSON.stringify(arr));
     document.getElementById("w1").innerHTML=arr[0];
     document.getElementById("w2").innerHTML=arr[1];
     document.getElementById("w3").innerHTML=arr[2];

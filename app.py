@@ -25,7 +25,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
+app.config['MYSQL_PASSWORD'] = 'Zargar@123'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -291,7 +291,7 @@ def layout():
    return render_template('layout.html',url=name)
 #5 Ace2)
 
-@app.route("/ace1")
+@app.route("/ace1",methods=['GET','POST'])
 def ace1():
    days=["Choose the day today","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
    seasons=["Choose the Season",'Spring','Summer','Autumn','Winter']
@@ -309,32 +309,32 @@ def ace1():
    return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states)
 
     
-@app.route("/ace2")
+@app.route("/ace2",methods=['GET','POST'])
 def ace2():
    return render_template('ACE/attention/attention2.html') 
 @app.route("/ace3",methods=['GET','POST']) 
 def ace3():
    return render_template('ACE/attention/attention3.html',url="ace4") 
-@app.route("/ace4") 
+@app.route("/ace4",methods=['GET','POST']) 
 def ace4():
    return render_template('ACE/attention/attention4.html',url="ace5")  
-@app.route("/ace5") 
+@app.route("/ace5",methods=['GET','POST']) 
 def ace5():
-   return render_template('ACE/memory/memory1.html')    
+   return render_template('ACE/memory/memory1.html',url="layout")    
 
-@app.route("/ace6") 
+@app.route("/ace6",methods=['GET','POST']) 
 def ace6():
-   return render_template('ACE/language/language2.html') 
+   return render_template('ACE/language/language2.html',url="ace7") 
 @app.route("/ace7",methods=['GET','POST']) 
 def ace7():
-   return render_template('ACE/language/language3.html') 
+   return render_template('ACE/language/language3.html',url="layout") 
 @app.route("/ace8",methods=['GET','POST']) 
 def ace8():
-   return render_template('ACE/language/language4.html') 
+   return render_template('ACE/language/language4.html',url="ace6") 
 @app.route("/ace9",methods=['GET','POST']) 
 def ace9():
    return render_template('ACE/memory/memory2.html',url="ace11") 
-@app.route("/ace10") 
+@app.route("/ace10",methods=['GET','POST']) 
 def ace10():
    return render_template('ACE/memory/memory3.html',url="layout") 
 @app.route("/ace11",methods=['GET','POST']) 
@@ -345,11 +345,11 @@ def ace12():
    return render_template('ACE/fluency/fluency2.html',url="layout")
 @app.route("/ace13",methods=['GET','POST'])  
 def ace13():
-   return render_template('ACE/fluency/fluency1.html') 
+   return render_template('ACE/fluency/fluency1.html',url="ace12") 
 @app.route("/lang",methods=['GET','POST'])
 def language1():
 
-   return render_template('ACE/language/language1.html',url="layout")
+   return render_template('ACE/language/language1.html',url="ace8")
 # visuo-spatial  tests
 @app.route("/vs1",methods=['GET','POST'])
 def vs1():
@@ -359,7 +359,7 @@ def vs1():
 @app.route("/vs2",methods=['GET','POST'])
 def vs2():
 
-   return render_template('ACE/visuospatial/vs2.html',url="ace10")
+   return render_template('ACE/visuospatial/vs2.html',url="/")
 
 #5 Pulse Tracking Test (PTT)
 @app.route("/ptt",methods=['GET','POST'])
