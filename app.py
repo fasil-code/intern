@@ -28,11 +28,6 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
-
-
-
-
-
 def create_database():
     conn = mysql.connector.connect(
         host=app.config['MYSQL_HOST'],
