@@ -31,7 +31,7 @@
     
     line-height: 1.4;
     font-family: sans-serif;
-    padding-top:15px;
+ 
   }
   
   a {
@@ -60,9 +60,7 @@ a:hover {
 
       
 @media(max-width:450px){
-    body{
-        font-size: 60%;
-    }
+  
     .auto-grid{
         --auto-grid-min-size: 100%;
    
@@ -75,7 +73,83 @@ a:hover {
     
 
 }
+.wrap {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+  height: 100vh;
+  padding: 2rem;
+  background-color: #eee;
+}
 
+.container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 1rem;
+  background-color: #fff;
+  width: 768px;
+  height: 100%;
+  border-radius: 0.25rem;
+  box-shadow: 0rem 1rem 2rem -0.25rem rgba(0, 0, 0, 0.25);
+}
+  .container__heading {
+    padding: 1rem 0;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+  }
+    .container h2 {
+      font-size: 1.75rem;
+      line-height: 1.75rem;
+      margin: 0;
+    }
+  
+  
+    .container__content {
+    flex-grow: 1;
+    overflow-y: scroll;
+  }
+  
+  .container__nav {
+    border-top: 1px solid #ccc;
+    text-align: right;
+    padding: 2rem 0 1rem;
+  }
+    .button1 {
+      background-color:#74b4fe; 
+      box-shadow: 0rem 0.5rem 1rem -0.125rem rgba(0, 0, 0, 0.25);
+      padding: 0.8rem 2rem;
+      border-radius: 0.5rem;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .button1:hover {
+        box-shadow: 0rem 0rem 1rem -0.125rem rgba(0, 0, 0, 0.25);
+        transform: translateY(-0.5rem);
+      }
+    
+    
+   small {
+      color: #777;
+      margin-right: 1rem;
+    }
+  .ques{
+    color:#74b4fe;
+    font-weight: bold;
+  }
+  .ans{
+    line-height: 25px;
+  }
+  ul li:first-child {
+list-style: none;
+font-weight: bold;
+  }
+  .inac{
+    display:none
+  }
     </style>
 </head>
 <body>
@@ -91,7 +165,54 @@ a:hover {
       {% endwith %}
     <h1>{{result}}</h1>
   </div>
-    <ul class="auto-grid">
+
+  <main id="wrap" class="wrap">
+    <section class="container">
+      <div class="container__heading">
+        <h2>Terms & Conditions</h2>
+      </div>
+   
+      <div class="container__content">
+        {% for term in terms %}
+        <p class="ques">{{term['ques']}}</p>
+        <p class="ans">{{term['ans']}}</p>
+        
+        
+      
+        <ul>
+          {% for list in term['lists'] %}
+    <li>{{list}}</li>
+          {% endfor %}
+        </ul>
+   
+    
+        <ul class="unlist">
+          {% for unlist in term['unlists'] %}
+    <li>{{unlist}}</li>
+          {% endfor %}
+        </ul>
+        {% endfor %}
+   
+        <input class="check" type="checkbox" id="check-1"name='check-1' value="check-1" required>
+        <label class="check" for="check-1"> I have read the instruction provided</label><br>
+       
+        <input type="checkbox" id="check-2"name='check-2' value="check-2" required>
+        <label for="check-2"> I agree to take part in the study </label><br>
+      </div>
+    
+      <div class="container__nav">
+        <small>By clicking 'Accept' you are agreeing to our terms and conditions.</small>
+        <a id="button1" class="button1" href="#">Accept</a>
+    
+      </div>
+      <p id="errorMessage" style="display: none; color: red;text-align:center"></p>
+    </section>
+  </main>
+
+
+
+    <ul id="main2" class=" auto-grid" style="display: none;">
+    
         <a  href="{{ url_for('layout') }}?name=emoji"> <li>Emoji Game</li></a>
        <a   href="{{ url_for('emojrecog') }}"> <li>Emotion Recognisation Test</li></a>
         <a    href="{{url_for('layout') }}?name=ace1"> <li>ACE-III</li></a>
@@ -101,8 +222,44 @@ a:hover {
        <a href="{{ url_for('layout') }}?name=tmt"> <li>Trail Making test</li></a>
        <a  href="{{ url_for('layout') }}?name=vs1" > <li>Visuo-Spatial I</li></a>
        <a  href="{{ url_for('layout') }}?name=vs2" > <li>Visuo-Spatial II</li></a>
+    </ul>
    
-      
+      <script>
+        window.onload = function() {
+          
+          var email="{{email}}"
+          var main2 = document.getElementById('main2');
+          var main1 = document.getElementById('wrap');
+          var button1 = document.getElementById('button1');
+          var checkbox1 = document.querySelector("input[name=check-1]");
+          var checkbox2 = document.querySelector("input[name=check-2]");
+          var errorMessage = document.getElementById("errorMessage");
+       
+          if (localStorage.getItem(email) === "true") {
+            main1.style.display = "none";
+            
+            main2.style.display = "grid";
+           
+           
+          }
+        
+          button1.addEventListener("click", function() {
+          
+            if (!checkbox1.checked || !checkbox2.checked) {
+              errorMessage.style.display = "block";
+              errorMessage.innerHTML = "Please agree to terms and conditions";
+        
+              event.preventDefault();
+            } else {
+              localStorage.setItem(email, "true");
+              main2.style.display = "grid";
+              main1.style.display = "none";
+            }
+          });
+        };
+
+      </script>
+
       <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
