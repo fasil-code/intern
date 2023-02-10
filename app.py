@@ -138,7 +138,7 @@ def login():
         hashed_password=str(result[0])
         # Verify the entered password with the hashed password
         if verify_password(password, hashed_password):
-            session['logged_in'] = True
+            session['logged_in'] = email
             flash('You have been logged in!', 'success')
             return redirect(url_for('home'))
         else:
@@ -259,7 +259,8 @@ def after_request(response):
 
 def tests():
    if 'logged_in' in session:
-        return render_template('home.html',terms=terms)
+        email = session.get('logged_in')
+        return render_template('home.html',terms=terms,email=email)
   
    
    return redirect('login')

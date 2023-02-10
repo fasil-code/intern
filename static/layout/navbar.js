@@ -30,4 +30,12 @@
     }); 
   })(jQuery); 
 
-  
+  var main2=document.getElementById('main2')
+      var main1=document.getElementById('wrap');
+      var test=document.getElementById('test');
+
+      test.addEventListener('click',function(){
+        main2.style.display='none'
+      })
+     
+
