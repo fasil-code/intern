@@ -1,119 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='ACE/attention/attention124.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ACE/attention/attention124.css')}}">
     <title>Attention Test</title>
 </head>
 
 <body>
+    <div class="d-flex justify-content-center align-items-center row">
+        <div class="col-md-8 col-lg-8 column">
+            <div class="card text-center"
+                style="width: 20rem; margin-bottom: 3rem; margin-left: auto; margin-right: auto;">
+                <div class="card-body">
+                    <h2 class="card-title">Instructions</h2>
+                    <h4 class="card-text">Subtract 7 five times and select the correct option for each subtraction</h4>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <h1 class="h1">Attention Calculation Test</h1>
         <ul class="quiz list-group">
-            <li class="list-group-item">
-                <h4 onmouseenter="play0()">Subtract 7 from 100</h4>
-               
+            <li class="list-group-item" id="quest1">
+                <h4>Subtract 7 from 100</h4>
+
                 <ul class="choices list-group">
                     <li class="list-group-item">
-                        <label><input type="radio" name="question0" value="A" /><span id="Cquest10">2</span></label>
+                        <label><input type="radio" onclick="chnageFun(2)" name="question0" value="A" /><span id="Cquest10">2</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question0" value="B" /><span id="Cquest11">1</span></label>
+                        <label><input type="radio" onclick="chnageFun(2)" name="question0" value="B" /><span id="Cquest11">1</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question0" value="C" /><span id="Cquest12">3</span></label>
+                        <label><input type="radio" onclick="chnageFun(2)" name="question0" value="C" /><span id="Cquest12">3</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question0" value="D" /><span id="Cquest13">4</span></label>
+                        <label><input type="radio" onclick="chnageFun(2)" name="question0" value="D" /><span id="Cquest13">4</span></label>
                     </li>
                 </ul>
             </li>
-            <li class="list-group-item">
-                <h4 onmouseenter="play1()">Subtract 7 again from result</h4>
-                <audio id="audio1" src="audio/second.mp3" ></audio>
+            <li class="list-group-item" id="quest2" style="display: none;">
+                <h4>Subtract 7 again from result</h4>
                 <ul class="choices list-group">
                     <li class="list-group-item">
-                        <label><input type="radio" name="question1" value="A" /><span id="Cquest20">2</span></label>
+                        <label><input type="radio" onclick="chnageFun(3)" name="question1" value="A" /><span id="Cquest20">2</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question1" value="B" /><span id="Cquest21">1</span></label>
+                        <label><input type="radio" onclick="chnageFun(3)" name="question1" value="B" /><span id="Cquest21">1</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question1" value="C" /><span id="Cquest22">3</span></label>
+                        <label><input type="radio" onclick="chnageFun(3)" name="question1" value="C" /><span id="Cquest22">3</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question1" value="D" /><span id="Cquest23">4</span></label>
+                        <label><input type="radio" onclick="chnageFun(3)" name="question1" value="D" /><span id="Cquest23">4</span></label>
                     </li>
                 </ul>
             </li>
-            <li class="list-group-item">
-                <h4 onmouseenter="play1()">Subtract 7 again from result</h4>
-                <audio id="audio2" src="audio/second.mp3" ></audio>
+            <li class="list-group-item" id="quest3" style="display: none;">
+                <h4>Subtract 7 again from result</h4>
                 <ul class="choices list-group">
                     <li class="list-group-item">
-                        <label><input type="radio" name="question2" value="A" /><span id="Cquest30">2</span></label>
+                        <label><input type="radio" onclick="chnageFun(4)" name="question2" value="A" /><span id="Cquest30">2</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question2" value="B" /><span id="Cquest31">1</span></label>
+                        <label><input type="radio" onclick="chnageFun(4)" name="question2" value="B" /><span id="Cquest31">1</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question2" value="C" /><span id="Cquest32">3</span></label>
+                        <label><input type="radio" onclick="chnageFun(4)" name="question2" value="C" /><span id="Cquest32">3</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question2" value="D" /><span id="Cquest33">4</span></label>
+                        <label><input type="radio" onclick="chnageFun(4)" name="question2" value="D" /><span id="Cquest33">4</span></label>
                     </li>
                 </ul>
             </li>
-            <li class="list-group-item">
-                <h4 onmouseenter="play1()">Subtract 7 again from result</h4>
-                <audio id="audio3" src="audio/second.mp3" ></audio>
+            <li class="list-group-item" id="quest4" style="display: none;">
+                <h4>Subtract 7 again from result</h4>
                 <ul class="choices list-group">
                     <li class="list-group-item">
-                        <label><input type="radio" name="question3" value="A" /><span id="Cquest40">2</span></label>
+                        <label><input type="radio" onclick="chnageFun(5)" name="question3" value="A" /><span id="Cquest40">2</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question3" value="B" /><span id="Cquest41">1</span></label>
+                        <label><input type="radio" onclick="chnageFun(5)" name="question3" value="B" /><span id="Cquest41">1</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question3" value="C" /><span id="Cquest42">3</span></label>
+                        <label><input type="radio" onclick="chnageFun(5)" name="question3" value="C" /><span id="Cquest42">3</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question3" value="D" /><span id="Cquest43">4</span></label>
+                        <label><input type="radio" onclick="chnageFun(5)" name="question3" value="D" /><span id="Cquest43">4</span></label>
                     </li>
                 </ul>
             </li>
-            <li class="list-group-item">
-                <h4 onmouseenter="play4()">Subtract 7 last time</h4>
-                <audio id="audio4" src="audio/last.mp3" ></audio>
+            <li class="list-group-item" id="quest5" style="display: none;">
+                <h4>Subtract 7 last time</h4>
                 <ul class="choices list-group">
                     <li class="list-group-item">
-                        <label><input type="radio" name="question4" value="A" /><span id="Cquest50">2</span></label>
+                        <label><input type="radio" onclick="chnageFun(6)" name="question4" value="A" /><span id="Cquest50">2</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question4" value="B" /><span id="Cquest51">1</span></label>
+                        <label><input type="radio" onclick="chnageFun(6)" name="question4" value="B" /><span id="Cquest51">1</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question4" value="C" /><span id="Cquest52">3</span></label>
+                        <label><input type="radio" onclick="chnageFun(6)" name="question4" value="C" /><span id="Cquest52">3</span></label>
                     </li>
                     <li class="list-group-item">
-                        <label><input type="radio" name="question4" value="D" /><span id="Cquest53">4</span></label>
+                        <label><input type="radio" onclick="chnageFun(6)" name="question4" value="D" /><span id="Cquest53">4</span></label>
                     </li>
                 </ul>
             </li>
         </ul>
-        
-                
-                <button   onclick="returnScore()" type="button" class="btn btn-primary btn-lg">Next</button>
-                
-          
-        
+
+        <div class="text-center" style="display: none;" id="btn" >
+            <button  type="button"onclick="returnScore()" class="btn btn-primary btn-lg">Next</button>
+        </div>
+
+
+
+
     </div>
-    <script>var nextUrl="{{url}}"</script>
-    <script type = "text/javascript" src = "{{ url_for('static', filename = 'ACE/attention/attention4.js') }}" ></script>
+    <script>{ var nextUrl = "{{url}}" }</script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/attention/attention4.js') }}"></script>
 </body>
+
 </html>

@@ -42,7 +42,7 @@
     align-items: center;
   }
 
-  h1 {
+  .h1 {
     padding: 5px;
     align-items: center;
     text-align: center;
@@ -57,7 +57,7 @@
 
   }
 
-  p {
+  .p {
     padding: 5px;
     align-items: end;
     text-align: center;
@@ -76,11 +76,13 @@
 
     .lefttext {
       width: 100%;
-      margin-top:8rem;
+      margin-top: 8rem;
     }
+
     h1 {
       font-size: 30px;
     }
+
     .rightimage {
       width: 100%;
     }
@@ -96,7 +98,7 @@
       font-size: 25px;
     }
 
-    p {
+    .p {
       font-size: 18px;
       ;
     }
@@ -108,30 +110,34 @@
   <section class="navigation">
     <div class="nav-container">
       <div class="brand">
-        <a href="/">FTD</a>
+        <a  href="/">FTD</a>
       </div>
       <nav>
-        <div class="nav-mobile"><a id="navbar-toggle" ><span></span></a></div>
+        <div class="nav-mobile"><a id="navbar-toggle"><span></span></a></div>
         <ul class="nav-list">
           <li>
-            <a href="/">Home</a>
+            <a  href="/">Home</a>
           </li>
           <li>
-            <a href="../static/docs.pdf" download>Docs</a>
+            <a  href="../static/docs.pdf" download>Docs</a>
           </li>
           <li>
-            <a id="test" href="{{ url_for('tests') }}">Tests</a>
+            <a   id="test" href="{{ url_for('tests') }}">Tests</a>
+
+          </li>
+          <li>
+            <a   id="test" href="{{ url_for('dashboard') }}">Dashboard</a>
 
           </li>
           {% if logged_in %}
           <li>
 
-            <a href="{{ url_for('logout') }}">Logout</a>
+            <a   href="{{ url_for('logout') }}">Logout</a>
           </li>
           {% else %}
           <li>
 
-            <a href="{{ url_for('login') }}">Login</a>
+            <a  href="{{ url_for('login') }}">Login</a>
           </li>
 
 
@@ -140,7 +146,7 @@
 
 
           <li>
-            <a href="{{ url_for('register') }}">Register</a>
+            <a  href="{{ url_for('register') }}">Register</a>
           </li>
           {% endif %}
         </ul>
@@ -164,8 +170,9 @@
 
 
     <div class="lefttext">
-      <h1>Frontotemporal Dementia (FTD)</h1>
-      <p>This is a research study of the web app-based cognitive assessment. Before deciding to participate, you need to
+      <h1 class="h1">Frontotemporal Dementia (FTD)</h1>
+      <p class="p">This is a research study of the web app-based cognitive assessment. Before deciding to participate,
+        you need to
         understand why the research is being conducted and what your participation will involve. Please take time to
         read. </p>
     </div>
@@ -177,8 +184,46 @@
     </div>
   </div>
   <!-- About US -->
+  <section id="about">
+    <div class="about-left-col">
+      <img src="{{ url_for('static', filename = 'images/dataset/frontotemporaldementia.jpg') }}">
+    </div>
+    <div class="about-right-col">
+      <div class="about-text">
+        <h1 style="color:#00aeef">About Dementia</h1>
+        <span class="square"></span>
+        <p>Frontotemporal dementia is an uncommon type of dementia that causes problems
+          with
+          behaviour and language.Dementia is the name for problems with mental abilities caused by
+          gradual
+          changes and damage in the brain.
 
+          Frontotemporal dementia affects the front and sides of the brain (the frontal and
+          temporal
+          lobes)
+          Dementia mostly affects people over 65, but frontotemporal dementia tends to start at a
+          younger age. Most cases are diagnosed in people aged 45-65, although it can also affect
+          younger or older people.
 
+          Like other types of dementia, frontotemporal dementia tends to develop slowly and get
+          gradually worse over several years.
+        <div class="line">
+          <a href="https://en.wikipedia.org/wiki/Frontotemporal_dementia"
+          style="text-decoration: none;"><button type="button" class="btn btn-primary" style="background-color: #00aeef;">Read More</button>
+        </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="bg-light text-center text-lg-start" style="width:100%">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: #00aeef; color: white;">
+        ©2023 Copyright:
+        <a class="text-dak" href="http://www.iitkgp.ac.in" style="text-decoration: none; color: white;">IIT
+            Kharagpur</a>
+    </div>
+    <!-- Copyright -->
+</footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="{{ url_for('static', filename = 'layout/navbar.js') }}"></script>
 </body>

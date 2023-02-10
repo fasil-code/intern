@@ -30,8 +30,6 @@ app.config['MYSQL_PASSWORD'] = 'Zargar@123'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
-
-#Create database 
 def create_database():
     conn = mysql.connector.connect(
         host=app.config['MYSQL_HOST'],
@@ -146,6 +144,13 @@ def tests():
 
 
 
+
+#dashboard
+@app.route("/dashboard",methods=['GET','POST'])
+def dashboard():
+   return render_template('dashboard.html')
+
+
 @app.route("/api-key")
 def get_api_key():
     api_key = os.environ.get("API_KEY")
@@ -257,10 +262,6 @@ def tmt():
 @app.route("/tmt-2",methods=['GET','POST'])
 def tmt2():
     return render_template('TMT/TMT2.html')
-
-
-
-
 if __name__ == "__main__":
     app.run(debug = True)
     
