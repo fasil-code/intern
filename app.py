@@ -25,7 +25,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -373,10 +373,6 @@ def tmt():
 @app.route("/tmt-2",methods=['GET','POST'])
 def tmt2():
     return render_template('TMT/TMT2.html')
-
-
-
-
 if __name__ == "__main__":
     app.run(debug = True)
     
