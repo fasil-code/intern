@@ -61,38 +61,45 @@
 					</div>
 
           <div class="option2 nav-option">
-			        <i class="fa fa-regular fa-home"></i>
+			        
                        <a href="{{ url_for('home') }}">
-                        <h3>Home</h3>
+                        <i class="fa fa-regular fa-home"></i>
+                        <h3 style="display:inline">Home</h3>
                       </a>
                       
 					</div>
 
 					<div class="option3 nav-option">
-						<i class="fa fa-file"></i>
+						
                         <a  href="../static/docs.pdf" >
-                            <h3>Documents</h3>
+                            <i class="fa fa-file"></i>
+                            <h3 style="display:inline">Documents</h3>
                         </a>
 						
 					</div>
 
 					<div class="nav-option option4">
-						<i class="fas fa-user-md"></i>
+						
                         <a href="{{ url_for('tests') }}">
-                            <h3>Tests</h3>
+                            <i class="fas fa-user-md"></i>
+                            <h3 style="display:inline">Tests</h3>
                           </a>
 
 					</div>
 
 					<div class="nav-option option5">
-						<i class="fas fa-chart-bar"></i>
-						<h3>Report</h3>
+						
+                        <a href="{{ url_for('tests') }}">
+                            <i class="fas fa-chart-bar"></i>
+                            <h3 style="display:inline">Report</h3>
+                          </a>
 					</div>
 
 					<div class="nav-option logout">
-						<i class="fas fa-sign-out-alt"></i>
+						
                         <a href="{{ url_for('logout') }}">
-                            <h3>Logout</h3>
+                            <i class="fas fa-sign-out-alt"></i>
+                            <h3 style="display:inline">Logout</h3>
                           </a>
 						
 					</div>

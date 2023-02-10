@@ -519,9 +519,11 @@ border-radius: 4px;
   
   .fa {
     font-size: 26px;
+    margin-right: 11px;
   }
   .fas {
     font-size: 26px;
+    margin-right: 11px;
   }
   @media only screen and (max-width: 600px) {
    .box-container{
