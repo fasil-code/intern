@@ -25,7 +25,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
+app.config['MYSQL_PASSWORD'] = 'alchemist'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 def create_database():
@@ -259,6 +259,12 @@ def tests():
   
    
    return redirect('login')
+
+#dashboard
+@app.route("/dashboard",methods=['GET','POST'])
+def dashboard():
+   return render_template('dashboard.html')
+
 @app.route("/api-key")
 def get_api_key():
     api_key = os.environ.get("API_KEY")

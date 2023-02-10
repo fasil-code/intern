@@ -9,9 +9,10 @@ function memorize(){
     
     for(let i=0;i<3;i++){
         let r=Math.floor(Math.random()*n);
-        if(arr.indexOf(idioms[r])==-1){
+        while (arr.indexOf(idioms[r]) !== -1) {
+          r = Math.floor(Math.random() * n);
+      }
             arr[i]=idioms[r].toLowerCase();
-        }
        
     }
     document.getElementById("w1").innerHTML=arr[0];
