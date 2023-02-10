@@ -236,6 +236,9 @@ font-weight: bold;
           var errorMessage = document.getElementById("errorMessage");
        
           if (localStorage.getItem(email) === "true") {
+            setTimeout(function() {
+              main1.style.display = "none";
+            }, 1000);
             main1.style.display = "none";
             
             main2.style.display = "grid";
@@ -250,7 +253,8 @@ font-weight: bold;
               errorMessage.innerHTML = "Please agree to terms and conditions";
         
               event.preventDefault();
-            } else {
+            } 
+            else {
               localStorage.setItem(email, "true");
               main2.style.display = "grid";
               main1.style.display = "none";
