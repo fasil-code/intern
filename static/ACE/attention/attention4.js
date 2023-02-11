@@ -1,14 +1,12 @@
-function play0() {
-    var audio = document.getElementById("audio0");
-    audio.play();
-}
-function play1() {
-    var audio = document.getElementById("audio1");
-    audio.play();
-}
-function play4() {
-    var audio = document.getElementById("audio4");
-    audio.play();
+function chnageFun(ind){
+    let prev=ind-1;
+    if(prev<=4){
+    document.getElementById("quest"+prev).style.display="none";
+    document.getElementById("quest"+ind).style.display="block";
+    }
+    else{
+       document.getElementById("btn").style.display="block"; 
+    }
 }
 var str = "ABCD";
 var x = Math.floor(Math.random() * 3);
@@ -48,7 +46,6 @@ while (k <= 5) {
     k++;
 }
 tot = answers2.length;
-
 function getCheckedValue(radioName) {
     var radios = document.getElementsByName(radioName);
     for (var y = 0; y < radios.length; y++)
@@ -57,7 +54,8 @@ function getCheckedValue(radioName) {
 function getScore() {
     var score = 0;
     for (var i = 0; i < tot; i++)
-        if (getCheckedValue("question" + i) === answers2[i]) score += 1;
+        if (getCheckedValue("question" + i) === answers2[i]) 
+           score += 1;
     return score;
 }
 function returnScore() {

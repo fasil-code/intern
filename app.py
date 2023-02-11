@@ -1,3 +1,4 @@
+#imports
 from flask import Flask,jsonify,render_template,request,session
 from flask import Flask,render_template,url_for,flash,redirect
 from forms import RegistrationForm,LoginForm,ResetRequestForm,ResetPassword
@@ -19,7 +20,7 @@ from terms import terms
 gc=geonamescache.GeonamesCache()
 countries = gc.get_countries()
 from flask import render_template
-
+from user import register_route,login_route,logout_route,reset_password_route,set_password_route
 
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
@@ -28,10 +29,6 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Zargar@123'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
-
-
-
-
 
 def create_database():
     conn = mysql.connector.connect(
@@ -60,6 +57,7 @@ mysql = MySQL(app)
 
 
 
+
    
     
 
@@ -67,48 +65,11 @@ mysql = MySQL(app)
 
 
 # for emotion data
-def hash_password(password):
-    # Generate a salt
-    password = password.encode("utf-8")
-    hash = bcrypt.hashpw(password, bcrypt.gensalt())
-    stored_password = hash.decode("utf-8")
-    return stored_password
 
-# Verify a password against the hashed password in the database
-def verify_password(password, hashed_password):
-    if bcrypt.checkpw(password.encode("utf-8"), hashed_password.encode("utf-8")):
-       return True
-    return False
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        username=form.username.data
-        email=form.email.data
-        password=form.password.data
-        hashed_password = hash_password(password)
-         # Connect to the database
-        conn = mysql.connect
-        cursor = conn.cursor()
-        # Check if the email already exists
-        cursor.execute("SELECT * FROM user WHERE email=%s", (email,))
-        result = cursor.fetchone()
-        
-        # If email already exists, show error message
-        if result:
-            flash('Email already exists, please use a different email address.', 'danger')
-            return redirect(url_for('register'))
-        # Insert form data into the user table
-        cursor.execute("INSERT INTO user (username, email, password) VALUES (%s, %s, %s)", (username, email, hashed_password))
-        conn.commit()
-        
-        # Close the cursor and connection
-        cursor.close()
-        conn.close()
-        flash(f'Account created for {username}!', 'success')
-        return redirect(url_for('home'))
-    return render_template('register.html', title='Register', form=form)
+    return register_route()
 
 def before_request():
     if not session.get('logged_in') and request.endpoint in ['index', 'secret']:
@@ -116,111 +77,38 @@ def before_request():
 
 @app.route("/login",methods=['GET','POST'])
 def login():
-    form=LoginForm()
-    if form.validate_on_submit():
-        email = form.email.data
-        password = str(form.password.data)
-        
-        # Connect to the database
-        conn = mysql.connect
-        cursor = conn.cursor()
-        log=False
-        # Get the hashed password from the database
-        cursor.execute("SELECT email FROM user WHERE email=%s", (email,))
-        result = cursor.fetchone()
-        
-        # If there is no matching record, show error message
-        if not result:
-            flash('Login Unsuccessful. Please check email and password.', 'danger')
-            return redirect(url_for('login'))
-        cursor.execute("SELECT password FROM user WHERE email=%s", (email,))
-        result = cursor.fetchone()
-        hashed_password=str(result[0])
-        # Verify the entered password with the hashed password
-        if verify_password(password, hashed_password):
-            session['logged_in'] = True
-            flash('You have been logged in!', 'success')
-            return redirect(url_for('home'))
-        else:
-            flash('Login Unsuccessful. Please check email and password.', 'danger')
-            return redirect(url_for('login'))
-    return render_template('login.html', title='Login', form=form)
+    return login_route()
          
-otp_sent = ""   
-def send_otp(email):
-    digits="0123456789"
-    OTP=""
-    for i in range(6):    
-       OTP+=digits[math.floor(random.random()*10)]
-    global otp_sent
-    otp_sent = OTP   
-    otp = OTP + " is your OTP"
-    msg= otp
-    s = smtplib.SMTP('smtp.gmail.com', 587)
-    s.starttls()
-    s.login("zargerfasil123@gmail.com", "wnkkbihlwomebczv")
-    emailid = email
-    s.sendmail('ftd',emailid,msg)
-email_sent = "" 
+
 @app.route('/reset_password',methods=['GET','POST'])
 def reset_password():
-    form=ResetRequestForm()
+    return reset_password_route()
    
     
-    if form.validate_on_submit():
-        email = form.email.data
-        global email_sent
-        email_sent=email
-        # Connect to the database
-        conn = mysql.connect
-        cursor = conn.cursor()
-        
-        # Check if the email exists in the user table
-        cursor.execute("SELECT * FROM user WHERE email=%s", (email,))
-        result = cursor.fetchone()
-        
-        # If there is no matching email, show error message
-        if not result:
-            flash('No account with this email found.', 'danger')
-            return redirect(url_for('reset_password'))
-        
-        # If email exists, show success message and reset password process
-        send_otp(email)
-        flash('Password reset instructions have been sent to your email', 'success')
-        return redirect(url_for('set_password'))
-    return render_template('reset_request.html',title='Reset Request',form=form)
-
 
 
 @app.route('/set_password',methods=['GET','POST'])
 def set_password():
-    form=ResetPassword()
-    if form.validate_on_submit():
-        # get the entered OTP value
-        entered_otp = form.otp.data
-        password = form.password.data
-        
-        # compare the entered OTP with the stored OTP
-        if entered_otp != otp_sent:
-            flash('Incorrect OTP. Please try again.', 'danger')
-            return redirect(url_for('set_password'))
-        email=email_sent 
-        # If OTP is correct, update the password in the database
-        conn = mysql.connect
-        cursor = conn.cursor()
-        hashed_password=hash_password(password)
-        cursor.execute("UPDATE user SET password=%s WHERE email=%s", (hashed_password, email))
-        conn.commit()
-        
-        flash('Password has been reset successfully.', 'success')
-        return redirect(url_for('login'))
-    return render_template('reset.html',title='Reset Request',form=form)
- 
+    return set_password_route()
+     
+
+@app.route('/logout')
+def logout():
+    
+    # Remove the logged_in key from the session
+    return logout_route()
+@app.after_request
+def after_request(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    return response
         
 @app.route("/send_score", methods=["POST"])
 def send_score():
     score= request.form.get("score")
     column= request.form.get("column")
+    
+    
+    
    # #   Connect to the database
    #  conn = mysql.connect
    #  cursor = conn.cursor()
@@ -235,7 +123,7 @@ def send_score():
 
     return "Score received: " + score + " for " + column     
         
-      
+ #1  Home     
 @app.route("/home", methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
 def home():
@@ -243,46 +131,47 @@ def home():
         return render_template('navbar.html', logged_in=True)
   
    return render_template('navbar.html', logged_in=False)
-@app.route('/logout')
-def logout():
-    
-    # Remove the logged_in key from the session
-    session.pop('logged_in', None)
-    return render_template('navbar.html', logged_in=False)
-@app.after_request
-def after_request(response):
-    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    return response
 
-#1  Home
+
+#Test Page 
 @app.route("/tests",methods=['GET','POST'])
-
 def tests():
    if 'logged_in' in session:
-        return render_template('home.html',terms=terms)
-  
-   
+        email = session.get('logged_in')
+        return render_template('home.html',terms=terms,email=email)   
    return redirect('login')
+
+
+
+
+
+#dashboard
+@app.route("/dashboard",methods=['GET','POST'])
+def dashboard():
+   return render_template('dashboard.html')
+
+
 @app.route("/api-key")
 def get_api_key():
     api_key = os.environ.get("API_KEY")
     return api_key
-#2 Emoji
+
+
+#1 Emoji Game
 @app.route("/emoji",methods=['GET','POST'])
 def emoji():
    return render_template('Emoji/emoji.html')
 
-#3 Emoji Recog
+
 
  
 
- 
+ #3 Emoji Recogonisation Test (ert)
 @app.route("/emojrecog",methods=['GET','POST'])
 def emojrecog():
-   
-  
-   
    return render_template('EmojRecog/EmojRecog.html')
+
+
 #4 Ace
 @app.route("/layout",methods=['GET','POST'])
 def layout():
@@ -373,10 +262,6 @@ def tmt():
 @app.route("/tmt-2",methods=['GET','POST'])
 def tmt2():
     return render_template('TMT/TMT2.html')
-
-
-
-
 if __name__ == "__main__":
     app.run(debug = True)
     
