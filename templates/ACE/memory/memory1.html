@@ -10,6 +10,7 @@
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
     crossorigin="anonymous"
   />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='ACE/memory/memory1.css')}}">
 </head>
@@ -33,7 +34,8 @@
                   >
                   <h5>Record first word </h5>
                   <h5 id="text0" class="word"></h5>
-                    <span><button onclick="audioToText(0)" type="button"  class="btn btn-outline-primary">Record</button></span>
+                    <span><button onclick="audioToText(0)" type="button"  class="btn btn-outline-primary"><i
+                      class="fa fa-microphone"></i></button></span>
                 </div>
               </div>
                 <div class="q2 bg-white p-4 border-bottom">
@@ -42,7 +44,8 @@
                       >
                       <h5>Record second word </h5>
                       <h5 id="text1" class="word"></h5>
-                      <span><button onclick="audioToText(1)" type="button"  class="btn btn-outline-primary">Record</button></span>
+                      <span><button onclick="audioToText(1)" type="button"  class="btn btn-outline-primary"><i
+                        class="fa fa-microphone"></i></button></span>
                     </div>
                 </div>
                 <div class="q3 bg-white p-4 border-bottom">
@@ -51,7 +54,8 @@
                     >
                       <h5>Record third word </h5>
                       <h5 id="text2" class="word"></h5>
-                      <span><button onclick="audioToText(2)" type="button" class="btn btn-outline-primary">Record</button></span>
+                      <span><button onclick="audioToText(2)" type="button" class="btn btn-outline-primary"><i
+                        class="fa fa-microphone"></i></button></span>
                     </div>
                 </div>
                 

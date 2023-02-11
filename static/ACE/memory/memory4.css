@@ -17,6 +17,9 @@ body{
     background: linear-gradient(to bottom, #f9f9f9, #eee);
     
 }
+.button{
+  text-align: center;
+}
 .next-btn{
     text-align: center;
 }
@@ -39,7 +42,11 @@ body{
   font-size: 12px;
 }
 }
-
+@media only screen and (max-width: 800px) {
+  .word{
+    display: none;
+  }
+}
 @media only screen and (max-width: 320px) {
   .content{
     flex-direction: column !important;
