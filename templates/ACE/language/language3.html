@@ -76,5 +76,9 @@
    {% endblock content %} 
 </body>
 <script> var nextUrl = "{{url}}"+"?name=vs1"</script>
+<script type="text/javascript">
+  window.history.forward();
+  function noBack() { window.history.forward(); }
+</script>
 <script type = "text/javascript" src = "{{ url_for('static', filename = 'ACE/language/language3.js') }}" ></script>
 </html>

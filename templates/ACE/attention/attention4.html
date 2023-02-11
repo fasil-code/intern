@@ -124,6 +124,10 @@
 
     </div>
     <script>{ var nextUrl = "{{url}}" }</script>
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() { window.history.forward(); }
+      </script>
     <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/attention/attention4.js') }}"></script>
 </body>
 
