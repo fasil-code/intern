@@ -161,7 +161,6 @@ function startTimer(time){
           scoring(); //call scoring function since time is over.
           timeText.textContent = "Time Over"; //change the time text to time off
           timeCount.textContent = "00"; //change the timeCount to 00
-          next_btn.style.visibility="visible"; //make next button visible again since time is over.
           recordButton.disabled = true; //disable the record button since time is over.
           document.getElementById('recognition-status').innerHTML = '🔴 Time  Over'; //change the status to time over.';
           
