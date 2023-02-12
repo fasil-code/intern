@@ -26,7 +26,7 @@ app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = '7006022139'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 

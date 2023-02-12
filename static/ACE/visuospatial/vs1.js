@@ -92,8 +92,8 @@
             if (inputValue === diagrams[dg_count].dot_count) {
               marks++;
           } 
-            // showResult();
-            window.location.href =  nextUrl;
+             showResult();
+            
            } //calling showResult function
         }
         console.log(marks);
@@ -106,6 +106,20 @@
       quiz_box.style.display="none";
       result_box.style.display="block";
       const scoreText = result_box.querySelector(".score_text");
+      $.ajax({
+        type: "POST",
+        url: "/send_score",
+        data: { 
+           score: marks,
+           column: "ace3"
+        },
+        success: function(response) {
+           console.log(response);
+           sent=true; 
+           redirect(sent);     
+        } 
+        
+     });
       if (marks > 3){ // if user scored more than 3
         //creating a new span tag and passing the user score number and total question number
         let scoreTag = '<span>and congrats! 🎉, You got <p>'+ marks +'</p> out of <p>'+ diagrams.length +'</p></span>';
@@ -119,4 +133,10 @@
         let scoreTag = '<span>and sorry 😐, You got only <p>'+ marks+'</p> out of <p>'+ diagrams.length +'</p></span>';
         scoreText.innerHTML = scoreTag;
     }
+    }
+ 
+    function redirect(sent){
+      if(sent===true){
+        window.location.href=nextUrl;
+      }
     }

@@ -5,6 +5,16 @@
       buttonText = "Emoji Game";
   }  else if (nexturl == "lang") {
       buttonText = "Language Test";
+      const info = document.getElementsByClassName("info");
+     info[0].innerHTML =
+         "1. You will be shown a set of 12 images about any object,animal etc.";
+     info[1].innerHTML = "2. You have to type the name of object shown in picture.You can't keep it blank.";
+     info[2].innerHTML =
+         "3. There is no time limit.";
+     info[3].innerHTML =
+         "4. For each correct answer you will get a point.";
+     info[4].innerHTML = "5. Result will be shown at the end.";
+   
   }
   else if (nexturl == "ace1") {
     buttonText = "Attention Test";
@@ -59,10 +69,34 @@
    }
    else if(nexturl=="ace8"){
     buttonText="Language Test"
+
 }
 else if (nexturl == "vs1") {
-    buttonText = "Visuo-Spatial Test";
+    buttonText = "Visuo-Spatial Test I";
+    const info = document.getElementsByClassName("info");
+    info[0].innerHTML =
+        "1. You will be shown an image containing some number of dots.";
+    info[1].innerHTML = "2. You have to type the number of dots shown in image.";
+    info[2].innerHTML =
+        "3. There is no time limit.";
+    info[3].innerHTML =
+        "4. For each correct answer you will get a point.";
+    info[4].innerHTML = "5. Result will be shown at the end.";
+    
+}
+else if (nexturl == "vs2") {
+    buttonText = "Visuo-Spatial Test II";
+    const info = document.getElementsByClassName("info");
+    info[0].innerHTML =
+        "1. You will be shown an image containing Fragmented English letters .";
+    info[1].innerHTML = "2. You have to type the letter shown in image.";
+    info[2].innerHTML =
+        "3. There is no time limit.";
+    info[3].innerHTML =
+        "4. For each correct answer you will get a point.";
+    info[4].innerHTML = "5. Result will be shown at the end.";
 } 
+
   else if (nexturl == "tmt") {
       /*
           // Before: Title of webpage ==> Attention Test

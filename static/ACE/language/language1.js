@@ -144,7 +144,7 @@ showImages(0);
                 marks++;
             } 
             
-              console.log(dg_count);
+              //console.log(dg_count);
               dg_count++; //increment the que_count value
               showImages(dg_count);
         }
@@ -159,8 +159,7 @@ showImages(0);
               marks++;
           } 
              showResult();
-            
-            window.location.href =  nextUrl;
+             
            } //calling showResult function
         }
     }
@@ -172,6 +171,20 @@ showImages(0);
       quiz_box.style.display="none";
       result_box.style.display="block";
       const scoreText = result_box.querySelector(".score_text");
+      $.ajax({
+        type: "POST",
+        url: "/send_score",
+        data: { 
+           score: marks,
+           column: "ace3"
+        },
+        success: function(response) {
+           console.log(response);
+           sent=true; 
+           redirect(sent);     
+        } 
+        
+     });
       if (marks > 3){ // if user scored more than 3
         //creating a new span tag and passing the user score number and total question number
         let scoreTag = '<span>and congrats! 🎉, You got <p>'+ marks +'</p> out of <p>'+ diagrams.length +'</p></span>';
@@ -186,17 +199,5 @@ showImages(0);
         scoreText.innerHTML = scoreTag;
     }
     }
-    $.ajax({
-      type: "POST",
-      url: "/send_data",
-      data: { 
-         marks: marks,
-         
-      },
-      success: function(response) {
-         console.log(response);
-         sent=true; 
-         redirect(sent);     
-      } 
-      
-   });
+  
+    
