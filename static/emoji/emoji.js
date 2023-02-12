@@ -805,6 +805,19 @@ else{
       submit.innerHTML='Submit'
      scored.innerHTML= "Your score is "+score
      form.style.display='none'
+     $.ajax({
+      type: "POST",
+      url: "/send_score",
+      data: { 
+         score: score,
+         column: "emoji"
+      },
+      success: function(response) {
+         console.log(response);     
+      } 
+      
+   });
+ 
       
 }
       }

@@ -1,5 +1,6 @@
 #imports
-from flask import Flask,jsonify,render_template,request,session
+import uuid
+from flask import Flask,jsonify, make_response,render_template,request,session
 from flask import Flask,render_template,url_for,flash,redirect
 from forms import RegistrationForm,LoginForm,ResetRequestForm,ResetPassword
 app = Flask(__name__)
@@ -27,7 +28,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 
-app.config['MYSQL_PASSWORD'] = '7006022139'
+app.config['MYSQL_PASSWORD'] = 'alchemist'
 
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -106,6 +107,8 @@ def after_request(response):
         
 @app.route("/send_score", methods=["POST"])
 def send_score():
+    
+    user_id = request.cookies.get('user_id')
     score= request.form.get("score")
     column= request.form.get("column")
     
@@ -123,7 +126,7 @@ def send_score():
    #  cursor.close()
    #  conn.close()
 
-    return "Score received: " + score + " for " + column     
+    return "Score received: " + score + " for " + column +" user id "+user_id     
         
  #1  Home     
 @app.route("/home", methods=['GET','POST'])
@@ -138,12 +141,18 @@ def home():
 #Test Page 
 @app.route("/tests",methods=['GET','POST'])
 def tests():
-   if 'logged_in' in session:
+    if 'logged_in' in session:
         email = session.get('logged_in')
-        return render_template('home.html',terms=terms,email=email)   
-   return redirect('login')
+    else:
+        # code to handle user not logged in
+        return redirect('login')
 
+    # Generate a new session ID
+    session['session_id'] = str(uuid.uuid4())
 
+    response = make_response(render_template('home.html', terms=terms, email=email))
+    response.set_cookie('session_id', session['session_id'])
+    return response
 
 
 
