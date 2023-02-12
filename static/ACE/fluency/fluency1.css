@@ -28,9 +28,7 @@ body{
     align-items: center;
     justify-content:center;
 }
-#next-btn{
-  visibility: hidden;
-}
+
 
 #heading{
     text-align: center;

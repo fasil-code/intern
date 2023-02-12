@@ -94,6 +94,7 @@ function animateText() {
     }
     console.log(word);
   } 
+  
   Promise.all(promises)
     .then(() => {
       
@@ -121,8 +122,7 @@ function animateText() {
     else{
       score=0;
     }
-    
- 
+  
   $.ajax({
     type: "POST",
     url: "/send_score",
@@ -158,10 +158,8 @@ function startTimer(time){
       }
       if(time < 0){ //if timer is less than 0
           clearInterval(counter); //clear counter
-          scoring(); //call scoring function since time is over.
           timeText.textContent = "Time Over"; //change the time text to time off
           timeCount.textContent = "00"; //change the timeCount to 00
-          next_btn.style.visibility="visible"; //make next button visible again since time is over.
           recordButton.disabled = true; //disable the record button since time is over.
           document.getElementById('recognition-status').innerHTML = '🔴 Time  Over'; //change the status to time over.';
           

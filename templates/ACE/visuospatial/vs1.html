@@ -50,7 +50,14 @@
   <script>
     var nextUrl = "{{url}}";
   </script>
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script type="text/javascript">
+    window.history.forward();
+    function noBack() { window.history.forward(); }
+  </script>
+
   <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/visuospatial/vs1.js') }}"></script>
 </body>
 
