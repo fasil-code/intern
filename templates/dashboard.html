@@ -155,8 +155,8 @@
               <thead>
                 <tr class="header">
                   <th class="header">Date-Time</th>
-                  <th class="header">Emogi Game</th>
-				  <th class="header">ERT</th>
+                  <th class="header">Emogi Game (%)</th>
+				  <th class="header">ERT (%)</th>
                   <th colspan="5" class="header">ACE-|||</th>
 				  <th class="header">Pulse Tracking</th>
                   <th class="header">Trail Making</th>
@@ -177,10 +177,11 @@
                 </tr>
               </thead>
               <tbody>
+				{% for result in results %}
                 <tr class="data">
-                  <td class="data">20</td>
-                  <td class="data">20</td>
-                  <td class="data">20</td>
+                  <td class="data">{{result[2]}}</td>
+                  <td class="data">{{result[3]}}</td>
+                  <td class="data">{{result[5]}}</td>
                   <td class="data">20</td>
                   <td class="data">20</td>
 				  <td class="data">20</td>
@@ -190,6 +191,7 @@
                   <td class="data">20</td>
 				  <td class="data">link</td>
                 </tr>
+				{% endfor  %}
               </tbody>
             </table>
             

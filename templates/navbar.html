@@ -122,7 +122,7 @@
             <a  href="../static/docs.pdf" download>Docs</a>
           </li>
           <li>
-            <a id="test" href="{{ url_for('tests') }}" onclick="handleTestClick(event)">Tests</a>
+            <a id="test" href="{{ url_for('tests') }}?session_id={{ session_id }}" onclick="handleTestClick(event)">Tests</a>
 
 
           </li>
@@ -225,34 +225,7 @@
     </div>
     <!-- Copyright -->
 </footer>
-<script>
-  function handleTestClick(){
-    // Prevent the default link behavior
-    event.preventDefault();
-      // Get the session ID from the HTML
-  var session_id = "{{ session_id }}";
-  
-      // Create a new XMLHttpRequest object
-      var xhr = new XMLHttpRequest();
-  
-      // Define the AJAX request
-  xhr.open('POST', '/send_session');
-  
-      // Set the content type of the request to plain text
-      xhr.setRequestHeader('Content-Type', 'text/plain');
-  
-  // Send the session ID as plain text data
-  xhr.send(session_id);
-  
-      // Define the success callback function
-      xhr.onload = function() {
-          // Log the response data to the console
-          console.log(xhr.responseText);
-           // Redirect the user to the /tests page
-           window.location.href = "{{ url_for('tests') }}";
-      };
-  }
-  </script>
+
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 

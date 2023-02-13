@@ -153,6 +153,7 @@ font-weight: bold;
     </style>
 </head>
 <body>
+  <h1>{{session_id}}</h1>
   <div style="text-align: center;">
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
