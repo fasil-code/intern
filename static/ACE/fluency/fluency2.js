@@ -342,7 +342,7 @@ function scoring() {
         url: "/send_score",
         data: { 
            score: score,
-           column: "ace12"
+           column: "fluency2"
         },
         success: function(response) {
            console.log(response);

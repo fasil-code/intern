@@ -163,7 +163,7 @@ showImages(0);
             url: "/send_score",
             data: { 
                score: marks,
-               column: "language"
+               column: "language1"
             },
             success: function(response) {
                console.log(response);

@@ -128,7 +128,7 @@ function animateText() {
     url: "/send_score",
     data: { 
        score: score,
-       column: "ace13"
+       column: "fluency1"
     },
     success: function(response) {
        console.log(response);

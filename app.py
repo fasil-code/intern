@@ -28,7 +28,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = 'alchemist'
 
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -47,7 +47,6 @@ def create_database():
     cursor.execute(
         "CREATE TABLE IF NOT EXISTS user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(80) NOT NULL , email VARCHAR(120) NOT NULL UNIQUE, password VARCHAR(160) NOT NULL)"
     )
-  
     cursor.execute(
      '''CREATE TABLE IF NOT EXISTS emotion (
     id INT AUTO_INCREMENT PRIMARY KEY, 
@@ -59,9 +58,32 @@ def create_database():
     time_ert VARCHAR(255),
     session_id VARCHAR(255)
     
-)'''
+   )'''
+   ) 
+    cursor.execute(
+    '''CREATE TABLE IF NOT EXISTS ace (
+         id INT AUTO_INCREMENT PRIMARY KEY, 
+         email VARCHAR(255) NOT NULL,
+         Date VARCHAR(255),
+         attention1 INT,
+         attention2 INT,
+         attention3 INT,
+         fluency1 INT,
+         fluency2 INT,
+         memory1 INT,
+         memory2 INT,
+         memory3 INT,
+         language1 INT,
+         language2 INT,
+         language3 INT,
+         language4 INT,
+         visuospatial1 INT,
+         visuospatial2 INT,
+         session_id VARCHAR(255)
+         
+   )'''
 )
-
+  
     cursor.close()
     conn.close()
 
@@ -139,7 +161,21 @@ def send_score():
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM emotion WHERE session_id = %s AND email = %s", (sesion_key, email))
     result = cursor.fetchone()
-    if column=="emoji":
+    cursor.execute(f"SELECT * FROM ace WHERE session_id = %s AND email = %s", (sesion_key, email))
+    result1 = cursor.fetchone()
+    aceColumn = ['attention1', 'attention2', 'attention3', 'fluency1', 'fluency2', 'memory1', 'memory2', 'memory3', 'language1', 'language2', 'language3', 'language4', 'visuospatial1', 'visuospatial2']
+    if column in aceColumn:
+       if not result1:
+             # Insert a new row
+       
+           cursor.execute(f"INSERT INTO ace (email,Date,{column},session_id) VALUES (%s,%s, %s, %s)", (email,date, score,sesion_key))
+           conn.commit() 
+       else:
+         # Update the existing row
+          cursor.execute(f"UPDATE ace SET {column}= %s WHERE session_id = %s AND email = %s", (score, sesion_key, email))
+          conn.commit()
+
+    elif column=="emoji":
       
       if not result:
         # Insert a new row
@@ -160,9 +196,7 @@ def send_score():
          # Update the existing row
            cursor.execute(f"UPDATE emotion SET ert = %s, time_ert = %s WHERE session_id = %s AND email = %s", (score, time, sesion_key, email))
            conn.commit()
-       
-      
-       
+   
     
     
  
