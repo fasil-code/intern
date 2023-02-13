@@ -2,7 +2,6 @@
 import uuid
 from flask import Flask,jsonify, make_response,render_template,request,session
 from flask import Flask,render_template,url_for,flash,redirect
-from forms import RegistrationForm,LoginForm,ResetRequestForm,ResetPassword
 app = Flask(__name__)
 import random
 import geonamescache
@@ -10,6 +9,7 @@ import os
 import bcrypt
 import math
 import random
+import datetime
 from functools import wraps
 import smtplib
 from flask_session import Session
@@ -28,7 +28,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 
-app.config['MYSQL_PASSWORD'] = 'alchemist'
+app.config['MYSQL_PASSWORD'] = 'Zargar@123'
 
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -48,6 +48,20 @@ def create_database():
         "CREATE TABLE IF NOT EXISTS user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(80) NOT NULL , email VARCHAR(120) NOT NULL UNIQUE, password VARCHAR(160) NOT NULL)"
     )
   
+    cursor.execute(
+     '''CREATE TABLE IF NOT EXISTS emotion (
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    email VARCHAR(255) NOT NULL,
+     Date VARCHAR(255),
+    emoji_game INT,
+    time_emoji_game VARCHAR(255),
+    ert INT,
+    time_ert VARCHAR(255),
+    session_id VARCHAR(255)
+    
+)'''
+)
+
     cursor.close()
     conn.close()
 
@@ -81,7 +95,9 @@ def before_request():
 @app.route("/login",methods=['GET','POST'])
 def login():
     return login_route()
-         
+def after_request(response):
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    return response        
 
 @app.route('/reset_password',methods=['GET','POST'])
 def reset_password():
@@ -105,41 +121,55 @@ def after_request(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     return response
 #session_id
-@app.route("/send_session", methods=["POST"])
-def send_session():
-  if request.method == 'POST':
-       # Get the session ID from the request data
-       session_id = request.data.decode('utf-8')
 
-       # Store the session ID in the database
-       # ...
 
-       return f'Session ID received: {session_id}'
   
 @app.route("/send_score", methods=["POST"])
 def send_score():
+    email = session.get('logged_in')
     
-    score= request.form.get("score", "")
-    column= request.form.get("column", "")
-   
-   #  user_id = request.cookies.get('user_id')
+    
+    date= datetime.datetime.now().date()
 
+    score= request.form.get("score")
+    column= request.form.get("column")
+    time=request.form.get('time')
+    
+    conn = mysql.connect
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM emotion WHERE session_id = %s AND email = %s", (sesion_key, email))
+    result = cursor.fetchone()
+    if column=="emoji":
+      
+      if not result:
+        # Insert a new row
+       
+        cursor.execute(f"INSERT INTO emotion (email,Date, emoji_game, time_emoji_game,session_id) VALUES (%s,%s, %s, %s,%s)", (email,date, score, time,sesion_key))
+        conn.commit()
+      else:
+         # Update the existing row
+        cursor.execute(f"UPDATE emotion SET emoji_game = %s, time_emoji_game = %s WHERE session_id = %s AND email = %s", (score, time, sesion_key, email))
+        conn.commit()
+    elif column=="ert":
+         if not result:
+        
+        # Insert a new row
+          cursor.execute(f"INSERT INTO emotion (email,Date, ert, time_ert,session_id) VALUES (%s,%s, %s, %s,%s)", (email,date, score, time,sesion_key))
+          conn.commit()
+         else:
+         # Update the existing row
+           cursor.execute(f"UPDATE emotion SET ert = %s, time_ert = %s WHERE session_id = %s AND email = %s", (score, time, sesion_key, email))
+           conn.commit()
+       
+      
+       
     
     
-    
-   # #   Connect to the database
-   #  conn = mysql.connect
-   #  cursor = conn.cursor()
-   
-   # #  Insert the score into the database
-   #  cursor.execute(f"INSERT INTO scores ({column}) VALUES (%s)", (score,))
-   #  conn.commit()
+ 
+    cursor.close()
+    conn.close()
 
-   #  # Close the connection
-   #  cursor.close()
-   #  conn.close()
-
-    return "Score received: " + score + " for " + column    
+    return "Score received: " + score + " for " + column   
         
  #1  Home     
 @app.route("/home", methods=['GET','POST'])
@@ -151,23 +181,34 @@ def home():
             session['session_id'] = session_id
             return render_template('navbar.html', session_id=session_id, logged_in=True)
             
-   return render_template('navbar.html',session_id=session_id, logged_in=False)
+   return render_template('navbar.html', logged_in=False)
 
 
 #Test Page  
+sesion_key="abcd"
 @app.route("/tests",methods=['GET','POST'])
 def tests():
    if 'logged_in' in session:
+        
         email = session.get('logged_in')
-       
-        return render_template('home.html',terms=terms,email=email)   
+        global sesion_key
+        session_id = request.args.get('session_id')
+        sesion_key=session_id
+        return render_template('home.html',terms=terms,email=email,session_id=session_id)   
    return redirect('login')
 
 #dashboard
 @app.route("/dashboard",methods=['GET','POST'])
 def dashboard():
-   return render_template('dashboard.html')
-
+   if 'logged_in' in session:
+      conn = mysql.connect
+      cursor = conn.cursor()
+      email = email = session.get('logged_in') # Replace with the actual email value you want to search for
+      query = "SELECT * FROM emotion WHERE email = %s"
+      cursor.execute(query, (email,))
+      results = cursor.fetchall()
+      return render_template('dashboard.html',results=results)
+   return redirect('login')
 
 @app.route("/api-key")
 def get_api_key():
@@ -178,7 +219,8 @@ def get_api_key():
 #1 Emoji Game
 @app.route("/emoji",methods=['GET','POST'])
 def emoji():
-   return render_template('Emoji/emoji.html')
+   session_id = request.args.get('session_id')
+   return render_template('Emoji/emoji.html',session_id=session_id)
 
 
 
