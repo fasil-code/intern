@@ -37,5 +37,5 @@
       test.addEventListener('click',function(){
         main2.style.display='none'
       })
-     
-
+    
+   

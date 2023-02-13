@@ -104,13 +104,26 @@ def logout():
 def after_request(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     return response
-        
+#session_id
+@app.route("/send_session", methods=["POST"])
+def send_session():
+  if request.method == 'POST':
+       # Get the session ID from the request data
+       session_id = request.data.decode('utf-8')
+
+       # Store the session ID in the database
+       # ...
+
+       return f'Session ID received: {session_id}'
+  
 @app.route("/send_score", methods=["POST"])
 def send_score():
     
-    user_id = request.cookies.get('user_id')
-    score= request.form.get("score")
-    column= request.form.get("column")
+    score= request.form.get("score", "")
+    column= request.form.get("column", "")
+   
+   #  user_id = request.cookies.get('user_id')
+
     
     
     
@@ -126,35 +139,29 @@ def send_score():
    #  cursor.close()
    #  conn.close()
 
-    return "Score received: " + score + " for " + column +" user id "+user_id     
+    return "Score received: " + score + " for " + column    
         
  #1  Home     
 @app.route("/home", methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
 def home():
    if 'logged_in' in session:
-        return render_template('navbar.html', logged_in=True)
-  
-   return render_template('navbar.html', logged_in=False)
+           # Generate a new session ID
+            session_id = str(uuid.uuid4())
+            session['session_id'] = session_id
+            return render_template('navbar.html', session_id=session_id, logged_in=True)
+            
+   return render_template('navbar.html',session_id=session_id, logged_in=False)
 
 
-#Test Page 
+#Test Page  
 @app.route("/tests",methods=['GET','POST'])
 def tests():
-    if 'logged_in' in session:
+   if 'logged_in' in session:
         email = session.get('logged_in')
-    else:
-        # code to handle user not logged in
-        return redirect('login')
-
-    # Generate a new session ID
-    session['session_id'] = str(uuid.uuid4())
-
-    response = make_response(render_template('home.html', terms=terms, email=email))
-    response.set_cookie('session_id', session['session_id'])
-    return response
-
-
+       
+        return render_template('home.html',terms=terms,email=email)   
+   return redirect('login')
 
 #dashboard
 @app.route("/dashboard",methods=['GET','POST'])

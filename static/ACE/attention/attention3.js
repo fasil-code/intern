@@ -175,7 +175,7 @@ function audioToText(i){
      },
      success: function(response) {
         console.log(response);
-        sent=true; 
+        // sent=true; 
         redirect(sent);     
      } 
      
