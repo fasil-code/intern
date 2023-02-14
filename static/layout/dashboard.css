@@ -496,14 +496,14 @@ border-radius: 4px;
   }
 
   
-  table {
+  /* table {
     font-family: Arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
   }
   .header {
     border: 1px solid black;
-  }
+  } */
   
   .data {
     border: 1px solid black;

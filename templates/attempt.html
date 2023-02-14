@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTD Session</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .win {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            border: 1px solid #ddd;
+            padding: 18px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+        }
+        .btn-cont{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
+        }
+        .button {
+            background-color: #e0e9e0;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        #exit {
+            background-color: #f8f8f8;
+            color: #5c3bf0;
+            transition: all 0.2s ease-in;
+        }
+        #attempt {
+            background-color: #5c3bf0;
+            color: white;
+            transition: all 0.2s ease-in;
+        }
+        #exit:hover {
+            /* border: 1px solid #f8f8f8; */
+            background-color: #5c3bf0;
+            color: #f8f8f8;
+        }
+        #attempt:hover {
+            /* border: 1px solid #5c3bf0; */
+            background-color: #f8f8f8;
+            color: #5c3bf0;
+        }
+        .txt {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="win">
+            <h2 class="txt">Are you sure about creating a New Session?</h2>
+            <div class="btn-cont">
+                <button class="button" id="exit">Exit</button>
+                <button class="button" id="attempt">Attempt</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
