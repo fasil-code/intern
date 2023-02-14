@@ -11,6 +11,7 @@ import math
 import random
 import uuid
 import datetime
+from reportlab.lib.colors import HexColor
 from reportlab.lib.enums import TA_CENTER,TA_RIGHT,TA_LEFT
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from io import BytesIO
@@ -260,27 +261,52 @@ def generate_pdf():
                 fontName='Helvetica-Bold',
                 fontSize=25,
                 textColor=colors.red,
-                spaceAfter=0.25*inch,
+                spaceAfter=0.1*inch,
                 alignment=TA_CENTER,
                 leftIndent=0.25*inch,
-                border=1,
-                borderColor=colors.blue,
-                borderPadding=0.1*inch,
+               
+                
                 
             ),
              'heading1': ParagraphStyle(
                 'heading',
                 fontName='Helvetica-Bold',
                 fontSize=20,
-                textColor=colors.red,
+                textColor=colors.black,
                 spaceAfter=0.25*inch,
                 
-                leftIndent=0*inch,
+                leftIndent=0.5*inch,
                 border=1,
-                borderColor=colors.blue,
+                borderColor=colors.black,
                 borderPadding=0.1*inch,
                 
-            )
+            ),
+             'para':ParagraphStyle(
+                'para',
+                textColor=colors.gray,
+                fontSize=13,
+                leading=14,
+                leftIndent=0.5*inch,
+                rightIndent=0.5*inch,
+                spaceBefore=0,
+                border=2,
+                borderWidth=1,
+                borderColor=colors._CMYK_white,
+                
+                borderRadius=1,
+                backColor=colors.whitesmoke,
+                borderPadding=(10,10,10),
+                
+                
+                
+             ),
+             'header': ParagraphStyle(
+                'header',
+                fontName='Helvetica-Bold',
+                fontSize=18,
+                textColor=colors.red
+             )
+            
         }
         elements = []
         elements.append(Paragraph('Frontotemporal Dementia Report ', styles['heading']))
@@ -295,65 +321,83 @@ def generate_pdf():
         fontName='Helvetica',
         fontSize=12,
         textColor=colors.black,
-        leftIndent=0.25*inch
+        leftIndent=0.25*inch,
+        #backColor=colors.whitesmoke
         )
         email_style = ParagraphStyle(
        'email',
         fontName='Helvetica',
-        fontSize=10,
+        fontSize=12,
         textColor=colors.black,
         
-        leftIndent=0.25*inch
+        
+        
+        
+                leftIndent=0.5*inch,
+                rightIndent=0.5*inch,
+                spaceBefore=0,
+                border=2,
+                borderWidth=1,
+                
+                borderColor=colors._CMYK_white,
+                
+                borderRadius=1,
+                
         
         )
+    
         date_style = ParagraphStyle(
         'date',
         fontName='Helvetica',
         fontSize=12,
         textColor=colors.black,
         alignment=TA_RIGHT,
+        #backColor=colors.whitesmoke,
         rightIndent=0.25*inch
+        
         )
         time_style = ParagraphStyle(
         'time',
         fontName='Helvetica',
-        fontSize=10,
+        fontSize=12,
         textColor=colors.black,
         alignment=TA_RIGHT,
-        rightIndent=0.25*inch
-        )    
-        elements.append(Paragraph(f'Name: {name}', name_style))
+        rightIndent=0.25*inch,
+        #backColor=colors.whitesmoke,
+        )   
+
+        elements.append(Paragraph(f' Name: {name}', email_style))
         elements.append(Paragraph(f'Email: {email}', email_style))
         elements.append(Paragraph(f'Date: {date}', date_style))
         elements.append(Paragraph(f'Time: {time}', time_style))
         
         # Add data to table
         
-        
-        elements.append(Spacer(1, 0.6*inch))
+        elements.append(Spacer(1, 0.5*inch))
        
-        elements.append(Paragraph('Tests related to Emotion', styles['heading1']))
+       
+        elements.append(Paragraph(' <font color="maroon">Tests related to Emotion</font>', styles['heading1']))
+        elements.append(Spacer(1, 0.2*inch))
         
-        
-        elements.append(Paragraph(f'''Emotion Recognition Test<br/>
-      Percentage Scored : {results[5]}<br/>                         
-      Completion Time (min :sec): {results[6]} <br/>  
-      Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient. 
-      The emotions of happy,sad ,anger.contempt,neutral,surprise,fear,and disgust were tested.
-      The user identification capacity is {results[5]} % and the time span was {results[6]} minutes.                  
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Emotion Recognition Test</font> <br/>
+      <br/>
+      Percentage Scored : <font color="black" fontSize=14 >{results[5]} %</font><br/>                         
+      Completion Time (min :sec):<font color="black" fontSize=14 > {results[6]}</font>  <br/>  
+      <br/>
+      Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient.
+   The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust were tested.
+      The user identification capacity is <font color="black" fontSize=14 >{results[5]} %</font>  and the time span was <font color="black" fontSize=14 >{results[6]} minutes</font> .                  
                              
                                   
-                                  ''', name_style))
+                                  ''', style=styles['para']))
         elements.append(Spacer(1, 0.4*inch))
-        elements.append(Paragraph(f'''Emoji Identification Test :<br/>
-           Percentage Scored : {results[3]}<br/>                         
-      Completion Time (min :sec): {results[4]} <br/>  
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b) Emoji Identification Test</font> :<br/> <br/>
+           Percentage Scored : <font color="black" fontSize=14 >{results[3]}</font> <br/>                         
+      Completion Time (min :sec): <font color="black" fontSize=14 >{results[4]}</font>  <br/>  
+       <br/>
       Summary: Emoji Identification test was given by the patient to test the patient's ability to recognise the emojis . 
-      The emojis related  smiley,frowny,emotion are tested.The user identification capacity is {results[3]} % and the time span was {results[4]} minutes.                                           
-                                    
-                                    
-                                    
-                                   ''', name_style))
+      The emojis related  smiley,frowny,emotion are tested.The user identification capacity is <font color="black" fontSize=14 >{results[3]} </font> % and the time span was <font color="black" fontSize=14 >{results[4]}  minutes. </font>                                          
+''', styles['para']))
         elements.append(Spacer(1, 0.6*inch))
         data = []
         
@@ -372,6 +416,34 @@ def generate_pdf():
         ]))
 
        # Add table to PDF template
+        elements.append(table)
+        data = [
+    ['Emotion', 'Actual', 'Predicted'],
+    ['Happy', 20, 18],
+    ['Sad', 15, 16],
+    ['Anger', 10, 10],
+    ['Contempt', 5, 6],
+    ['Neutral', 25, 24],
+    ['Surprise', 10, 9],
+    ['Fear', 5, 8],
+    ['Disgust', 10, 9],
+    ]
+
+# Define the style for the table
+        table_style = TableStyle([
+    ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+    ('FONTSIZE', (0, 0), (-1, 0), 14),
+    ('BACKGROUND', (0, 0), (-1, 0), 'lightgrey'),
+    ('TEXTCOLOR', (0, 0), (-1, 0), 'black'),
+    ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+    ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+    ('FONTSIZE', (0, 1), (-1, -1), 12),
+    ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
+      ])
+
+# Create the table and add it to the elements list
+        table = Table(data)
+        table.setStyle(table_style)
         elements.append(table)
         doc.build(elements)
         response.data = buffer.getvalue()
