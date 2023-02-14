@@ -1,4 +1,4 @@
-var words = ["Complex","Intelligent","Statistic","Hypothesis","Metamorphosis","Grammar","Innovation","Philanthropy","Quantum","Revolution","Skeptical","Understand","Vocabulary","Philosophy","Xylograph","Yellow","Zoo","Antique","Bureaucracy","Circle","Institute","Exclude","Fossil","Geology","Hydro","Incomprehensible","Justice","Linguistic","Mechanics"];
+let words = ["Complex","Intelligent","Statistic","Hypothesis","Metamorphosis","Grammar","Innovation","Philanthropy","Quantum","Revolution","Skeptical","Understand","Vocabulary","Philosophy","Xylograph","Yellow","Zoo","Antique","Bureaucracy","Circle","Institute","Exclude","Fossil","Geology","Hydro","Incomprehensible","Justice","Linguistic","Mechanics"];
 
 let n=words.length-1;
 let arr=new Array(3);
@@ -11,7 +11,7 @@ function memorize(){
     while (arr.indexOf(words[r]) !== -1) {
         r = Math.floor(Math.random() * n);
     }
-    arr[i]=words[r];
+    arr[i]=words[r].toLowerCase();
 }
 
     document.getElementById("w1").innerHTML=arr[0];
@@ -130,13 +130,14 @@ function scoring(){
   let score=0;
   let sent=false;
   for(let i=0;i<3;i++){
+    
       let ind=arr.indexOf(ans[i]);
      if(ind!=-1){
          score++;
          arr.splice(ind,1);
      }
   }
-  
+  console.log(score);
   $.ajax({
     type: "POST",
     url: "/send_score",
