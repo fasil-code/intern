@@ -1,5 +1,5 @@
-#imports
-import uuid
+
+
 from flask import Flask,jsonify, make_response,render_template,request,session
 from flask import Flask,render_template,url_for,flash,redirect
 app = Flask(__name__)
@@ -9,7 +9,19 @@ import os
 import bcrypt
 import math
 import random
+import uuid
 import datetime
+from reportlab.lib.enums import TA_CENTER,TA_RIGHT,TA_LEFT
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from io import BytesIO
+from io import BytesIO
+from reportlab.lib.pagesizes import letter, landscape
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.lib.units import inch
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle
+from reportlab.lib import colors
+from flask import make_response
+from flask import make_response
 from functools import wraps
 import smtplib
 from flask_session import Session
@@ -59,8 +71,34 @@ def create_database():
     time_ert VARCHAR(255),
     session_id VARCHAR(255)
     
-)'''
+   )'''
+   ) 
+    cursor.execute(
+    '''CREATE TABLE IF NOT EXISTS ace (
+         id INT AUTO_INCREMENT PRIMARY KEY, 
+         email VARCHAR(255) NOT NULL,
+         Date VARCHAR(255),
+         attention1 INT,
+         attention2 INT,
+         attention3 INT,
+         fluency1 INT,
+         fluency2 INT,
+         memory1 INT,
+         memory2 INT,
+         memory3 INT,
+         language1 INT,
+         language2 INT,
+         language3 INT,
+         language4 INT,
+         
+         
+         
+         session_id VARCHAR(255)
+         
+   )'''
 )
+    
+    
 
     cursor.close()
     conn.close()
@@ -71,7 +109,7 @@ create_database()
 app.config['MYSQL_DB'] = 'ftd'
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 mysql = MySQL(app)
-
+mysql = MySQL(app)
 
 
 
@@ -139,6 +177,7 @@ def send_score():
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM emotion WHERE session_id = %s AND email = %s", (sesion_key, email))
     result = cursor.fetchone()
+    
     if column=="emoji":
       
       if not result:
@@ -207,6 +246,7 @@ def dashboard():
       query = "SELECT * FROM emotion WHERE email = %s"
       cursor.execute(query, (email,))
       results = cursor.fetchall()
+      
       return render_template('dashboard.html',results=results)
    return redirect('login')
 
@@ -214,6 +254,163 @@ def dashboard():
 def get_api_key():
     api_key = os.environ.get("API_KEY")
     return api_key
+
+
+
+@app.route("/generate_pdf", methods=['GET', 'POST'])
+def generate_pdf():
+    if 'logged_in' in session:
+        result = request.form.get("res")
+        id = request.args.get('id')
+        conn = mysql.connect
+        cursor = conn.cursor()
+       
+        
+        
+        email = session.get('logged_in')
+            # Replace with the actual email value you want to search for
+        query = "SELECT * FROM emotion WHERE id=%s AND email=%s"
+        cursor.execute(query, (id, email))
+        results = cursor.fetchone()
+        
+        
+        
+        
+        
+        response = make_response()
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'attachment; filename=output.pdf'
+        buffer = BytesIO()
+        doc = SimpleDocTemplate(buffer, pagesize=landscape(letter))
+        
+        # Add decorated heading to PDF
+        styles = {
+            'heading': ParagraphStyle(
+                'heading',
+                fontName='Helvetica-Bold',
+                fontSize=25,
+                textColor=colors.red,
+                spaceAfter=0.25*inch,
+                alignment=TA_CENTER,
+                leftIndent=0.25*inch,
+                border=1,
+                borderColor=colors.blue,
+                borderPadding=0.1*inch,
+                
+            ),
+             'heading1': ParagraphStyle(
+                'heading',
+                fontName='Helvetica-Bold',
+                fontSize=20,
+                textColor=colors.red,
+                spaceAfter=0.25*inch,
+                
+                leftIndent=0*inch,
+                border=1,
+                borderColor=colors.blue,
+                borderPadding=0.1*inch,
+                
+            )
+        }
+        elements = []
+        elements.append(Paragraph('Frontotemporal Dementia Report ', styles['heading']))
+        
+        elements.append(Spacer(1, 0.5*inch))
+        name = "Moin"  # Replace with the actual name value
+        email = session.get('logged_in')  # Replace with the actual name value
+        date = datetime.datetime.now().strftime('%B, %d, %Y')
+        time = datetime.datetime.now().strftime('%I:%M %p')
+        name_style = ParagraphStyle(
+        'name',
+        fontName='Helvetica',
+        fontSize=12,
+        textColor=colors.black,
+        leftIndent=0.25*inch
+        )
+        email_style = ParagraphStyle(
+       'email',
+        fontName='Helvetica',
+        fontSize=10,
+        textColor=colors.black,
+        backColor=colors.black,
+        leftIndent=0.25*inch
+        
+        )
+        date_style = ParagraphStyle(
+        'date',
+        fontName='Helvetica',
+        fontSize=12,
+        textColor=colors.black,
+        alignment=TA_RIGHT,
+        rightIndent=0.25*inch
+        )
+        time_style = ParagraphStyle(
+        'time',
+        fontName='Helvetica',
+        fontSize=10,
+        textColor=colors.black,
+        alignment=TA_RIGHT,
+        rightIndent=0.25*inch
+        )    
+        elements.append(Paragraph(f'Name: {name}', name_style))
+        elements.append(Paragraph(f'Email: {email}', email_style))
+        elements.append(Paragraph(f'Date: {date}', date_style))
+        elements.append(Paragraph(f'Time: {time}', time_style))
+        
+        # Add data to table
+        
+        
+        elements.append(Spacer(1, 0.6*inch))
+       
+        elements.append(Paragraph('Tests related to Emotion', styles['heading1']))
+        
+        
+        elements.append(Paragraph(f'''Emotion Recognition Test<br/>
+      Percentage Scored : {results[5]}<br/>                         
+      Completion Time (min :sec): {results[6]} <br/>  
+      Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient. 
+      The emotions of happy,sad ,anger.contempt,neutral,surprise,fear,and disgust were tested.
+      The user identification capacity is {results[5]} % and the time span was {results[6]} minutes.                  
+                             
+                                  
+                                  ''', name_style))
+        elements.append(Spacer(1, 0.4*inch))
+        elements.append(Paragraph(f'''Emoji Identification Test :<br/>
+           Percentage Scored : {results[3]}<br/>                         
+      Completion Time (min :sec): {results[4]} <br/>  
+      Summary: Emoji Identification test was given by the patient to test the patient's ability to recognise the emojis . 
+      The emojis related  smiley,frowny,emotion are tested.The user identification capacity is {results[3]} % and the time span was {results[4]} minutes.                                           
+                                    
+                                    
+                                    
+                                   ''', name_style))
+        elements.append(Spacer(1, 0.6*inch))
+        data = []
+        
+        data.append(results)
+        table = Table(data)
+        table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+    ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+    ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+    ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+    ('FONTSIZE', (0, 0), (-1, 0), 14),
+    ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+    ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+    ('GRID', (0, 0), (-1, -1), 1, colors.black),
+    ('BACKGROUND', (1, 1), (1, 1), colors.lightgrey),
+        ]))
+
+       # Add table to PDF template
+        elements.append(table)
+        doc.build(elements)
+        response.data = buffer.getvalue()
+
+        return response
+    return redirect('login')
+
+
+
 
 
 #1 Emoji Game
@@ -324,4 +521,3 @@ def tmt2():
     return render_template('TMT/TMT2.html')
 if __name__ == "__main__":
     app.run(debug = True)
-    
