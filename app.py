@@ -258,11 +258,20 @@ def dashboard():
       # Replace with the actual email value you want to search for
       query = "SELECT * FROM ace WHERE email = %s"
       cursor.execute(query, (email,))
+      table_one=False
+      table_two=False
+      table_three=False
+      if results:
+         table_one=True
+         
       results1 = cursor.fetchall()
+      if  results1:           
+         table_two=True
       size=len(results)
+      
       results=results+results1
       
-      return render_template('dashboard.html',results=results,size=size)
+      return render_template('dashboard.html',results=results,size=size,table_one=table_one,table_two=table_two)
    return redirect('login')
 
 
