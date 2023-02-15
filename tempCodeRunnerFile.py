@@ -73,30 +73,7 @@ def create_database():
     
 )'''
 )
-    cursor.execute(
-    '''CREATE TABLE IF NOT EXISTS ace (
-         id INT AUTO_INCREMENT PRIMARY KEY, 
-         email VARCHAR(255) NOT NULL,
-         Date VARCHAR(255),
-         attention1 INT,
-         attention2 INT,
-         attention3 INT,
-         fluency1 INT,
-         fluency2 INT,
-         memory1 INT,
-         memory2 INT,
-         memory3 INT,
-         language1 INT,
-         language2 INT,
-         language3 INT,
-         language4 INT,
-         visuospatial1 INT,
-         visuospatial2 INT,
-         session_id VARCHAR(255)
-         
-   )'''
-)
-  
+
     cursor.close()
     conn.close()
 
@@ -174,19 +151,6 @@ def send_score():
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM emotion WHERE session_id = %s AND email = %s", (sesion_key, email))
     result = cursor.fetchone()
-    cursor.execute(f"SELECT * FROM ace WHERE session_id = %s AND email = %s", (sesion_key, email))
-    result1 = cursor.fetchone()
-    aceColumn = ['attention1', 'attention2', 'attention3', 'fluency1', 'fluency2', 'memory1', 'memory2', 'memory3', 'language1', 'language2', 'language3', 'language4', 'visuospatial1', 'visuospatial2']
-    if column in aceColumn:
-       if not result1:
-             # Insert a new row
-       
-           cursor.execute(f"INSERT INTO ace (email,Date,{column},session_id) VALUES (%s,%s, %s, %s)", (email,date, score,sesion_key))
-           conn.commit() 
-       else:
-         # Update the existing row
-          cursor.execute(f"UPDATE ace SET {column}= %s WHERE session_id = %s AND email = %s", (score, sesion_key, email))
-          conn.commit()
     if column=="emoji":
       
       if not result:
@@ -253,15 +217,8 @@ def dashboard():
       query = "SELECT * FROM emotion WHERE email = %s"
       cursor.execute(query, (email,))
       results = cursor.fetchall()
-       # Replace with the actual email value you want to search for
-      query = "SELECT * FROM ace WHERE email = %s"
-      cursor.execute(query, (email,))
-      results1 = cursor.fetchall()
-      for i in range(len(results1)):
-         
-         if not results1[i]:
-                results1=0
-      return render_template('dashboard.html',results=results,results1=results1)
+      
+      return render_template('dashboard.html',results=results)
    return redirect('login')
 
 @app.route("/api-key")
@@ -537,7 +494,7 @@ def ace1():
 
    list.sort()
    list.insert(0,"Choose your country")
-   return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states,url="ace3")
+   return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states)
 
     
 @app.route("/ace2",methods=['GET','POST'])
