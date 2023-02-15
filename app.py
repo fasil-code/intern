@@ -95,6 +95,8 @@ def create_database():
          session_id VARCHAR(255)
          
    )'''
+   
+   
 )
   
     cursor.close()
@@ -253,18 +255,20 @@ def dashboard():
       query = "SELECT * FROM emotion WHERE email = %s"
       cursor.execute(query, (email,))
       results = cursor.fetchall()
-       # Replace with the actual email value you want to search for
+      # Replace with the actual email value you want to search for
       query = "SELECT * FROM ace WHERE email = %s"
       cursor.execute(query, (email,))
       results1 = cursor.fetchall()
-      for i in range(len(results1)):
-         
-         if not results1[i]:
-                results1=0
-      return render_template('dashboard.html',results=results,results1=results1)
+      size=len(results)
+      results=results+results1
+      
+      return render_template('dashboard.html',results=results,size=size)
    return redirect('login')
 
+
 @app.route("/api-key")
+
+
 def get_api_key():
     api_key = os.environ.get("API_KEY")
     return api_key
