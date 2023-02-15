@@ -785,8 +785,18 @@ const buttonGroupPressed = e => {
       
      }
    
+var r=false;
+let start_time;
+if(r===false){
+      loadQuestion();
+      r=true;
+      start_time=new Date().getTime();
+      
+}
+else{
+      loadQuestion();
+}
 
-loadQuestion();
 buttonGroup.addEventListener("click", buttonGroupPressed);
 
 submit.addEventListener('click',()=>{
@@ -802,9 +812,30 @@ loadQuestion();
 
 }
 else{
+      let end_time=new Date().getTime()
+      let time_taken=end_time-start_time
+      let time_taken_min=Math.floor(time_taken/60000)            
+      let time_taken_sec=Math.floor((time_taken%60000)/1000)
+      let time=time_taken_min+":"+time_taken_sec;
+      let score_percentage=Math.floor(score/10*100)
       submit.innerHTML='Submit'
      scored.innerHTML= "Your score is "+score
      form.style.display='none'
+     $.ajax({
+      type: "POST",
+      url: "/send_score",
+      data: { 
+         score: score_percentage,
+         column: "emoji",
+         time:time,
+        
+      },
+      success: function(response) {
+         console.log(response);     
+      } 
+      
+   });
+ 
       
 }
       }

@@ -68,7 +68,7 @@ function returnScore() {
         url: "/send_score",
         data: { 
            score: tot,
-           column: "ace4"
+           column: "attention3"
         },
         success: function(response) {
            console.log(response);

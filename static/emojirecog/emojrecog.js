@@ -95,13 +95,14 @@ exit_btn.onclick = ()=>{
     starter.style.display="block"
     quiz_box.style.display="none"
 }
-
+let start_time;
 // if continueQuiz button clicked
 continue_btn.onclick = ()=>{
     info_box.style.display="none"
     quiz_box.style.display="block"
     info_box.classList.remove("activeInfo"); //hide info box
     quiz_box.classList.add("activeQuiz"); //show quiz box
+    start_time=new Date().getTime();
     showQuetions(0); //calling showQestions function
     queCounter(1); //passing 1 parameter to queCounter
     startTimer(15); //calling startTimer function
@@ -171,6 +172,26 @@ next_btn.onclick = ()=>{
         timeText.textContent = "Time Left"; //change the timeText to Time Left
         next_btn.classList.remove("show"); //hide the next button
     }else{
+        let end_time=new Date().getTime()
+      let time_taken=end_time-start_time
+      let time_taken_min=Math.floor(time_taken/60000)            
+      let time_taken_sec=Math.floor((time_taken%60000)/1000)
+      let time=time_taken_min+":"+time_taken_sec;
+      let score_percentage=Math.floor(userScore/10*100)
+        $.ajax({
+            type: "POST",
+            url: "/send_score",
+            data: { 
+               score: score_percentage,
+               column: "ert",
+               time:time,
+              
+            },
+            success: function(response) {
+               console.log(response);     
+            } 
+            
+         });
         clearInterval(counter); //clear counter
         clearInterval(counterLine); //clear counterLine
         showResult(); //calling showResult function
@@ -193,7 +214,7 @@ function showQuetions(index){
   let correct1=questions[que_count].answer;
     let path= correct1+random(correct1)
     img.src='static/images/dataset/'+path;
-    console.log(img.src)
+    
     let option_tag = '<div class="option"><span>'+ questions[index].options[0] +'</span></div>'
     + '<div class="option"><span>'+ questions[index].options[1] +'</span></div>'
     + '<div class="option"><span>'+ questions[index].options[2] +'</span></div>'
@@ -223,18 +244,17 @@ function optionSelected(answer){
         userScore += 1; //upgrading score value with 1
         answer.classList.add("correct"); //adding green color to correct selected option
         answer.insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to correct selected option
-        console.log("Correct Answer");
-        console.log("Your correct answers = " + userScore);
+        
     }else{
         answer.classList.add("incorrect"); //adding red color to correct selected option
         answer.insertAdjacentHTML("beforeend", crossIconTag); //adding cross icon to correct selected option
-        console.log("Wrong Answer");
+        
 
         for(i=0; i < allOptions; i++){
             if(option_list.children[i].textContent == correcAns){ //if there is an option which is matched to an array answer 
                 option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
                 option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
-                console.log("Auto selected correct answer.");
+               
             }
         }
     }
@@ -285,7 +305,7 @@ function startTimer(time){
                 if(option_list.children[i].textContent == correcAns){ //if there is an option which is matched to an array answer
                     option_list.children[i].setAttribute("class", "option correct"); //adding green color to matched option
                     option_list.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
-                    console.log("Time Off: Auto selected correct answer.");
+                  
                 }
             }
             for(i=0; i < allOptions; i++){

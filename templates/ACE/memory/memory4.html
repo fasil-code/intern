@@ -19,12 +19,12 @@
   <div class="container">
     <div class="d-flex justify-content-center align-items-center row">
       <div class="col-md-8 col-lg-8 column">
-        <div class="card text-center" style="width: 20rem; margin-bottom: 0.8rem; margin-left: auto; margin-right: auto;">
+        <!-- <div class="card text-center" style="width: 20rem; margin-bottom: 0.8rem; margin-left: auto; margin-right: auto;">
           <div class="card-body">
             <h2 class="card-title">Instructions</h2>
-            <p class="card-text">Answer the following four questions...</p>
+            <p class="card-text">Answer the following four questions...</p> -->
             <!-- <a href="" class="btn btn-primary">Read More...</a> -->
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -34,7 +34,7 @@
           <div class="p-5 bg-primary text-white border-bottom">
             <!-- heading -->
             <div id="heading">
-              <h3>Memory Related Questions</h3>
+              <h4>Answer the following questions </h4>
 
 
               <h5 id="recognition-status"></h5>
@@ -79,14 +79,14 @@
 
          
           <!-- //buttons -->
-          <div class="words bg-white p-4 border-bottom">
-            <div class="d-flex flex-row justify-content-between align-items-center">
-              <span id="btn-score"><button type="button" onclick="refreshPage()" class="px-5 btn btn-lg btn-primary"> <i
-                    class="fa fa-refresh"></i></button> </span>
+          <div class="button words bg-white p-4 border-bottom">
+        
+              <!-- <span id="btn-score"><button type="button" onclick="refreshPage()" class="px-5 btn btn-lg btn-primary"> <i
+                     class="fa fa-refresh"></i></button> </span>  -->
               <!-- <span id="btn-score"><button type="button" onclick="scoring()"
                   class="px-5 btn btn-lg btn-danger">Stop</button> </span> -->
                   <button type="button" onclick="scoring()" class="px-5 btn btn-lg btn-primary">Next</button>
-            </div>
+            
           </div>
 
         </div>
@@ -96,6 +96,10 @@
 
 </body>
 <script>let nextUrl="{{url}}"</script>
+<script type="text/javascript">
+  window.history.forward();
+  function noBack() { window.history.forward(); }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/memory/memory4.js') }}"></script>

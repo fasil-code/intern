@@ -153,6 +153,7 @@ font-weight: bold;
     </style>
 </head>
 <body>
+  <h1>{{session_id}}</h1>
   <div style="text-align: center;">
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -223,7 +224,7 @@ font-weight: bold;
        <a  href="{{ url_for('layout') }}?name=vs1" > <li>Visuo-Spatial I</li></a>
        <a  href="{{ url_for('layout') }}?name=vs2" > <li>Visuo-Spatial II</li></a>
     </ul>
-   
+    
       <script>
         window.onload = function() {
           
@@ -236,6 +237,9 @@ font-weight: bold;
           var errorMessage = document.getElementById("errorMessage");
        
           if (localStorage.getItem(email) === "true") {
+            setTimeout(function() {
+              main1.style.display = "none";
+            }, 1000);
             main1.style.display = "none";
             
             main2.style.display = "grid";
@@ -250,7 +254,8 @@ font-weight: bold;
               errorMessage.innerHTML = "Please agree to terms and conditions";
         
               event.preventDefault();
-            } else {
+            } 
+            else {
               localStorage.setItem(email, "true");
               main2.style.display = "grid";
               main1.style.display = "none";

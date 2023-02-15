@@ -48,6 +48,9 @@ body{
 }
 
 @media only screen and (max-width: 800px) {
+    .word{
+        display: none;
+    }
     .container {
       position: relative;
       top: 0;
