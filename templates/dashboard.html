@@ -178,20 +178,21 @@
 				
 				{% for i in range(size)   %}
 				<tr class="data">
-{% if table_one==True %}
+{% if results[i] is not none %}
   <td class="data">{{results[i][2]}}</td>
   <td class="data">{{results[i][3]}}</td>
   <td class="data">{{results[i][5]}}</td>
 {% endif %}
-{% if table_two==True %}
+{% if  (i+size)<results|length and results[i+size] is not none %}
   <td class="data">{{results[i+size][4]+results[i+size][5]}}</td>
   <td class="data">{{results[i+size][6]+results[i+size][7]}}</td>
-  <td class="data">{{results[i+size][8]+results[i+size][9]+results[i+2][10]}}</td>
-  <td class="data">{{results[i+size][11]+results[i+size][12]+results[i+2][13]+results[i+2][14]}}</td>
+  <td class="data">{{results[i+size][8]+results[i+size][9]+results[i+size][10]}}</td>
+  <td class="data">{{results[i+size][11]+results[i+size][12]+results[i+size][13]+results[i+size][14]}}</td>
 
   <td class="data">{{results[i+size][15]+results[i+size][16]}}</td>
   <td class="data">{{results[i+size][15]+results[i+size][16]}}</td>
   <td class="data">{{results[i+size][15]+results[i+size][16]}}</td>
+
   {% endif %}
   <td class="data"><a href="{{ url_for('generate_pdf') }}?id={{results[i][0]}}"  target="blank">Report</a></td>
   

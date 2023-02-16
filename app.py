@@ -1,8 +1,6 @@
 
-
 from flask import Flask,jsonify, make_response,render_template,request,session
 from flask import Flask,render_template,url_for,flash,redirect
-app = Flask(__name__)
 import random
 import geonamescache
 import os
@@ -33,10 +31,11 @@ import mysql.connector
 from terms import terms
 gc=geonamescache.GeonamesCache()
 countries = gc.get_countries()
+import pymysql
 from flask import render_template
 from user import register_route,login_route,logout_route,reset_password_route,set_password_route
 
-app = Flask(__name__)
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
@@ -47,7 +46,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
 def create_database():
-    conn = mysql.connector.connect(
+    conn = pymysql.connect(
         host=app.config['MYSQL_HOST'],
         user=app.config['MYSQL_USER'],
         password=app.config['MYSQL_PASSWORD']
@@ -255,23 +254,30 @@ def dashboard():
       query = "SELECT * FROM emotion WHERE email = %s"
       cursor.execute(query, (email,))
       results = cursor.fetchall()
+      
       # Replace with the actual email value you want to search for
       query = "SELECT * FROM ace WHERE email = %s"
       cursor.execute(query, (email,))
-      table_one=False
-      table_two=False
-      table_three=False
-      if results:
-         table_one=True
-         
+      
+     
       results1 = cursor.fetchall()
-      if  results1:           
-         table_two=True
-      size=len(results)
+      
+      size = len(results)
+      maximum_size = max(len(results), len(results1))
+      diff1 = maximum_size - len(results)
+      diff2 = maximum_size - len(results1)
+      tup1 = (0,)*20 # create a tuple of 20 zeros
+      for i in range(diff1):
+          results = results + ((0,)*7,) # append a tuple of 7 zeros to results
+      for i in range(diff2):
+          results1 = results1 + ((tup1),) 
+
+      cursor.close()
+      
       
       results=results+results1
       
-      return render_template('dashboard.html',results=results,size=size,table_one=table_one,table_two=table_two)
+      return render_template('dashboard.html',results=results,size=size)
    return redirect('login')
 
 
