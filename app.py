@@ -40,7 +40,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 
-app.config['MYSQL_PASSWORD'] = 'alchemist'
+app.config['MYSQL_PASSWORD'] = '7006022139'
 
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -116,7 +116,7 @@ mysql = MySQL(app)
 
 
 # for emotion data
-
+mysql = MySQL(app)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -504,7 +504,12 @@ def ace13():
 @app.route("/lang",methods=['GET','POST'])
 def language1():
 
-   return render_template('ACE/language/language1.html',url="ace8")
+   return render_template('ACE/language/language1.html',url="lang2")
+@app.route("/lang2",methods=['GET','POST'])
+def language5():
+
+   return render_template('ACE/language/language5.html',url="ace8")   
+
 # visuo-spatial  tests
 @app.route("/vs1",methods=['GET','POST'])
 def vs1():
