@@ -1,8 +1,6 @@
 
-
 from flask import Flask,jsonify, make_response,render_template,request,session
 from flask import Flask,render_template,url_for,flash,redirect
-app = Flask(__name__)
 import random
 import geonamescache
 import os
@@ -11,6 +9,7 @@ import math
 import random
 import uuid
 import datetime
+from reportlab.lib.colors import HexColor
 from reportlab.lib.enums import TA_CENTER,TA_RIGHT,TA_LEFT
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from io import BytesIO
@@ -32,10 +31,11 @@ import mysql.connector
 from terms import terms
 gc=geonamescache.GeonamesCache()
 countries = gc.get_countries()
+import pymysql
 from flask import render_template
 from user import register_route,login_route,logout_route,reset_password_route,set_password_route
 
-app = Flask(__name__)
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
@@ -46,7 +46,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
 def create_database():
-    conn = mysql.connector.connect(
+    conn = pymysql.connect(
         host=app.config['MYSQL_HOST'],
         user=app.config['MYSQL_USER'],
         password=app.config['MYSQL_PASSWORD']
@@ -77,24 +77,28 @@ def create_database():
          id INT AUTO_INCREMENT PRIMARY KEY, 
          email VARCHAR(255) NOT NULL,
          Date VARCHAR(255),
-         attention1 INT,
-         attention2 INT,
-         attention3 INT,
-         fluency1 INT,
-         fluency2 INT,
-         memory1 INT,
-         memory2 INT,
-         memory3 INT,
-         language1 INT,
-         language2 INT,
-         language3 INT,
-         language4 INT,
-         visuospatial1 INT,
-         visuospatial2 INT,
+         attention1 INT DEFAULT 0,
+         attention2 INT DEFAULT 0,
+         attention3 INT DEFAULT 0,
+         attention4 INT DEFAULT 0,
+         fluency1 INT DEFAULT 0,
+         fluency2 INT DEFAULT 0,
+         memory1 INT DEFAULT 0,
+         memory2 INT DEFAULT 0,
+         memory3 INT DEFAULT 0,
+         language1 INT DEFAULT 0,
+         language2 INT DEFAULT 0,
+         language3 INT DEFAULT 0,
+         language4 INT DEFAULT 0,
+         language5 INT DEFAULT 0,
+         visuospatial1 INT DEFAULT 0,
+         visuospatial2 INT DEFAULT 0,
          session_id VARCHAR(255)
          
    )'''
+     
 )
+  
   
     cursor.close()
     conn.close()
@@ -175,13 +179,15 @@ def send_score():
     result = cursor.fetchone()
     cursor.execute(f"SELECT * FROM ace WHERE session_id = %s AND email = %s", (sesion_key, email))
     result1 = cursor.fetchone()
-    aceColumn = ['attention1', 'attention2', 'attention3', 'fluency1', 'fluency2', 'memory1', 'memory2', 'memory3', 'language1', 'language2', 'language3', 'language4', 'visuospatial1', 'visuospatial2']
+    aceColumn = ['attention1','attention2','attention3','attention4','fluency1','fluency2','memory1','memory2',
+                 'memory3','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
     if column in aceColumn:
        if not result1:
              # Insert a new row
-       
-           cursor.execute(f"INSERT INTO ace (email,Date,{column},session_id) VALUES (%s,%s, %s, %s)", (email,date, score,sesion_key))
-           conn.commit() 
+            if not score:
+              score = 0
+            cursor.execute(f"INSERT INTO ace (email,Date,{column},session_id) VALUES (%s,%s, %s, %s)", (email,date, score,sesion_key))
+            conn.commit() 
        else:
          # Update the existing row
           cursor.execute(f"UPDATE ace SET {column}= %s WHERE session_id = %s AND email = %s", (score, sesion_key, email))
@@ -252,14 +258,34 @@ def dashboard():
       query = "SELECT * FROM emotion WHERE email = %s"
       cursor.execute(query, (email,))
       results = cursor.fetchall()
-      email = email = session.get('logged_in') # Replace with the actual email value you want to search for
+      
+      # Replace with the actual email value you want to search for
       query = "SELECT * FROM ace WHERE email = %s"
       cursor.execute(query, (email,))
       results1 = cursor.fetchall()
-      return render_template('dashboard.html',results=results,results1=results1)
+      
+      size = len(results)
+      maximum_size = max(len(results), len(results1))
+      diff1 = maximum_size - len(results)
+      diff2 = maximum_size - len(results1)
+      tup1 = (0,)*20 # create a tuple of 20 zeros
+      for i in range(diff1):
+          results = results + ((0,)*7,) # append a tuple of 7 zeros to results
+      for i in range(diff2):
+          results1 = results1 + ((tup1),) 
+
+      cursor.close()
+      
+      
+      results=results+results1
+      
+      return render_template('dashboard.html',results=results,size=size)
    return redirect('login')
 
+
 @app.route("/api-key")
+
+
 def get_api_key():
     api_key = os.environ.get("API_KEY")
     return api_key
@@ -281,7 +307,10 @@ def generate_pdf():
         query = "SELECT * FROM emotion WHERE id=%s AND email=%s"
         cursor.execute(query, (id, email))
         results = cursor.fetchone()
-        
+
+        query = "SELECT * FROM ace WHERE id=%s AND email=%s"
+        cursor.execute(query, (id, email))
+        results1 = cursor.fetchone()
         
         
         
@@ -299,27 +328,52 @@ def generate_pdf():
                 fontName='Helvetica-Bold',
                 fontSize=25,
                 textColor=colors.red,
-                spaceAfter=0.25*inch,
+                spaceAfter=0.1*inch,
                 alignment=TA_CENTER,
                 leftIndent=0.25*inch,
-                border=1,
-                borderColor=colors.blue,
-                borderPadding=0.1*inch,
+               
+                
                 
             ),
              'heading1': ParagraphStyle(
                 'heading',
                 fontName='Helvetica-Bold',
                 fontSize=20,
-                textColor=colors.red,
+                textColor=colors.black,
                 spaceAfter=0.25*inch,
                 
-                leftIndent=0*inch,
+                leftIndent=0.5*inch,
                 border=1,
-                borderColor=colors.blue,
+                borderColor=colors.black,
                 borderPadding=0.1*inch,
                 
-            )
+            ),
+             'para':ParagraphStyle(
+                'para',
+                textColor=colors.gray,
+                fontSize=13,
+                leading=14,
+                leftIndent=0.5*inch,
+                rightIndent=0.5*inch,
+                spaceBefore=0,
+                border=2,
+                borderWidth=1,
+                borderColor=colors._CMYK_white,
+                
+                borderRadius=1,
+                backColor=colors.whitesmoke,
+                borderPadding=(10,10,10),
+                
+                
+                
+             ),
+             'header': ParagraphStyle(
+                'header',
+                fontName='Helvetica-Bold',
+                fontSize=18,
+                textColor=colors.red
+             )
+            
         }
         elements = []
         elements.append(Paragraph('Frontotemporal Dementia Report ', styles['heading']))
@@ -334,65 +388,83 @@ def generate_pdf():
         fontName='Helvetica',
         fontSize=12,
         textColor=colors.black,
-        leftIndent=0.25*inch
+        leftIndent=0.25*inch,
+        #backColor=colors.whitesmoke
         )
         email_style = ParagraphStyle(
        'email',
         fontName='Helvetica',
-        fontSize=10,
+        fontSize=12,
         textColor=colors.black,
         
-        leftIndent=0.25*inch
+        
+        
+        
+                leftIndent=0.5*inch,
+                rightIndent=0.5*inch,
+                spaceBefore=0,
+                border=2,
+                borderWidth=1,
+                
+                borderColor=colors._CMYK_white,
+                
+                borderRadius=1,
+                
         
         )
+    
         date_style = ParagraphStyle(
         'date',
         fontName='Helvetica',
         fontSize=12,
         textColor=colors.black,
         alignment=TA_RIGHT,
+        #backColor=colors.whitesmoke,
         rightIndent=0.25*inch
+        
         )
         time_style = ParagraphStyle(
         'time',
         fontName='Helvetica',
-        fontSize=10,
+        fontSize=12,
         textColor=colors.black,
         alignment=TA_RIGHT,
-        rightIndent=0.25*inch
-        )    
-        elements.append(Paragraph(f'Name: {name}', name_style))
+        rightIndent=0.25*inch,
+        #backColor=colors.whitesmoke,
+        )   
+
+        elements.append(Paragraph(f' Name: {name}', email_style))
         elements.append(Paragraph(f'Email: {email}', email_style))
         elements.append(Paragraph(f'Date: {date}', date_style))
         elements.append(Paragraph(f'Time: {time}', time_style))
         
         # Add data to table
         
-        
-        elements.append(Spacer(1, 0.6*inch))
+        elements.append(Spacer(1, 0.5*inch))
        
-        elements.append(Paragraph('Tests related to Emotion', styles['heading1']))
+       
+        elements.append(Paragraph(' <font color="maroon">Tests related to Emotion</font>', styles['heading1']))
+        elements.append(Spacer(1, 0.2*inch))
         
-        
-        elements.append(Paragraph(f'''Emotion Recognition Test<br/>
-      Percentage Scored : {results[5]}<br/>                         
-      Completion Time (min :sec): {results[6]} <br/>  
-      Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient. 
-      The emotions of happy,sad ,anger.contempt,neutral,surprise,fear,and disgust were tested.
-      The user identification capacity is {results[5]} % and the time span was {results[6]} minutes.                  
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Emotion Recognition Test</font> <br/>
+      <br/>
+      Percentage Scored : <font color="black" fontSize=14 >{results[5]} %</font><br/>                         
+      Completion Time (min :sec):<font color="black" fontSize=14 > {results[6]}</font>  <br/>  
+      <br/>
+      Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient.
+   The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust were tested.
+      The user identification capacity is <font color="black" fontSize=14 >{results[5]} %</font>  and the time span was <font color="black" fontSize=14 >{results[6]} minutes</font> .                  
                              
                                   
-                                  ''', name_style))
+                                  ''', style=styles['para']))
         elements.append(Spacer(1, 0.4*inch))
-        elements.append(Paragraph(f'''Emoji Identification Test :<br/>
-           Percentage Scored : {results[3]}<br/>                         
-      Completion Time (min :sec): {results[4]} <br/>  
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b) Emoji Identification Test</font> :<br/> <br/>
+           Percentage Scored : <font color="black" fontSize=14 >{results[3]}</font> <br/>                         
+      Completion Time (min :sec): <font color="black" fontSize=14 >{results[4]}</font>  <br/>  
+       <br/>
       Summary: Emoji Identification test was given by the patient to test the patient's ability to recognise the emojis . 
-      The emojis related  smiley,frowny,emotion are tested.The user identification capacity is {results[3]} % and the time span was {results[4]} minutes.                                           
-                                    
-                                    
-                                    
-                                   ''', name_style))
+      The emojis related  smiley,frowny,emotion are tested.The user identification capacity is <font color="black" fontSize=14 >{results[3]} </font> % and the time span was <font color="black" fontSize=14 >{results[4]}  minutes. </font>                                          
+''', styles['para']))
         elements.append(Spacer(1, 0.6*inch))
         data = []
         
@@ -411,6 +483,113 @@ def generate_pdf():
         ]))
 
        # Add table to PDF template
+        elements.append(table)
+        data = [
+    ['Emotion', 'Actual', 'Predicted'],
+    ['Happy', 20, 18],
+    ['Sad', 15, 16],
+    ['Anger', 10, 10],
+    ['Contempt', 5, 6],
+    ['Neutral', 25, 24],
+    ['Surprise', 10, 9],
+    ['Fear', 5, 8],
+    ['Disgust', 10, 9],
+    ]
+
+# Define the style for the table
+        table_style = TableStyle([
+    ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+    ('FONTSIZE', (0, 0), (-1, 0), 14),
+    ('BACKGROUND', (0, 0), (-1, 0), 'lightgrey'),
+    ('TEXTCOLOR', (0, 0), (-1, 0), 'black'),
+    ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+    ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+    ('FONTSIZE', (0, 1), (-1, -1), 12),
+    ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
+      ])
+
+        elements.append(Spacer(1, 0.5*inch))
+
+        elements.append(
+            Paragraph(' <font color="maroon">ACE-|||</font>', styles['heading1']))
+        elements.append(Spacer(1, 0.2*inch))
+
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Attention Test</font> <br/>
+      <br/>
+      Total Score : <font color="black" fontSize=14 > %</font><br/>   
+      Score : <font color="black" fontSize=14 >{results[5]} %</font><br/>                      
+     
+      <br/>
+      Q1:This question asks for information about the date and season, specifically the day, date, month, year, season and address 
+     <br/>
+      Q2: The question asks the subject to repeat three words and then instructs them to try to remember the words for later recall. {results[4]}                
+     <br/>
+      Q3: The question asks the subject to subtract 7 from 100 and then continue subtracting 7 from each new number five times. {results[5]}                    
+                                  
+                                  ''', style=styles['para']))
+        elements.append(Spacer(1, 0.4*inch))
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b)Memory Test</font> :<br/> <br/>
+          Total Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>   
+      Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>                      
+     
+      <br/>
+      Q1:This question asks the subject to to repeat three words, that were displayed earlier in attention test.{results[3]}
+     <br/>
+      Q2: This question asks the subject to repeat name and address three times, so the subject will have a chance to learn.
+     <br/>
+      Q3: In this test, the subject is asked a series of general knowledge questions to assess their overall knowledge and cognitive ability.
+     <br/>
+      Q4: The question asks the subject to  repeat the name and address that were presented to them earlier during a memory test.                           
+                                  ''', style=styles['para']))
+        elements.append(Spacer(1, 0.4*inch))
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16> (c) Fluency Test</font> <br/>
+      <br/>
+      Total Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>   
+      Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>                      
+     
+      <br/>
+      Q1:The question asks the subject to generate as many words as possible starting with a given letter, excluding names of people or places, in one minute.
+     <br/>
+      Q2: The question asks the subject to generate as many names of animals as possible  starting with any letter.
+     <br/>
+     
+                                  
+                                  ''', style=styles['para']))
+        elements.append(Spacer(1, 0.4*inch))
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16> (d) Language Test</font> <br/>
+      <br/>
+      Total Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>   
+      Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>                      
+     
+      <br/>
+      Q1:The question asks the subject to write at least two complete sentences without using abbreviations. The scoring criteria are based on the subject's ability to produce at least two complete sentences about a single topic and to demonstrate correct grammar and spelling
+     <br/>
+      Q2: The question asks the subject to repeat words like : 'caterpillar'; 'eccentricity; 'unintelligible'; 'statistician'
+     <br/>
+      Q3: The question asks the subject to repeat idioms like : "All that glitters is not gold"
+     <br/>
+      Q4: The question asks the subject to name the pictures displayed on screen
+      <br/>
+      Q5:The question asks the subject about some information related to pictures displayed on screen 
+                                  
+                                  ''', style=styles['para']))
+        elements.append(Spacer(1, 0.4*inch))
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(e) Visuosptial Test</font> :<br/> <br/>
+          Total Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>   
+      Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>                      
+     
+      <br/>
+      
+      Q1: The question ask the subject to count the number of dots displayed on screen
+     <br/>
+      Q2: The question ask the subject to identify the fragmented letters.
+     <br/>
+      
+                                  ''', style=styles['para']))
+        elements.append(Spacer(1, 0.4*inch))
+        # Create the table and add it to the elements list
+        table = Table(data)
+        table.setStyle(table_style)
         elements.append(table)
         doc.build(elements)
         response.data = buffer.getvalue()
