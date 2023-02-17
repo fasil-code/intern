@@ -82,40 +82,11 @@
      // inputElement.style.display="none";
       result_box.style.display='none';
       quiz_box.style.display='block';
-       // on clicking start button
-    //   start_btn.onclick = ()=>{
-    //    // showImages(0); 
-    //    info_box.classList.add("activeInfo");
-    //     info_box.style.display="block"
-    //     next_btn.style.display="block";
-    //     input_box.style.display="block";
-    //     start_btn.style.display="none"; 
-    //     quiz_box.style.display='none';
-    // }
-    // if exitQuiz button clicked
+      
 
 
-// if continueQuiz button clicked
-// continue_btn.onclick = ()=>{
-//   info_box.style.display="none"
-//   quiz_box.style.display="block"
-//   input_box.style.display="block";
-//   info_box.classList.remove("activeInfo"); //hide info box
-//   quiz_box.classList.add("activeQuiz"); //show quiz box
-//   showImages(0); //calling showQestions function
 showImages(0);
-// }
-// quit quiz
-// quit_quiz.onclick = ()=>{
-//   window.location.reload(); //reload the current window
-// }
-// exit quiz
-// exit_btn.onclick = ()=>{
-//   info_box.classList.remove("activeInfo"); //hide info box
-//   info_box.style.display="none"
-//   start_btn.style.display="block"; 
-//   quiz_box.style.display="none"
-// }
+
 
     // show Images
       function showImages(index){

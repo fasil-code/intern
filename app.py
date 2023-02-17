@@ -40,7 +40,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = '7006022139'
 
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -77,26 +77,28 @@ def create_database():
          id INT AUTO_INCREMENT PRIMARY KEY, 
          email VARCHAR(255) NOT NULL,
          Date VARCHAR(255),
-         attention1 INT,
-         attention2 INT,
-         attention3 INT,
-         fluency1 INT,
-         fluency2 INT,
-         memory1 INT,
-         memory2 INT,
-         memory3 INT,
-         language1 INT,
-         language2 INT,
-         language3 INT,
-         language4 INT,
-         visuospatial1 INT,
-         visuospatial2 INT,
+         attention1 INT DEFAULT 0,
+         attention2 INT DEFAULT 0,
+         attention3 INT DEFAULT 0,
+         attention4 INT DEFAULT 0,
+         fluency1 INT DEFAULT 0,
+         fluency2 INT DEFAULT 0,
+         memory1 INT DEFAULT 0,
+         memory2 INT DEFAULT 0,
+         memory3 INT DEFAULT 0,
+         language1 INT DEFAULT 0,
+         language2 INT DEFAULT 0,
+         language3 INT DEFAULT 0,
+         language4 INT DEFAULT 0,
+         language5 INT DEFAULT 0,
+         visuospatial1 INT DEFAULT 0,
+         visuospatial2 INT DEFAULT 0,
          session_id VARCHAR(255)
          
    )'''
-   
-   
+     
 )
+  
   
     cursor.close()
     conn.close()
@@ -118,7 +120,7 @@ mysql = MySQL(app)
 
 
 # for emotion data
-
+mysql = MySQL(app)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -177,13 +179,15 @@ def send_score():
     result = cursor.fetchone()
     cursor.execute(f"SELECT * FROM ace WHERE session_id = %s AND email = %s", (sesion_key, email))
     result1 = cursor.fetchone()
-    aceColumn = ['attention1', 'attention2', 'attention3', 'fluency1', 'fluency2', 'memory1', 'memory2', 'memory3', 'language1', 'language2', 'language3', 'language4', 'visuospatial1', 'visuospatial2']
+    aceColumn = ['attention1','attention2','attention3','attention4','fluency1','fluency2','memory1','memory2',
+                 'memory3','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
     if column in aceColumn:
        if not result1:
              # Insert a new row
-       
-           cursor.execute(f"INSERT INTO ace (email,Date,{column},session_id) VALUES (%s,%s, %s, %s)", (email,date, score,sesion_key))
-           conn.commit() 
+            if not score:
+              score = 0
+            cursor.execute(f"INSERT INTO ace (email,Date,{column},session_id) VALUES (%s,%s, %s, %s)", (email,date, score,sesion_key))
+            conn.commit() 
        else:
          # Update the existing row
           cursor.execute(f"UPDATE ace SET {column}= %s WHERE session_id = %s AND email = %s", (score, sesion_key, email))
@@ -258,8 +262,6 @@ def dashboard():
       # Replace with the actual email value you want to search for
       query = "SELECT * FROM ace WHERE email = %s"
       cursor.execute(query, (email,))
-      
-     
       results1 = cursor.fetchall()
       
       size = len(results)
@@ -305,7 +307,10 @@ def generate_pdf():
         query = "SELECT * FROM emotion WHERE id=%s AND email=%s"
         cursor.execute(query, (id, email))
         results = cursor.fetchone()
-        
+
+        query = "SELECT * FROM ace WHERE id=%s AND email=%s"
+        cursor.execute(query, (id, email))
+        results1 = cursor.fetchone()
         
         
         
@@ -503,7 +508,86 @@ def generate_pdf():
     ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
       ])
 
-# Create the table and add it to the elements list
+        elements.append(Spacer(1, 0.5*inch))
+
+        elements.append(
+            Paragraph(' <font color="maroon">ACE-|||</font>', styles['heading1']))
+        elements.append(Spacer(1, 0.2*inch))
+
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Attention Test</font> <br/>
+      <br/>
+      Total Score : <font color="black" fontSize=14 > %</font><br/>   
+      Score : <font color="black" fontSize=14 >{results[5]} %</font><br/>                      
+     
+      <br/>
+      Q1:This question asks for information about the date and season, specifically the day, date, month, year, season and address 
+     <br/>
+      Q2: The question asks the subject to repeat three words and then instructs them to try to remember the words for later recall. {results[4]}                
+     <br/>
+      Q3: The question asks the subject to subtract 7 from 100 and then continue subtracting 7 from each new number five times. {results[5]}                    
+                                  
+                                  ''', style=styles['para']))
+        elements.append(Spacer(1, 0.4*inch))
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b)Memory Test</font> :<br/> <br/>
+          Total Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>   
+      Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>                      
+     
+      <br/>
+      Q1:This question asks the subject to to repeat three words, that were displayed earlier in attention test.{results[3]}
+     <br/>
+      Q2: This question asks the subject to repeat name and address three times, so the subject will have a chance to learn.
+     <br/>
+      Q3: In this test, the subject is asked a series of general knowledge questions to assess their overall knowledge and cognitive ability.
+     <br/>
+      Q4: The question asks the subject to  repeat the name and address that were presented to them earlier during a memory test.                           
+                                  ''', style=styles['para']))
+        elements.append(Spacer(1, 0.4*inch))
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16> (c) Fluency Test</font> <br/>
+      <br/>
+      Total Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>   
+      Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>                      
+     
+      <br/>
+      Q1:The question asks the subject to generate as many words as possible starting with a given letter, excluding names of people or places, in one minute.
+     <br/>
+      Q2: The question asks the subject to generate as many names of animals as possible  starting with any letter.
+     <br/>
+     
+                                  
+                                  ''', style=styles['para']))
+        elements.append(Spacer(1, 0.4*inch))
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16> (d) Language Test</font> <br/>
+      <br/>
+      Total Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>   
+      Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>                      
+     
+      <br/>
+      Q1:The question asks the subject to write at least two complete sentences without using abbreviations. The scoring criteria are based on the subject's ability to produce at least two complete sentences about a single topic and to demonstrate correct grammar and spelling
+     <br/>
+      Q2: The question asks the subject to repeat words like : 'caterpillar'; 'eccentricity; 'unintelligible'; 'statistician'
+     <br/>
+      Q3: The question asks the subject to repeat idioms like : "All that glitters is not gold"
+     <br/>
+      Q4: The question asks the subject to name the pictures displayed on screen
+      <br/>
+      Q5:The question asks the subject about some information related to pictures displayed on screen 
+                                  
+                                  ''', style=styles['para']))
+        elements.append(Spacer(1, 0.4*inch))
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(e) Visuosptial Test</font> :<br/> <br/>
+          Total Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>   
+      Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>                      
+     
+      <br/>
+      
+      Q1: The question ask the subject to count the number of dots displayed on screen
+     <br/>
+      Q2: The question ask the subject to identify the fragmented letters.
+     <br/>
+      
+                                  ''', style=styles['para']))
+        elements.append(Spacer(1, 0.4*inch))
+        # Create the table and add it to the elements list
         table = Table(data)
         table.setStyle(table_style)
         elements.append(table)
@@ -599,7 +683,12 @@ def ace13():
 @app.route("/lang",methods=['GET','POST'])
 def language1():
 
-   return render_template('ACE/language/language1.html',url="ace8")
+   return render_template('ACE/language/language1.html',url="lang2")
+@app.route("/lang2",methods=['GET','POST'])
+def language5():
+
+   return render_template('ACE/language/language5.html',url="ace8")   
+
 # visuo-spatial  tests
 @app.route("/vs1",methods=['GET','POST'])
 def vs1():
