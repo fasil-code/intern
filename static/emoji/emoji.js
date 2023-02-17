@@ -785,8 +785,17 @@ const buttonGroupPressed = e => {
       
      }
    
+let start_time;
+var rr=false;
+if(rr===false){
+      start_time=new Date();
+      rr=true;
+      loadQuestion();
+}
+else{
+      loadQuestion();
+}
 
-loadQuestion();
 buttonGroup.addEventListener("click", buttonGroupPressed);
 
 submit.addEventListener('click',()=>{

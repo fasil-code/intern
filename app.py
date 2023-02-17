@@ -40,7 +40,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 
-app.config['MYSQL_PASSWORD'] = '7006022139'
+app.config['MYSQL_PASSWORD'] = 'Zargar@123'
 
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -264,7 +264,7 @@ def dashboard():
       cursor.execute(query, (email,))
       results1 = cursor.fetchall()
       
-      size = len(results)
+      size = max(len(results),len(results1))
       maximum_size = max(len(results), len(results1))
       diff1 = maximum_size - len(results)
       diff2 = maximum_size - len(results1)
