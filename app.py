@@ -40,7 +40,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 
-app.config['MYSQL_PASSWORD'] = '7006022139'
+app.config['MYSQL_PASSWORD'] = 'alchemist'
 
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -524,15 +524,15 @@ def generate_pdf():
         elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Attention Test</font> <br/>
       <br/>
 
-      <font color="black" fontSize=14 >Total Marks: 22 </font><br/>   
-      <font color="black" fontSize=14 > Marks Secured: {results1[3]+results1[4]+results1[5]+results1[6]}</font><br/>                      
+      <font color="black" fontSize=14 >Total Marks: 19 </font><br/>   
+      <font color="black" fontSize=14 > Marks Secured: {results1[3]+results1[4]+results1[5]}</font><br/>                      
      
       <br/>
-      <font color="black" fontSize=14 > Q1:This question asks for information about the date and season, specifically the day, date, month, year, season and address </font><br/>
+      <font color="black" fontSize=14 > Q1: This question asks for information about the date and season, specifically the day, date, month, year, season and address </font><br/>
       
      <br/>
       <font color="black" fontSize=14 >Total Marks: 11 </font><br/>   
-      Marks Secured : <font color="black" fontSize=14 >{results1[3]} </font><br/>                      
+      <font color="black" fontSize=14 >Marks Secured : {results1[3]} </font><br/>                      
      
       <br/>
       <font color="black" fontSize=14 >Q2: The question asks the subject to repeat three words and then instructs them to try to remember the words for later recall. </font><br/>
@@ -553,60 +553,117 @@ def generate_pdf():
                                   ''', style=styles['para']))
         elements.append(Spacer(1, 0.4*inch))
         elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b)Memory Test</font> :<br/> <br/>
-          Total Marks: 23 <font color="black" fontSize=14 ></font><br/>   
-          Marks Secured: <font color="black" fontSize=14 >{results1[9]+results1[10]+results1[11]} </font><br/>                      
+          <font color="black" fontSize=14 >Total Marks: 26</font><br/>   
+          <font color="black" fontSize=14 >Marks Secured: {results1[8]+results1[9]+results1[10]+results1[11]} </font><br/>                      
      
       <br/>
-      Q1:This question asks the subject to to repeat three words, that were displayed earlier in attention test.{results[3]}
-     <br/>
-      Q2: This question asks the subject to repeat name and address three times, so the subject will have a chance to learn.
-     <br/>
-      Q3: In this test, the subject is asked a series of general knowledge questions to assess their overall knowledge and cognitive ability.
-     <br/>
-      Q4: The question asks the subject to  repeat the name and address that were presented to them earlier during a memory test.                           
+
+      <font color="black" fontSize=14>Q1: This question asks the subject to to repeat three words, that were displayed earlier in attention test </font><br/>
+     <br/> 
+      <font color="black" fontSize=14 >Total Marks: 3 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[8]} </font><br/>
+      <br/>
+
+      <font color="black" fontSize=14>Q2: This question asks the subject to repeat name and address three times, so the subject will have a chance to learn.</font><br/>
+     <br/> 
+      <font color="black" fontSize=14 >Total Marks: 7 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[9]} </font><br/>
+      <br/>
+
+      <font color="black" fontSize=14> Q3: In this test, the subject is asked a series of general knowledge questions to assess their overall knowledge and cognitive ability</font><br/>
+     <br/> 
+      <font color="black" fontSize=14 >Total Marks: 4 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[10]} </font><br/>
+      <br/>
+     
+      <font color="black" fontSize=14>Q4: The question asks the subject to  repeat the name and address that were presented to them earlier during a memory test</font><br/>
+     <br/> 
+      <font color="black" fontSize=14 >Total Marks: 12 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[11]} </font><br/>
+      <br/>
+     
+     
+                                 
                                   ''', style=styles['para']))
         elements.append(Spacer(1, 0.4*inch))
         elements.append(Paragraph(f''' <font color="blue" fontSize=16> (c) Fluency Test</font> <br/>
       <br/>
-      Total Marks :14 <font color="black" fontSize=14 ></font><br/>   
-      Marks Secured : <font color="black" fontSize=14 >{results1[7]+results1[8]}</font><br/>                      
+      <font color="black" fontSize=14 >Total Marks :14 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured : {results1[6]+results1[7]}</font><br/>                      
      
       <br/>
-      Q1:The question asks the subject to generate as many words as possible starting with a given letter, excluding names of people or places, in one minute.
-     <br/>
-      Q2: The question asks the subject to generate as many names of animals as possible  starting with any letter.
-     <br/>
+      <font color="black" fontSize=14>Q1: The question asks the subject to generate as many words as possible starting with a given letter, excluding names of people or places, in one minute</font><br/>
+     <br/> 
+      <font color="black" fontSize=14 >Total Marks: 7 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[6]} </font><br/>
+      <br/>
      
+      <font color="black" fontSize=14>Q2: The question asks the subject to generate as many names of animals as possible  starting with any letter</font><br/>
+     <br/> 
+      <font color="black" fontSize=14 >Total Marks: 7 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[7]} </font><br/>
+      <br/>
+      
                                   
                                   ''', style=styles['para']))
         elements.append(Spacer(1, 0.4*inch))
         elements.append(Paragraph(f''' <font color="blue" fontSize=16> (d) Language Test</font> <br/>
       <br/>
-      Total Marks :23 <font color="black" fontSize=14 > </font><br/>   
-      Marks Secured : <font color="black" fontSize=14 >{results1[12]+results1[13]+results1[14]+results1[15]+results1[16]} </font><br/>                      
+      <font color="black" fontSize=14 >Total Marks: 23  </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured : {results1[12]+results1[13]+results1[14]+results1[15]+results1[16]} </font><br/>                      
      
       <br/>
-      Q1:The question asks the subject to write at least two complete sentences without using abbreviations. The scoring criteria are based on the subject's ability to produce at least two complete sentences about a single topic and to demonstrate correct grammar and spelling
-     <br/>
-      Q2: The question asks the subject to repeat words like : 'caterpillar'; 'eccentricity; 'unintelligible'; 'statistician'
-     <br/>
-      Q3: The question asks the subject to repeat idioms like : "All that glitters is not gold"
-     <br/>
-      Q4: The question asks the subject to name the pictures displayed on screen
+
+      <font color="black" fontSize=14>Q1: The question asks the subject to name the pictures displayed on screen</font><br/>
+      <br/> 
+      <font color="black" fontSize=14 >Total Marks: 12 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[12]} </font><br/>
       <br/>
-      Q5:The question asks the subject about some information related to pictures displayed on screen 
+      
+      <font color="black" fontSize=14>Q2: The question asks the subject about some information related to pictures displayed on screen</font><br/>
+      <br/> 
+      <font color="black" fontSize=14 >Total Marks: 4 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[13]} </font><br/>
+      <br/>
+
+      <font color="black" fontSize=14> Q3: The question asks the subject to write at least two complete sentences without using abbreviations. The scoring criteria are based on the subject's ability to produce at least two complete sentences about a single topic and to demonstrate correct grammar and spelling</font><br/>
+      <br/> 
+      <font color="black" fontSize=14 >Total Marks: 2 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[14]} </font><br/>
+      <br/>
+    
+      <font color="black" fontSize=14>Q4: The question asks the subject to repeat words like : 'caterpillar'; 'eccentricity; 'unintelligible'; 'statistician'</font><br/>
+      <br/> 
+      <font color="black" fontSize=14 >Total Marks: 3 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[15]} </font><br/>
+      <br/>
+      
+      <font color="black" fontSize=14>Q5: The question asks the subject to repeat idioms like : "All that glitters is not gold"</font><br/>
+      <br/> 
+      <font color="black" fontSize=14 >Total Marks: 2 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[16]} </font><br/>
+      <br/>
+    
                                   
                                   ''', style=styles['para']))
         elements.append(Spacer(1, 0.4*inch))
         elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(e) Visuosptial Test</font> :<br/> <br/>
-          Total Marks: 8 <font color="black" fontSize=14 ></font><br/>   
-          Marks Secured : <font color="black" fontSize=14 >{results1[17]+results1[18]}</font><br/>                      
+          <font color="black" fontSize=14 >Total Marks: 8 </font><br/>   
+          <font color="black" fontSize=14 >Marks Secured : {results1[17]+results1[18]}</font><br/>                      
      
       <br/>
+      <font color="black" fontSize=14>Q1: The question ask the subject to count the number of dots displayed on screen</font><br/>
+      <br/> 
+      <font color="black" fontSize=14 >Total Marks: 4 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[17]} </font><br/>
+      <br/>
+     
+      <font color="black" fontSize=14>Q2: The question ask the subject to identify the fragmented letters</font><br/>
+      <br/> 
+      <font color="black" fontSize=14 >Total Marks: 4 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[18]} </font><br/>
+      <br/>
       
-      Q1: The question ask the subject to count the number of dots displayed on screen
-     <br/>
-      Q2: The question ask the subject to identify the fragmented letters.
      <br/>
       
                                   ''', style=styles['para']))
