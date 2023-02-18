@@ -100,7 +100,7 @@ function scoring(score){
         url: "/send_score",
         data: { 
            score: score,
-           column: "language2"
+           column: "language3"
         },
     success: function(response) {
            console.log(response);

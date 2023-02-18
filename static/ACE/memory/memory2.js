@@ -166,7 +166,7 @@ function scoring(){
       url: "/send_score",
       data: { 
          score: score,
-         column: "memory1"
+         column: "memory2"
       },
       success: function(response) {
          console.log(response);

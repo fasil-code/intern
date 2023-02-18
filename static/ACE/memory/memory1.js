@@ -79,7 +79,7 @@ function repeat(message){
       url: "/send_score",
       data: { 
          score: score,
-         column: "attention4"
+         column: "memory1"
       },
       success: function(response) {
          console.log(response);

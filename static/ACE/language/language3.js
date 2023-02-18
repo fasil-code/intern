@@ -148,7 +148,7 @@ function scoring(){
     url: "/send_score",
     data: { 
        score: score,
-       column: "language4"
+       column: "language5"
     },
     success: function(response) {
        console.log(response);
