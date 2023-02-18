@@ -1,5 +1,5 @@
 body {
-    background-color: #EEE;
+    background-color: #f7f2c6;
 }
 
 .prompt {
@@ -23,6 +23,7 @@ body {
 }
 
 .btn {
+    width: fit-content;
     padding: 10px 20px;
     background-color: aliceblue;
     color: #007BFF;
@@ -32,20 +33,9 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     cursor: pointer;
 }
-
-#guide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #b8daff;
-    background-color: #cce5ff;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.5vw;
-    color: #004085;
-}
-
 .grid{
     display: flex;
+    flex-direction: column;
     height: 70vh;
     align-items: center;
     justify-content: space-evenly;
@@ -55,11 +45,30 @@ body {
     display: none;
     align-items: center;
     justify-content: center;
-    border: 2px solid black;
     width: 20vh;
     height: 20vh;
     border-radius: 100%;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 1);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1rem;
+}
+#box2:active {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
+    transform:
+        perspective(1px)
+        translateZ(0);
+}
+
+#box1 {
+    background-color: #ec4343;
+    border: 2px solid rgb(218, 111, 111);
+    transition: all 1s ease;
+    color: #cce5ff;
+}
+#box2 {
+    background-color: #4089db;
+    border: 2px solid rgb(160, 209, 241);
+    box-shadow: 0 8px 12px rgb(0, 0, 0);
+    color: #e5e5ec;
     transform:
         perspective(1px)
         translateZ(0);
@@ -67,28 +76,70 @@ body {
         box-shadow 0.3s,
         transform 0.3s;
 }
-.box:active {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 1);
-    transform:
-        perspective(1px)
-        translateZ(0);
-}
 
 .result{
+    position: relative;
     display: none;
     align-items: center;
     justify-content: center;
     margin: auto;
     margin-top: 5rem;
-    width: 30%;
-    height: 50%;
+    width: 40%;
     font-size: 1.5vw;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background: #fff;
+    border-radius: 5px;
 }
-
+.score{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 1.5rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 400;
+    color: #343a40;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+.num{
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    font-size: 1rem;
+    font-weight: 300;
+    color: #343a40;
+}
+#pul{
+    color: #007BFF;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-weight: 600;
+}
+#cor{
+    color: #80e972;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-weight: 600;
+}
+#wrn{
+    color: #ec4343;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-weight: 600;
+}
 #container {
     display: none;
-    height: 200px;
-    position: relative;
+    position: absolute;
+    top: 70%;
+    left: 50%;
 }
 .center {
 margin: 0;
@@ -137,6 +188,37 @@ transform: translate(-50%, -50%);
     user-select: none;
 }
 
+.animate:before{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 23vh;
+    height: 23vh;
+    border-radius: 100%;
+    position:absolute;
+    content:'';
+    border:5px solid #350704;
+    animation:animate 0.5s linear infinite;
+}
+.animate:after{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 23vh;
+    height: 23vh;
+    border-radius: 100%;
+    position:absolute;
+    content:'';
+    border:5px solid #ec8585;
+    animation:animate 0.5s 0.25s linear infinite;
+}
+@keyframes animate{
+    100%{
+        transform:scale(2);
+        opacity:0
+    }
+}
+
 @media (max-width: 768px) {
     #guide {
         font-size: 3vw;
@@ -158,30 +240,4 @@ transform: translate(-50%, -50%);
         height: 60%;
         font-size: 2.5vw;
     }
-}
-
-table {
-    border-spacing: 1.5px;
-    border-collapse: collapse;
-    border-radius: 20px;
-    background-color: rgba(0, 200, 0, 0.5);
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    width: 100%;
-}
-
-td, th {
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: rgba(30, 200, 30, 1);
-    text-align: center;
-}
-th:first-child {
-    border-top-left-radius: 20px;
-}
-th:last-child {
-    border-top-right-radius: 20px;
 }

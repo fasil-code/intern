@@ -173,8 +173,8 @@ const buttonGroupPressed = e => {
            clicked=false
            }
            if(e.target.id==="option1"|| e.target.id==="option2"|| e.target.id==="option3"|| e.target.id==="option4"){
-     document.getElementById(e.target.id).style.border='1px solid #16e232'
-     document.getElementById(e.target.id).style.background='#16e232'
+     document.getElementById(e.target.id).style.border='1px solid #0d6efd'
+     document.getElementById(e.target.id).style.background='#0d6efd'
        clicked=true;
        choosen=e.target.id;
            }
@@ -224,9 +224,9 @@ else{
       type: "POST",
       url: "/send_score",
       data: { 
-         score: score_percentage,
-         column: "language5",
-         time:time,
+         score: score,
+         column: "language2",
+        //  time:time,
         
       },
       success: function(response) {

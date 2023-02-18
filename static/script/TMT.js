@@ -1,5 +1,6 @@
 const nCircle = 25;
 const grid = document.getElementById('grid');
+const thumbRule = 90;
 
 let startTime;
 let timeTaken;
@@ -15,6 +16,13 @@ for (let i = 1; i <= nCircle; i++) {
 }
 
 const cell = document.querySelectorAll('.box');
+const timer   = document.getElementById('timer');
+
+for(let t=thumbRule; t>=0; t--) {
+    setTimeout(() => {
+        timer.innerText = t;
+    }, (thumbRule-t)*1000);
+}
 
 const coordinates = 
 Array.from({length: cell.length}, () => [Math.ceil(Math.random() * 10), Math.ceil(Math.random() * 10)]);
@@ -33,6 +41,56 @@ for(let i = 0; i < cell.length; i++) {
 
 let i = 1;
 let blinkInterval = null;
+let completed = false;
+
+function displayResult() {
+    timeTaken = Date.now() - startTime;
+    let verdict;
+    if(timeTaken < 78*1000) {
+        verdict = 'Normal';
+    } else {
+        verdict = 'Deficient';
+    }
+    grid.style.display = 'none';
+    grid.style.height = '0px';
+    let result = document.getElementById('result');
+    result.style.display = 'flex';
+    const resultTable = `
+        <table>
+        <tr>
+            <th>Result</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>Total Time</td>
+            <td>${timeTaken} ms</td>
+        </tr>
+        <tr>
+            <td>In seconds</td>
+            <td>${timeTaken/1000} s</td>
+        </tr>
+        <tr>
+            <td>Verdict</td>
+            <td>${verdict}</td>
+        </tr>
+        <tr>
+            <td>Completed</td>
+            <td>${completed}</td>
+        </tr>
+        </table>
+        `;
+    result.innerHTML = resultTable;
+    let router = document.getElementById('container');
+    router.style.display = 'flex';
+}
+
+let completionInterval = setInterval(() => {
+    if(!completed) {
+        displayResult();
+        clearInterval(completionInterval);
+    }
+}, thumbRule*1000);
+
 document.addEventListener('click', function (event) {
     let target = event.target;
     if(target.classList.contains(`box${i}`)) {
@@ -42,41 +100,8 @@ document.addEventListener('click', function (event) {
         }
         i++;
         if(i > nCircle) {
-            timeTaken = Date.now() - startTime;
-            let verdict;
-            if(timeTaken < 78000) {
-                verdict = 'Normal';
-            } else {
-                verdict = 'Deficient';
-            }
-            grid.style.display = 'none';
-            grid.style.height = '0px';
-            let result = document.getElementById('result');
-            result.style.display = 'flex';
-            const resultTable = `
-                <table>
-                <tr>
-                    <th>Result</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Total Time</td>
-                    <td>${timeTaken} ms</td>
-                </tr>
-                <tr>
-                    <td>In seconds</td>
-                    <td>${timeTaken/1000} s</td>
-                </tr>
-                <tr>
-                    <td>Verdict</td>
-                    <td>${verdict}</td>
-                </tr>
-                </table>
-                `;
-            result.innerHTML = resultTable;
-            let router = document.getElementById('container');
-            router.style.display = 'flex';
-
+            completed = true;
+            displayResult();
         }
     } else if(target.classList.contains('box')) {
         if(blinkInterval) {
