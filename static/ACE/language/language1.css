@@ -7,6 +7,17 @@
     font-family: 'Poppins', sans-serif;
     
 }
+.h2{
+    color:white;
+    background-color: #0d6efd;
+   width:100%;
+   margin:10px;
+   height:70px;
+   align-items:center;
+   display:flex;
+   justify-content: center;
+   text-align: center;
+  }
 
 body{
   

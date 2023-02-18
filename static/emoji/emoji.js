@@ -785,13 +785,12 @@ const buttonGroupPressed = e => {
       
      }
    
-var r=false;
 let start_time;
-if(r===false){
+var rr=false;
+if(rr===false){
+      start_time=new Date();
+      rr=true;
       loadQuestion();
-      r=true;
-      start_time=new Date().getTime();
-      
 }
 else{
       loadQuestion();
@@ -812,7 +811,10 @@ loadQuestion();
 
 }
 else{
-      let end_time=new Date().getTime()
+      submit.innerHTML='Submit'
+     scored.innerHTML= "Your score is "+score
+     form.style.display='none'
+     let end_time=new Date().getTime()
       let time_taken=end_time-start_time
       let time_taken_min=Math.floor(time_taken/60000)            
       let time_taken_sec=Math.floor((time_taken%60000)/1000)
@@ -835,7 +837,6 @@ else{
       } 
       
    });
- 
       
 }
       }
@@ -843,5 +844,3 @@ else{
             alert("select any option")
       }
 });
-
-

@@ -1,11 +1,4 @@
 
-$.ajax({
-    url: "/api-key",
-    success: function(api_key) {
-        // Store the API key in a global variable
-        window.API_KEY = api_key;
-
-        // Make another AJAX request using the API key
         let firstErrorMessage = "";
         let secondErrorMessage = "";
         let s1=0,s2=0;
@@ -46,7 +39,7 @@ $.ajax({
                 method: 'POST',
                 headers: {
                     'content-type': 'application/x-www-form-urlencoded',
-                    'X-RapidAPI-Key': window.API_KEY,
+                    'X-RapidAPI-Key': 'b1ae5b8ab7mshdae051681457ddep1fbd4cjsn1a204c61719d',
                     'X-RapidAPI-Host': 'dnaber-languagetool.p.rapidapi.com'
                 },
                 body: encodedParams
@@ -98,8 +91,7 @@ $.ajax({
            
        }
        
-    }
-})
+   
 function scoring(score){
    let sent=false;
     
@@ -108,7 +100,7 @@ function scoring(score){
         url: "/send_score",
         data: { 
            score: score,
-           column: "language2"
+           column: "language3"
         },
     success: function(response) {
            console.log(response);

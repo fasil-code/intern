@@ -54,7 +54,7 @@
          "4.  Before recording, take a brief pause before speaking to ensure clear audio.";
      info[4].innerHTML = "5. Once you have clicked on the Next button, you will not be able to go back ";
   }
- else if(nexturl=="ace9"){
+ else if(nexturl=="ace5"){
         buttonText="Memory Test"
         // Rules of the test are changed
      const info = document.getElementsByClassName("info");
@@ -67,10 +67,7 @@
          "4.  Before recording, take a brief pause before speaking to ensure clear audio.";
      info[4].innerHTML = "5. Once you have clicked on the Next button, you will not be able to go back ";
    }
-   else if(nexturl=="ace8"){
-    buttonText="Language Test"
 
-}
 else if (nexturl == "vs1") {
     buttonText = "Visuo-Spatial Test I";
     const info = document.getElementsByClassName("info");
