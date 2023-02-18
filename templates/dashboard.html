@@ -178,7 +178,7 @@
 				
 				{% for i in range(size)   %}
 				<tr class="data">
-{% if results[i] is not none %}
+{% if  results[i] is not none %}
   <td class="data">{{results[i][2]}}</td>
   <td class="data">{{results[i][3]}}</td>
   <td class="data">{{results[i][5]}}</td>
@@ -190,8 +190,8 @@
   <td class="data">{{results[i+size][11]+results[i+size][12]+results[i+size][13]+results[i+size][14]}}</td>
 
   <td class="data">{{results[i+size][15]+results[i+size][16]}}</td>
-  <td class="data">{{results[i+size][15]+results[i+size][16]}}</td>
-  <td class="data">{{results[i+size][15]+results[i+size][16]}}</td>
+  <td class="data">0</td>
+  <td class="data">0</td>
 
   {% endif %}
   <td class="data"><a href="{{ url_for('generate_pdf') }}?id={{results[i][0]}}"  target="blank">Report</a></td>
