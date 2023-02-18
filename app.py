@@ -80,12 +80,12 @@ def create_database():
          attention1 INT DEFAULT 0,
          attention2 INT DEFAULT 0,
          attention3 INT DEFAULT 0,
-         attention4 INT DEFAULT 0,
          fluency1 INT DEFAULT 0,
          fluency2 INT DEFAULT 0,
          memory1 INT DEFAULT 0,
          memory2 INT DEFAULT 0,
          memory3 INT DEFAULT 0,
+         memory4 INT DEFAULT 0,
          language1 INT DEFAULT 0,
          language2 INT DEFAULT 0,
          language3 INT DEFAULT 0,
@@ -179,8 +179,8 @@ def send_score():
     result = cursor.fetchone()
     cursor.execute(f"SELECT * FROM ace WHERE session_id = %s AND email = %s", (sesion_key, email))
     result1 = cursor.fetchone()
-    aceColumn = ['attention1','attention2','attention3','attention4','fluency1','fluency2','memory1','memory2',
-                 'memory3','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
+    aceColumn = ['attention1','attention2','attention3','fluency1','fluency2','memory1','memory2',
+                 'memory3','memory4','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
     if column in aceColumn:
        if not result1:
              # Insert a new row
@@ -511,26 +511,50 @@ def generate_pdf():
         elements.append(Spacer(1, 0.5*inch))
 
         elements.append(
-            Paragraph(' <font color="maroon">ACE-|||</font>', styles['heading1']))
+            Paragraph(' <font color="maroon">ACE-|||</font>', styles['heading1'])) 
+        
         elements.append(Spacer(1, 0.2*inch))
-
-        elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Attention Test</font> <br/>
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16>Total Marks :90</font> <br/>
       <br/>
-      Total Score : <font color="black" fontSize=14 > %</font><br/>   
-      Score : <font color="black" fontSize=14 >{results[5]} %</font><br/>                      
-     
-      <br/>
-      Q1:This question asks for information about the date and season, specifically the day, date, month, year, season and address 
-     <br/>
-      Q2: The question asks the subject to repeat three words and then instructs them to try to remember the words for later recall. {results[4]}                
-     <br/>
-      Q3: The question asks the subject to subtract 7 from 100 and then continue subtracting 7 from each new number five times. {results[5]}                    
+        
+      <font color="black" fontSize=14 >Marks Secured : {results1[3]+results1[4]+results1[5]+results1[6]+results1[7]+results1[8]+results1[9]+results1[10]+results1[11]+results1[12]+results1[13]+results1[14]+results1[15]+results1[16]+results1[17]+results1[18]} </font><br/>                                        
                                   
                                   ''', style=styles['para']))
         elements.append(Spacer(1, 0.4*inch))
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Attention Test</font> <br/>
+      <br/>
+
+      <font color="black" fontSize=14 >Total Marks: 22 </font><br/>   
+      <font color="black" fontSize=14 > Marks Secured: {results1[3]+results1[4]+results1[5]+results1[6]}</font><br/>                      
+     
+      <br/>
+      <font color="black" fontSize=14 > Q1:This question asks for information about the date and season, specifically the day, date, month, year, season and address </font><br/>
+      
+     <br/>
+      <font color="black" fontSize=14 >Total Marks: 11 </font><br/>   
+      Marks Secured : <font color="black" fontSize=14 >{results1[3]} </font><br/>                      
+     
+      <br/>
+      <font color="black" fontSize=14 >Q2: The question asks the subject to repeat three words and then instructs them to try to remember the words for later recall. </font><br/>
+      
+     <br/>
+      
+      <font color="black" fontSize=14 >Total Marks: 3 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[4]} </font><br/>
+      <br/>
+      <font color="black" fontSize=14 >  Q3: The question asks the subject to subtract 7 from 100 and then continue subtracting 7 from each new number five times. </font><br/>
+      
+     <br/>
+      
+      <font color="black" fontSize=14 >Total Marks: 5 </font><br/>   
+      <font color="black" fontSize=14 >Marks Secured :{results1[5]} </font><br/>
+      <br/>
+                  
+                                  ''', style=styles['para']))
+        elements.append(Spacer(1, 0.4*inch))
         elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b)Memory Test</font> :<br/> <br/>
-          Total Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>   
-      Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>                      
+          Total Marks: 23 <font color="black" fontSize=14 ></font><br/>   
+          Marks Secured: <font color="black" fontSize=14 >{results1[9]+results1[10]+results1[11]} </font><br/>                      
      
       <br/>
       Q1:This question asks the subject to to repeat three words, that were displayed earlier in attention test.{results[3]}
@@ -544,8 +568,8 @@ def generate_pdf():
         elements.append(Spacer(1, 0.4*inch))
         elements.append(Paragraph(f''' <font color="blue" fontSize=16> (c) Fluency Test</font> <br/>
       <br/>
-      Total Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>   
-      Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>                      
+      Total Marks :14 <font color="black" fontSize=14 ></font><br/>   
+      Marks Secured : <font color="black" fontSize=14 >{results1[7]+results1[8]}</font><br/>                      
      
       <br/>
       Q1:The question asks the subject to generate as many words as possible starting with a given letter, excluding names of people or places, in one minute.
@@ -558,8 +582,8 @@ def generate_pdf():
         elements.append(Spacer(1, 0.4*inch))
         elements.append(Paragraph(f''' <font color="blue" fontSize=16> (d) Language Test</font> <br/>
       <br/>
-      Total Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>   
-      Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>                      
+      Total Marks :23 <font color="black" fontSize=14 > </font><br/>   
+      Marks Secured : <font color="black" fontSize=14 >{results1[12]+results1[13]+results1[14]+results1[15]+results1[16]} </font><br/>                      
      
       <br/>
       Q1:The question asks the subject to write at least two complete sentences without using abbreviations. The scoring criteria are based on the subject's ability to produce at least two complete sentences about a single topic and to demonstrate correct grammar and spelling
@@ -575,8 +599,8 @@ def generate_pdf():
                                   ''', style=styles['para']))
         elements.append(Spacer(1, 0.4*inch))
         elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(e) Visuosptial Test</font> :<br/> <br/>
-          Total Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>   
-      Score : <font color="black" fontSize=14 >{results1[3]} %</font><br/>                      
+          Total Marks: 8 <font color="black" fontSize=14 ></font><br/>   
+          Marks Secured : <font color="black" fontSize=14 >{results1[17]+results1[18]}</font><br/>                      
      
       <br/>
       
@@ -651,10 +675,10 @@ def ace3():
    return render_template('ACE/attention/attention3.html',url="ace4") 
 @app.route("/ace4",methods=['GET','POST']) 
 def ace4():
-   return render_template('ACE/attention/attention4.html',url="ace5")  
+   return render_template('ACE/attention/attention4.html',url="layout")  
 @app.route("/ace5",methods=['GET','POST']) 
 def ace5():
-   return render_template('ACE/memory/memory1.html',url="layout")    
+   return render_template('ACE/memory/memory1.html',url="ace9")    
 
 @app.route("/ace6",methods=['GET','POST']) 
 def ace6():
