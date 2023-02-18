@@ -1,5 +1,5 @@
-#imports
-import uuid
+
+
 from flask import Flask,jsonify, make_response,render_template,request,session
 from flask import Flask,render_template,url_for,flash,redirect
 app = Flask(__name__)
@@ -9,7 +9,20 @@ import os
 import bcrypt
 import math
 import random
+import uuid
 import datetime
+from reportlab.lib.colors import HexColor
+from reportlab.lib.enums import TA_CENTER,TA_RIGHT,TA_LEFT
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from io import BytesIO
+from io import BytesIO
+from reportlab.lib.pagesizes import letter, landscape
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.lib.units import inch
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle
+from reportlab.lib import colors
+from flask import make_response
+from flask import make_response
 from functools import wraps
 import smtplib
 from flask_session import Session
@@ -26,10 +39,7 @@ from user import register_route,login_route,logout_route,reset_password_route,se
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-
-
 app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
-
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -58,8 +68,8 @@ def create_database():
     time_ert VARCHAR(255),
     session_id VARCHAR(255)
     
-   )'''
-   ) 
+)'''
+)
     cursor.execute(
     '''CREATE TABLE IF NOT EXISTS ace (
          id INT AUTO_INCREMENT PRIMARY KEY, 
@@ -82,6 +92,8 @@ def create_database():
          session_id VARCHAR(255)
          
    )'''
+   
+   
 )
   
     cursor.close()
@@ -93,7 +105,7 @@ create_database()
 app.config['MYSQL_DB'] = 'ftd'
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 mysql = MySQL(app)
-
+mysql = MySQL(app)
 
 
 
@@ -174,8 +186,7 @@ def send_score():
          # Update the existing row
           cursor.execute(f"UPDATE ace SET {column}= %s WHERE session_id = %s AND email = %s", (score, sesion_key, email))
           conn.commit()
-
-    elif column=="emoji":
+    if column=="emoji":
       
       if not result:
         # Insert a new row
@@ -241,13 +252,260 @@ def dashboard():
       query = "SELECT * FROM emotion WHERE email = %s"
       cursor.execute(query, (email,))
       results = cursor.fetchall()
-      return render_template('dashboard.html',results=results)
+      # Replace with the actual email value you want to search for
+      query = "SELECT * FROM ace WHERE email = %s"
+      cursor.execute(query, (email,))
+      table_one=False
+      table_two=False
+      table_three=False
+      if results:
+         table_one=True
+         
+      results1 = cursor.fetchall()
+      if  results1:           
+         table_two=True
+      size=len(results)
+      
+      results=results+results1
+      
+      return render_template('dashboard.html',results=results,size=size,table_one=table_one,table_two=table_two)
    return redirect('login')
 
+
 @app.route("/api-key")
+
+
 def get_api_key():
     api_key = os.environ.get("API_KEY")
     return api_key
+
+
+
+@app.route("/generate_pdf", methods=['GET', 'POST'])
+def generate_pdf():
+    if 'logged_in' in session:
+        result = request.form.get("res")
+        id = request.args.get('id')
+        conn = mysql.connect
+        cursor = conn.cursor()
+       
+        
+        
+        email = session.get('logged_in')
+            # Replace with the actual email value you want to search for
+        query = "SELECT * FROM emotion WHERE id=%s AND email=%s"
+        cursor.execute(query, (id, email))
+        results = cursor.fetchone()
+        
+        
+        
+        
+        
+        response = make_response()
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'attachment; filename=output.pdf'
+        buffer = BytesIO()
+        doc = SimpleDocTemplate(buffer, pagesize=landscape(letter))
+        
+        # Add decorated heading to PDF
+        styles = {
+            'heading': ParagraphStyle(
+                'heading',
+                fontName='Helvetica-Bold',
+                fontSize=25,
+                textColor=colors.red,
+                spaceAfter=0.1*inch,
+                alignment=TA_CENTER,
+                leftIndent=0.25*inch,
+               
+                
+                
+            ),
+             'heading1': ParagraphStyle(
+                'heading',
+                fontName='Helvetica-Bold',
+                fontSize=20,
+                textColor=colors.black,
+                spaceAfter=0.25*inch,
+                
+                leftIndent=0.5*inch,
+                border=1,
+                borderColor=colors.black,
+                borderPadding=0.1*inch,
+                
+            ),
+             'para':ParagraphStyle(
+                'para',
+                textColor=colors.gray,
+                fontSize=13,
+                leading=14,
+                leftIndent=0.5*inch,
+                rightIndent=0.5*inch,
+                spaceBefore=0,
+                border=2,
+                borderWidth=1,
+                borderColor=colors._CMYK_white,
+                
+                borderRadius=1,
+                backColor=colors.whitesmoke,
+                borderPadding=(10,10,10),
+                
+                
+                
+             ),
+             'header': ParagraphStyle(
+                'header',
+                fontName='Helvetica-Bold',
+                fontSize=18,
+                textColor=colors.red
+             )
+            
+        }
+        elements = []
+        elements.append(Paragraph('Frontotemporal Dementia Report ', styles['heading']))
+        
+        elements.append(Spacer(1, 0.5*inch))
+        name = "Moin"  # Replace with the actual name value
+        email = session.get('logged_in')  # Replace with the actual name value
+        date = datetime.datetime.now().strftime('%B, %d, %Y')
+        time = datetime.datetime.now().strftime('%I:%M %p')
+        name_style = ParagraphStyle(
+        'name',
+        fontName='Helvetica',
+        fontSize=12,
+        textColor=colors.black,
+        leftIndent=0.25*inch,
+        #backColor=colors.whitesmoke
+        )
+        email_style = ParagraphStyle(
+       'email',
+        fontName='Helvetica',
+        fontSize=12,
+        textColor=colors.black,
+        
+        
+        
+        
+                leftIndent=0.5*inch,
+                rightIndent=0.5*inch,
+                spaceBefore=0,
+                border=2,
+                borderWidth=1,
+                
+                borderColor=colors._CMYK_white,
+                
+                borderRadius=1,
+                
+        
+        )
+    
+        date_style = ParagraphStyle(
+        'date',
+        fontName='Helvetica',
+        fontSize=12,
+        textColor=colors.black,
+        alignment=TA_RIGHT,
+        #backColor=colors.whitesmoke,
+        rightIndent=0.25*inch
+        
+        )
+        time_style = ParagraphStyle(
+        'time',
+        fontName='Helvetica',
+        fontSize=12,
+        textColor=colors.black,
+        alignment=TA_RIGHT,
+        rightIndent=0.25*inch,
+        #backColor=colors.whitesmoke,
+        )   
+
+        elements.append(Paragraph(f' Name: {name}', email_style))
+        elements.append(Paragraph(f'Email: {email}', email_style))
+        elements.append(Paragraph(f'Date: {date}', date_style))
+        elements.append(Paragraph(f'Time: {time}', time_style))
+        
+        # Add data to table
+        
+        elements.append(Spacer(1, 0.5*inch))
+       
+       
+        elements.append(Paragraph(' <font color="maroon">Tests related to Emotion</font>', styles['heading1']))
+        elements.append(Spacer(1, 0.2*inch))
+        
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Emotion Recognition Test</font> <br/>
+      <br/>
+      Percentage Scored : <font color="black" fontSize=14 >{results[5]} %</font><br/>                         
+      Completion Time (min :sec):<font color="black" fontSize=14 > {results[6]}</font>  <br/>  
+      <br/>
+      Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient.
+   The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust were tested.
+      The user identification capacity is <font color="black" fontSize=14 >{results[5]} %</font>  and the time span was <font color="black" fontSize=14 >{results[6]} minutes</font> .                  
+                             
+                                  
+                                  ''', style=styles['para']))
+        elements.append(Spacer(1, 0.4*inch))
+        elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b) Emoji Identification Test</font> :<br/> <br/>
+           Percentage Scored : <font color="black" fontSize=14 >{results[3]}</font> <br/>                         
+      Completion Time (min :sec): <font color="black" fontSize=14 >{results[4]}</font>  <br/>  
+       <br/>
+      Summary: Emoji Identification test was given by the patient to test the patient's ability to recognise the emojis . 
+      The emojis related  smiley,frowny,emotion are tested.The user identification capacity is <font color="black" fontSize=14 >{results[3]} </font> % and the time span was <font color="black" fontSize=14 >{results[4]}  minutes. </font>                                          
+''', styles['para']))
+        elements.append(Spacer(1, 0.6*inch))
+        data = []
+        
+        data.append(results)
+        table = Table(data)
+        table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+    ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+    ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+    ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+    ('FONTSIZE', (0, 0), (-1, 0), 14),
+    ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+    ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+    ('GRID', (0, 0), (-1, -1), 1, colors.black),
+    ('BACKGROUND', (1, 1), (1, 1), colors.lightgrey),
+        ]))
+
+       # Add table to PDF template
+        elements.append(table)
+        data = [
+    ['Emotion', 'Actual', 'Predicted'],
+    ['Happy', 20, 18],
+    ['Sad', 15, 16],
+    ['Anger', 10, 10],
+    ['Contempt', 5, 6],
+    ['Neutral', 25, 24],
+    ['Surprise', 10, 9],
+    ['Fear', 5, 8],
+    ['Disgust', 10, 9],
+    ]
+
+# Define the style for the table
+        table_style = TableStyle([
+    ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+    ('FONTSIZE', (0, 0), (-1, 0), 14),
+    ('BACKGROUND', (0, 0), (-1, 0), 'lightgrey'),
+    ('TEXTCOLOR', (0, 0), (-1, 0), 'black'),
+    ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+    ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+    ('FONTSIZE', (0, 1), (-1, -1), 12),
+    ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
+      ])
+
+# Create the table and add it to the elements list
+        table = Table(data)
+        table.setStyle(table_style)
+        elements.append(table)
+        doc.build(elements)
+        response.data = buffer.getvalue()
+
+        return response
+    return redirect('login')
+
+
+
 
 
 #1 Emoji Game
@@ -277,19 +535,17 @@ def layout():
 @app.route("/ace1",methods=['GET','POST'])
 def ace1():
    days=["Choose the day today","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-   seasons=["Choose the Season",'Spring','Summer','Autumn','Winter']
+   seasons=["Choose the Season",'Spring','Summer','Autumn','Winter','Monsoon']
    states=['Choose the State','Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','Gujarat','Haryana','Himachal','Jammu and Kashmir','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal']
 
    
   # print countries dictionary
    list=[]
-
    for i in countries:
       list.append(countries[i]['name'])
-
    list.sort()
    list.insert(0,"Choose your country")
-   return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states)
+   return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states,url="ace3")
 
     
 @app.route("/ace2",methods=['GET','POST'])
@@ -358,4 +614,3 @@ def tmt2():
     return render_template('TMT/TMT2.html')
 if __name__ == "__main__":
     app.run(debug = True)
-    

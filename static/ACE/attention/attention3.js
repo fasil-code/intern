@@ -40,7 +40,7 @@ function memorize(){
     while (arr.indexOf(words[r]) !== -1) {
         r = Math.floor(Math.random() * n);
     }
-    arr[i]=words[r];
+    arr[i]=words[r].toLowerCase();
 }
     localStorage.setItem('arr', JSON.stringify(arr));
     document.getElementById("w1").innerHTML=arr[0];
