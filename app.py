@@ -38,8 +38,8 @@ from user import register_route,login_route,logout_route,reset_password_route,se
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
-app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
+
+app.config['MYSQL_PASSWORD'] = 'Zargar@123'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -146,9 +146,10 @@ def before_request():
 @app.route("/login",methods=['GET','POST'])
 def login():
     return login_route()
+@app.after_request
 def after_request(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    return response        
+    return response      
 
 
 @app.route('/reset_password',methods=['GET','POST'])
@@ -257,18 +258,19 @@ def send_score():
 @app.route("/", methods=['GET','POST'])
 def home():
    if 'logged_in' in session:
+            name=session.get('name')
            # Generate a new session ID
-            session_id = str(uuid.uuid4())
-            session['session_id'] = session_id
-            return render_template('navbar.html', session_id=session_id, logged_in=True)         
+            
+            
+            return render_template('navbar.html',name=name,  logged_in=True)         
    return render_template('navbar.html', logged_in=False)
 
 
 #Test Page  
-sesion_key="abcd"
 @app.route("/tests",methods=['GET','POST'])
 def tests():
    if 'logged_in' in session:
+        
         email = session.get('logged_in')
         global sesion_key
         session_id = request.args.get('session_id')
@@ -687,9 +689,25 @@ The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust wer
       return response
    return redirect('login')
 
+@app.route("/termsconditions",methods=['GET','POST'])
+def termsconditions():
+     if 'logged_in' in session:
+        
+        email = session.get('logged_in')
+        global sesion_key
+        session_id = request.args.get('session_id')
+        sesion_key=session_id
+        return render_template('terms.html',terms=terms,email=email,session_id=session_id)   
+     return redirect('login')
 
-
-
+@app.route("/attempt", methods=['GET', 'POST'])
+def attempt():
+   if 'logged_in' in session:
+           # Generate a new session ID
+            session_id = str(uuid.uuid4())
+            session['session_id'] = session_id
+            return render_template('attempt.html', session_id=session_id, logged_in=True)
+   return redirect('login') 
 
 #1 Emoji Game
 @app.route("/emoji",methods=['GET','POST'])
