@@ -83,7 +83,7 @@ function scoring(){
     url: "/send_score",
     data: { 
        score: score,
-       column: "memory2"
+       column: "memory3"
     },
     success: function(response) {
        console.log(response);

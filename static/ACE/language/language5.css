@@ -5,14 +5,24 @@ body{
  padding:0;
  height: 100%;
  margin: 0;
- font-family: 'Chivo Mono', monospace;
+ font-family: 'Open Sans', sans-serif;
  background-color:rgb(128, 6, 6);
  overflow:auto;
 
 }
-
+.h2{
+  color:white;
+  background-color: #0d6efd;
+ width:100%;
+ margin:0;
+ height:100px;
+ align-items:center;
+ display:flex;
+ justify-content: center;
+ text-align: center;
+}
 .options{
-    margin: 1.25rem auto ;
+    margin: 1rem auto ;
     width: 40rem;
     height: 40rem;
  cursor:pointer;
@@ -27,14 +37,14 @@ body{
   width: 100% ;
   width: calc(100% - 1rem) ;
   margin: 50px auto;
-  padding: 50px;
+  padding: 30px;
 
  
 }
   .options .box {
    background-color:#ccffd3;
-    padding: 0.5rem;
-    border-radius: 0.8rem;
+    padding: .4rem;
+    border-radius: 1rem;
     color: black;
     
     display: flex;
@@ -78,7 +88,7 @@ body{
     opacity: 1;
   }
 
-  @media (min-width: 490px) and (max-width :770px){
+  @media (min-width: 530px) and (max-width :770px){
     .options{
         margin: 1.25rem auto ;
         width: 30rem;
@@ -91,10 +101,10 @@ body{
         grid-row-gap: 10px;
       }
   }
-  @media (min-width: 380px) and (max-width:490px){
+  @media (min-width: 380px) and (max-width:530px){
     .options{
         margin: 1.25rem auto ;
-        width: 24rem;
+        width: 22rem;
         height: 24rem;
      cursor:pointer;
         display: grid;
@@ -116,8 +126,8 @@ body{
 @media (min-width:300px) and (max-width :380px){
     .options{
         margin: 1.25rem auto ;
-        width: 19rem;
-        height: 19rem;
+        width: 17rem;
+        height: 17rem;
      cursor:pointer;
         display: grid;
         grid-template-columns: 12.5rem 12.5rem;
@@ -137,6 +147,14 @@ body{
         grid-row: auto auto;
         grid-column-gap: 10px;
         grid-row-gap: 10px;
+      }
+      .h2{
+        font-size: 3.2vw;
+        height:150px;
+        align-items:center;
+        display:flex;
+        justify-content: center;
+        text-align: center;
       }
   }
 .options {

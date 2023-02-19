@@ -130,7 +130,7 @@ document.getElementById("next-btn").addEventListener("click", function(event){
             url: "/send_score",
             data: { 
                score: score,
-               column: "memory3"
+               column: "memory4"
             },
             success: function(response) {
                console.log(response);
