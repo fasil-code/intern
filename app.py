@@ -39,7 +39,8 @@ from user import register_route,login_route,logout_route,reset_password_route,se
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+# app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
