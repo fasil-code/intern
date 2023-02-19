@@ -82,6 +82,18 @@ function displayResult() {
     result.innerHTML = resultTable;
     let router = document.getElementById('container');
     router.style.display = 'flex';
+
+    $.ajax({
+        type: "POST",
+        url: "/send_score",
+        data: { 
+           score: timeTaken,
+           column: "tmt"
+        },
+        success: function(response) {
+           console.log(response);    
+        }   
+      });
 }
 
 let completionInterval = setInterval(() => {

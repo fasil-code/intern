@@ -73,6 +73,18 @@ function displayResult() {
     let proceed_btn = document.getElementById('route');
     proceed_btn.innerHTML = 'Back to Home';
     router.style.display = 'flex';
+
+    $.ajax({
+        type: "POST",
+        url: "/send_score",
+        data: { 
+           score: timeTaken,
+           column: "tmt"
+        },
+        success: function(response) {
+           console.log(response);    
+        }   
+      });
 }
 
 const cell = document.querySelectorAll('.box');
