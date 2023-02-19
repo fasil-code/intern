@@ -38,6 +38,9 @@ from user import register_route,login_route,logout_route,reset_password_route,se
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
+<<<<<<< HEAD
+app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
+=======
 
 
 
@@ -46,6 +49,7 @@ app.config['MYSQL_USER'] = 'root'
 
 
 
+>>>>>>> 2e7281c00780bfd50ad42524122b54af921715de
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -713,16 +717,14 @@ def layout():
 @app.route("/ace1",methods=['GET','POST'])
 def ace1():
    days=["Choose the day today","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-   seasons=["Choose the Season",'Spring','Summer','Autumn','Winter']
+   seasons=["Choose the Season",'Spring','Summer','Autumn','Winter','Monsoon']
    states=['Choose the State','Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','Gujarat','Haryana','Himachal','Jammu and Kashmir','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal']
 
    
   # print countries dictionary
    list=[]
-
    for i in countries:
       list.append(countries[i]['name'])
-
    list.sort()
    list.insert(0,"Choose your country")
    return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states,url="ace3")
