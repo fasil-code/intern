@@ -10,6 +10,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ACE/attention/attention124.css')}}">
     <title>Attention Test</title>
+    <style>
+        span{
+            font-size: large;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,7 +33,7 @@
         <h1 class="h1">Attention Calculation Test</h1>
         <ul class="quiz list-group">
             <li class="list-group-item" id="quest1">
-                <h4>Subtract 7 from 100</h4>
+               <h4> <span >Qno1:-</span>Subtract 7 from 100</h4>
 
                 <ul class="choices list-group">
                     <li class="list-group-item">
@@ -46,7 +51,7 @@
                 </ul>
             </li>
             <li class="list-group-item" id="quest2" style="display: none;">
-                <h4>Subtract 7 again from result</h4>
+                <h4><span>Qno2:-</span>Subtract 7 again from result</h4>
                 <ul class="choices list-group">
                     <li class="list-group-item">
                         <label><input type="radio" onclick="chnageFun(3)" name="question1" value="A" /><span id="Cquest20">2</span></label>
@@ -63,7 +68,7 @@
                 </ul>
             </li>
             <li class="list-group-item" id="quest3" style="display: none;">
-                <h4>Subtract 7 again from result</h4>
+                <h4><span>Qno3:-</span>Subtract 7 again from result</h4>
                 <ul class="choices list-group">
                     <li class="list-group-item">
                         <label><input type="radio" onclick="chnageFun(4)" name="question2" value="A" /><span id="Cquest30">2</span></label>
@@ -80,7 +85,7 @@
                 </ul>
             </li>
             <li class="list-group-item" id="quest4" style="display: none;">
-                <h4>Subtract 7 again from result</h4>
+                <h4> <span>Qno4:-</span>Subtract 7 again from result</h4>
                 <ul class="choices list-group">
                     <li class="list-group-item">
                         <label><input type="radio" onclick="chnageFun(5)" name="question3" value="A" /><span id="Cquest40">2</span></label>
@@ -97,7 +102,7 @@
                 </ul>
             </li>
             <li class="list-group-item" id="quest5" style="display: none;">
-                <h4>Subtract 7 last time</h4>
+                <h4> <span>Qno5:-</span>Subtract 7 last time</h4>
                 <ul class="choices list-group">
                     <li class="list-group-item">
                         <label><input type="radio" onclick="chnageFun(6)" name="question4" value="A" /><span id="Cquest50">2</span></label>
@@ -118,10 +123,6 @@
         <div class="text-center" style="display: none;" id="btn" >
             <button  type="button"onclick="returnScore()" class="btn btn-primary btn-lg">Next</button>
         </div>
-
-
-
-
     </div>
     <script>{ var nextUrl = "{{url}}" }</script>
     <script type="text/javascript">

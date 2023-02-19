@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@100&family=Quicksand:wght@300&display=swap');
+body{
+   
+ margin:0;
+ padding:0;
+ height: 100%;
+ margin: 0;
+ font-family: 'Chivo Mono', monospace;
+ background-color:rgb(128, 6, 6);
+ overflow:auto;
+
+}
+
+.options{
+    margin: 1.25rem auto ;
+    width: 40rem;
+    height: 40rem;
+ cursor:pointer;
+    display: grid;
+    grid-template-columns: 12.5rem 12.5rem;
+    grid-row: auto auto;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+  }
+.cont{
+  max-width: 960px;
+  width: 100% ;
+  width: calc(100% - 1rem) ;
+  margin: 50px auto;
+  padding: 50px;
+
+ 
+}
+  .options .box {
+   background-color:#ccffd3;
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+    color: black;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rempx;
+ 
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 1px rgba(0,0,0,0.09), 
+              0 4px 2px rgba(0,0,0,0.09), 
+              0 8px 4px rgba(0,0,0,0.09), 
+              0 16px 8px rgba(0,0,0,0.09),
+              0 32px 16px rgba(0,0,0,0.09);
+  }
+  .box:hover {
+    transform: scale(1.1);
+  }
+
+  /* Create the hidden pseudo-element */
+  /* include the shadow for the end state */
+  .box::after {
+  
+    z-index: -1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+ 
+  button a{
+    color:white;
+    text-decoration: none;
+  }
+
+  
+  /* Scale up the box */
+  .box:hover {
+    transform: scale(1.1);
+  }
+  
+ 
+  .box:hover::after {
+    opacity: 1;
+  }
+
+  @media (min-width: 490px) and (max-width :770px){
+    .options{
+        margin: 1.25rem auto ;
+        width: 30rem;
+        height: 30rem;
+     cursor:pointer;
+        display: grid;
+        grid-template-columns: 12.5rem 12.5rem;
+        grid-row: auto auto;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+      }
+  }
+  @media (min-width: 380px) and (max-width:490px){
+    .options{
+        margin: 1.25rem auto ;
+        width: 24rem;
+        height: 24rem;
+     cursor:pointer;
+        display: grid;
+        grid-template-columns: 12.5rem 12.5rem;
+        grid-row: auto auto;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+      }
+    .cont{
+        display:block;
+        width:100%;
+    }
+    .box:hover {
+      transform: none;
+    }
+    
+   
+}
+@media (min-width:300px) and (max-width :380px){
+    .options{
+        margin: 1.25rem auto ;
+        width: 19rem;
+        height: 19rem;
+     cursor:pointer;
+        display: grid;
+        grid-template-columns: 12.5rem 12.5rem;
+        grid-row: auto auto;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+      }
+  }
+  @media (max-width :300px){
+    .options{
+        margin: 1.25rem auto ;
+        width: 100%;
+        height: 100%;
+     cursor:pointer;
+        display: grid;
+        grid-template-columns: 12.5rem 12.5rem;
+        grid-row: auto auto;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+      }
+  }
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
+  
+  .option {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .option img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
