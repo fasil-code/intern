@@ -92,7 +92,10 @@
       overflow: hidden;
     }
   }
+#drip{
+color:white
 
+}
   @media(max-width:450px) {
     h1 {
       font-size: 25px;
@@ -106,6 +109,7 @@
 </style>
 
 <body>
+
 
   <section class="navigation">
     <div class="nav-container">
@@ -122,25 +126,37 @@
             <a  href="../static/docs.pdf" download>Docs</a>
           </li>
           <li>
-            <a id="test" href="{{ url_for('tests') }}?session_id={{ session_id }}" onclick="handleTestClick(event)">Tests</a>
+            <a id="test" href="{{ url_for('attempt') }}" onclick="handleTestClick(event)">Tests</a>
 
 
           </li>
+       
+
+
+        
+          {% if logged_in %}
+       
           <li>
             <a   id="test" href="{{ url_for('dashboard') }}">Dashboard</a>
 
           </li>
-          {% if logged_in %}
           <li>
-
-            <a   href="{{ url_for('logout') }}">Logout</a>
+            <a id="drip" >{{name}}</a>
+            <ul class="navbar-dropdown">
+              <li>
+                <a href="{{ url_for('logout') }}">Logout</a>
+              </li>
+             
+            </ul>
           </li>
+       
+      
           {% else %}
           <li>
 
             <a  href="{{ url_for('login') }}">Login</a>
           </li>
-
+       
 
 
 

@@ -15,10 +15,6 @@
         </div>
     </div>
 
-    <div id="guide">
-        <h3>Click the blue circle once!</h3>
-    </div>
-
     <div id="timer-box">
         <div id="time-left-txt">Time Left</div>
         <div id="timer"></div>
@@ -26,13 +22,29 @@
 
     <div class="grid" id="grid">
         <button class="box" id="box1"></button>
-        <button class="box" id="box2"></button> 
+        <button class="box" id="box2">Tap</button> 
     </div>
-    <div class="result" id="result"></div>
-    <div id="container">
-        <div class="center">
-            <a href="/"><button id="route" class="btn">Proceed to Home</button></a>
+    <div class="result" id="result">
+        <div class="score" id="score">
+            <div style="font-size: 50px;">
+                <p>&#127942;</p>
+            </div>
+            <div style="font-weight: 400; margin-top: 0.25rem; margin-bottom:1rem;">
+                Hurrah &#127881;! You have completed the test.
+            </div>   
+            <div class="num" id="right">
+                From a total of <span id="pul"> </span> pulses, you have synced with <span id="cor"></span> pulses correctly.
+            </div>
+            <div class="num" id="wrong">
+                You have been penalised for <span id="wrn"></span> wrong clicks.
+            </div>
         </div>
     </div>
+    <div id="container">
+        <div class="center">
+            <a href="/"><button id="route" class="btn">Proceed</button></a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
