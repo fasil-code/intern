@@ -16,10 +16,25 @@
 
     <div class="grid" id="grid" ></div>
 
-    <div id="result"></div>
+    <div class="result" id="result">
+        <div class="score" id="score">
+            <div id="logo">
+                <p>&#127942;</p>
+            </div>
+            <div style="font-weight: 400; margin-top: 0.25rem; margin-bottom:1rem;">
+                Hurrah &#127881;! You have completed the test.
+            </div>   
+            <div class="num" id="right">
+                You have been classified as <span id="pul"></span>, as you have spent exactly <span id="cor"></span> seconds on this test.
+            </div>
+            <div class="num" id="wrong">
+                You have been penalised for <span id="wrn"></span> wrong clicks.
+            </div>
+        </div>
+    </div>
     <div id="container">
         <div class="center">
-            <a href="/"><button id="route" class="btn">Proceed to Home</button></a>
+            <a href="/"><button id="route" class="btn">Proceed to Tests</button></a>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
