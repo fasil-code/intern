@@ -234,14 +234,22 @@ color:white
   </section>
   <footer class="bg-light text-center text-lg-start" style="width:100%">
     <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: #00aeef; color: white;">
+    <div  class="text-center p-3" style="background-color: #00aeef; color: white;">
+      <span id="copyright">
         ©2023 Copyright:
+      </span>
+   
         <a class="text-dak" href="http://www.iitkgp.ac.in" style="text-decoration: none; color: white;">IIT
             Kharagpur</a>
     </div>
     <!-- Copyright -->
 </footer>
+<script>
+let copyright=document.getElementById('copyright')
+var year=new Date().getFullYear();
+copyright.innerHTML='@'+year+"  Copyright: " ;
 
+</script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 

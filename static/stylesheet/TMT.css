@@ -15,12 +15,14 @@
     margin-bottom: 1rem;
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(10, 4rem);
-    grid-template-rows: repeat(10, 1rem);
-    column-gap: 3rem;
-    row-gap: 4rem;
-  
-    font-size: 1.5rem;
+    grid-template-columns: repeat(10, 25px);
+    grid-template-rows: repeat(10, 25px);
+    column-gap: 80px;
+    row-gap: 45px;
+    padding: 0%;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .box { 
@@ -86,36 +88,14 @@ left: 50%;
 transform: translate(-50%, -50%);
 }
 
-@media (max-width: 481px) {
-    .grid {
-        margin-top: 0.2vw;
-        margin-left: 0.05vw;
-        margin-right: 0.05vw;
-        margin-bottom: 0.2vw;
-        display: grid;
-        justify-content: center;
-        grid-template-columns: repeat(10, 4rem);
-        grid-template-rows: repeat(10, 4rem);
-        column-gap: 4rem;
-        row-gap: 4rem;
-        font-size: 18px;
-    }
-    .result{
-        width: 60%;
-        height: 60%;
-        font-size: 2.5vw;
-    }
-}
-
-
 #timer-box{
     margin: auto;
-    margin-top: 5vh;
+    margin-top: 1vh;
     color: #004085;
     background: #cce5ff;
     border: 1px solid #b8daff;
-    height: 70px;
-    width: 200px;
+    height: 65px;
+    width: 160px;
     padding: 0 19px;
     border-radius: 5px;
     display: flex;
@@ -125,7 +105,7 @@ transform: translate(-50%, -50%);
 
 #time-left-txt{
     font-weight: 400;
-    font-size: 20px;
+    font-size: 17px;
     user-select: none;
 }
 
@@ -133,10 +113,10 @@ transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 19px;
+    font-size: 16px;
     font-weight: 500;
     height: 50px;
-    width: 70px;
+    width: 60px;
     color: #fff;
     border-radius: 5px;
     line-height: 30px;
@@ -144,4 +124,44 @@ transform: translate(-50%, -50%);
     background: #343a40;
     border: 1px solid #343a40;
     user-select: none;
+}
+
+@media (max-width: 1101px) {
+    .grid {
+        grid-template-columns: repeat(10, 20px);
+        grid-template-rows: repeat(10, 20px);
+        column-gap: 60px;
+        row-gap: 60px;
+      
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 841px) {
+    .grid {
+        padding: 0%;
+        grid-template-columns: repeat(10, 5px);
+        grid-template-rows: repeat(10, 5px);
+        column-gap: 20px;
+        row-gap: 40px;
+      
+        font-size: 1px;
+    }
+    #timer-box{
+        height: 40px;
+        width: 100px;
+        padding: 0 19px;
+    }
+    #time-left-txt{
+        font-weight: 400;
+        font-size: 13px;
+    }
+    #timer{
+        font-size: 16px;
+        font-weight: 500;
+        height: 30px;
+        width: 40px;
+        border-radius: 5px;
+        line-height: 30px;
+    }
 }

@@ -18,6 +18,18 @@ body{
     color: #fff;
     background: #007bff;
 }
+.h2{
+    color:white;
+    background-color: #0d6efd;
+    box-shadow: black;
+   width:100%;
+   margin:15px;
+   height:100px;
+   align-items:center;
+   display:flex;
+   justify-content: center;
+   text-align: center;
+  }
 
 .start_btn,
 .info_box,
@@ -126,83 +138,15 @@ body{
 
 
 section{
-    padding: 25px 30px 20px 30px;
+    padding: 20px 40px 20px 20px;
     background: #fff;
 }
 
 section .que_text{
     font-size: 25px;
     font-weight: 600;
-    padding: 7px;
+   
 
-}
-
-section .option_list{
-    padding: 20px 0px;
-    display: block;   
-}
-
-section .option_list .option{
-    background: aliceblue;
-    border: 1px solid #84c5fe;
-    border-radius: 5px;
-    padding: 8px 15px;
-    font-size: 17px;
-    margin-bottom: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-section .option_list .option:last-child{
-    margin-bottom: 0px;
-}
-
-section .option_list .option:hover{
-    color: #004085;
-    background: #cce5ff;
-    border: 1px solid #b8daff;
-}
-
-section .option_list .option.correct{
-    color: #155724;
-    background: #d4edda;
-    border: 1px solid #c3e6cb;
-}
-
-section .option_list .option.incorrect{
-    color: #721c24;
-    background: #f8d7da;
-    border: 1px solid #f5c6cb;
-}
-
-section .option_list .option.disabled{
-    pointer-events: none;
-}
-
-section .option_list .option .icon{
-    height: 26px;
-    width: 26px;
-    border: 2px solid transparent;
-    border-radius: 50%;
-    text-align: center;
-    font-size: 13px;
-    pointer-events: none;
-    transition: all 0.3s ease;
-    line-height: 24px;
-}
-.option_list .option .icon.tick{
-    color: #23903c;
-    border-color: #23903c;
-    background: #d4edda;
-}
-
-.option_list .option .icon.cross{
-    color: #a42834;
-    background: #f8d7da;
-    border-color: #a42834;
 }
 
 footer{
@@ -351,7 +295,7 @@ position:'none';
   }
   
   html{
-    padding-top:20px;
+    padding-top:10px;
    
     font-size: 14px;
     display: flex;
@@ -372,10 +316,9 @@ width:100vw;
 }
  .rem{
   font-size:15px;
-  padding: 20px;
+  
  } 
  
-
 
 }
 

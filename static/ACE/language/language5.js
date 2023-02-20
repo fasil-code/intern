@@ -153,7 +153,7 @@ var choosen=-1;
 function rem(){
       for (const child of buttonGroup.children) {
             child.style.border='none'
-            child.style.transition='none'
+            child.style.transition='0.3s ease-in-out'
            // child.style.transform='none'
             child.style.background=''
             clicked=false
@@ -167,7 +167,7 @@ const buttonGroupPressed = e => {
          for (const child of buttonGroup.children) {
        
            child.style.border='none'
-           child.style.transition='none'
+           child.style.transition='0.3s ease-in-out'
           // child.style.transform='none'
            child.style.background=''
            clicked=false
