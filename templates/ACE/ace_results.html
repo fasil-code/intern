@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ACE/ace_results.css')}}">
+    
+    <title>Results</title>
+</head>
+<body>
+    <div class="table">
+
+        <table>
+            <caption>Test Results</caption>
+            <thead>
+              <tr>
+                <th scope="col">Test</th>
+                <th scope="col">Score</th>
+              
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Test">Attention Test</td>
+                    <td data-label="Marks">40/100</td>
+                  
+                </tr>
+                <tr>
+                    <td scope="row" data-label="Test">Fluency Test</td>
+                    <td data-label="Marks">50/100</td>
+              
+                </tr> 
+              
+              <tr>
+                <td scope="row" data-label="Test">Memory Test</td>
+                <td data-label="Marks">60/100</td>
+              
+              </tr>
+              <tr>
+                <td data-label="Test">Language Test</td>
+                <td data-label="Marks">40/100</td>
+              
+              </tr>
+              <tr>
+                <td scope="row" data-label="test">Visuo-Spatial Test</td>
+                <td data-label="Marks">10/100</td>
+           
+              </tr>
+              <tr>
+                <td scope="row" data-label="test">Over All Precentage:</td>
+                <td data-label="Marks">90%</td>
+           
+              </tr>
+            </tbody>
+        </table>
+        <div id="quit">
+        <button id="quit_btn" class="button button-1">Quit</button>
+        </div>  
+    </div>
+    <script>
+        var nextUrl = "{{url}}";
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/ace_results.js') }}"></script>
+
+</body>
+</html>

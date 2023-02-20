@@ -40,7 +40,7 @@ import pickle
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = '7006022139'
 # app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -842,8 +842,12 @@ def vs1():
 @app.route("/vs2",methods=['GET','POST'])
 def vs2():
 
-   return render_template('ACE/visuospatial/vs2.html',url="/")
+   return render_template('ACE/visuospatial/vs2.html',url="/ace_res")
+# aceresults route
+@app.route("/ace_res",methods=['GET','POST'])
+def ace_results():
 
+   return render_template('ACE/ace_results.html',url="/tests")
 #5 Pulse Tracking Test (PTT)
 @app.route("/ptt",methods=['GET','POST'])
 def ptt():
