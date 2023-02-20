@@ -1,72 +1,28 @@
 const nCircle = 25;
 const grid = document.getElementById('grid');
+const thumbRule = 90;
 
 let startTime;
 let timeTaken;
-
-startTime = Date.now();
-let flag_num = 1;
-let num = 1;
-let alpha = 'A';
 let wrongClicks = 0;
-
-const timer   = document.getElementById('timer');
-for(let t=180; t>=0; t--) {
-    setTimeout(() => {
-        timer.innerText = t;
-    }, (180-t)*1000);
-}
+startTime = Date.now();
 
 for (let i = 1; i <= nCircle; i++) {
     const cell = document.createElement('div');
     cell.classList.add(`box${i}`);
     cell.classList.add(`box`);
-    if(flag_num == 1) {
-        cell.innerText = num;
-        num++;
-        flag_num = 0;
-    } else {
-        cell.innerText = alpha;
-        alpha = String.fromCharCode(alpha.charCodeAt(0) + 1);
-        flag_num = 1;
-    }
+    cell.innerText = i;
     grid.appendChild(cell);
 }
 
-function displayResult() {
-    timeTaken = Date.now() - startTime;
-    let verdict;
-    if(timeTaken < 273*1000) {
-        verdict = 'Normal';
-    } else {
-        verdict = 'Deficient';
-    }
-    grid.style.display = 'none';
-    grid.style.height = '0px';
-    let result = document.getElementById('result');
-    result.style.display = 'flex';
-   
-    let router = document.getElementById('container');
-    let proceed_btn = document.getElementById('route');
-    proceed_btn.innerHTML = 'Back to Home';
-    router.style.display = 'flex';
-    document.getElementById('pul').innerText = verdict;
-    document.getElementById('cor').innerText = timeTaken/1000;
-    document.getElementById('wrn').innerText = wrongClicks;
-    $.ajax({
-        type: "POST",
-        url: "/send_score",
-        data: { 
-           score: timeTaken,
-           column: "tmt"
-        },
-        success: function(response) {
-           console.log(response);    
-        }   
-      });
-}
-
 const cell = document.querySelectorAll('.box');
+const timer   = document.getElementById('timer');
+
+for(let t=thumbRule; t>=0; t--) {
+    setTimeout(() => {
+        timer.innerText = t;
+    }, (thumbRule-t)*1000);
+}
 
 const coordinates = 
 Array.from({length: cell.length}, () => [Math.ceil(Math.random() * 10), Math.ceil(Math.random() * 10)]);
@@ -82,16 +38,48 @@ for(let i = 0; i < cell.length; i++) {
     cell[i].style.gridRowStart = coord[1];
     cell[i].style.gridRowEnd = coord[1] + 1;
 }
+
+let i = 1;
+let blinkInterval = null;
 let completed = false;
+
+function displayResult() {
+    timeTaken = Date.now() - startTime;
+    let verdict;
+    if(timeTaken < 78*1000) {
+        verdict = 'Normal';
+    } else {
+        verdict = 'Deficient';
+    }
+    grid.style.display = 'none';
+    grid.style.height  = '0px';
+    let result = document.getElementById('result');
+    result.style.display = 'flex';
+    let router = document.getElementById('container');
+    router.style.display = 'flex';
+    document.getElementById('pul').innerText = verdict;
+    document.getElementById('cor').innerText = timeTaken/1000;
+    document.getElementById('wrn').innerText = wrongClicks;
+    $.ajax({
+        type: "POST",
+        url: "/send_score",
+        data: { 
+           score: timeTaken,
+           column: "tmt"
+        },
+        success: function(response) {
+           console.log(response);    
+        }   
+    });
+}
+
 let completionInterval = setInterval(() => {
     if(!completed) {
         displayResult();
         clearInterval(completionInterval);
     }
-}, 180*1000);
+}, thumbRule*1000);
 
-let i = 1;
-let blinkInterval = null;
 document.addEventListener('click', function (event) {
     let target = event.target;
     if(target.classList.contains(`box${i}`)) {
