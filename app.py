@@ -27,7 +27,7 @@ from flask_session import Session
 from flask_mysqldb import MySQL
 app = Flask(__name__)
 mysql = MySQL(app)
-import mysql.connector
+
 from terms import terms
 gc=geonamescache.GeonamesCache()
 countries = gc.get_countries()
@@ -112,6 +112,9 @@ def create_database():
          tmt_score INT,
          session_id VARCHAR(255)
       )'''
+      
+      
+      
    ) 
    cursor.close()
    conn.close()
@@ -175,9 +178,8 @@ def after_request(response):
   
 @app.route("/send_score", methods=["POST"])
 def send_score():
-   email = session.get('logged_in')
-   date= datetime.datetime.now().date()
-
+   
+   email=session.get('logged_in')
    score= request.form.get("score")
    column= request.form.get("column")
    time=request.form.get('time')
@@ -186,10 +188,10 @@ def send_score():
    cursor = conn.cursor()
 
    cursor.execute(f"SELECT * FROM emotion WHERE session_id = %s AND email = %s", (sesion_key, email))
-   result = cursor.fetchone()
+   result_emoji = cursor.fetchone()
 
    cursor.execute(f"SELECT * FROM ace WHERE session_id = %s AND email = %s", (sesion_key, email))
-   result1 = cursor.fetchone()
+   result_ace = cursor.fetchone()
 
    cursor.execute(f"SELECT * FROM ptt WHERE session_id = %s AND email = %s", (sesion_key, email))
    result_ptt = cursor.fetchone()
@@ -200,51 +202,27 @@ def send_score():
    aceColumn = ['attention1','attention2','attention3','fluency1','fluency2','memory1','memory2',
                'memory3','memory4','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
    if column in aceColumn:
-      if not result1:
-         # Insert a new row
-         if not score:
-            score = 0
-         cursor.execute(f"INSERT INTO ace (email,Date,{column},session_id) VALUES (%s,%s, %s, %s)", (email,date, score,sesion_key))
-         conn.commit() 
-      else:
+        
       # Update the existing row
          cursor.execute(f"UPDATE ace SET {column}= %s WHERE session_id = %s AND email = %s", (score, sesion_key, email))
          conn.commit()
 
 
    if column=="emoji":
-      if not result:
-         # Insert a new row  
-         cursor.execute(f"INSERT INTO emotion (email,Date, emoji_game, time_emoji_game,session_id) VALUES (%s,%s, %s, %s,%s)", (email, date, score, time, sesion_key))
-         conn.commit()
-      else:
+      
          # Update the existing row
          cursor.execute(f"UPDATE emotion SET emoji_game = %s, time_emoji_game = %s WHERE session_id = %s AND email = %s", (score, time, sesion_key, email))
          conn.commit()
-   elif column=="ert":
-      if not result:
-      # Insert a new row
-         cursor.execute(f"INSERT INTO emotion (email,Date, ert, time_ert,session_id) VALUES (%s,%s, %s, %s,%s)", (email, date, score, time, sesion_key))
-         conn.commit()
-      else:
-      # Update the existing row
+   if column=="ert":
          cursor.execute(f"UPDATE emotion SET ert = %s, time_ert = %s WHERE session_id = %s AND email = %s", (score, time, sesion_key, email))
          conn.commit()
 
    
    if column=="ptt":
-      if not result_ptt:
-         cursor.execute(f"INSERT INTO ptt (email, Date, ptt_score, session_id) VALUES (%s, %s, %s,%s)", (email, date, score, sesion_key))
-         conn.commit()
-      else:
          cursor.execute(f"UPDATE ptt SET ptt_score = %s WHERE session_id = %s AND email = %s", (score, sesion_key, email))
          conn.commit()
    
    if column=="tmt":
-      if not result_tmt:
-         cursor.execute(f"INSERT INTO tmt (email, Date, tmt_score, session_id) VALUES (%s, %s, %s, %s)", (email, date, score, sesion_key))
-         conn.commit()
-      else:
          cursor.execute(f"UPDATE tmt SET tmt_score = %s WHERE session_id = %s AND email = %s", (score, sesion_key, email))
          conn.commit()
 
@@ -253,7 +231,7 @@ def send_score():
 
    return "Score received: " + score + " for " + column   
         
- #1  Home     
+   
 @app.route("/home", methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
 def home():
@@ -271,10 +249,47 @@ def home():
 def tests():
    if 'logged_in' in session:
         
-        email = session.get('logged_in')
+        
         global sesion_key
         session_id = request.args.get('session_id')
         sesion_key=session_id
+        email = session.get('logged_in')
+        date= datetime.datetime.now().date()
+        conn = mysql.connect
+        cursor = conn.cursor()
+        # Attempt for emoji game and ert test
+        cursor.execute(f"SELECT * FROM emotion WHERE session_id = %s AND email = %s", (session_id, email))
+        result_emotion = cursor.fetchone()
+         # Attempt for ace test
+        cursor.execute(f"SELECT * FROM ace WHERE session_id = %s AND email = %s", (session_id, email))
+        result_ace = cursor.fetchone()
+        #Attempt for ptt test
+        cursor.execute(f"SELECT * FROM ptt WHERE session_id = %s AND email = %s", (session_id, email))
+        result_ptt = cursor.fetchone()
+        #Atempt for tmt test
+        cursor.execute(f"SELECT * FROM tmt WHERE session_id = %s AND email = %s", (session_id, email))
+        result_tmt = cursor.fetchone()
+        #emoji
+        if(not result_emotion):
+            cursor.execute(f"INSERT INTO emotion (email, Date, session_id) VALUES (%s, %s, %s)", (email, date, session_id)) 
+            conn.commit()
+         #ace   
+        if(not result_ace):
+            cursor.execute(f"INSERT INTO ace (email, Date, session_id) VALUES (%s, %s, %s)", (email, date, session_id)) 
+            conn.commit()
+         #ptt
+        if(not result_ptt):
+            cursor.execute(f"INSERT INTO ptt (email, Date, session_id) VALUES (%s, %s, %s)", (email, date, session_id)) 
+            conn.commit() 
+          #tmt  
+        if(not result_tmt):
+            cursor.execute(f"INSERT INTO tmt (email, Date, session_id) VALUES (%s, %s, %s)", (email, date, session_id)) 
+            conn.commit()
+         
+        cursor.close()
+        conn.close()    
+            
+                
         return render_template('home.html',terms=terms,email=email,session_id=session_id)   
    return redirect('login')
 
@@ -290,40 +305,27 @@ def dashboard():
       # emotion
       query = "SELECT * FROM emotion WHERE email = %s"
       cursor.execute(query, (email,))
-      results = cursor.fetchall()
+      results_emoji = cursor.fetchall()
       
       # ACE
       query = "SELECT * FROM ace WHERE email = %s"
       cursor.execute(query, (email,))
-      results1 = cursor.fetchall()
+      results_ace = cursor.fetchall()
       
       # PTT
       query = "SELECT * FROM ptt WHERE email = %s"
       cursor.execute(query, (email,))
-      result_ptt = cursor.fetchall()
+      results_ptt = cursor.fetchall()
 
       # TMT
       query = "SELECT * FROM tmt WHERE email = %s"
       cursor.execute(query, (email,))
-      result_tmt = cursor.fetchall()
+      results_tmt = cursor.fetchall()
 
-      size = max(len(results),len(results1), len(result_ptt), len(result_tmt))
-      maximum_size = max(len(results), len(results1), len(result_ptt), len(result_tmt))
-      diff1 = maximum_size - len(results)
-      diff2 = maximum_size - len(results1)
-      diff3 = maximum_size - len(result_ptt)
-      diff4 = maximum_size - len(result_tmt)
-      tup1 = (0,)*20 # create a tuple of 20 zeros
-      for i in range(diff1):
-         results = results + ((0,)*7,) # append a tuple of 7 zeros to results
-      for i in range(diff2):
-         results1 = results1 + ((tup1),) 
-      for i in range(diff3):
-         result_ptt = result_ptt + ((0,)*7,) 
-      for i in range(diff4):
-         result_tmt = result_tmt + ((0,)*7,)
-      cursor.close()
-      results=results+results1
+      size=len(results_ace)
+      results=results_emoji+results_ace+results_ptt+results_tmt
+       
+      
       return render_template('dashboard.html',results=results,size=size)
    return redirect('login')
 
@@ -347,6 +349,7 @@ def generate_pdf():
       query = "SELECT * FROM emotion WHERE id=%s AND email=%s"
       cursor.execute(query, (id, email))
       results = cursor.fetchone()
+      report_id=results[7]
       query = "SELECT * FROM ace WHERE id=%s AND email=%s"
       cursor.execute(query, (id, email))
       results1 = cursor.fetchone()
@@ -404,9 +407,11 @@ def generate_pdf():
       elements.append(Paragraph('Frontotemporal Dementia Report ', styles['heading']))
       
       elements.append(Spacer(1, 0.5*inch))
-      name = "Moin"  # Replace with the actual name value
+        # Replace with the actual name value
       email = session.get('logged_in')  # Replace with the actual name value
+      name = session.get('name')
       date = datetime.datetime.now().strftime('%B, %d, %Y')
+     
       time = datetime.datetime.now().strftime('%I:%M %p')
       name_style = ParagraphStyle(
       'name',
@@ -449,10 +454,14 @@ def generate_pdf():
          #backColor=colors.whitesmoke,
       )   
 
-      elements.append(Paragraph(f' Name: {name}', email_style))
-      elements.append(Paragraph(f'Email: {email}', email_style))
-      elements.append(Paragraph(f'Date: {date}', date_style))
-      elements.append(Paragraph(f'Time: {time}', time_style))
+      elements.append(Paragraph(f'<font color="brown"> Name:</font> {name}', email_style))
+      elements.append(Spacer(1, 0.1*inch))
+      elements.append(Paragraph(f'<font color="brown">  Email:</font> {email}', email_style))
+      elements.append(Spacer(1, 0.1*inch))
+      elements.append(Paragraph(f'<font color="brown"> Report Id:</font> <font color="blue">{report_id}</font> ', email_style))
+      elements.append(Paragraph(f'<font color="brown">Date:</font>  {date}', date_style))
+      elements.append(Spacer(1, 0.1*inch))
+      elements.append(Paragraph(f'<font color="brown">  Time:</font> {time}', time_style))
       
       # Add data to table
       elements.append(Spacer(1, 0.5*inch))
@@ -496,17 +505,7 @@ The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust wer
 
       # Add table to PDF template
       elements.append(table)
-      data = [
-   ['Emotion', 'Actual', 'Predicted'],
-   ['Happy', 20, 18],
-   ['Sad', 15, 16],
-   ['Anger', 10, 10],
-   ['Contempt', 5, 6],
-   ['Neutral', 25, 24],
-   ['Surprise', 10, 9],
-   ['Fear', 5, 8],
-   ['Disgust', 10, 9],
-   ]
+     
 
 # Define the style for the table
       table_style = TableStyle([
@@ -681,9 +680,7 @@ The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust wer
                                   ''', style=styles['para']))
       elements.append(Spacer(1, 0.4*inch))
       # Create the table and add it to the elements list
-      table = Table(data)
-      table.setStyle(table_style)
-      elements.append(table)
+      
       doc.build(elements)
       response.data = buffer.getvalue()
       return response
