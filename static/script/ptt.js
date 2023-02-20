@@ -31,10 +31,6 @@ class Data {
     this.timeStampCorrect = timeStampCorrect;
     this.timeStampWrong   = timeStampWrong;
   }
-
-  get score() {
-    return this.successArray.reduce((a, b) => a + b, 0);
-  }
 }
 
 let greyClicks       = 0;
@@ -45,7 +41,7 @@ let wrongClicks      = 0;
 let timeStampWrong   = [];
 let successArray     = [];
 let isClicked        = false;
-// const Data = new Data(greyClicks, correctClicks, wrongClicks, successArray, timeStampGray, timeStampCorrect, timeStampWrong);
+
 document.getElementById('proceed').addEventListener('click', function () {
   box1.style.display = 'flex';
   box2.style.display = 'flex';
@@ -113,18 +109,18 @@ function Game() {
 
   
   setTimeout(() => {
+    let myData = new Data(greyClicks, correctClicks, wrongClicks, successArray, timeStampGray, timeStampCorrect, timeStampWrong);
+    let jsonData = JSON.stringify(myData);
     result.style.display = 'flex';
     score.style.display = 'flex';
     let router = document.getElementById('container');
     router.style.display = 'flex';
     pul.innerText = pulses;
-    // cor.innerText = Data.score;
     cor.innerText = successArray.reduce((a, b) => a + b, 0);
     wrn.innerText = wrongClicks;
     console.log('Gray Clicks');
-    console.log(greyClicks);
-    // console.log(Data.greyClicks)
-    console.log(timeStampGray);
+    console.log(myData.greyClicks);
+    console.log(myData.timeStampGray);
     console.log('Correct Clicks');
     console.log(correctClicks);
     console.log(timeStampCorrect);
@@ -142,7 +138,7 @@ function Game() {
       type: "POST",
       url: "/send_score",
       data: { 
-         score: successArray.reduce((a, b) => a + b, 0),
+         score: jsonData,
          column: "ptt"
       },
       success: function(response) {

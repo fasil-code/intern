@@ -34,7 +34,8 @@ countries = gc.get_countries()
 import pymysql
 from flask import render_template
 from user import register_route,login_route,logout_route,reset_password_route,set_password_route
-
+import json
+import pickle
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
@@ -102,6 +103,13 @@ def create_database():
          email VARCHAR(255) NOT NULL,
          Date VARCHAR(255),
          ptt_score INT,
+         GrayClicks INT,
+         WrongClicks INT,
+         CorrectClicks INT,
+         GrayTimeStamp BLOB,
+         WrongTimeStamp BLOB,
+         CorrectTimeStamp BLOB,
+         SuccessStamp BLOB,
          session_id VARCHAR(255)
       )'''
    ) 
@@ -177,13 +185,19 @@ def after_request(response):
 @app.route("/send_score", methods=["POST"])
 def send_score():
    email = session.get('logged_in')
-   date= datetime.datetime.now().date()
+   date  = datetime.datetime.now().date()
 
-   score= request.form.get("score")
-   column= request.form.get("column")
-   time=request.form.get('time')
+   column = request.form.get("column")
+
+   if column == 'ptt':
+      score = request.form['score']
+      print("recieved") # for debugging
+      parsed_data = json.loads(score)
+   else:
+      score = request.form.get("score")
+      time = request.form.get('time')
    
-   conn = mysql.connect
+   conn   = mysql.connect
    cursor = conn.cursor()
 
    cursor.execute(f"SELECT * FROM emotion WHERE session_id = %s AND email = %s", (sesion_key, email))
@@ -234,11 +248,24 @@ def send_score():
 
    
    if column=="ptt":
+      SucArr = parsed_data['successArray']
+
+      # Converting arrays to binary data (BLOB)
+      # using pickle module
+      GrayTimeStamp = pickle.dumps(parsed_data['timeStampGray'])
+      WrongTimeStamp = pickle.dumps(parsed_data['timeStampWrong'])
+      CorrectTimeStamp = pickle.dumps(parsed_data['timeStampCorrect'])
+      SuccessStamp = pickle.dumps(SucArr)
+
       if not result_ptt:
-         cursor.execute(f"INSERT INTO ptt (email, Date, ptt_score, session_id) VALUES (%s, %s, %s,%s)", (email, date, score, sesion_key))
+         sqlCmd = f"INSERT INTO ptt (email, Date, ptt_score, GrayClicks, WrongClicks, CorrectClicks, GrayTimeStamp, WrongTimeStamp, CorrectTimeStamp, SuccessStamp, session_id) VALUES (%s, %s, %s,%s, %s, %s, %s,%s, %s, %s, %s)"
+         vals = (email, date, sum(SucArr), parsed_data['greyClicks'], parsed_data['wrongClicks'], parsed_data['correctClicks'], GrayTimeStamp, WrongTimeStamp, CorrectTimeStamp, SuccessStamp, sesion_key)
+         cursor.execute(sqlCmd, vals)
          conn.commit()
       else:
-         cursor.execute(f"UPDATE ptt SET ptt_score = %s WHERE session_id = %s AND email = %s", (score, sesion_key, email))
+         sqlCmd = f"UPDATE ptt SET ptt_score = %s, GrayClicks = %s, WrongClicks = %s, CorrectClicks = %s, GrayTimeStamp = %s, WrongTimeStamp = %s, CorrectTimeStamp = %s, SuccessStamp = %s WHERE session_id = %s AND email = %s"
+         vals = (sum(SucArr), parsed_data['greyClicks'], parsed_data['wrongClicks'], parsed_data['correctClicks'], GrayTimeStamp, WrongTimeStamp, CorrectTimeStamp, SuccessStamp, sesion_key, email)
+         cursor.execute(sqlCmd, vals)
          conn.commit()
    
    if column=="tmt":
@@ -259,11 +286,9 @@ def send_score():
 @app.route("/", methods=['GET','POST'])
 def home():
    if 'logged_in' in session:
-            name=session.get('name')
-           # Generate a new session ID
-            
-            
-            return render_template('navbar.html',name=name,  logged_in=True)         
+         name=session.get('name')
+         # Generate a new session ID
+         return render_template('navbar.html',name=name,  logged_in=True)         
    return render_template('navbar.html', logged_in=False)
 
 
@@ -344,13 +369,24 @@ def generate_pdf():
       conn = mysql.connect
       cursor = conn.cursor() 
       email = session.get('logged_in')
+
       # Replace with the actual email value you want to search for
       query = "SELECT * FROM emotion WHERE id=%s AND email=%s"
       cursor.execute(query, (id, email))
       results = cursor.fetchone()
+
       query = "SELECT * FROM ace WHERE id=%s AND email=%s"
       cursor.execute(query, (id, email))
       results1 = cursor.fetchone()
+
+      query = "SELECT * FROM ptt WHERE id=%s AND email=%s"
+      cursor.execute(query, (id, email))
+      result_ptt = cursor.fetchone()
+
+      query = "SELECT * FROM tmt WHERE id=%s AND email=%s"
+      cursor.execute(query, (id, email))
+      result_tmt = cursor.fetchone()
+
       response = make_response()
       response.headers['Content-Type'] = 'application/pdf'
       response.headers['Content-Disposition'] = 'attachment; filename=output.pdf'
@@ -418,17 +454,17 @@ def generate_pdf():
       #backColor=colors.whitesmoke
       )
       email_style = ParagraphStyle(
-      'email',
-      fontName='Helvetica',
-      fontSize=12,
-      textColor=colors.black,
-               leftIndent=0.5*inch,
-               rightIndent=0.5*inch,
-               spaceBefore=0,
-               border=2,
-               borderWidth=1,
-               borderColor=colors._CMYK_white,
-               borderRadius=1,    
+         'email',
+         fontName='Helvetica',
+         fontSize=12,
+         textColor=colors.black,
+         leftIndent=0.5*inch,
+         rightIndent=0.5*inch,
+         spaceBefore=0,
+         border=2,
+         borderWidth=1,
+         borderColor=colors._CMYK_white,
+         borderRadius=1,    
       )
    
       date_style = ParagraphStyle(
@@ -460,71 +496,68 @@ def generate_pdf():
       elements.append(Paragraph(' <font color="maroon">Tests related to Emotion</font>', styles['heading1']))
       elements.append(Spacer(1, 0.2*inch))
       elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Emotion Recognition Test</font> <br/>
-   <br/>
-   Percentage Scored : <font color="black" fontSize=14 >{results[5]} %</font><br/>                         
-   Completion Time (min :sec):<font color="black" fontSize=14 > {results[6]}</font>  <br/>  
-   <br/>
-   Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient.
-The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust were tested.
-   The user identification capacity is <font color="black" fontSize=14 >{results[5]} %</font>  and the time span was <font color="black" fontSize=14 >{results[6]} minutes</font> .                  
-                           
-                                 
-                                 ''', style=styles['para']))
+      <br/>
+      Percentage Scored : <font color="black" fontSize=14 >{results[5]} %</font><br/>                         
+      Completion Time (min :sec):<font color="black" fontSize=14 > {results[6]}</font>  <br/>  
+      <br/>
+      Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient.
+      The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust were tested.
+      The user identification capacity is <font color="black" fontSize=14 >{results[5]} %</font>  and the time span was <font color="black" fontSize=14 >{results[6]} minutes</font> .                                
+      ''', style=styles['para']))
       elements.append(Spacer(1, 0.4*inch))
       elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b) Emoji Identification Test</font> :<br/> <br/>
-         Percentage Scored : <font color="black" fontSize=14 >{results[3]}</font> <br/>                         
-   Completion Time (min :sec): <font color="black" fontSize=14 >{results[4]}</font>  <br/>  
+      Percentage Scored : <font color="black" fontSize=14 >{results[3]}</font> <br/>                         
+      Completion Time (min :sec): <font color="black" fontSize=14 >{results[4]}</font>  <br/>  
       <br/>
-   Summary: Emoji Identification test was given by the patient to test the patient's ability to recognise the emojis . 
-   The emojis related  smiley,frowny,emotion are tested.The user identification capacity is <font color="black" fontSize=14 >{results[3]} </font> % and the time span was <font color="black" fontSize=14 >{results[4]}  minutes. </font>                                          
-''', styles['para']))
+      Summary: Emoji Identification test was given by the patient to test the patient's ability to recognise the emojis . 
+      The emojis related  smiley,frowny,emotion are tested.The user identification capacity is <font color="black" fontSize=14 >{results[3]} </font> % and the time span was <font color="black" fontSize=14 >{results[4]}  minutes. </font>                                          
+      ''', styles['para']))
       elements.append(Spacer(1, 0.6*inch))
       data = []
       
       data.append(results)
       table = Table(data)
       table.setStyle(TableStyle([
-      ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-   ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-   ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-   ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-   ('FONTSIZE', (0, 0), (-1, 0), 14),
-   ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-   ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-   ('GRID', (0, 0), (-1, -1), 1, colors.black),
-   ('BACKGROUND', (1, 1), (1, 1), colors.lightgrey),
+         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+         ('FONTSIZE', (0, 0), (-1, 0), 14),
+         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+         ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+         ('GRID', (0, 0), (-1, -1), 1, colors.black),
+         ('BACKGROUND', (1, 1), (1, 1), colors.lightgrey),
       ]))
 
       # Add table to PDF template
       elements.append(table)
       data = [
-   ['Emotion', 'Actual', 'Predicted'],
-   ['Happy', 20, 18],
-   ['Sad', 15, 16],
-   ['Anger', 10, 10],
-   ['Contempt', 5, 6],
-   ['Neutral', 25, 24],
-   ['Surprise', 10, 9],
-   ['Fear', 5, 8],
-   ['Disgust', 10, 9],
-   ]
+         ['Emotion', 'Actual', 'Predicted'],
+         ['Happy', 20, 18],
+         ['Sad', 15, 16],
+         ['Anger', 10, 10],
+         ['Contempt', 5, 6],
+         ['Neutral', 25, 24],
+         ['Surprise', 10, 9],
+         ['Fear', 5, 8],
+         ['Disgust', 10, 9],
+      ]
 
-# Define the style for the table
+      # Define the style for the table
       table_style = TableStyle([
-   ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-   ('FONTSIZE', (0, 0), (-1, 0), 14),
-   ('BACKGROUND', (0, 0), (-1, 0), 'lightgrey'),
-   ('TEXTCOLOR', (0, 0), (-1, 0), 'black'),
-   ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
-   ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
-   ('FONTSIZE', (0, 1), (-1, -1), 12),
-   ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
-   ])
+         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+         ('FONTSIZE', (0, 0), (-1, 0), 14),
+         ('BACKGROUND', (0, 0), (-1, 0), 'lightgrey'),
+         ('TEXTCOLOR', (0, 0), (-1, 0), 'black'),
+         ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+         ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+         ('FONTSIZE', (0, 1), (-1, -1), 12),
+         ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
+      ])
 
       elements.append(Spacer(1, 0.5*inch))
 
-      elements.append(
-         Paragraph(' <font color="maroon">ACE-|||</font>', styles['heading1'])) 
+      elements.append(Paragraph(' <font color="maroon">ACE-III</font>', styles['heading1'])) 
       
       elements.append(Spacer(1, 0.2*inch))
       elements.append(Paragraph(f''' <font color="blue" fontSize=16>Total Marks :90</font> <br/>
@@ -532,7 +565,7 @@ The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust wer
         
       <font color="black" fontSize=14 >Marks Secured : {results1[3]+results1[4]+results1[5]+results1[6]+results1[7]+results1[8]+results1[9]+results1[10]+results1[11]+results1[12]+results1[13]+results1[14]+results1[15]+results1[16]+results1[17]+results1[18]} </font><br/>                                        
                                   
-                                  ''', style=styles['para']))
+      ''', style=styles['para']))
       elements.append(Spacer(1, 0.4*inch))
       elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Attention Test</font> <br/>
       <br/>
@@ -680,7 +713,26 @@ The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust wer
      <br/>
       
                                   ''', style=styles['para']))
-      elements.append(Spacer(1, 0.4*inch))
+      # elements.append(Spacer(1, 0.4*inch))
+
+      # elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(f) Pulse Tracking Test</font> :<br/> <br/>
+      #    <font color="black" fontSize=14 >Total Marks: 5 </font><br/>
+      #    <font color="black" fontSize=14 >Marks Secured: {result_ptt[4]}</font><br/>
+      #    <br/>
+      #    <font color="black" fontSize=14>Wrong Clicks: {result_ptt[6]}</font><br/>
+      #    <br/>
+      #    <font color="black" fontSize=14>Correct Clicks: {result_ptt[7]}</font><br/>
+      #    <font color="black" fontSize=14>All the wrong clicks and correct ones have been noted along with their timestamps and have been stored as BLOBs. <br/>
+      #    Use pickle module to deserialize the BLOB data in Python</font><br/>
+      #    ''', style=styles['para']))
+      # elements.append(Spacer(1, 0.4*inch))
+      # elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(g) Trail Making Test</font> :<br/> <br/>
+      #    <font color="black" fontSize=14 >Total Marks: 5 </font><br/>
+      #    <font color="black" fontSize=14 >Marks Secured : {result_tmt[4]}</font><br/>
+      #    <br/>
+      #    <font color="black" fontSize=14>The count of wrong clicks has been noted down</font><br/>
+      #    ''', style=styles['para']))
+      # elements.append(Spacer(1, 0.4*inch))
       # Create the table and add it to the elements list
       table = Table(data)
       table.setStyle(table_style)
