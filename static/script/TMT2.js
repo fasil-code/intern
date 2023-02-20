@@ -8,6 +8,7 @@ startTime = Date.now();
 let flag_num = 1;
 let num = 1;
 let alpha = 'A';
+let wrongClicks = 0;
 
 const timer   = document.getElementById('timer');
 for(let t=180; t>=0; t--) {
@@ -44,36 +45,14 @@ function displayResult() {
     grid.style.height = '0px';
     let result = document.getElementById('result');
     result.style.display = 'flex';
-    const resultTable = `
-        <table>
-        <tr>
-            <th>Result</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>Total Time</td>
-            <td>${timeTaken} ms</td>
-        </tr>
-        <tr>
-            <td>In seconds</td>
-            <td>${timeTaken/1000} s</td>
-        </tr>
-        <tr>
-            <td>Verdict</td>
-            <td>${verdict}</td>
-        </tr>
-        <tr>
-            <td>Completed</td>
-            <td>${completed}</td>
-        </tr>
-        </table>
-        `;
-    result.innerHTML = resultTable;
+   
     let router = document.getElementById('container');
     let proceed_btn = document.getElementById('route');
     proceed_btn.innerHTML = 'Back to Home';
     router.style.display = 'flex';
-
+    document.getElementById('pul').innerText = verdict;
+    document.getElementById('cor').innerText = timeTaken/1000;
+    document.getElementById('wrn').innerText = wrongClicks;
     $.ajax({
         type: "POST",
         url: "/send_score",
@@ -126,6 +105,7 @@ document.addEventListener('click', function (event) {
             displayResult();
         }
     } else if(target.classList.contains('box')) {
+        wrongClicks++;
         if(blinkInterval) {
             clearInterval(blinkInterval);
         }
