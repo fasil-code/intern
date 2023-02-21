@@ -496,15 +496,14 @@ border-radius: 4px;
   }
 
   
-  /* table {
+   table {
     font-family: Arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
   }
-  .header {
+.header {
     border: 1px solid black;
-  } */
-  
+  } 
   .data {
     border: 1px solid black;
     text-align: center;
@@ -512,6 +511,7 @@ border-radius: 4px;
   }
   a {
     text-decoration: none;
+    color: black;
   }
   a:visited {
     color: inherit;
@@ -525,9 +525,10 @@ border-radius: 4px;
     font-size: 26px;
     margin-right: 11px;
   }
+
   @media only screen and (max-width: 600px) {
    .box-container{
     display: none;
-   }
+  } 
   
   }

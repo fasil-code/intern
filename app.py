@@ -40,7 +40,7 @@ import pickle
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = '7006022139'
+app.config['MYSQL_PASSWORD'] = 'alchemist'
 # app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -846,8 +846,14 @@ def vs2():
 # aceresults route
 @app.route("/ace_res",methods=['GET','POST'])
 def ace_results():
-
-   return render_template('ACE/ace_results.html',url="/tests")
+        email = session.get('logged_in')
+        conn = mysql.connect
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT * FROM ace WHERE session_id = %s AND email = %s", (sesion_key, email))
+        result_ace = cursor.fetchone()
+        cursor.close()
+        conn.close() 
+        return render_template('ACE/ace_results.html',result_ace=result_ace,url="/tests")
 #5 Pulse Tracking Test (PTT)
 @app.route("/ptt",methods=['GET','POST'])
 def ptt():

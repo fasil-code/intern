@@ -12,7 +12,7 @@
     <div class="table">
 
         <table>
-            <caption>Test Results</caption>
+            <caption>Test Result</caption>
             <thead>
               <tr>
                 <th scope="col">Test</th>
@@ -23,34 +23,39 @@
             <tbody>
                 <tr>
                     <td data-label="Test">Attention Test</td>
-                    <td data-label="Marks">40/100</td>
+                    <td data-label="Marks">{{result_ace[3]+result_ace[4]+result_ace[5]}}/19</td>
                   
                 </tr>
                 <tr>
                     <td scope="row" data-label="Test">Fluency Test</td>
-                    <td data-label="Marks">50/100</td>
+                    <td data-label="Marks">{{result_ace[6]+result_ace[7]}}/14</td>
               
                 </tr> 
               
               <tr>
                 <td scope="row" data-label="Test">Memory Test</td>
-                <td data-label="Marks">60/100</td>
+                <td data-label="Marks">{{result_ace[8]+result_ace[9]+result_ace[10]+result_ace[11]}}/26</td>
               
               </tr>
               <tr>
                 <td data-label="Test">Language Test</td>
-                <td data-label="Marks">40/100</td>
+                <td data-label="Marks">{{result_ace[12]+result_ace[13]+result_ace[14]+result_ace[15]+result_ace[16]}}/23</td>
               
               </tr>
               <tr>
                 <td scope="row" data-label="test">Visuo-Spatial Test</td>
-                <td data-label="Marks">10/100</td>
+                <td data-label="Marks">{{result_ace[17]+result_ace[18]}}/8</td>
            
               </tr>
               <tr>
-                <td scope="row" data-label="test">Over All Precentage:</td>
-                <td data-label="Marks">90%</td>
+                <td scope="row" data-label="test">Total</td>
+                <td data-label="Marks">{{result_ace[3]+result_ace[4]+result_ace[5]+result_ace[6]+result_ace[7]+result_ace[8]+result_ace[9]+result_ace[10]+result_ace[11]+result_ace[12]+result_ace[13]+result_ace[14]+result_ace[15]+result_ace[16]+result_ace[17]+result_ace[18]}}/90</td>
            
+              </tr>
+              <tr>
+                <td scope="row" data-label="test">Percentage</td>
+                <td data-label="Marks">{{ '{:.2f}'.format((result_ace[3]+result_ace[4]+result_ace[5]+result_ace[6]+result_ace[7]+result_ace[8]+result_ace[9]+result_ace[10]+result_ace[11]+result_ace[12]+result_ace[13]+result_ace[14]+result_ace[15]+result_ace[16]+result_ace[17]+result_ace[18])/90*100) }}%</td>
+
               </tr>
             </tbody>
         </table>
