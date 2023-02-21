@@ -85,6 +85,8 @@ document.addEventListener('click', function (event) {
     if(target.classList.contains(`box${i}`)) {
         target.style.backgroundColor = 'rgb(102, 182, 106)';
         if(blinkInterval) {
+            let correctDiv = document.getElementsByClassName(`box${i}`)[0];
+            correctDiv.classList.remove('animate');
             clearInterval(blinkInterval);
         }
         i++;
@@ -95,10 +97,13 @@ document.addEventListener('click', function (event) {
     } else if(target.classList.contains('box')) {
         wrongClicks++;
         if(blinkInterval) {
+            let correctDiv = document.getElementsByClassName(`box${i}`)[0];
+            correctDiv.classList.remove('animate');
             clearInterval(blinkInterval);
         }
         blinkInterval = setInterval(() => {
             let correctDiv = document.getElementsByClassName(`box${i}`)[0];
+            correctDiv.classList.add('animate');
             correctDiv.style.backgroundColor = 
             (correctDiv.style.backgroundColor === 'rgb(102, 182, 106)') ? 'white' : 'rgb(102, 182, 106)';
         }, 500);
