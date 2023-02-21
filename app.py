@@ -40,8 +40,8 @@ import pickle
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = 'alchemist'
-# app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
+# app.config['MYSQL_PASSWORD'] = 'alchemist'
+app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -709,27 +709,74 @@ def generate_pdf():
      <br/>
       
                                   ''', style=styles['para']))
-      # elements.append(Spacer(1, 0.4*inch))
+      elements.append(Spacer(1, 0.2*inch))
+      elements.append(Paragraph(f''' <font color="blue" fontSize=16> (F) Pulse Tracking Test</font> <br/>
+      <br/>
+      Total Pulses Synced Properly: <font color="black" fontSize=14 > {result_ptt[3]} </font> out of <font color="black" fontSize=14 > 5 </font> <br/>                          
+      Correct Clicks: <font color="black" fontSize=14 > {result_ptt[4]} </font> <br/>
+      Extra Clicks: <font color="black" fontSize=14 > {result_ptt[4]-result_ptt[3]} </font> <br/>
+      Wrong Clicks: <font color="black" fontSize=14 > {result_ptt[5]} </font> <br/>
+      Summary: Pulse Tracking Test gamifies the diagnosis for potential repulsive behaviour in tap. It also checks whether a person is able to sync properly with abrupt changes in the pulse. The test is divided into 5 levels.                                
+      ''', style=styles['para']))
+      elements.append(Spacer(1, 0.4*inch))
+      data = []
+      data.append(result_ptt)
+      table = Table(data)
+      table.setStyle(TableStyle([
+         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+         ('FONTSIZE', (0, 0), (-1, 0), 14),
+         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+         ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+         ('GRID', (0, 0), (-1, -1), 1, colors.black),
+         ('BACKGROUND', (1, 1), (1, 1), colors.lightgrey),
+      ]))
+      elements.append(table)
+      table_style = TableStyle([
+         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+         ('FONTSIZE', (0, 0), (-1, 0), 14),
+         ('BACKGROUND', (0, 0), (-1, 0), 'lightgrey'),
+         ('TEXTCOLOR', (0, 0), (-1, 0), 'black'),
+         ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+         ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+         ('FONTSIZE', (0, 1), (-1, -1), 12),
+         ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
+      ])
 
-      # elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(f) Pulse Tracking Test</font> :<br/> <br/>
-      #    <font color="black" fontSize=14 >Total Marks: 5 </font><br/>
-      #    <font color="black" fontSize=14 >Marks Secured: {result_ptt[4]}</font><br/>
-      #    <br/>
-      #    <font color="black" fontSize=14>Wrong Clicks: {result_ptt[6]}</font><br/>
-      #    <br/>
-      #    <font color="black" fontSize=14>Correct Clicks: {result_ptt[7]}</font><br/>
-      #    <font color="black" fontSize=14>All the wrong clicks and correct ones have been noted along with their timestamps and have been stored as BLOBs. <br/>
-      #    Use pickle module to deserialize the BLOB data in Python</font><br/>
-      #    ''', style=styles['para']))
-      # elements.append(Spacer(1, 0.4*inch))
-      # elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(g) Trail Making Test</font> :<br/> <br/>
-      #    <font color="black" fontSize=14 >Total Marks: 5 </font><br/>
-      #    <font color="black" fontSize=14 >Marks Secured : {result_tmt[4]}</font><br/>
-      #    <br/>
-      #    <font color="black" fontSize=14>The count of wrong clicks has been noted down</font><br/>
-      #    ''', style=styles['para']))
-      # elements.append(Spacer(1, 0.4*inch))
-      # Create the table and add it to the elements list
+      elements.append(Spacer(1, 0.2*inch))
+      elements.append(Paragraph(f''' <font color="blue" fontSize=16> (g) Trail Making Test</font> <br/>
+      <br/>
+      Total Time Taken to complete the test: <font color="black" fontSize=14 > {result_ptt[3]} </font> out of <font color="black" fontSize=14 > 5 </font> <br/>                          
+      Summary: Trail Making Test tests a persons ability to count the numbers in an order and his memory. It also checks whether a person is able to do it under time. The test is divided into parts.                                
+      ''', style=styles['para']))
+      elements.append(Spacer(1, 0.4*inch))
+      data = []
+      data.append(result_ptt)
+      table = Table(data)
+      table.setStyle(TableStyle([
+         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+         ('FONTSIZE', (0, 0), (-1, 0), 14),
+         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+         ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+         ('GRID', (0, 0), (-1, -1), 1, colors.black),
+         ('BACKGROUND', (1, 1), (1, 1), colors.lightgrey),
+      ]))
+      elements.append(table)
+      table_style = TableStyle([
+         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+         ('FONTSIZE', (0, 0), (-1, 0), 14),
+         ('BACKGROUND', (0, 0), (-1, 0), 'lightgrey'),
+         ('TEXTCOLOR', (0, 0), (-1, 0), 'black'),
+         ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
+         ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+         ('FONTSIZE', (0, 1), (-1, -1), 12),
+         ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
+      ])
       
       doc.build(elements)
       response.data = buffer.getvalue()

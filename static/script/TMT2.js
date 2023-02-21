@@ -97,6 +97,7 @@ document.addEventListener('click', function (event) {
     if(target.classList.contains(`box${i}`)) {
         target.style.backgroundColor = 'rgb(102, 182, 106)';
         if(blinkInterval) {
+            let correctDiv = document.getElementsByClassName(`box${i}`)[0];
             correctDiv.classList.remove('animate');
             clearInterval(blinkInterval);
         }
@@ -108,6 +109,7 @@ document.addEventListener('click', function (event) {
     } else if(target.classList.contains('box')) {
         wrongClicks++;
         if(blinkInterval) {
+            let correctDiv = document.getElementsByClassName(`box${i}`)[0];
             correctDiv.classList.remove('animate');
             clearInterval(blinkInterval);
         }
