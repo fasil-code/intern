@@ -132,7 +132,7 @@ intern/
 |   |   └── Layout
 |   |   └── Images
 │   └── templates     
-│       ├── ACE|(attention(4))|fluency(2)|memory(4)|visuospatial(2)|results(1)
+│       ├── ACE|(attention(4))|fluency(2)|language(5)|memory(4)|visuospatial(2)|results(1)
 │       ├── Emoji|emoji(1)
 │       ├── EmojiRecog |(emojirecog.html)
 │       └── home 
@@ -150,38 +150,6 @@ intern/
 └── terms.py
 ```
 
-No complicated configuration or folder structures, only the files you need to build and deploy your app.
-Once the installation is done, you can open your project folder:
-```sh
-cd my-app
-```
-Inside the newly created project, you can run some commands:
-
-### `source venv/bin/activate` or `.\venv\Scripts\activate`
-Activates the virutal environment required for the project dependency isolation.
-
-[Read more about venv.](https://https://docs.python.org/3/library/venv.html)  
-
-### `pip install -r requirements.txt`
-Installs libraries and dependencies listed in `requirements.txt` in active environment.
-
-### `python run.py`
-Starts the app in development mode. 
-Open [http://localhost:5000](http://localhost:5000) to view it in browser.
-
-The page will automatically reload if you make changes to the code. 
-You will see errors in app reload or startup in the console.
-
-
-## How to Update to New Versions?
-
-Create-Flask-App can be simply upgraded using pip:
-
-```sh
-pip install createflaskapp --upgrade
-# or
-pip install createflaskapp -U
-```
 
 ## What's Included?
 
