@@ -154,7 +154,7 @@ Don't forget to give the project a star! Thanks again!
 # Developers
 * Moin 
 * Faisal
-* Faseel
+* Fazeel
 * Zahoor
 * Haseeb
 0 comments on commit 
