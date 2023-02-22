@@ -1,5 +1,4 @@
-
-    const diagrams= [
+ const diagrams= [
         {
           "name": "Book",
           "imageUrl": "book.png",
