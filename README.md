@@ -27,7 +27,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://www.linkpicture.com/q/web_pg3.png)
 
 This is a research study of the web app-based cognitive assessment. Before deciding to participate, you need to understand why the research is being conducted and what your participation will involve.
 Frontotemporal dementia is an uncommon type of dementia that causes problems with behaviour and language.Dementia is the name for problems with mental abilities caused by gradual changes and damage in the brain. Frontotemporal dementia affects the front and sides of the brain (the frontal and temporal lobes) Dementia mostly affects people over 65, but frontotemporal dementia tends to start at a younger age. Most cases are diagnosed in people aged 45-65, although it can also affect younger or older people. Like other types of dementia, frontotemporal dementia tends to develop slowly and get gradually worse over several years.
@@ -43,6 +43,7 @@ Various test used to diagonise FTD:
 
 
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 The objective of the project is to develop a tool for the detection of dementia(FTD) in individuals based on their performance in various cognitive tests. The project was undertaken as part of a research initiative to find a non-invasive and cost-effective method for early diagnosis of dementia.
 
@@ -64,7 +65,7 @@ The Following Tech Stack is used for developing this website :
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 * [![JQuery][JQuery.com]][JQuery-url]
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -169,7 +170,7 @@ Check out [this guide](https://blog.miguelgrinberg.com/post/the-flask-mega-tutor
 * Haseeb Hijazi Khan
 
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -187,7 +188,7 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch 
 5. Open a Pull Request
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 "
 
 <!-- LICENSE -->
@@ -195,7 +196,7 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -206,7 +207,7 @@ Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.c
 
 Project Link: [https://github.com/fasil-code/intern](https://github.com/fasil-code/intern)
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -222,7 +223,7 @@ Project Link: [https://github.com/fasil-code/intern](https://github.com/fasil-co
 * [Ck_Plus Dataset](https://www.kaggle.com/datasets/salmaachour/ckplus-without-duplicates)
 * [Language Tool API](https://rapidapi.com/dnaber/api/languagetool)
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
