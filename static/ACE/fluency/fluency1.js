@@ -1,4 +1,3 @@
-
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
 const next_btn=document.getElementById("next-btn");

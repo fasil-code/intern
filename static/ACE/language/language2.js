@@ -1,3 +1,4 @@
+
 let words = ["Complex","Intelligent","Statistic","Hypothesis","Metamorphosis","Grammar","Innovation","Philanthropy","Quantum","Revolution","Skeptical","Understand","Vocabulary","Philosophy","Xylograph","Yellow","Zoo","Antique","Bureaucracy","Circle","Institute","Exclude","Fossil","Geology","Hydro","Incomprehensible","Justice","Linguistic","Mechanics"];
 
 let n=words.length-1;

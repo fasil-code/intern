@@ -9,15 +9,37 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ACE/fluency/fluency2.css')}}">
+   <!-- sweet alert-->
   <style>
-   
+        span {
+            font-size: large;
+        }
+        .upperdiv{
+            margin:5% auto;
+        }
+         #btn{
+            padding: 20px 10px;
+         }
+        .div3 {
+            width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media screen and (max-width: 300px) {
+            .div3,.div4 {
+                width: 15rem;
+            }
+            .div4{
+              margin:auto auto;
+            }
+        }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="d-flex justify-content-center align-items-center row">
+    <div class="d-flex justify-content-center align-items-center row upperdiv">
       <div class="col-md-8 col-lg-8 column">
-        <div class="card text-center" style="width: 20rem; margin-bottom: 3rem; margin-left: auto; margin-right: auto;">
+        <div class="card text-center div3">
           <div class="card-body">
             <h2 class="card-title">Instructions</h2>
             <h6 class="card-text">Name as many animals as you can and do not repeat the name of animals.You can name
@@ -27,7 +49,7 @@
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-center align-items-center row">
+    <div class="d-flex justify-content-center text-center row div4">
       <div class="col-md-8 col-lg-8 column">
         <div class="border">
           <div class="p-4 bg-primary text-white border-bottom">
@@ -40,7 +62,7 @@
           <div class="q1 bg-white p-4 border-bottom">
             <div class="d-flex flex-row justify-content-between align-items-center q1">
               <!-- write question in h5 -->
-              <h5>Name the animals</h5>
+              <h5>Name the Animal</h5>
               <h5 id="text0" class="word"></h5>
               <span><button onclick="audioToText(0)" type="button" class="btn btn-outline-primary"><i
                     class="fa fa-microphone"></i></button></span>
@@ -51,16 +73,9 @@
             <div id="result"> </div>
           </div>
           <!-- //buttons -->
-          <div class="words bg-white p-4 border-bottom">
-            <div class="d-flex flex-row justify-content-between align-items-center">
-              <!-- <span id="btn-score"><button type="button" onclick="scoring()" class="px-5 btn btn-lg btn-primary">Score</button> </span> -->
-              <span id="btn-score"><button type="button" onclick="refreshPage()" class="px-5 btn btn-lg btn-primary"> <i
-                    class="fa fa-refresh"></i></button> </span>
-              <!-- <span id="btn-score"><button type="button" onclick="scoring()"
-                  class="px-5 btn btn-lg btn-danger">Stop</button> </span> -->
+            <div class="next-btn words bg-white p-4 border-bottom">
                   <button type="button" onclick="scoring()" class="px-5 btn btn-lg btn-primary">Next</button>
             </div>
-          </div>
         </div>
       </div>
     </div>

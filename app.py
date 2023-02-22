@@ -38,18 +38,7 @@ from user import register_route,login_route,logout_route,reset_password_route,se
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-<<<<<<< HEAD
 app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
-=======
-
-
-
-# app.config['MYSQL_PASSWORD'] = 'Zargar@123'
-
-
-
-
->>>>>>> 2e7281c00780bfd50ad42524122b54af921715de
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
