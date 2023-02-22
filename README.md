@@ -138,14 +138,7 @@ Don't forget to give the project a star! Thanks again!
 5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-# Developers
-* Moin 
-* Faisal
-* Faseel
-* Zahoor
-* Haseeb
-0 comments on commit 
+"
 
 <!-- LICENSE -->
 ## License
