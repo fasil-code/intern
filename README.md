@@ -26,9 +26,12 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
+### Main Page
 ![Alt text](https://www.linkpicture.com/q/web_pg1.png "Optional title")
-
+### Dashboard
+![Alt text](https://www.linkpicture.com/q/web_pg2.png "Optional title")
+### Tests
+![Alt text](https://www.linkpicture.com/q/web_pg3.png "Optional title")
 This is a research study of the web app-based cognitive assessment. Before deciding to participate, you need to understand why the research is being conducted and what your participation will involve.
 Frontotemporal dementia is an uncommon type of dementia that causes problems with behaviour and language.Dementia is the name for problems with mental abilities caused by gradual changes and damage in the brain. Frontotemporal dementia affects the front and sides of the brain (the frontal and temporal lobes) Dementia mostly affects people over 65, but frontotemporal dementia tends to start at a younger age. Most cases are diagnosed in people aged 45-65, although it can also affect younger or older people. Like other types of dementia, frontotemporal dementia tends to develop slowly and get gradually worse over several years.
 
