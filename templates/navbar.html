@@ -248,7 +248,17 @@ color:white
 let copyright=document.getElementById('copyright')
 var year=new Date().getFullYear();
 copyright.innerHTML='@'+year+"  Copyright: " ;
-
+window.history.pushState(null, null, document.URL);
+window.onpopstate = function(event) {
+    window.history.pushState(null, null, document.URL);
+};
+window.history.pushState(null, null, document.URL);
+window.onpopstate = function(event) {
+    window.history.pushState(null, null, document.URL);
+};
+window.onload = function() {
+    window.history.pushState(null, null, document.URL);
+};
 </script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
