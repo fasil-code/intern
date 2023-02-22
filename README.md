@@ -43,7 +43,6 @@ Various test used to diagonise FTD:
 
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 The objective of the project is to develop a tool for the detection of dementia(FTD) in individuals based on their performance in various cognitive tests. The project was undertaken as part of a research initiative to find a non-invasive and cost-effective method for early diagnosis of dementia.
 
@@ -65,7 +64,7 @@ The Following Tech Stack is used for developing this website :
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 * [![JQuery][JQuery.com]][JQuery-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 
@@ -170,7 +169,7 @@ Check out [this guide](https://blog.miguelgrinberg.com/post/the-flask-mega-tutor
 * Haseeb Hijazi Khan
 
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 
@@ -188,7 +187,7 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch 
 5. Open a Pull Request
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 "
 
 <!-- LICENSE -->
@@ -196,7 +195,7 @@ Don't forget to give the project a star! Thanks again!
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 
@@ -207,7 +206,7 @@ Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.c
 
 Project Link: [https://github.com/fasil-code/intern](https://github.com/fasil-code/intern)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 
@@ -223,7 +222,7 @@ Project Link: [https://github.com/fasil-code/intern](https://github.com/fasil-co
 * [Ck_Plus Dataset](https://www.kaggle.com/datasets/salmaachour/ckplus-without-duplicates)
 * [Language Tool API](https://rapidapi.com/dnaber/api/languagetool)
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 
