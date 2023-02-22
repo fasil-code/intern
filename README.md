@@ -47,7 +47,7 @@ Various test used to diagonise FTD:
 
 The objective of the project is to develop a tool for the detection of dementia(FTD) in individuals based on their performance in various cognitive tests. The project was undertaken as part of a research initiative to find a non-invasive and cost-effective method for early diagnosis of dementia.
 
-Methodology:
+### Methodology:
 The project involved conducting various cognitive tests on a sample population consisting of both healthy individuals and those with confirmed dementia. The tests were designed to assess different aspects of cognitive function, such as memory, attention, and executive function.
 
 The data collected from the tests was then analyzed using various statistical techniques to identify the key features that could be used to distinguish between the healthy and dementia groups. The features identified will be used to develop a machine learning model that will predict the presence of dementia in individuals based on their test performance.
