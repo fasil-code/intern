@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ACE/ace_results.css')}}">
+    
+    <title>Results</title>
+</head>
+<body>
+    <div class="table">
+
+        <table>
+            <caption>Test Result</caption>
+            <thead>
+              <tr>
+                <th scope="col">Test</th>
+                <th scope="col">Score</th>
+              
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Test">Attention Test</td>
+                    <td data-label="Marks">{{result_ace[3]+result_ace[4]+result_ace[5]}}/19</td>
+                  
+                </tr>
+                <tr>
+                    <td scope="row" data-label="Test">Fluency Test</td>
+                    <td data-label="Marks">{{result_ace[6]+result_ace[7]}}/14</td>
+              
+                </tr> 
+              
+              <tr>
+                <td scope="row" data-label="Test">Memory Test</td>
+                <td data-label="Marks">{{result_ace[8]+result_ace[9]+result_ace[10]+result_ace[11]}}/26</td>
+              
+              </tr>
+              <tr>
+                <td data-label="Test">Language Test</td>
+                <td data-label="Marks">{{result_ace[12]+result_ace[13]+result_ace[14]+result_ace[15]+result_ace[16]}}/23</td>
+              
+              </tr>
+              <tr>
+                <td scope="row" data-label="test">Visuo-Spatial Test</td>
+                <td data-label="Marks">{{result_ace[17]+result_ace[18]}}/8</td>
+           
+              </tr>
+              <tr>
+                <td scope="row" data-label="test">Total</td>
+                <td data-label="Marks">{{result_ace[3]+result_ace[4]+result_ace[5]+result_ace[6]+result_ace[7]+result_ace[8]+result_ace[9]+result_ace[10]+result_ace[11]+result_ace[12]+result_ace[13]+result_ace[14]+result_ace[15]+result_ace[16]+result_ace[17]+result_ace[18]}}/90</td>
+           
+              </tr>
+              <tr>
+                <td scope="row" data-label="test">Percentage</td>
+                <td data-label="Marks">{{ '{:.2f}'.format((result_ace[3]+result_ace[4]+result_ace[5]+result_ace[6]+result_ace[7]+result_ace[8]+result_ace[9]+result_ace[10]+result_ace[11]+result_ace[12]+result_ace[13]+result_ace[14]+result_ace[15]+result_ace[16]+result_ace[17]+result_ace[18])/90*100) }}%</td>
+
+              </tr>
+            </tbody>
+        </table>
+        <div id="quit">
+        <button id="quit_btn" class="button button-1">Quit</button>
+        </div>  
+    </div>
+    <script>
+        var nextUrl = "{{url}}";
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/ace_results.js') }}"></script>
+
+</body>
+</html>

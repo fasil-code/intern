@@ -140,14 +140,15 @@ else if (nexturl == "vs2") {
       // Rules of the test are changed
       const info = document.getElementsByClassName("info");
       info[0].innerHTML =
-          "1. You have to click <span>Blue circle</span> only once in every iteration.";
+          "1. Every <span>5 seconds</span> a pulse of <span>2 seconds</span> duration is generated.";
       info[1].innerHTML =
-          "2. You are given <span>5 seconds</span> to click Blue circle.";
-      info[2].innerHTML = "3. Wrong and multiple clicks will be penalised.";
+          "2. Click the <span>Blue Circle</span> only once when a pulse is generated till it lasts.";
+      info[2].innerHTML = 
+          "3. Wrong and multiple clicks will be penalised.";
       info[3].innerHTML =
-          "4. A <span>10 second</span> rest time is given after every iteration. DO NOT click during this time.";
+          "4. A <span>10 second</span> rest time is given after the completion. DO NOT click during this time.";
       info[4].innerHTML =
-          "5. After <span>5 iterations</span> you will be given a <span>30 second</span> rest time. DO NOT click during this time.";
+          "5. You can expect <span>5 iterations</span> of pulses.";
   } 
 
   const starter = document.querySelector(".start_btn");

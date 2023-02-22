@@ -100,12 +100,13 @@ def login_route():
         if not result:
             flash('Login Unsuccessful. Please check email and password.', 'danger')
             return redirect(url_for('login'))
-        cursor.execute("SELECT password FROM user WHERE email=%s", (email,))
+        cursor.execute("SELECT password,username FROM user WHERE email=%s", (email,))
         result = cursor.fetchone()
         hashed_password=str(result[0])
         # Verify the entered password with the hashed password
         if verify_password(password, hashed_password):
             session['logged_in'] = email
+            session['name']=result[1]
             flash('You have been logged in!', 'success')
             return redirect(url_for('home'))
         else:

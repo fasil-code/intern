@@ -1,0 +1,161 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
+
+table {
+    border: 3px solid #d3dfda;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+    box-shadow: #92c9b3;
+    
+  }
+  .table{
+    box-shadow: 0px 0px 10px #888;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    background: linear-gradient(to bottom, #f9f9f9, #eee);
+  }
+  
+  table caption {
+    font-size: 2em;
+    margin: .5em 0 .75em;
+    color: #2489c7;
+  }
+  
+  table tr {
+    background-color: #f8f8f8;
+    border: 2px solid #c6b2b2;
+    padding: .35em;
+    color: black;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  table th,
+  table td {
+    padding: 1.5em;
+    text-align: center;
+    font-size: 1em;
+    font-weight: 700;
+  }
+  
+  table th {
+    font-size: .95em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .table tr:hover {
+    background-color: #f2f2f2;
+  }
+  
+
+  @media screen and (max-width: 600px) {
+    table {
+      border: 0;
+    }
+  
+    table caption {
+      font-size: 1.3em;
+    }
+    
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    table td::before {
+      /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    table td:last-child {
+      border-bottom: 0;
+    }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /* general styling */
+  body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.25;
+    margin: 10px;
+    background-color:#eee;
+  }
+  #quit{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+  }
+  .button {
+    width: 120px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-left: 30px;
+    margin-bottom: 30px;
+    cursor: pointer;
+    display: inline-block;
+  }
+  
+  .button-1 {
+    background-color: rgb(28, 165, 206);
+    border: 3px solid #31a4ce;
+    border-radius: 20px;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+    color: white;
+    font-weight: bold;
+  }
+  .button-1:hover {
+    box-shadow: 0 0 10px 0 #1160d7 inset, 0 0 20px 2px #0b77d5;
+    border: 3px solid #1462ba;
+  }
+  
+  /* Style the alternating rows of the table */
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  

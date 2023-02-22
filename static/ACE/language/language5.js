@@ -153,7 +153,7 @@ var choosen=-1;
 function rem(){
       for (const child of buttonGroup.children) {
             child.style.border='none'
-            child.style.transition='none'
+            child.style.transition='0.3s ease-in-out'
            // child.style.transform='none'
             child.style.background=''
             clicked=false
@@ -167,7 +167,7 @@ const buttonGroupPressed = e => {
          for (const child of buttonGroup.children) {
        
            child.style.border='none'
-           child.style.transition='none'
+           child.style.transition='0.3s ease-in-out'
           // child.style.transform='none'
            child.style.background=''
            clicked=false
@@ -216,9 +216,9 @@ else{
       let time_taken_min=Math.floor(time_taken/60000)            
       let time_taken_sec=Math.floor((time_taken%60000)/1000)
       let time=time_taken_min+":"+time_taken_sec;
-      let score_percentage=Math.floor(score/4*100)
+      let score_percentage=Math.floor((score/4)*100)
       submit.innerHTML='Submit'
-     scored.innerHTML= "Your score is "+score
+    //  scored.innerHTML= "Your score is "+score
      form.style.display='none'
      $.ajax({
       type: "POST",

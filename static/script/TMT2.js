@@ -8,6 +8,7 @@ startTime = Date.now();
 let flag_num = 1;
 let num = 1;
 let alpha = 'A';
+let wrongClicks = 0;
 
 const timer   = document.getElementById('timer');
 for(let t=180; t>=0; t--) {
@@ -44,35 +45,25 @@ function displayResult() {
     grid.style.height = '0px';
     let result = document.getElementById('result');
     result.style.display = 'flex';
-    const resultTable = `
-        <table>
-        <tr>
-            <th>Result</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>Total Time</td>
-            <td>${timeTaken} ms</td>
-        </tr>
-        <tr>
-            <td>In seconds</td>
-            <td>${timeTaken/1000} s</td>
-        </tr>
-        <tr>
-            <td>Verdict</td>
-            <td>${verdict}</td>
-        </tr>
-        <tr>
-            <td>Completed</td>
-            <td>${completed}</td>
-        </tr>
-        </table>
-        `;
-    result.innerHTML = resultTable;
+   
     let router = document.getElementById('container');
     let proceed_btn = document.getElementById('route');
     proceed_btn.innerHTML = 'Back to Home';
     router.style.display = 'flex';
+    document.getElementById('pul').innerText = verdict;
+    document.getElementById('cor').innerText = timeTaken/1000;
+    document.getElementById('wrn').innerText = wrongClicks;
+    $.ajax({
+        type: "POST",
+        url: "/send_score",
+        data: { 
+           score: timeTaken,
+           column: "tmt"
+        },
+        success: function(response) {
+           console.log(response);    
+        }   
+      });
 }
 
 const cell = document.querySelectorAll('.box');
@@ -106,6 +97,8 @@ document.addEventListener('click', function (event) {
     if(target.classList.contains(`box${i}`)) {
         target.style.backgroundColor = 'rgb(102, 182, 106)';
         if(blinkInterval) {
+            let correctDiv = document.getElementsByClassName(`box${i}`)[0];
+            correctDiv.classList.remove('animate');
             clearInterval(blinkInterval);
         }
         i++;
@@ -114,11 +107,15 @@ document.addEventListener('click', function (event) {
             displayResult();
         }
     } else if(target.classList.contains('box')) {
+        wrongClicks++;
         if(blinkInterval) {
+            let correctDiv = document.getElementsByClassName(`box${i}`)[0];
+            correctDiv.classList.remove('animate');
             clearInterval(blinkInterval);
         }
         blinkInterval = setInterval(() => {
             let correctDiv = document.getElementsByClassName(`box${i}`)[0];
+            correctDiv.classList.add('animate');
             correctDiv.style.backgroundColor = 
             (correctDiv.style.backgroundColor === 'rgb(102, 182, 106)') ? 'white' : 'rgb(102, 182, 106)';
         }, 500);

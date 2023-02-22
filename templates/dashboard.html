@@ -155,7 +155,7 @@
                   <th class="header">Date-Time</th>
                   <th class="header">Emogi Game (%)</th>
 				  <th class="header">ERT (%)</th>
-                  <th colspan="5" class="header">ACE-|||</th>
+                  <th colspan="5" class="header" style="text-align: center;">ACE-|||</th>
 				  <th class="header">Pulse Tracking</th>
                   <th class="header">Trail Making</th>
 				  <th class="header">Report</th>
@@ -184,16 +184,19 @@
   <td class="data">{{results[i][5]}}</td>
 {% endif %}
 {% if  (i+size)<results|length and results[i+size] is not none %}
-  <td class="data">{{results[i+size][4]+results[i+size][5]}}</td>
+  <td class="data">{{results[i+size][3]+results[i+size][4]+results[i+size][5]}}</td>
   <td class="data">{{results[i+size][6]+results[i+size][7]}}</td>
-  <td class="data">{{results[i+size][8]+results[i+size][9]+results[i+size][10]}}</td>
-  <td class="data">{{results[i+size][11]+results[i+size][12]+results[i+size][13]+results[i+size][14]}}</td>
 
-  <td class="data">{{results[i+size][15]+results[i+size][16]}}</td>
-  <td class="data">0</td>
-  <td class="data">0</td>
+  <td class="data">{{results[i+size][8]+results[i+size][9]+results[i+size][10]+results[i+size][11]}}</td>
+  <td class="data">{{results[i+size][12]+results[i+size][13]+results[i+size][15]+results[i+size][14]+results[i+size][16]}}</td>
+  <td class="data">{{results[i+size][17]+results[i+size][18]}}</td>
+
 
   {% endif %}
+
+  <td class="data">{{results[i+2*size][3]}}</td>
+  <td class="data">{{results[i+3*size][3]}}</td>
+
   <td class="data"><a href="{{ url_for('generate_pdf') }}?id={{results[i][0]}}"  target="blank">Report</a></td>
   
 </tr>	

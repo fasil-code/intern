@@ -219,25 +219,102 @@ transform: translate(-50%, -50%);
     }
 }
 
-@media (max-width: 768px) {
-    #guide {
-        font-size: 3vw;
+@media (max-width: 775px) {
+    .result{
+        width: 80%;
+        font-size: 2vw;
     }
+    .num{ 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;  
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+    #pul{
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        font-weight: 600;
+    }
+    #cor{
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        font-weight: 600;
+    }
+    #wrn{
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        font-weight: 600;
+    }
+    .btn{
+        font-size: 5px;
+    }
+}
+
+@media (max-width: 1358px) {
+    .result{
+        width: 80%;
+        font-size: 2vw;
+    }
+    .num{   
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+    #pul{
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        font-weight: 600;
+    }
+    #cor{
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        font-weight: 600;
+    }
+    #wrn{
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        font-weight: 600;
+    }
+}
+
+@media (max-width: 820px) {
     #timer-box{
-        height: 55px;
-        width: 140px;
+        height: 57px;
+        width: 145px;
     }
     #timer{
-        height: 40px;
-        width: 40px;
-        font-size: 12px;
+        height: 42px;
+        width: 45px;
+        font-size: 14px;
     }
     #timer-left-txt{
-        font-size: 12px;
+        font-size: 14px;
     }
     .result{
-        width: 60%;
-        height: 60%;
-        font-size: 2.5vw;
+        width: 80%;
+        font-size: 2vw;
+    }
+    .num{   
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
+    #pul{
+        margin-left: 0.3rem;
+        margin-right: 0.3rem;
+        font-weight: 600;
+    }
+    #cor{
+        margin-left: 0.3rem;
+        margin-right: 0.3rem;
+        font-weight: 600;
+    }
+    #wrn{
+        margin-left: 0.3rem;
+        margin-right: 0.3rem;
+        font-weight: 600;
+    }
+    .btn {
+        font-size: 25px;
     }
 }

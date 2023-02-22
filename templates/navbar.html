@@ -92,7 +92,10 @@
       overflow: hidden;
     }
   }
+#drip{
+color:white
 
+}
   @media(max-width:450px) {
     h1 {
       font-size: 25px;
@@ -106,6 +109,7 @@
 </style>
 
 <body>
+
 
   <section class="navigation">
     <div class="nav-container">
@@ -122,25 +126,37 @@
             <a  href="../static/docs.pdf" download>Docs</a>
           </li>
           <li>
-            <a id="test" href="{{ url_for('tests') }}?session_id={{ session_id }}" onclick="handleTestClick(event)">Tests</a>
+            <a id="test" href="{{ url_for('attempt') }}" onclick="handleTestClick(event)">Tests</a>
 
 
           </li>
+       
+
+
+        
+          {% if logged_in %}
+       
           <li>
             <a   id="test" href="{{ url_for('dashboard') }}">Dashboard</a>
 
           </li>
-          {% if logged_in %}
           <li>
-
-            <a   href="{{ url_for('logout') }}">Logout</a>
+            <a id="drip" >{{name}}</a>
+            <ul class="navbar-dropdown">
+              <li>
+                <a href="{{ url_for('logout') }}">Logout</a>
+              </li>
+             
+            </ul>
           </li>
+       
+      
           {% else %}
           <li>
 
             <a  href="{{ url_for('login') }}">Login</a>
           </li>
-
+       
 
 
 
@@ -218,14 +234,32 @@
   </section>
   <footer class="bg-light text-center text-lg-start" style="width:100%">
     <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: #00aeef; color: white;">
+    <div  class="text-center p-3" style="background-color: #00aeef; color: white;">
+      <span id="copyright">
         ©2023 Copyright:
+      </span>
+   
         <a class="text-dak" href="http://www.iitkgp.ac.in" style="text-decoration: none; color: white;">IIT
             Kharagpur</a>
     </div>
     <!-- Copyright -->
 </footer>
-
+<script>
+let copyright=document.getElementById('copyright')
+var year=new Date().getFullYear();
+copyright.innerHTML='@'+year+"  Copyright: " ;
+window.history.pushState(null, null, document.URL);
+window.onpopstate = function(event) {
+    window.history.pushState(null, null, document.URL);
+};
+window.history.pushState(null, null, document.URL);
+window.onpopstate = function(event) {
+    window.history.pushState(null, null, document.URL);
+};
+window.onload = function() {
+    window.history.pushState(null, null, document.URL);
+};
+</script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
