@@ -84,14 +84,8 @@ If you have questions, suggestions or need help, [feel free to open an issue](ht
 
 ## Quick overview 
 
-```sh
-pip install createflaskapp
-create-flask-app my-app
-cd my-app
-# activate venv
-python run.py
-```
-*(use correct version of [pip](https://pip.pypa.io/en/stable/) and [python](https://python.org/) according to your OS and python install)*
+
+*(Use correct version of [pip](https://pip.pypa.io/en/stable/) and [python](https://python.org/) according to your OS and python install)*
 Then open [http://localhost:5000](http://localhost:5000) to see your app.
 When you are ready to deploy to production, set environment variable `PRODUCTION` to  `True` on your server of choice, clone the project onto your server and spin it up.
 
@@ -101,15 +95,27 @@ When you are ready to deploy to production, set environment variable `PRODUCTION
 **You'll need to have Python 3.6 or higher on your local development machine** (but it's not required on the server).
 To create a new app, you can run :
 
-### bash
-```sh
-create-flask-app my-app 
-```
 
 ### python
 ```sh
-python -m create-flask-app my-app
+pip install flask
 ```
+### Virtual env 
+```sh
+pip install virtualenv
+python -m venv env
+```
+```sh
+env/Scripts/activate
+```
+```sh
+flask run 
+```
+or 
+```sh
+python app.py 
+```
+
 It will create a directory called my-app inside the current folder.
 Inside that directory, it will generate the initial project structure :
 ```
