@@ -119,27 +119,35 @@ python app.py
 It will create a directory called my-app inside the current folder.
 Inside that directory, it will generate the initial project structure :
 ```
-my-app/
-├──venv
+intern/
+├──env
 ├── app
 │   ├── __init__.py     
-│   ├── config.py       
-│   ├── errors
-│   │   ├── __init__.py 
-│   │   └── handlers.py 
-│   ├── home
-│   │   ├── __init__.py 
-│   │   └── routes.py   
+│   ├── config.py        
 │   ├── static
-│   │   └── css
-│   │       └── main.css
+│   │   └── ACE
+│   │   └── Emoji
+|   |   └── Emoji Recog
+|   |   └── TMT/PTT
+|   |   └── Layout
+|   |   └── Images
 │   └── templates     
-│       ├── about.html
-│       ├── base.html 
-│       ├── error.html
-│       └── home.html 
+│       ├── ACE|(attention(4))|fluency(2)|memory(4)|visuospatial(2)|results(1)
+│       ├── Emoji|emoji(1)
+│       ├── EmojiRecog |(emojirecog.html)
+│       └── home 
+│       └── dashboard
+│       └── attempt
+│       └── terms
+│       └── layout
+│       └── navbar
+│       └── login|register|set_pass|reset_pass      
 ├── requirements.txt  
-└── run.py
+└── app.py
+└── user.py
+└── forms.py
+└── report.py
+└── terms.py
 ```
 
 No complicated configuration or folder structures, only the files you need to build and deploy your app.
