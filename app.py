@@ -23,8 +23,8 @@ import pickle
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-# app.config['MYSQL_PASSWORD'] = 'alchemist'
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = '7006022139'
+# app.config['MYSQL_PASSWORD'] = 'Zargar@123'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -407,12 +407,7 @@ def ace2():
 
 @app.route("/ace3",methods=['GET','POST']) 
 def ace3():
-<<<<<<< HEAD
    return render_template('ACE/attention/attention3.html',url="ace4",home="/home") 
-=======
-   return render_template('ACE/attention/attention3.html',url="ace4")
-         
->>>>>>> ddda80fac600129794c6439be1aef2259114da53
 @app.route("/ace4",methods=['GET','POST']) 
 def ace4():
    return render_template('ACE/attention/attention4.html',url="layout")  

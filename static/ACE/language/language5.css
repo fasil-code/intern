@@ -23,8 +23,8 @@ body{
 }
 .options{
     margin: 1rem auto ;
-    width: 40rem;
-    height: 40rem;
+    width: 35rem;
+    height: 35rem;
  cursor:pointer;
     display: grid;
     grid-template-columns: 12.5rem 12.5rem;

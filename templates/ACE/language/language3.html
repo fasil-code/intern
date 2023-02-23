@@ -18,14 +18,16 @@
     <div class="d-flex justify-content-center align-items-center row">
       
          <div class="border container-fluid">
-          <div class="p-4 bg-primary text-white border-bottom">
+          
+            <div class="p-4 bg-primary text-white border-bottom">
            
-             <span class="heading">
-              <h4 >Repeat and Record given idioms</h4>
-              <h5 id="recognition-status"> </h5>
-            </span>
-            </div>
-           
+              <span class="heading">
+               <h4 >Repeat and Record given Idioms</h4>          
+               <h5 id="recognition-status"> </h5>
+               <a href="{{ url_for('ace_results') }}" style="display: inline-block; padding: 8px 22px; background-color: #4CAF50; color: #fff; text-decoration: none; border-radius: 4px; font-size: 14px; margin-right: 10px; ">Exit</a>
+ 
+             </span>
+             </div>
             <div class="words bg-white p-3 border-bottom">
               <div class="container-fluid">
                 <div class="row align-items-center">
