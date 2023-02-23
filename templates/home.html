@@ -185,7 +185,7 @@ font-weight: bold;
        <a  href="{{ url_for('layout') }}?name=vs1" > <li>Visuo-Spatial </li></a>
       </ul>
       <div class="buton">
-   <a  href="{{ url_for('home')}}" id="button1" class="button1" >Home</a>
+   <a  href="{{ url_for('home')}}" onclick="return confirm_alert(this);" id="button1" class="button1" >Home</a>
       </div>
    
       <script>
@@ -201,7 +201,11 @@ window.onload = function() {
     window.history.pushState(null, null, document.URL);
 };
       </script>
+      
       <script type="text/javascript">
+        function confirm_alert(node) {
+          return confirm("Present session will end.Do you want to continue?");
+      }
         window.history.forward();
         function noBack() {
             window.history.forward();
