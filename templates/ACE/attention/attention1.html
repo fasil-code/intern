@@ -410,9 +410,12 @@
  </div>   -->
   <div id="main" class="main group-2">
     <div class="container container-fluid border bg-white">
-      <div class="h2">
-        <h1>Attention Test</h1>
+      
+      <div class="h2" style="display: flex; align-items: center;">
+        <a href="{{ url_for('ace_results') }}" style="display: inline-block; padding: 8px 22px; background-color: #4CAF50; color: #fff; text-decoration: none; border-radius: 4px; font-size: 14px; margin-right: 10px margin-left-4px;">Exit</a>
+        <h4 class="flex-grow-1">Answer the following questions</h4>
       </div>
+    
       <form class="text-center">
         <div class="def texform-group ">
           <div class="datepicker date input-group">
@@ -458,7 +461,7 @@
         </label> -->
         <div class="mt-4">
           <!-- <a href="location.html" target="_blank"> -->
-          <a class="px-5 btn btn-lg btn-primary" href="{{ url_for('ace3') }}"  onclick="Score()">Next</a>
+          <a class="px-5 btn btn-lg btn-primary" onclick="Score()">Next</a>
 
           </span>
         </div>
@@ -471,9 +474,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"></script>
+      crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
       crossorigin="anonymous"></script>
@@ -499,6 +502,7 @@
       //   document.getElementsByClassName("group-1")[0].style.display = "none";
       // }
       function Score() {
+        let sent=false;
         let ans = 0;
         const day = new Date().getDay();
         const date = new Date().getDate();
@@ -516,15 +520,15 @@
         // let selectedstate = document.getElementById("state").value;
         let selectedseason = document.getElementById("season").value;
         if (selectdeddate === ddmmyyyy) {
-          ans += 1;
+          ans += 3;
         }
         if (selectedcountry === "India" || selectedcountry === "india") {
-          ans += 1;
+          ans += 2;
         }
         listday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         correctday = listday[day];
         if (selectedday === correctday) {
-          ans += 1;
+          ans += 3;
         }
 
         seasonlist = ['Spring', 'Summer', 'Monsoon', 'Autumn', 'Winter']
@@ -540,14 +544,32 @@
         else
           season = "Winter";
         if (selectedseason === season) {
-          ans += 1;
+          ans += 2;
         }
         // var x = inpstate;
         // if (selectedstate.includes(x) || x.includes(selectedstate)) {
         //   ans += 1;
         // }
-        return ans;
-      }
+        $.ajax({
+        type: "POST",
+        url: "/send_score",
+        data: { 
+        score: ans,
+        column: "attention1"
+     },
+     success: function(response) {
+        console.log(response);
+        sent=true; 
+        redirect(sent);     
+     } 
+     
+  });
+}
+function redirect(sent){
+  if(sent===true){
+    window.location.href=nextUrl;
+  }
+}
       // if startQuiz button clicked
       $(function () {
         $('.datepicker').datepicker({

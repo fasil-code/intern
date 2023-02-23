@@ -9,23 +9,43 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='ACE/language/language3.css')}}">
-    <!-- sweet alert-->
+    
     <title>ACE III</title>
 </head>
+<style>
+  .next-btn{
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+  }
+  @media (max-width :300px){
+    .next-btn{
+      display: flex;
+     flex-direction: column;
+     justify-content: center;
+     
+    }
+    button{
+      text-align: center;
+    }
+
+  }
+</style>
 <body>
   {% block content %}
   <div class="container">
     <div class="d-flex justify-content-center align-items-center row">
       
          <div class="border container-fluid">
-          <div class="p-4 bg-primary text-white border-bottom">
+          
+            <div class="p-4 bg-primary text-white border-bottom">
            
-             <span class="heading">
-              <h4 >Repeat and Record given idioms</h4>
-              <h5 id="recognition-status"> </h5>
-            </span>
-            </div>
-           
+              <span class="heading">
+               <h4 >Repeat and Record given Idioms</h4>          
+               <h5 id="recognition-status"> </h5>
+ 
+             </span>
+             </div>
             <div class="words bg-white p-3 border-bottom">
               <div class="container-fluid">
                 <div class="row align-items-center">
@@ -61,18 +81,38 @@
         </div>
       
      
-            <!-- //buttons -->
-            <div class="next-btn words bg-white p-2 border-bottom">
-             
-              <span><button type="button" onclick="scoring()"  class="px-5 btn btn-lg btn-primary">Next</button> </span>
-              <!-- <span><a class="next-button px-5 btn btn-lg btn-primary" href="{{ url_for('language1') }}">Next</a></span> -->
+           <!-- buttons -->
+           <div class=" next-btn words bg-white p-4 border-bottom">
+            <div>  
+            <button type="button" id="next-btn" class="px-4 btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Exit</button>
+            </div>
+            <div><button type="button" id="next-btn" onclick="scoring()" class="px-4 btn  btn-primary">Next</button> </div>
             
-          </div>
+        </div>
          </div>
         </div>
     </div>
   </div>
-
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
+        
+      </div>
+      
+      <div class="modal-footer" style="display:flex; justify-content: space-between;" >
+        <a href="{{ url_for('ace_results') }}">
+        <button type="button" class="btn btn-primary">Yes</button>
+      </a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
    {% endblock content %} 
 </body>
 <script> var nextUrl = "{{url}}"+"?name=vs1"</script>

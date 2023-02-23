@@ -264,7 +264,7 @@ function audioToText(i) {
         const transcript = event.results[0][0].transcript;
 
         // Display the transcribed text
-        document.getElementById('text' + i).textContent = transcript;
+        // document.getElementById('text' + i).textContent = transcript;
         message = transcript;
         message = message.toLowerCase();
         if (message[message.length - 1] === ".") {
@@ -281,7 +281,8 @@ function audioToText(i) {
         // Display a message when recognition ends
         document.getElementById('recognition-status').textContent = '🟢 Voice Recognition ended';
         repeat(message);
-
+        document.getElementById("text").innerHTML = "Record next name";
+        animateText();
     });
     recognition.start();
     // Stop recognition after 4 seconds
@@ -289,6 +290,14 @@ function audioToText(i) {
     recognition.stop();
   }, 5000);
 }
+//animate text
+function animateText() {
+    const textElement = document.getElementById("text");
+    textElement.classList.add("animate");
+    setTimeout(() => {
+      textElement.classList.remove("animate");
+    }, 1000);
+  }
 function scoring() {
     document.getElementById("hidden").style.display="block";
     let score = 0;

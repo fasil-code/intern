@@ -12,20 +12,41 @@
    <!-- sweet alert-->
     <title>ACE III</title>
 </head>
+<style>
+  .next-btn{
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+  }
+  @media (max-width :300px){
+    .next-btn{
+      display: flex;
+     flex-direction: column;
+     justify-content: center;
+     
+    }
+    button{
+      text-align: center;
+    }
+
+  }
+</style>
 <body>
   {% block content %}
   <div class="container">
     <div class="d-flex justify-content-center align-items-center row">
       <div class="col-md-8 col-lg-8">
          <div class="border">
-          <div class="p-4 bg-primary text-white border-bottom">
-           
-             <span class="heading">
-              <h4 >Repeat and Record given words</h4>
-              <h5 id="recognition-status"> </h5>
-            </span>
-            </div>
           
+            <div class="p-4 bg-primary text-white border-bottom">
+           
+              <span class="heading">
+               <h4 >Repeat and Record given words</h4>          
+               <h5 id="recognition-status"> </h5>
+ 
+             </span>
+             </div>
+            
             <div class="words bg-white p-3 border-bottom">
               <div class="container-fluid">
                 <div class="row align-items-center">
@@ -77,18 +98,37 @@
           
       </div>
     
-            <!-- //buttons -->
-            <div class="next-btn words bg-white p-4 border-bottom">
-              
-              <span><button type="button" onclick="scoring()"  class="px-5 btn btn-lg btn-primary">Next</button> </span>
-              
-              
-          </div>
+          <div class=" next-btn words bg-white p-4 border-bottom">
+            <div>  
+            <button type="button" id="next-btn" class="px-4 btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Exit</button>
+            </div>
+            <div><button type="button" id="next-btn" onclick="scoring()" class="px-4 btn  btn-primary">Next</button> </div>
+            
+        </div> 
          </div>
         </div>
     </div>
   </div>
-
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
+        
+      </div>
+      
+      <div class="modal-footer" style="display:flex; justify-content: space-between;" >
+        <a href="{{ url_for('ace_results') }}">
+        <button type="button" class="btn btn-primary">Yes</button>
+      </a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
    {% endblock content %} 
 </body>
 <script> var nextUrl = "{{url}}"</script>

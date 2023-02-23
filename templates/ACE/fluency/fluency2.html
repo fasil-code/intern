@@ -4,8 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Fluency Test</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  
+  <link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+  crossorigin="anonymous"
+/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ACE/fluency/fluency2.css')}}">
@@ -33,6 +38,25 @@
               margin:auto auto;
             }
         }
+        
+        .next-btn{
+          display: flex;
+          text-align: center;
+          justify-content: space-between;
+        }
+        @media (max-width :300px){
+          .next-btn{
+            display: flex;
+          flex-direction: column;
+          justify-content: center;
+          
+          }
+          button{
+            text-align: center;
+          }
+
+        }
+
   </style>
 </head>
 <body>
@@ -52,17 +76,22 @@
     <div class="d-flex justify-content-center text-center row div4">
       <div class="col-md-8 col-lg-8 column">
         <div class="border">
-          <div class="p-4 bg-primary text-white border-bottom">
+        
+    
             <!-- heading -->
-            <div id="heading">
-              <h3>Fluency Test</h3>
-              <h5 id="recognition-status"></h5>
+            <div class="p-4 bg-primary text-white border-bottom">
+              <!-- heading -->
+              <div id="heading">
+                <h4 style="display: inline-block; margin: 0; vertical-align: middle;">Fluency Test</h4>
+                <h5 id="recognition-status"></h5>
+              </div>
             </div>
-          </div>
+            
+          
           <div class="q1 bg-white p-4 border-bottom">
             <div class="d-flex flex-row justify-content-between align-items-center q1">
               <!-- write question in h5 -->
-              <h5>Name animals</h5>
+              <h5 id="text">Record first animal's name</h5>
               <h5 id="text0" class="word"></h5>
               <span><button onclick="audioToText(0)" type="button" class="btn btn-outline-primary"><i
                     class="fa fa-microphone"></i></button></span>
@@ -72,22 +101,51 @@
           <div class="bg-white p-4 border-bottom" id="hidden" style="display: none;">
             <div id="result"> </div>
           </div>
-          <!-- //buttons -->
-            <div class="next-btn words bg-white p-4 border-bottom">
-                  <button type="button" onclick="scoring()" class="px-5 btn btn-lg btn-primary">Next</button>
-            </div>
+          
+            <div class=" next-btn words bg-white p-4 border-bottom">
+              
+              <div>
+                <button type="button" id="next-btn" class="px-4 btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Exit</button>
+
+              </div>
+              <div><button type="button" id="next-btn" onclick="scoring()" class="px-4 btn  btn-primary">Next</button> </div>
+              
+          </div> 
         </div>
       </div>
     </div>
   </div>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
+        
+      </div>
+      
+      <div class="modal-footer" style="display:flex; justify-content: space-between;" >
+        <a href="{{ url_for('ace_results') }}">
+        <button type="button" class="btn btn-primary">Yes</button>
+      </a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 <script> let nextUrl="{{url}}"+"?name=ace5"</script>
+<script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
 <script type="text/javascript">
   window.history.forward();
   function noBack() { window.history.forward(); }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
 <script type = "text/javascript" src = "{{ url_for('static', filename = 'ACE/fluency/fluency2.js') }}" ></script>
 </html>

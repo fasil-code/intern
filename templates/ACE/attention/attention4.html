@@ -230,18 +230,50 @@
                 <div class="text-center" id="btn" style="text-align: center;">
                     <button type="button" onclick="returnScore()" class="px-5 btn btn-primary btn-lg">Next</button>
                 </div>
+                <!-- <div class=" next-btn words bg-white p-4 border-bottom">
+
+                    <div>
+
+                        <button type="button" id="next-btn" class="px-4 btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalCenter">Exit</button>
+
+                    </div>
+                    <div>
+                        <button type="button" id="next-btn" onclick="returnScore()" 
+                            class="px-4 btn  btn-primary float-right">Next</button> </div>
+
+                </div> -->
             </div>
         </div>
     </div>
-    <script>
-        var nextUrl = "{{url}}" + "?name=ace13";
-    </script>
+    <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
 
-    <script type="text/javascript">
-        window.history.forward();
-        function noBack() { window.history.forward(); }
-    </script>
-    <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/attention/attention4.js') }}"></script>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
+
+                </div>
+
+                <div class="modal-footer" style="display:flex; justify-content: space-between;">
+                    <a href="{{ url_for('ace_results') }}">
+                        <button type="button" class="btn btn-primary">Yes</button>
+                    </a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+
+                </div>
+            </div>
+        </div> -->
+        <script>
+            var nextUrl = "{{url}}" + "?name=ace13";
+        </script>
+
+        <script type="text/javascript">
+            window.history.forward();
+            function noBack() { window.history.forward(); }
+        </script>
+        <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/attention/attention4.js') }}"></script>
 </body>
 
 </html>

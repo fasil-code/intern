@@ -113,18 +113,20 @@ a:hover {
     padding: 2rem 0 1rem;
   }
     .button1 {
-      background-color:#74b4fe; 
+     
       box-shadow: 0rem 0.5rem 1rem -0.125rem rgba(0, 0, 0, 0.25);
       padding: 0.8rem 2rem;
       border-radius: 0.5rem;
       color: #fff;
       text-decoration: none;
+ 
       font-size: 0.9rem;
       transition: transform 0.25s, box-shadow 0.25s;
+      
     }
     .button1:hover {
-        box-shadow: 0rem 0rem 1rem -0.125rem rgba(0, 0, 0, 0.25);
-        transform: translateY(-0.5rem);
+        box-shadow: 0rem 0rem 1rem 0.025rem rgba(0, 0, 0, 0.25);
+        transform: translateY(0.5rem);
       }
     
     
@@ -145,6 +147,12 @@ font-weight: bold;
   }
   .inac{
     display:none
+  }
+  .buton{
+    display: flex;
+    justify-content: center;
+    align-items: center;;
+
   }
     </style>
 </head>
@@ -178,8 +186,33 @@ font-weight: bold;
        <a href="{{ url_for('layout') }}?name=tmt"> <li>Trail Making test</li></a>
        <a  href="{{ url_for('layout') }}?name=vs1" > <li>Visuo-Spatial </li></a>
       </ul>
-    
+      <div class="buton">
+   <a  href="{{ url_for('home')}}" onclick="return confirm_alert(this);" id="button1" class="button1" style="background:#f06807" >Home</a>
+      </div>
+   
+      <script>
+        window.history.pushState(null, null, document.URL);
+window.onpopstate = function(event) {
+    window.history.pushState(null, null, document.URL);
+};
+window.history.pushState(null, null, document.URL);
+window.onpopstate = function(event) {
+    window.history.pushState(null, null, document.URL);
+};
+window.onload = function() {
+    window.history.pushState(null, null, document.URL);
+};
+      </script>
       
+      <script type="text/javascript">
+        function confirm_alert(node) {
+          return confirm("Present session will end.Do you want to continue?");
+      }
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+      </script>
       <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"

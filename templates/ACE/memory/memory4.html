@@ -37,6 +37,25 @@
         margin: auto auto;
       }
     }
+    
+      .next-btn{
+        display: flex;
+        text-align: center;
+        justify-content: space-between;
+      }
+      @media (max-width :300px){
+        .next-btn{
+          display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        }
+        button{
+          text-align: center;
+        }
+
+      }
+
   </style>
 </head>
 
@@ -45,16 +64,22 @@
     <div class="d-flex justify-content-center align-items-center row upperdiv div4">
       <div class="col-md-8 col-lg-8 column div4">
         <div class="border">
-          <div class="p-5 bg-primary text-white border-bottom text-center">
-            <!-- heading -->
-            <div id="heading">
+          <!-- <div class="p-5 bg-primary text-white border-bottom text-center">
+             heading -->
+            <!-- <div id="heading">
               <h4>Answer the following questions </h4>
 
 
               <h5 id="recognition-status"></h5>
             </div>
+          </div> -->
+          <div class="p-5 bg-primary text-white border-bottom">
+            <div id="heading">
+              
+              <h4 style=" text-align: center; margin-bottom: 4%;">Answer the following questions</h4>
+              <h5 style="text-align: center;"id="recognition-status"></h5>
+            </div>
           </div>
-
           <div class="q1 bg-white p-4 border-bottom">
             <div class="d-flex flex-row justify-content-between align-items-center q1">
               <!-- write question in h5 -->
@@ -91,23 +116,38 @@
             </div>
           </div>
 
-
-          <!-- //buttons -->
-          <div class="button words bg-white p-4 border-bottom">
-
-            <!-- <span id="btn-score"><button type="button" onclick="refreshPage()" class="px-5 btn btn-lg btn-primary"> <i
-                     class="fa fa-refresh"></i></button> </span>  -->
-            <!-- <span id="btn-score"><button type="button" onclick="scoring()"
-                  class="px-5 btn btn-lg btn-danger">Stop</button> </span> -->
-            <button type="button" onclick="scoring()" class="px-5 btn btn-lg btn-primary">Next</button>
-
-          </div>
-
+          <!-- buttons -->
+          <div class=" next-btn words bg-white p-4 border-bottom">
+            <div>  
+            <button type="button" id="next-btn" class="px-4 btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Exit</button>
+            </div>
+            <div><button type="button" id="next-btn" onclick="scoring()" class="px-4 btn  btn-primary">Next</button> </div>
+            
+        </div>
         </div>
       </div>
     </div>
   </div>
-
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
+        
+      </div>
+      
+      <div class="modal-footer" style="display:flex; justify-content: space-between;" >
+        <a href="{{ url_for('ace_results') }}">
+        <button type="button" class="btn btn-primary">Yes</button>
+      </a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 <script>let nextUrl = "{{url}}"</script>
 <script type="text/javascript">
@@ -117,6 +157,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/memory/memory4.js') }}"></script>
-<script src="index.js"></script>
+
 
 </html>

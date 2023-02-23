@@ -15,6 +15,25 @@
     <link rel= "stylesheet" type= "text/css" href="{{ url_for('static', filename='ACE/fluency/fluency1.css')}}">
     <!-- sweet alert-->
 </head>
+<style>
+  .next-btn{
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+  }
+  @media (max-width :300px){
+    .next-btn{
+      display: flex;
+     flex-direction: column;
+     justify-content: center;
+     
+    }
+    button{
+      text-align: center;
+    }
+
+  }
+</style>
   <body>
     <div class="container">
         <div class="d-flex justify-content-center align-items-center row">
@@ -31,10 +50,12 @@
                     <div class="timer">
                     <div class="time_left_txt">Time Left</div>
                     <div class="timer_sec">60</div>
+                    
+
                 </div>
               </div>
                   <h5 id="recognition-status"></h5>
-               
+                 
       
               </div>
                </div>
@@ -43,23 +64,44 @@
                 <div
                   class="d-flex flex-row justify-content-between align-items-center"
                   >
-                  <h5 id="text" class="word">Record first word</h5>
+                  <h5 id="text" class="word">Record first name</h5>
                     <span><button onclick="audioToText()" id="record-btn" type="button"  class="btn btn-outline-primary"><i
                       class="fa fa-microphone"></i></button></span>
                 </div>
               </div>
                 
-               <!-- buttons -->
-                <div class="button words bg-white p-4 border-bottom">
-                  <button type="button" onclick="scoring()" id="next-btn" class="px-5 btn btn-lg btn-primary">Next</button>
-                  
-              </div>
+              <!-- buttons -->
+              <div class=" next-btn words bg-white p-4 border-bottom">
+                <div>  
+                <button type="button" id="next-btn" class="px-4 btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Exit</button>
+                </div>
+                <div><button type="button" id="next-btn" onclick="scoring()" class="px-4 btn  btn-primary">Next</button> </div>
                 
+            </div> 
              </div>
             </div>
         </div>
     </div>
-   
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
+        
+      </div>
+      
+      <div class="modal-footer" style="display:flex; justify-content: space-between;" >
+        <a href="{{ url_for('ace_results') }}">
+        <button type="button" class="btn btn-primary">Yes</button>
+      </a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
   </body>
   <script> let nextUrl="{{url}}"</script>
   <script type="text/javascript">

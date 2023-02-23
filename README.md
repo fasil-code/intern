@@ -8,13 +8,7 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
+    <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#contributors">Contributors</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -26,9 +20,12 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
+### Main Page
+![Main Page](https://www.linkpicture.com/q/web_pg1.png "Optional title")
+### Dashboard
+![Dashboard](https://www.linkpicture.com/q/web_pg2.png "Optional title")
+### Tests
+![Tests](https://www.linkpicture.com/q/web_pg3_1.png "Optional title")
 This is a research study of the web app-based cognitive assessment. Before deciding to participate, you need to understand why the research is being conducted and what your participation will involve.
 Frontotemporal dementia is an uncommon type of dementia that causes problems with behaviour and language.Dementia is the name for problems with mental abilities caused by gradual changes and damage in the brain. Frontotemporal dementia affects the front and sides of the brain (the frontal and temporal lobes) Dementia mostly affects people over 65, but frontotemporal dementia tends to start at a younger age. Most cases are diagnosed in people aged 45-65, although it can also affect younger or older people. Like other types of dementia, frontotemporal dementia tends to develop slowly and get gradually worse over several years.
 
@@ -74,9 +71,9 @@ The Following Tech Stack is used for developing this website :
 
 # Create-Flask-App [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/isakal/create-flask-app/pull/new/master)
 
-Flask port of [create-react-app](https://facebook.github.io/create-react-app/) that is used for initializing project structure of your next application.
 
-- [Creating an app](#creating-an-app) - How to create a new app.
+
+
 
 Create Flask app works on macOS, Windows and Linux.
 If something doesn't work, please [file an issue](https://github.com/isakal/create-flask-app/issues/new).
@@ -84,14 +81,8 @@ If you have questions, suggestions or need help, [feel free to open an issue](ht
 
 ## Quick overview 
 
-```sh
-pip install createflaskapp
-create-flask-app my-app
-cd my-app
-# activate venv
-python run.py
-```
-*(use correct version of [pip](https://pip.pypa.io/en/stable/) and [python](https://python.org/) according to your OS and python install)*
+
+*(Use correct version of [pip](https://pip.pypa.io/en/stable/) and [python](https://python.org/) according to your OS and python install)*
 Then open [http://localhost:5000](http://localhost:5000) to see your app.
 When you are ready to deploy to production, set environment variable `PRODUCTION` to  `True` on your server of choice, clone the project onto your server and spin it up.
 
@@ -101,73 +92,61 @@ When you are ready to deploy to production, set environment variable `PRODUCTION
 **You'll need to have Python 3.6 or higher on your local development machine** (but it's not required on the server).
 To create a new app, you can run :
 
-### bash
-```sh
-create-flask-app my-app 
-```
 
 ### python
 ```sh
-python -m create-flask-app my-app
+pip install flask
 ```
+### Virtual env 
+```sh
+pip install virtualenv
+python -m venv env
+```
+```sh
+env/Scripts/activate
+```
+```sh
+flask run 
+```
+or 
+```sh
+python app.py 
+```
+
 It will create a directory called my-app inside the current folder.
 Inside that directory, it will generate the initial project structure :
 ```
-my-app/
-├──venv
+intern/
+├──env
 ├── app
 │   ├── __init__.py     
-│   ├── config.py       
-│   ├── errors
-│   │   ├── __init__.py 
-│   │   └── handlers.py 
-│   ├── home
-│   │   ├── __init__.py 
-│   │   └── routes.py   
+│   ├── config.py        
 │   ├── static
-│   │   └── css
-│   │       └── main.css
+│   │   └── ACE
+│   │   └── Emoji
+|   |   └── Emoji Recog
+|   |   └── TMT/PTT
+|   |   └── Layout
+|   |   └── Images
 │   └── templates     
-│       ├── about.html
-│       ├── base.html 
-│       ├── error.html
-│       └── home.html 
+│       ├── ACE|(attention(4))|fluency(2)|language(5)|memory(4)|visuospatial(2)|results(1)
+│       ├── Emoji|emoji(1)
+│       ├── EmojiRecog |(emojirecog.html)
+│       └── home 
+│       └── dashboard
+│       └── attempt
+│       └── terms
+│       └── layout
+│       └── navbar
+│       └── login|register|set_pass|reset_pass      
 ├── requirements.txt  
-└── run.py
+└── app.py
+└── user.py
+└── forms.py
+└── report.py
+└── terms.py
 ```
 
-No complicated configuration or folder structures, only the files you need to build and deploy your app.
-Once the installation is done, you can open your project folder:
-```sh
-cd my-app
-```
-Inside the newly created project, you can run some commands:
-
-### `source venv/bin/activate` or `.\venv\Scripts\activate`
-Activates the virutal environment required for the project dependency isolation.
-
-[Read more about venv.](https://https://docs.python.org/3/library/venv.html)  
-
-### `pip install -r requirements.txt`
-Installs libraries and dependencies listed in `requirements.txt` in active environment.
-
-### `python run.py`
-Starts the app in development mode. 
-Open [http://localhost:5000](http://localhost:5000) to view it in browser.
-
-The page will automatically reload if you make changes to the code. 
-You will see errors in app reload or startup in the console.
-
-
-## How to Update to New Versions?
-
-Create-Flask-App can be simply upgraded using pip:
-
-```sh
-pip install createflaskapp --upgrade
-# or
-pip install createflaskapp -U
-```
 
 ## What's Included?
 
@@ -201,9 +180,9 @@ If you have a suggestion that would make this better, please fork the repo and c
 Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+2. Create your change Branch 
+3. Commit your Changes 
+4. Push to the Branch 
 5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

@@ -124,10 +124,10 @@ function audioToText(i){
     
   });
   recognition.start();
-   // Stop recognition after 4 seconds
+   // Stop recognition after 6 seconds
    setTimeout(() => {
     recognition.stop();
-  }, 80000);
+  }, 70000);
 }   
  //scoring
 function scoring(){

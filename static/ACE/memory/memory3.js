@@ -135,15 +135,15 @@ document.getElementById("next-btn").addEventListener("click", function(event){
             },
             success: function(response) {
                console.log(response);
-               sent=true; 
-               redirect(sent);    
+            //    sent=true; 
+               redirect();    
             } 
             
          });
     }
 })
-function redirect(sent){
-    if(sent===true){
+function redirect(){
+    
       window.location.href=nextUrl;
-    }
+    
   }
