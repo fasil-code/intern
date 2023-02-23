@@ -11,15 +11,23 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ACE/attention/attention124.css')}}">
     <title>Attention Test</title>
     <style>
+        body {
+            padding: 0 0;
+            margin: 0 0;
+        }
+
         span {
             font-size: large;
         }
-        .upperdiv{
-            margin:5% auto;
+
+        .upperdiv {
+            margin: 5% auto;
         }
-         #btn{
+
+        #btn {
             padding: 20px 10px;
-         }
+        }
+
         .div3 {
             width: 70%;
             margin-left: auto;
@@ -33,13 +41,60 @@
             margin-right: auto;
         }
 
-        @media screen and (max-width: 350px) {
+        .choices li {
+            text-decoration: none;
+            list-style: none;
+        }
+
+        @media screen and (max-width: 470px) {
+            .upperdiv {
+                margin: 0 0;
+                margin-top: 1%;
+            }
+
             .div3 {
-                width: 15rem;
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .list-group {
+                margin-left: 0;
             }
 
             .div1 {
-                width: 15rem;
+                width: 20rem;
+            }
+
+            .choices .list-group-item:hover {
+                background: #85b6eb;
+                color: #ffff;
+                transition: 1s linear infinite;
+            }
+        }
+
+        @media screen and (max-width: 270px) {
+            .upperdiv {
+                margin: 0 0;
+                margin-top: 1%;
+            }
+
+            .div3 {
+                width: 20rem;
+                margin-left: 0;
+            }
+
+            .list-group {
+                margin-left: 0;
+            }
+
+            .div1 {
+                width: 20rem;
+            }
+
+            .choices .list-group-item:hover {
+                background: #85b6eb;
+                color: #ffff;
+                transition: 1s linear infinite;
             }
         }
     </style>
@@ -60,9 +115,9 @@
             <div class="card div3">
                 <div class="p-4 bg-primary text-white border-bottom text-center">
                     <span class="heading">
-                     <h4>Subtraction of 7 from 100 five times and for each subtraction select the correct option</h4>
-                   </span>
-                   </div>
+                        <h4>Subtraction of 7 from 100 five times and for each subtraction select the correct option</h4>
+                    </span>
+                </div>
                 <!-- <h3 class="h1">Attention Test</h3> -->
                 <ul class="quiz list-group">
                     <li class="list-group-item card-body " id="quest1">
