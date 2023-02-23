@@ -10,10 +10,10 @@
          "1. You will be shown a set of 12 images about any object,animal etc.";
      info[1].innerHTML = "2. You have to type the name of object shown in picture.You can't keep it blank.";
      info[2].innerHTML =
-         "3. There is no time limit.";
+         "3. After this you have to answer 4 questions about the these pictures.";
      info[3].innerHTML =
-         "4. For each correct answer you will get a point.";
-     info[4].innerHTML = "5. Result will be shown at the end.";
+         "4. You will be given 4 options for each question .";
+     info[4].innerHTML = "5.For each correct answer you will get a point.";
    
   }
   else if (nexturl == "ace1") {
@@ -72,13 +72,13 @@ else if (nexturl == "vs1") {
     buttonText = "Visuo-Spatial Test I";
     const info = document.getElementsByClassName("info");
     info[0].innerHTML =
-        "1. You will be shown an image containing some number of dots.";
-    info[1].innerHTML = "2. You have to type the number of dots shown in image.";
+        "1. First You will be shown 4 images containing some number of dots.";
+    info[1].innerHTML = "2. You have to type the number of dots shown in each image.";
     info[2].innerHTML =
-        "3. There is no time limit.";
+        "3. After this you will be shown another 4 images containing Fragmented English letters ";
     info[3].innerHTML =
-        "4. For each correct answer you will get a point.";
-    info[4].innerHTML = "5. Result will be shown at the end.";
+        "4.  You have to type the letter shown in each image.";
+    info[4].innerHTML = "5. For each correct answer you will get a point.";
     
 }
 else if (nexturl == "vs2") {
