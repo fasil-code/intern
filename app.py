@@ -1,4 +1,4 @@
-from flask import Flask,jsonify, make_response,render_template,request,session
+from flask import Flask,jsonify,abort, make_response,render_template,request,session
 from flask import Flask,render_template,url_for,flash,redirect
 import geonamescache
 import os
@@ -23,8 +23,8 @@ import pickle
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = 'alchemist'
-# app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+# app.config['MYSQL_PASSWORD'] = 'alchemist'
+app.config['MYSQL_PASSWORD'] = 'Zargar@123'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -247,7 +247,8 @@ def home():
    return render_template('navbar.html', logged_in=False)
 
 
-#Test Page  
+#Test Page 
+
 @app.route("/tests",methods=['GET','POST'])
 def tests():
    if 'logged_in' in session:
@@ -291,10 +292,12 @@ def tests():
          
         cursor.close()
         conn.close()    
-            
+    
                 
         return render_template('home.html',terms=terms,email=email,session_id=session_id)   
    return redirect('login')
+
+
 @app.after_request
 def after_request(response):
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
@@ -400,10 +403,16 @@ def ace1():
   
 @app.route("/ace2",methods=['GET','POST'])
 def ace2():
-   return render_template('ACE/attention/attention2.html') 
+   return render_template('ACE/attention/attention2.html')
+
 @app.route("/ace3",methods=['GET','POST']) 
 def ace3():
+<<<<<<< HEAD
    return render_template('ACE/attention/attention3.html',url="ace4",home="/home") 
+=======
+   return render_template('ACE/attention/attention3.html',url="ace4")
+         
+>>>>>>> ddda80fac600129794c6439be1aef2259114da53
 @app.route("/ace4",methods=['GET','POST']) 
 def ace4():
    return render_template('ACE/attention/attention4.html',url="layout")  
@@ -462,9 +471,12 @@ def ace_results():
         cursor = conn.cursor()
         cursor.execute(f"SELECT * FROM ace WHERE session_id = %s AND email = %s", (sesion_key, email))
         result_ace = cursor.fetchone()
+        leng=len(result_ace)
+        
         cursor.close()
         conn.close() 
-        return render_template('ACE/ace_results.html',result_ace=result_ace,session_id=sesion_key,url="home")
+        url='/tests?session_id='+sesion_key
+        return render_template('ACE/ace_results.html',result_ace=result_ace,url=url)
 #5 Pulse Tracking Test (PTT)
 @app.route("/ptt",methods=['GET','POST'])
 def ptt():
