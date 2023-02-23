@@ -113,7 +113,7 @@ a:hover {
     padding: 2rem 0 1rem;
   }
     .button1 {
-      background-color:#74b4fe; 
+     
       box-shadow: 0rem 0.5rem 1rem -0.125rem rgba(0, 0, 0, 0.25);
       padding: 0.8rem 2rem;
       border-radius: 0.5rem;
@@ -122,6 +122,7 @@ a:hover {
  
       font-size: 0.9rem;
       transition: transform 0.25s, box-shadow 0.25s;
+      
     }
     .button1:hover {
         box-shadow: 0rem 0rem 1rem 0.025rem rgba(0, 0, 0, 0.25);
@@ -151,6 +152,7 @@ font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;;
+
   }
     </style>
 </head>
@@ -185,7 +187,7 @@ font-weight: bold;
        <a  href="{{ url_for('layout') }}?name=vs1" > <li>Visuo-Spatial </li></a>
       </ul>
       <div class="buton">
-   <a  href="{{ url_for('home')}}" onclick="return confirm_alert(this);" id="button1" class="button1" >Home</a>
+   <a  href="{{ url_for('home')}}" onclick="return confirm_alert(this);" id="button1" class="button1" style="background:#f06807" >Home</a>
       </div>
    
       <script>
