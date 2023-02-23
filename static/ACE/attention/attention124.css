@@ -31,10 +31,10 @@ padding:10px 10px;
 .choices {
     list-style-type: none;
     padding: 0;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 .choices li {
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 .choices label {
     display: flex;
@@ -44,8 +44,8 @@ padding:10px 10px;
 input[type="radio"] {
     cursor: pointer;
 }
-.choices .list-group-item:hover{
-    background: #85b6eb;
+.choices li:hover{
+    background:lightgray;
    color: #ffff;
 transition: 1s linear infinite;
 }

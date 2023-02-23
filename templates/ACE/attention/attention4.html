@@ -7,21 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ACE/attention/attention124.css')}}">
     <title>Attention Test</title>
     <style>
+        body {
+            padding: 0 0;
+            margin: 0 0;
+        }
+
         span {
             font-size: large;
         }
-        .upperdiv{
-            margin:5% auto;
+
+        .upperdiv {
+            margin: 5% auto;
         }
-         #btn{
+
+        #btn {
             padding: 20px 10px;
-         }
+        }
+
         .div3 {
             width: 70%;
             margin-left: auto;
@@ -35,34 +41,62 @@
             margin-right: auto;
         }
 
-        @media screen and (max-width: 350px) {
+        .choices li {
+            text-decoration: none;
+            list-style: none;
+        }
+
+        @media screen and (max-width: 470px) {
+            .upperdiv {
+                margin: 0 0;
+                margin-top: 1%;
+            }
+
             .div3 {
-                width: 15rem;
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .list-group {
+                margin-left: 0;
             }
 
             .div1 {
-                width: 15rem;
-            }
-        }
-       
-        .next-btn{
-            display: flex;
-             text-align: center;
-            justify-content: space-between;
-        }
-        @media (max-width :400px){
-            .next-btn{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            
-            }
-            button{
-            text-align: center;
+                width: 20rem;
             }
 
+            .choices .list-group-item:hover {
+                background: lightgray;
+                color: #ffff;
+                transition: 1s linear infinite;
+            }
         }
 
+        @media screen and (max-width: 270px) {
+            .upperdiv {
+                margin: 0 0;
+                margin-top: 1%;
+            }
+
+            .div3 {
+                width: 20rem;
+                margin-left: 0;
+            }
+
+            .list-group {
+                margin-left: 0;
+            }
+
+            .div1 {
+                width: 20rem;
+            }
+
+            .choices .list-group-item:hover {
+                background: lightgray;
+                color: #ffff;
+                transition: 1s linear infinite;
+            }
+        }
     </style>
 </head>
 
@@ -79,12 +113,11 @@
         </div> -->
         <div class="col-md-8 col-lg-8 column">
             <div class="card div3">
-                
-                   <div class="p-4 bg-primary text-white border-bottom text-center" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="p-4 bg-primary text-white border-bottom text-center">
                     <span class="heading">
-                      <h4>Subtraction of 7 from 100 five times and for each subtraction select the correct option</h4>
+                        <h4>Subtraction of 7 from 100 five times and for each subtraction select the correct option</h4>
                     </span>
-                    </div>
+                </div>
                 <!-- <h3 class="h1">Attention Test</h3> -->
                 <ul class="quiz list-group">
                     <li class="list-group-item card-body " id="quest1">
@@ -194,53 +227,53 @@
                         </ul>
                     </li>
                 </ul>
-               
-                  <div class=" next-btn words bg-white p-4 border-bottom">
-              
-                    <div>
-                      <!-- <a href="{{ url_for('ace_results') }}">
-                        <button type="button" id="next-btn" class="px-4 mt-3 btn btn-danger">Exit</button>
-                      </a> -->
-                      <button type="button" id="next-btn" class="px-4 mt-3 btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Exit</button>
+                <!-- <div class="text-center" id="btn" style="text-align: center;">
+                    <button type="button" onclick="returnScore()" class="px-5 btn btn-primary btn-lg">Next</button>
+                </div> -->
+                <div class=" next-btn words bg-white p-4 border-bottom">
 
-                    </div>
-                    <div><button type="button" id="next-btn" onclick="returnScore()" class="px-4 mt-3 btn  btn-primary">Next</button> </div>
-                    
+                    <div>
+
+                        <button type="button" id="next-btn" class="px-4 btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalCenter">Exit</button>
+
+                    <!-- </div>
+                    <div> -->
+                        <button type="button" id="next-btn" onclick="returnScore()" 
+                            class="px-4 btn  btn-primary float-right">Next</button> </div>
+
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
+
+                </div>
+
+                <div class="modal-footer" style="display:flex; justify-content: space-between;">
+                    <a href="{{ url_for('ace_results') }}">
+                        <button type="button" class="btn btn-primary">Yes</button>
+                    </a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+
                 </div>
             </div>
-            
         </div>
-    </div>
-    <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          
-          <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
-          
-        </div>
-        
-        <div class="modal-footer" style="display:flex; justify-content: space-between;" >
-          <a href="{{ url_for('ace_results') }}">
-          <button type="button" class="btn btn-primary">Yes</button>
-        </a>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-          
-        </div>
-      </div>
-    </div>
-  </div>
-    <script>
-        var nextUrl = "{{url}}" + "?name=ace13";
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-
-    <script type="text/javascript">
-        window.history.forward();
-        function noBack() { window.history.forward(); }
-    </script>
-    <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/attention/attention4.js') }}"></script>
+        <script>
+            var nextUrl = "{{url}}" + "?name=ace13";
+            </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            window.history.forward();
+            function noBack() { window.history.forward(); }
+        </script>
+        <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/attention/attention4.js') }}"></script>
 </body>
 
 </html>
