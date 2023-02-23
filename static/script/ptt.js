@@ -134,6 +134,7 @@ function Game() {
     box2.style.display = 'none';
     grid.style.display = 'none';
     timerbox.style.display = 'none';
+    document.getElementById('exit').style.display = 'none';
 
     $.ajax({
       type: "POST",

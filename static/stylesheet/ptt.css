@@ -22,6 +22,15 @@ body {
     text-align: center;
 }
 
+.end{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
 .btn {
     width: fit-content;
     padding: 10px 20px;
@@ -33,6 +42,13 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     cursor: pointer;
 }
+#exit-btn {
+    background-color: #e01414;
+    color: aliceblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
+}
+
 .grid{
     display: flex;
     flex-direction: column;
@@ -294,6 +310,7 @@ transform: translate(-50%, -50%);
     .result{
         width: 80%;
         font-size: 2vw;
+        margin-bottom: 10px;
     }
     .num{   
         font-size: 1.2rem;
@@ -316,5 +333,17 @@ transform: translate(-50%, -50%);
     }
     .btn {
         font-size: 25px;
+    }
+}
+
+@media (max-width: 402px) {
+    .result{
+        width: 80%;
+        font-size: 2vw;
+        margin-bottom: 30px;
+    }
+    #container{
+        top: 85%;
+        font-size: 15px;
     }
 }

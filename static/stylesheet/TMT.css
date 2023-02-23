@@ -26,6 +26,13 @@
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+#exit-btn{
+    background-color: #e01414;
+    color: aliceblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
+}
+
 .box { 
     padding: 2px;
     display: flex;

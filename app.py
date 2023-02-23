@@ -23,8 +23,9 @@ import pickle
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = 'alchemist'
+# app.config['MYSQL_PASSWORD'] = 'alchemist'
 # app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -85,10 +86,10 @@ def create_database():
          id INT AUTO_INCREMENT PRIMARY KEY,
          email VARCHAR(255) NOT NULL,
          Date VARCHAR(255),
-         ptt_score INT,
+         ptt_score INT DEFAULT 0,
          
-         WrongClicks INT,
-         CorrectClicks INT,
+         WrongClicks INT DEFAULT 0,
+         CorrectClicks INT DEFAULT 0,
          
          
          session_id VARCHAR(255)
@@ -99,7 +100,7 @@ def create_database():
          id INT AUTO_INCREMENT PRIMARY KEY,
          email VARCHAR(255) NOT NULL,
          Date VARCHAR(255),
-         tmt_score INT,
+         tmt_score INT DEFAULT 0,
          session_id VARCHAR(255)
       )'''
       
@@ -475,12 +476,14 @@ def ace_results():
 #5 Pulse Tracking Test (PTT)
 @app.route("/ptt",methods=['GET','POST'])
 def ptt():
-   return render_template('PTT/ptt.html')
+   url = '/tests?session_id='+sesion_key
+   return render_template('PTT/ptt.html', url=url)
 
 #6 Trail Making Test (TMT I & II)
 @app.route("/tmt",methods=['GET','POST'])
 def tmt():
-    return render_template('TMT/TMT.html')
+   url = '/tests?session_id='+sesion_key
+   return render_template('TMT/TMT.html', url=url)
 @app.route("/tmt-2",methods=['GET','POST'])
 def tmt2():
     return render_template('TMT/TMT2.html')
