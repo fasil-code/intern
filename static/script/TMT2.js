@@ -43,6 +43,7 @@ function displayResult() {
     }
     grid.style.display = 'none';
     grid.style.height = '0px';
+    document.getElementById('exit').style.display = 'none';
     let result = document.getElementById('result');
     result.style.display = 'flex';
    
