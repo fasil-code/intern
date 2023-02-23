@@ -260,7 +260,12 @@ window.onload = function() {
     window.history.pushState(null, null, document.URL);
 };
 </script>
-  
+<script type="text/javascript">
+  window.history.forward();
+  function noBack() {
+      window.history.forward();
+  }
+</script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
