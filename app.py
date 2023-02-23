@@ -464,7 +464,7 @@ def ace_results():
         result_ace = cursor.fetchone()
         cursor.close()
         conn.close() 
-        return render_template('ACE/ace_results.html',result_ace=result_ace,url="/tests")
+        return render_template('ACE/ace_results.html',result_ace=result_ace,session_id=sesion_key,url="home")
 #5 Pulse Tracking Test (PTT)
 @app.route("/ptt",methods=['GET','POST'])
 def ptt():
