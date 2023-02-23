@@ -115,4 +115,7 @@ label {
     label {
         font-size: 15px; /* decreased font-size for smaller screens */
     }
+    h4{
+        font-size: 1rem;
+       }
 }

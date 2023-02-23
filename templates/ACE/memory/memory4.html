@@ -45,16 +45,23 @@
     <div class="d-flex justify-content-center align-items-center row upperdiv div4">
       <div class="col-md-8 col-lg-8 column div4">
         <div class="border">
-          <div class="p-5 bg-primary text-white border-bottom text-center">
-            <!-- heading -->
-            <div id="heading">
+          <!-- <div class="p-5 bg-primary text-white border-bottom text-center">
+             heading -->
+            <!-- <div id="heading">
               <h4>Answer the following questions </h4>
 
 
               <h5 id="recognition-status"></h5>
             </div>
+          </div> -->
+          <div class="p-5 bg-primary text-white border-bottom">
+            <div id="heading">
+              
+              <h4 style=" text-align: center; margin-bottom: 4%;">Answer the following questions</h4>
+              <h5 style="text-align: center;"id="recognition-status"></h5>
+              <a href="{{ url_for('ace_results') }}" style="float: left; padding: 5px 10px; background-color: #4CAF50; color: #fff; text-decoration: none; border-radius: 4px; font-size: 14px; margin-right: 10px;">Home</a>
+            </div>
           </div>
-
           <div class="q1 bg-white p-4 border-bottom">
             <div class="d-flex flex-row justify-content-between align-items-center q1">
               <!-- write question in h5 -->

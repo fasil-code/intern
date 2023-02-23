@@ -403,7 +403,7 @@ def ace2():
    return render_template('ACE/attention/attention2.html') 
 @app.route("/ace3",methods=['GET','POST']) 
 def ace3():
-   return render_template('ACE/attention/attention3.html',url="ace4") 
+   return render_template('ACE/attention/attention3.html',url="ace4",home="/home") 
 @app.route("/ace4",methods=['GET','POST']) 
 def ace4():
    return render_template('ACE/attention/attention4.html',url="layout")  

@@ -18,15 +18,17 @@
     <div class="d-flex justify-content-center align-items-center row">
       <div class="col-md-8 col-lg-8">
          <div class="border">
-          <div class="p-4 bg-primary text-white border-bottom">
-           
-             <div class="heading">
-              <h4 >Please record name and address three times</h4>
-              <h4 >You will be asked to recall this information later.</h4>
-              <h5 id="recognition-status"> </h5>
-             </div>
-            </div>
           
+            <div class="p-5 bg-primary text-white border-bottom">
+              <div id="heading">
+                
+                <h4 style=" margin-bottom: 4%;">Please record name and address three times.You will be asked to recall this information later.</h4>
+                <h5 style="text-align: center;"id="recognition-status"></h5>
+                <a href="{{ url_for('ace_results') }}" style="float: left; padding: 5px 10px; background-color: #4CAF50; color: #fff; text-decoration: none; border-radius: 4px; font-size: 14px; margin-right: 10px;">Home</a>
+              </div>
+            </div>
+            
+            
             <div class="words bg-white p-3 border-bottom">
               <div class="container-fluid">
                 <div class="row align-items-center">

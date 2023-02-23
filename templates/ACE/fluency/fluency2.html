@@ -52,13 +52,19 @@
     <div class="d-flex justify-content-center text-center row div4">
       <div class="col-md-8 col-lg-8 column">
         <div class="border">
-          <div class="p-4 bg-primary text-white border-bottom">
+        
+    
             <!-- heading -->
-            <div id="heading">
-              <h4>Fluency Test</h4>
-              <h5 id="recognition-status"></h5>
+            <div class="p-4 bg-primary text-white border-bottom">
+              <!-- heading -->
+              <div id="heading">
+                <a href="{{ url_for('ace_results') }}" style="float: left; padding: 5px 10px; background-color: #4CAF50; color: #fff; text-decoration: none; border-radius: 4px; font-size: 14px; margin-right: 10px; vertical-align: middle;">Home</a>
+                <h4 style="display: inline-block; margin: 0; vertical-align: middle;">Fluency Test</h4>
+                <h5 id="recognition-status"></h5>
+              </div>
             </div>
-          </div>
+            
+          
           <div class="q1 bg-white p-4 border-bottom">
             <div class="d-flex flex-row justify-content-between align-items-center q1">
               <!-- write question in h5 -->
