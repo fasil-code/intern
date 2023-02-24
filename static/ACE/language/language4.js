@@ -102,18 +102,18 @@ function scoring(score){
            score: score,
            column: "language3"
         },
-    success: function(response) {
-           console.log(response);
-        //    sent=true;
-           redirect();
-}
-    });
-}
-     
-   function redirect(sent){
-     
-       window.location.href=nextUrl;
-     
-   }
+        success: function(response) {
+            console.log(response);
+            sent=true;
+            redirect(sent);
+ }
+     });
+ }
+      
+    function redirect(sent){
+      if(sent===true){
+        window.location.href=nextUrl;
+      }
+    }
 
 

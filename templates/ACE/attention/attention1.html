@@ -584,80 +584,146 @@
     // For second,third question give 1 mark
     // For fourth and fifth queston give 2 marks
     // For last question give 1 mark
-    function Score() {
-      let sent = false;
-      let ans = 0;
-      const day = new Date().getDay();
-      const date = new Date().getDate();
-      let month = new Date().getMonth();
-      let mon = month;
-      month = month + 1;
-      if (month < 10) {
-        month = "0" + month;
-      }
-      let year = new Date().getFullYear();
-      let ddmmyyyy = month + "/" + date + "/" + year;
-      let selectdeddate = document.getElementById("fecha1").value;
-      let selectedday = document.getElementById("day").value;
-      let selectedcountry = document.getElementById("country").value;
-      // let selectedstate = document.getElementById("state").value;
-      let selectedseason = document.getElementById("season").value;
-      if (selectdeddate === ddmmyyyy) {
-        ans += 3;
-      }
-      if (selectedcountry === "India" || selectedcountry === "india") {
-        ans += 2;
-      }
-      listday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      correctday = listday[day];
-      if (selectedday === correctday) {
-        ans += 3;
-      }
+    // function Score() {
+    //   let sent = false;
+    //   let ans = 0;
+    //   const day = new Date().getDay();
+    //   const date = new Date().getDate();
+    //   let month = new Date().getMonth();
+    //   let mon = month;
+    //   month = month + 1;
+    //   if (month < 10) {
+    //     month = "0" + month;
+    //   }
+    //   let year = new Date().getFullYear();
+    //   let ddmmyyyy = month + "/" + date + "/" + year;
+    //   let selectdeddate = document.getElementById("fecha1").value;
+    //   let selectedday = document.getElementById("day").value;
+    //   let selectedcountry = document.getElementById("country").value;
+    //   // let selectedstate = document.getElementById("state").value;
+    //   let selectedseason = document.getElementById("season").value;
+    //   if (selectdeddate === ddmmyyyy) {
+    //     ans += 3;
+    //   }
+    //   if (selectedcountry === "India" || selectedcountry === "india") {
+    //     ans += 2;
+    //   }
+    //   listday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    //   correctday = listday[day];
+    //   if (selectedday === correctday) {
+    //     ans += 3;
+    //   }
 
-      seasonlist = ['Spring', 'Summer', 'Monsoon', 'Autumn', 'Winter']
-      season = "";
-      if (mon == 2 || mon == 3)
-        season = "Spring";
-      else if (mon == 4 || mon == 5)
-        season = "Summer";
-      else if (mon == 6 || mon == 7)
-        season = "Monsoon"
-      else if (mon == 8 || mon == 9)
-        season = "Autumn";
-      else
-        season = "Winter";
-      if (selectedseason === season) {
-        ans += 2;
-      }
-      // var x = inpstate;
-      // if (selectedstate.includes(x) || x.includes(selectedstate)) {
-      //   ans += 1;
-      // }
-      $.ajax({
-        type: "POST",
-        url: "/send_score",
-        data: {
-          score: ans,
-          column: "attention1"
-        },
-        success: function (response) {
-          console.log(response);
-          sent = true;
-          redirect(sent);
+    //   seasonlist = ['Spring', 'Summer', 'Monsoon', 'Autumn', 'Winter']
+    //   season = "";
+    //   if (mon == 2 || mon == 3)
+    //     season = "Spring";
+    //   else if (mon == 4 || mon == 5)
+    //     season = "Summer";
+    //   else if (mon == 6 || mon == 7)
+    //     season = "Monsoon"
+    //   else if (mon == 8 || mon == 9)
+    //     season = "Autumn";
+    //   else
+    //     season = "Winter";
+    //   if (selectedseason === season) {
+    //     ans += 2;
+    //   }
+    //   // var x = inpstate;
+    //   // if (selectedstate.includes(x) || x.includes(selectedstate)) {
+    //   //   ans += 1;
+    //   // }
+    //   $.ajax({
+    //     type: "POST",
+    //     url: "/send_score",
+    //     data: {
+    //       score: ans,
+    //       column: "attention1"
+    //     },
+    //     success: function (response) {
+    //       console.log(response);
+    //       sent = true;
+    //       redirect(sent);
+    //     }
+      function Score() {
+        let sent=false;
+        let ans = 0;
+        const day = new Date().getDay();
+        const date = new Date().getDate();
+        let month = new Date().getMonth();
+        let mon = month;
+        month = month + 1;
+        if (month < 10) {
+          month = "0" + month;
+        }
+        let year = new Date().getFullYear();
+        let ddmmyyyy = month + "/" + date + "/" + year;
+        let selectdeddate = document.getElementById("fecha1").value;
+        let selectedday = document.getElementById("day").value;
+        let selectedcountry = document.getElementById("country").value;
+        // let selectedstate = document.getElementById("state").value;
+        let selectedseason = document.getElementById("season").value;
+        if (selectdeddate === ddmmyyyy) {
+
+          ans += 3;
+         
+        }
+        if (selectedcountry === "India" || selectedcountry === "india") {
+          ans += 2;
+          
+        }
+        listday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        correctday = listday[day];
+        if (selectedday === correctday) {
+          ans += 3;
+          
         }
 
-      });
-    }
-    function redirect(sent) {
-      if (sent === true) {
-        window.location.href = nextUrl;
-      }
-    }
-    // if startQuiz button clicked
-    $(function () {
-      $('.datepicker').datepicker({
-        language: "es",
-        autoclose: true,
+        seasonlist = ['Spring', 'Summer', 'Monsoon', 'Autumn', 'Winter']
+        season = "";
+        if (mon == 2 || mon == 3)
+          season = "Spring";
+        else if (mon == 4 || mon == 5)
+          season = "Summer";
+        else if (mon == 6 || mon == 7)
+          season = "Monsoon"
+        else if (mon == 8 || mon == 9)
+          season = "Autumn";
+        else
+          season = "Winter";
+        if (selectedseason === season) {
+          ans += 2;
+          
+        }
+        // var x = inpstate;
+        // if (selectedstate.includes(x) || x.includes(selectedstate)) {
+        //   ans += 1;
+        // }
+        $.ajax({
+        type: "POST",
+        url: "/send_score",
+        data: { 
+        score: ans,
+        column: "attention1"
+     },
+     success: function(response) {
+        console.log(response);
+        sent=true;
+        redirect(sent);     
+     } 
+     
+  });
+}
+function redirect(sent){
+  if(sent===true){
+    window.location.href=nextUrl;
+  }
+}
+      // if startQuiz button clicked
+      $(function () {
+        $('.datepicker').datepicker({
+          language: "es",
+          autoclose: true
 
       });
     });
