@@ -21,11 +21,11 @@
     }
     .register{
     padding:20px 30px;
-background-color: white;
+    background-color: white;
     width:60vw;
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 60%;
     transform: translate(-50%,-50%);
     border-radius:5px;
     }
@@ -80,6 +80,78 @@ background-color: white;
         {{ form.email(class="form-control form-control-lg") }}
         {% endif %}
     </div>
+    <!-- Started from here -->
+    <div class="form-group">
+        {{ form.age.label(class="form-control-label") }}
+        {% if form.age.errors %}
+        {{ form.age(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+         {% for error in form.age.errors %}
+         <span>{{ error }}</span>
+         {% endfor %}
+        </div>
+        {% else %}
+        {{ form.age(class="form-control form-control-lg") }}
+        {% endif %}
+      
+    </div>
+    <div class="form-group">
+        {{ form.gender.label(class="form-control-label") }}
+        {% if form.gender.errors %}
+        {{ form.gender(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+         {% for error in form.gender.errors %}
+         <span>{{ error }}</span>
+         {% endfor %}
+        </div>
+        {% else %}
+        {{ form.gender(class="form-control form-control-lg") }}
+        {% endif %}
+      
+    </div>
+    <div class="form-group">
+        {{ form.region.label(class="form-control-label") }}
+        {% if form.region.errors %}
+        {{ form.region(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+         {% for error in form.region.errors %}
+         <span>{{ error }}</span>
+         {% endfor %}
+        </div>
+        {% else %}
+        {{ form.region(class="form-control form-control-lg") }}
+        {% endif %}
+      
+    </div>
+    <div class="form-group">
+        {{ form.city.label(class="form-control-label") }}
+        {% if form.city.errors %}
+        {{ form.city(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+         {% for error in form.city.errors %}
+         <span>{{ error }}</span>
+         {% endfor %}
+        </div>
+        {% else %}
+        {{ form.city(class="form-control form-control-lg") }}
+        {% endif %}
+      
+    </div>
+    <div class="form-group">
+        {{ form.state.label(class="form-control-label") }}
+        {% if form.state.errors %}
+        {{ form.state(class="form-control form-control-lg is-invalid") }}
+        <div class="invalid-feedback">
+         {% for error in form.state.errors %}
+         <span>{{ error }}</span>
+         {% endfor %}
+        </div>
+        {% else %}
+        {{ form.state(class="form-control form-control-lg") }}
+        {% endif %}
+      
+    </div>
+    <!-- End here -->
     <div class="form-group">
         {{ form.password.label(class="form-control-label") }}
         {% if form.password.errors %}
@@ -106,7 +178,6 @@ background-color: white;
         {{ form.confirm_password(class="form-control form-control-lg") }}
         {% endif %}
     </div>
-
 </fieldset>
 <div class="form-group">
     {{ form.submit(class=" mt-4 btn btn-outline-info") }}

@@ -4,13 +4,11 @@ import geonamescache
 import os
 import uuid
 import datetime
-
 from report import generate_route_pdf
 from flask_session import Session
 from flask_mysqldb import MySQL
 app = Flask(__name__)
 mysql = MySQL(app)
-
 from terms import terms
 gc=geonamescache.GeonamesCache()
 countries = gc.get_countries()
@@ -48,9 +46,9 @@ def create_database():
       id INT AUTO_INCREMENT PRIMARY KEY, 
       email VARCHAR(255) NOT NULL,
       Date VARCHAR(255),
-      emoji_game INT,
+      emoji_game INT DEFAULT 0,
       time_emoji_game VARCHAR(255),
-      ert INT,
+      ert INT DEFAULT 0,
       time_ert VARCHAR(255),
       session_id VARCHAR(255)     
       )'''
@@ -503,6 +501,7 @@ def tmt():
    return render_template('TMT/TMT.html', url=url)
 @app.route("/tmt-2",methods=['GET','POST'])
 def tmt2():
-    return render_template('TMT/TMT2.html')
+    url = '/tests?session_id='+sesion_key
+    return render_template('TMT/TMT2.html', url=url)
 if __name__ == "__main__":
     app.run(debug = True)
