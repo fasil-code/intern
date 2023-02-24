@@ -48,9 +48,9 @@ def create_database():
       id INT AUTO_INCREMENT PRIMARY KEY, 
       email VARCHAR(255) NOT NULL,
       Date VARCHAR(255),
-      emoji_game INT,
+      emoji_game INT DEFAULT 0,
       time_emoji_game VARCHAR(255),
-      ert INT,
+      ert INT DEFAULT 0,
       time_ert VARCHAR(255),
       session_id VARCHAR(255)     
       )'''
