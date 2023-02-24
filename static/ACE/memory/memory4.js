@@ -69,7 +69,7 @@ function audioToText(i){
 function scoring(){
 
   let score=0;
-  l=['delhi','tiger','salman khan','mahatma gandhi'];
+  l=['delhi','tiger','amitabh bachchan','mahatma gandhi'];
   if(ans[0]==='new delhi'){
     score+=1
  }

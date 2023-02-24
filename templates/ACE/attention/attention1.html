@@ -12,7 +12,7 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <title>Attention Test</title>
 </head>
 <style>
@@ -26,7 +26,24 @@
 
 
   }
+  .form-control::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-size: 8;
+    color: black;
+    /* Firefox */
+  }
 
+  .form-control:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    font-size: 8;
+    color: black;
+  }
+
+  .form-control::-ms-input-placeholder {
+    /* Microsoft Edge */
+    font-size: 8;
+    color: black;
+  }
   .start_btn,
   .info_box,
   .quiz_box,
@@ -332,24 +349,29 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     cursor: pointer;
   } */
-  .next-btn{
+  .next-btn {
     display: flex;
     text-align: center;
     justify-content: space-between;
     padding: 0 !important;
   }
-  @media (max-width :300px){
-    .next-btn{
+
+  @media (max-width :300px) {
+    .next-btn {
       display: flex;
-     flex-direction: column;
-     justify-content: center;
-     
+      flex-direction: column;
+      justify-content: center;
+
     }
-    button{
+
+    button {
       text-align: center;
+      margin-bottom: 10px;
+      margin-top: 10px;
     }
 
   }
+
   @media(max-width:430px) {
     .container {
       width: 100%;
@@ -387,9 +409,8 @@
 
     outline: none;
   }
-  @media(max-width:230px) {
-    
-  }
+
+  @media(max-width:230px) {}
 </style>
 
 <body>
@@ -397,7 +418,7 @@
 
 
   {% block content %}
-   <!-- For address part -->
+  <!-- For address part -->
 
   <!-- <div id="main" class=" main group-1">
     <div class="container container-fluid border bg-white">
@@ -427,11 +448,11 @@
  </div>   -->
   <div id="main" class="main group-2">
     <div class="container container-fluid border bg-white">
-      
+
       <div class="h2" style="display: flex; align-items: center;">
         <h4 class="flex-grow-1">Answer the following questions</h4>
       </div>
-    
+
       <form class="text-center">
         <div class="def texform-group ">
           <div class="datepicker date input-group">
@@ -455,6 +476,24 @@
             {% endfor %}
           </select>
         </label>
+        <!-- <label class="day custom-select">
+          <select name="sample" id="city">
+            {% for city in states %}
+            <option value={{city}}>{{city}}</option>
+            {% endfor %}
+          </select>
+        </label> -->
+        <label class="day custom-select">
+          <input class="form-control" style="border:1px solid grey" type="text"
+            placeholder="Enter City/District name" />
+        </label>
+        <label class="day custom-select">
+          <select name="sample" id="state">
+            {% for state in states %}
+            <option value={{state}}>{{state}}</option>
+            {% endfor %}
+          </select>
+        </label>
         <label class="day custom-select">
           <select name="sample" id="country">
             {% for country in list %}
@@ -462,168 +501,171 @@
             {% endfor %}
           </select>
         </label>
-        <!-- <label class="day custom-select">
-          <select name="sample" id="state">
-            {% for state in states %}
-            <option value={{state}}>{{state}}</option>
-            {% endfor %}
-          </select>
-        </label> 
-        <label class="day custom-select">
+        <!--  <label class="day custom-select">
           <div class="words bg-white ">
             <input class="input-t" type="text" id="first" class="form-control" name="first-sentence"
               placeholder="Type your full address" maxlength="130">
           </div>
         </label> -->
-        
+
         <div class="mt-5 next-btn words bg-white p-4 border-bottom">
-          <div>  
-          <button type="button" id="next-btn" class="px-4 btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Exit</button>
+          <div>
+            <button type="button" id="next-btn" class="px-4 btn btn-danger float-left" data-bs-toggle="modal"
+              data-bs-target="#exampleModalCenter">Exit</button>
           </div>
-          <div><button type="button" id="next-btn" onclick="Score()" class="px-4 btn  btn-primary">Next</button> </div>
-          
-      </div> 
+          <div>
+            <button type="button" id="next-btn" onclick="Score()"
+              class="px-4 btn  btn-primary float-right">Next</button>
+          </div>
+
+        </div>
       </form>
     </div>
   </div>
-    <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        
-        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
-        
-      </div>
-      
-      <div class="modal-footer" style="display:flex; justify-content: space-between;" >
-        <a href="{{ url_for('ace_results') }}">
-        <button type="button" class="btn btn-primary">Yes</button>
-      </a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-        
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
+
+        </div>
+
+        <div class="modal-footer" style="display:flex; justify-content: space-between;">
+          <a href="{{ url_for('ace_results') }}">
+            <button type="button" class="btn btn-primary">Yes</button>
+          </a>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+
+        </div>
       </div>
     </div>
   </div>
-</div>
-    {% endblock content %}
-    <script> nextUrl = "{{url}}"</script>
+  {% endblock content %}
+  <script> nextUrl = "{{url}}"</script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-   
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"></script>
-      <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-    <!-- Datepicker -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <!-- <script type = "text/javascript" src = "{{ url_for('static', filename = 'ACE/attention/attention1.js') }}" ></script> -->
-    <script>
-      // let inpcity;
-      // let inpfloor;
-      // let inpstreet;
-      // let inpstate;
-      // function displayfun() {
-      //   inpfloor=document.getElementById("inpfloor").value;
-      //   inpstreet=document.getElementById("inpstreet").value;
-      //   inpcity=document.getElementById("inpcity").value;
-      //   inpstate=document.getElementById("inpstate").value;
-      //   document.getElementsByClassName("group-2")[0].style.display = "block";
-      //   document.getElementsByClassName("group-1")[0].style.display = "none";
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- Datepicker -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/attention/attention1.js') }}"></script>
+  <script>
+    // let inpcity;
+    // let inpfloor;
+    // let inpstreet;
+    // let inpstate;
+    // function displayfun() {
+    //   inpfloor=document.getElementById("inpfloor").value;
+    //   inpstreet=document.getElementById("inpstreet").value;
+    //   inpcity=document.getElementById("inpcity").value;
+    //   inpstate=document.getElementById("inpstate").value;
+    //   document.getElementsByClassName("group-2")[0].style.display = "block";
+    //   document.getElementsByClassName("group-1")[0].style.display = "none";
+    // }
+
+
+    // Scoring----->
+    // For first question  give 3 marks;
+    // For second,third question give 1 mark
+    // For fourth and fifth queston give 2 marks
+    // For last question give 1 mark
+    function Score() {
+      let sent = false;
+      let ans = 0;
+      const day = new Date().getDay();
+      const date = new Date().getDate();
+      let month = new Date().getMonth();
+      let mon = month;
+      month = month + 1;
+      if (month < 10) {
+        month = "0" + month;
+      }
+      let year = new Date().getFullYear();
+      let ddmmyyyy = month + "/" + date + "/" + year;
+      let selectdeddate = document.getElementById("fecha1").value;
+      let selectedday = document.getElementById("day").value;
+      let selectedcountry = document.getElementById("country").value;
+      // let selectedstate = document.getElementById("state").value;
+      let selectedseason = document.getElementById("season").value;
+      if (selectdeddate === ddmmyyyy) {
+        ans += 3;
+      }
+      if (selectedcountry === "India" || selectedcountry === "india") {
+        ans += 2;
+      }
+      listday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      correctday = listday[day];
+      if (selectedday === correctday) {
+        ans += 3;
+      }
+
+      seasonlist = ['Spring', 'Summer', 'Monsoon', 'Autumn', 'Winter']
+      season = "";
+      if (mon == 2 || mon == 3)
+        season = "Spring";
+      else if (mon == 4 || mon == 5)
+        season = "Summer";
+      else if (mon == 6 || mon == 7)
+        season = "Monsoon"
+      else if (mon == 8 || mon == 9)
+        season = "Autumn";
+      else
+        season = "Winter";
+      if (selectedseason === season) {
+        ans += 2;
+      }
+      // var x = inpstate;
+      // if (selectedstate.includes(x) || x.includes(selectedstate)) {
+      //   ans += 1;
       // }
-      function Score() {
-        let sent=false;
-        let ans = 0;
-        const day = new Date().getDay();
-        const date = new Date().getDate();
-        let month = new Date().getMonth();
-        let mon = month;
-        month = month + 1;
-        if (month < 10) {
-          month = "0" + month;
-        }
-        let year = new Date().getFullYear();
-        let ddmmyyyy = month + "/" + date + "/" + year;
-        let selectdeddate = document.getElementById("fecha1").value;
-        let selectedday = document.getElementById("day").value;
-        let selectedcountry = document.getElementById("country").value;
-        // let selectedstate = document.getElementById("state").value;
-        let selectedseason = document.getElementById("season").value;
-        if (selectdeddate === ddmmyyyy) {
-          ans += 3;
-        }
-        if (selectedcountry === "India" || selectedcountry === "india") {
-          ans += 2;
-        }
-        listday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        correctday = listday[day];
-        if (selectedday === correctday) {
-          ans += 3;
-        }
-
-        seasonlist = ['Spring', 'Summer', 'Monsoon', 'Autumn', 'Winter']
-        season = "";
-        if (mon == 2 || mon == 3)
-          season = "Spring";
-        else if (mon == 4 || mon == 5)
-          season = "Summer";
-        else if (mon == 6 || mon == 7)
-          season = "Monsoon"
-        else if (mon == 8 || mon == 9)
-          season = "Autumn";
-        else
-          season = "Winter";
-        if (selectedseason === season) {
-          ans += 2;
-        }
-        // var x = inpstate;
-        // if (selectedstate.includes(x) || x.includes(selectedstate)) {
-        //   ans += 1;
-        // }
-        $.ajax({
+      $.ajax({
         type: "POST",
         url: "/send_score",
-        data: { 
-        score: ans,
-        column: "attention1"
-     },
-     success: function(response) {
-        console.log(response);
-        sent=true; 
-        redirect(sent);     
-     } 
-     
-  });
-}
-function redirect(sent){
-  if(sent===true){
-    window.location.href=nextUrl;
-  }
-}
-      // if startQuiz button clicked
-      $(function () {
-        $('.datepicker').datepicker({
-          language: "es",
-          autoclose: true,
+        data: {
+          score: ans,
+          column: "attention1"
+        },
+        success: function (response) {
+          console.log(response);
+          sent = true;
+          redirect(sent);
+        }
 
-        });
       });
-      $('.dropdown-menu li').on('click', function () {
-        var getValue = $(this).text();
-        $('.dropdown-select').text(getValue);
+    }
+    function redirect(sent) {
+      if (sent === true) {
+        window.location.href = nextUrl;
+      }
+    }
+    // if startQuiz button clicked
+    $(function () {
+      $('.datepicker').datepicker({
+        language: "es",
+        autoclose: true,
+
       });
-    </script>
+    });
+    $('.dropdown-menu li').on('click', function () {
+      var getValue = $(this).text();
+      $('.dropdown-select').text(getValue);
+    });
+  </script>
 
 
 </body>
