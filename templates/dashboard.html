@@ -195,7 +195,7 @@
   {% endif %}
 
   <td class="data">{{results[i+2*size][3]}}</td>
-  <td class="data">{{results[i+3*size][3]}}</td>
+  <td class="data">{{(results[i+3*size][3]+results[i+3*size][4])/1000}}</td>
 
   <td class="data"><a href="{{ url_for('generate_pdf') }}?id={{results[i][0]}}"  target="blank">Report</a></td>
   

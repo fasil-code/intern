@@ -47,10 +47,10 @@
       </div>
     </section>
     <footer>
-      <div style="text-align: left;">
+      <div  style="text-align: left;">
   
-        <a href="{{ url_for('ace_results') }}" style=" display: inline-block; padding:8px 22px; background-color: #d03821; color: #fff; text-decoration: none; border-radius: 4px; font-size: 18px; margin-right: 10px; ">Exit</a>
-      </div>
+        <button type="button" id="next-btn" class="px-4 btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Exit</button>
+       </div>
       <div class="total_que">
 
       </div>
@@ -58,7 +58,26 @@
       <button class="next_btn">Next</button>
     </footer>
   </div>
-
+  <!-- Modals -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
+        
+      </div>
+      
+      <div class="modal-footer" style="display:flex; justify-content: space-between;" >
+        <a href="{{ url_for('ace_results') }}">
+        <button type="button" class="btn btn-primary">Yes</button>
+      </a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- Result box -->
   <div class="result_box">

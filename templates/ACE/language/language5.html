@@ -23,7 +23,7 @@
       <p id="heading" class="h2 p-sm display-5 text-center">Identify the emotion of +{}</p>
       <div style="text-align: left;">
   
-        <a href="{{ url_for('ace_results') }}" style=" display: inline-block; padding:8px 22px; background-color: #cc4219; color: #fff; text-decoration: none; border-radius: 4px; font-size: 18px; margin-right: 10px; ">Exit</a>
+        <button type="button" id="next-btn" class="px-4 btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Exit</button>
       </div>
       <div class="options" id="option11" >
       
@@ -37,8 +37,27 @@
     <div class="text-center ">
     
       
-     <button  id="submit" type="button" class=" btn btn-lg btn-primary text-center btn btn-outline-info">  Next</button>
+     <button  id="submit" type="button" class=" btn btn-lg btn-primary text-center btn btn-outline-info" >  Next</button>
     
+    </div>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            
+            <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
+            
+          </div>
+          
+          <div class="modal-footer" style="display:flex; justify-content: space-between;" >
+            <a href="{{ url_for('ace_results') }}">
+            <button type="button" class="btn btn-primary">Yes</button>
+          </a>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+            
+          </div>
+        </div>
+      </div>
     </div>
      
      </div> 

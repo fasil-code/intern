@@ -4,13 +4,11 @@ import geonamescache
 import os
 import uuid
 import datetime
-
 from report import generate_route_pdf
 from flask_session import Session
 from flask_mysqldb import MySQL
 app = Flask(__name__)
 mysql = MySQL(app)
-
 from terms import terms
 gc=geonamescache.GeonamesCache()
 countries = gc.get_countries()
@@ -23,9 +21,9 @@ import pickle
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
+# app.config['MYSQL_PASSWORD'] = '7006022139'
 # app.config['MYSQL_PASSWORD'] = 'Zargar@123'
-# app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
+app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -48,9 +46,9 @@ def create_database():
       id INT AUTO_INCREMENT PRIMARY KEY, 
       email VARCHAR(255) NOT NULL,
       Date VARCHAR(255),
-      emoji_game INT,
+      emoji_game INT DEFAULT 0,
       time_emoji_game VARCHAR(255),
-      ert INT,
+      ert INT DEFAULT 0,
       time_ert VARCHAR(255),
       session_id VARCHAR(255)     
       )'''
@@ -100,7 +98,8 @@ def create_database():
          id INT AUTO_INCREMENT PRIMARY KEY,
          email VARCHAR(255) NOT NULL,
          Date VARCHAR(255),
-         tmt_score INT DEFAULT 0,
+         tmt_score1 INT DEFAULT 0,
+         tmt_score2 INT DEFAULT 0,
          session_id VARCHAR(255)
       )'''
       
@@ -178,6 +177,8 @@ def send_score():
    
       
    score= request.form.get("score")
+   tmt1=request.form.get('tmt1')
+   tmt2=request.form.get('tmt2')
    
    time=request.form.get('time')
 
@@ -229,9 +230,13 @@ def send_score():
        conn.commit()
    
    if column=="tmt":
-         cursor.execute(f"UPDATE tmt SET tmt_score = %s WHERE session_id = %s AND email = %s", (score, sesion_key, email))
-         conn.commit()
-
+        if tmt1:
+           
+          cursor.execute(f"UPDATE tmt SET tmt_score1 = %s WHERE session_id = %s AND email = %s", (tmt1, sesion_key, email))
+          conn.commit()
+        if tmt2:
+           cursor.execute(f"UPDATE tmt SET tmt_score2 = %s WHERE session_id = %s AND email = %s", (tmt2, sesion_key, email))
+           conn.commit() 
    cursor.close()
    conn.close()
 
@@ -486,6 +491,7 @@ def tmt():
    return render_template('TMT/TMT.html', url=url)
 @app.route("/tmt-2",methods=['GET','POST'])
 def tmt2():
-    return render_template('TMT/TMT2.html')
+    url = '/tests?session_id='+sesion_key
+    return render_template('TMT/TMT2.html', url=url)
 if __name__ == "__main__":
     app.run(debug = True)
