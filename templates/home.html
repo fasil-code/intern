@@ -30,7 +30,7 @@
  
   }
   
-  a {
+  .test{
     padding:5rem 5rem 5rem 5rem;
     
     text-align: center;
@@ -41,14 +41,14 @@
     background: linear-gradient(45deg, #4199fe, #74b4fe);
   border-radius: 6px;
   }
-a{
+.test{
   color:white;
     text-decoration: none;
     transition: all 0.4s ease-in-out;
     -webkit-box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12);
     box-shadow: 0px 9px 12px -6px rgba(0, 0, 0, 0.2), 0px 19px 29px 2px rgba(0, 0, 0, 0.14), 0px 7px 36px 6px rgba(0, 0, 0, 0.12);
 }
-a:hover {
+.test:hover {
     scale: 1.05;
     transition: all 0.4s ease-in-out;
     
@@ -61,7 +61,7 @@ a:hover {
         --auto-grid-min-size: 100%;
    
     }
-    a{
+    .test{
         
         padding:3rem;
         margin:0;
@@ -177,19 +177,37 @@ font-weight: bold;
 
     <ul id="main2" class=" auto-grid" >
     
-        <a  href="{{ url_for('layout') }}?name=emoji"> <li>Emoji Game</li></a>
-       <a   href="{{ url_for('emojrecog') }}"> <li>Emotion Recognisation Test</li></a>
-        <a    href="{{url_for('layout') }}?name=ace1"> <li>ACE-III</li></a>
+        <a  class="test" href="{{ url_for('layout') }}?name=emoji"> <li>Emoji Game</li></a>
+       <a   class="test" href="{{ url_for('emojrecog') }}"> <li>Emotion Recognisation Test</li></a>
+        <a  class="test"   href="{{url_for('layout') }}?name=ace1"> <li>ACE-III</li></a>
       
        
-       <a   href="{{ url_for('layout') }}?name=ptt"> <li>Pulse Tracking Test</li></a>
-       <a href="{{ url_for('layout') }}?name=tmt"> <li>Trail Making test</li></a>
-       <a  href="{{ url_for('layout') }}?name=vs1" > <li>Visuo-Spatial </li></a>
+       <a  class="test"  href="{{ url_for('layout') }}?name=ptt"> <li>Pulse Tracking Test</li></a>
+       <a class="test" href="{{ url_for('layout') }}?name=tmt"> <li>Trail Making test</li></a>
+       <a class="test"  href="{{ url_for('layout') }}?name=vs1" > <li>Visuo-Spatial </li></a>
       </ul>
       <div class="buton">
-   <a  href="{{ url_for('home')}}" onclick="return confirm_alert(this);" id="button1" class="button1" style="background:#f06807" >Home</a>
+   <a  href="{{ url_for('home')}}" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" id="button1" class="button1" style="background:#dc3545" >Home</a>
       </div>
-   
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              
+              <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to exit ?</h5>
+              
+            </div>
+            
+            <div class="modal-footer" style="display:flex; justify-content: space-between;" >
+              <a href="{{ url_for('ace_results') }}">
+              <button type="button" class="btn btn-primary">Yes</button>
+            </a>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
       <script>
         window.history.pushState(null, null, document.URL);
 window.onpopstate = function(event) {
