@@ -100,7 +100,8 @@ def create_database():
          id INT AUTO_INCREMENT PRIMARY KEY,
          email VARCHAR(255) NOT NULL,
          Date VARCHAR(255),
-         tmt_score INT DEFAULT 0,
+         tmt_score1 INT DEFAULT 0,
+         tmt_score2 INT DEFAULT 0,
          session_id VARCHAR(255)
       )'''
       
@@ -178,6 +179,8 @@ def send_score():
    
       
    score= request.form.get("score")
+   tmt1=request.form.get('tmt1')
+   tmt2=request.form.get('tmt2')
    
    time=request.form.get('time')
 
@@ -229,9 +232,13 @@ def send_score():
        conn.commit()
    
    if column=="tmt":
-         cursor.execute(f"UPDATE tmt SET tmt_score = %s WHERE session_id = %s AND email = %s", (score, sesion_key, email))
-         conn.commit()
-
+        if tmt1:
+           
+          cursor.execute(f"UPDATE tmt SET tmt_score1 = %s WHERE session_id = %s AND email = %s", (tmt1, sesion_key, email))
+          conn.commit()
+        if tmt2:
+           cursor.execute(f"UPDATE tmt SET tmt_score2 = %s WHERE session_id = %s AND email = %s", (tmt2, sesion_key, email))
+           conn.commit() 
    cursor.close()
    conn.close()
 

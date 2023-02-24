@@ -65,7 +65,7 @@ function displayResult() {
         type: "POST",
         url: "/send_score",
         data: { 
-           score: timeTaken,
+          tmt1: timeTaken,
            column: "tmt"
         },
         success: function(response) {

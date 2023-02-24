@@ -189,36 +189,11 @@ def generate_route_pdf():
       ''', styles['para']))
       elements.append(Spacer(1, 0.6*inch))
       data = []
-      
-      data.append(results)
-      table = Table(data)
-      table.setStyle(TableStyle([
-         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-         ('FONTSIZE', (0, 0), (-1, 0), 14),
-         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-         ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-         ('BACKGROUND', (1, 1), (1, 1), colors.lightgrey),
-      ]))
-
-      # Add table to PDF template
-      elements.append(table)
+  
 
 
-      # Define the style for the table
-      table_style = TableStyle([
-         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-         ('FONTSIZE', (0, 0), (-1, 0), 14),
-         ('BACKGROUND', (0, 0), (-1, 0), 'lightgrey'),
-         ('TEXTCOLOR', (0, 0), (-1, 0), 'black'),
-         ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
-         ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
-         ('FONTSIZE', (0, 1), (-1, -1), 12),
-         ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
-      ])
+
+
 
       elements.append(Spacer(1, 0.5*inch))
 
@@ -387,65 +362,15 @@ def generate_route_pdf():
       Wrong Clicks: <font color="black" fontSize=14 > {result_ptt[5]} </font> <br/>
       Summary: Pulse Tracking Test gamifies the diagnosis for potential repulsive behaviour in tap. It also checks whether a person is able to sync properly with abrupt changes in the pulse. The test is divided into 5 levels.                                
       ''', style=styles['para']))
-      elements.append(Spacer(1, 0.4*inch))
-      data = []
-      data.append(result_ptt)
-      table = Table(data)
-      table.setStyle(TableStyle([
-         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-         ('FONTSIZE', (0, 0), (-1, 0), 14),
-         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-         ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-         ('BACKGROUND', (1, 1), (1, 1), colors.lightgrey),
-      ]))
-      elements.append(table)
-      table_style = TableStyle([
-         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-         ('FONTSIZE', (0, 0), (-1, 0), 14),
-         ('BACKGROUND', (0, 0), (-1, 0), 'lightgrey'),
-         ('TEXTCOLOR', (0, 0), (-1, 0), 'black'),
-         ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
-         ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
-         ('FONTSIZE', (0, 1), (-1, -1), 12),
-         ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
-      ])
-
+      
       elements.append(Spacer(1, 0.2*inch))
       elements.append(Paragraph(f''' <font color="blue" fontSize=16> (g) Trail Making Test</font> <br/>
       <br/>
-      Total Time Taken to complete the test: <font color="black" fontSize=14 > {result_ptt[3]} </font> out of <font color="black" fontSize=14 > 5 </font> <br/>                          
+      Total Time Taken to complete the test: <font color="black" fontSize=14 > {result_tmt[3]} </font> out of <font color="black" fontSize=14 > 5 </font> <br/>                          
       Summary: Trail Making Test tests a persons ability to count the numbers in an order and his memory. It also checks whether a person is able to do it under time. The test is divided into parts.                                
       ''', style=styles['para']))
       elements.append(Spacer(1, 0.4*inch))
-      data = []
-      data.append(result_ptt)
-      table = Table(data)
-      table.setStyle(TableStyle([
-         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
-         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
-         ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-         ('FONTSIZE', (0, 0), (-1, 0), 14),
-         ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
-         ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
-         ('GRID', (0, 0), (-1, -1), 1, colors.black),
-         ('BACKGROUND', (1, 1), (1, 1), colors.lightgrey),
-      ]))
-      elements.append(table)
-      table_style = TableStyle([
-         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-         ('FONTSIZE', (0, 0), (-1, 0), 14),
-         ('BACKGROUND', (0, 0), (-1, 0), 'lightgrey'),
-         ('TEXTCOLOR', (0, 0), (-1, 0), 'black'),
-         ('ALIGN', (0, 0), (-1, 0), 'CENTER'),
-         ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
-         ('FONTSIZE', (0, 1), (-1, -1), 12),
-         ('ALIGN', (0, 1), (-1, -1), 'CENTER'),
-      ])
+  
       
       doc.build(elements)
       response.data = buffer.getvalue()
