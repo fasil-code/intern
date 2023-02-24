@@ -366,7 +366,8 @@ def generate_route_pdf():
       elements.append(Spacer(1, 0.2*inch))
       elements.append(Paragraph(f''' <font color="blue" fontSize=16> (g) Trail Making Test</font> <br/>
       <br/>
-      Total Time Taken to complete the test: <font color="black" fontSize=14 > {result_tmt[3]} </font> out of <font color="black" fontSize=14 > 5 </font> <br/>                          
+      Total Time Taken to complete the test 1: <font color="black" fontSize=14 > {result_tmt[3]}</font><br/>
+      Total Time Taken to complete the test 2: <font color="black" fontSize=14 > {result_tmt[4]}</font><br/>                          
       Summary: Trail Making Test tests a persons ability to count the numbers in an order and his memory. It also checks whether a person is able to do it under time. The test is divided into parts.                                
       ''', style=styles['para']))
       elements.append(Spacer(1, 0.4*inch))

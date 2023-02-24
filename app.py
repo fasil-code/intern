@@ -24,8 +24,8 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 # app.config['MYSQL_PASSWORD'] = '7006022139'
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
-# app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
+# app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -493,6 +493,7 @@ def tmt():
    return render_template('TMT/TMT.html', url=url)
 @app.route("/tmt-2",methods=['GET','POST'])
 def tmt2():
-    return render_template('TMT/TMT2.html')
+    url = '/tests?session_id='+sesion_key
+    return render_template('TMT/TMT2.html', url=url)
 if __name__ == "__main__":
     app.run(debug = True)
