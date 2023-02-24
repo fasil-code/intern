@@ -24,7 +24,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 # app.config['MYSQL_PASSWORD'] = '7006022139'
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = 'alchemist'
 # app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -76,6 +76,7 @@ def create_database():
          language5 INT DEFAULT 0,
          visuospatial1 INT DEFAULT 0,
          visuospatial2 INT DEFAULT 0,
+         attention2_res JSON,
          session_id VARCHAR(255)
          
       )'''    
@@ -174,10 +175,11 @@ def send_score():
    
    email=session.get('logged_in')
    column= request.form.get("column")
+   source= request.form.get("source")
    wrong_clicks=request.form.get('wrong_clicks')
    correct_clicks=request.form.get('correct_clicks')
    
-      
+   array = json.loads(request.form.get('array', '[]'))
    score= request.form.get("score")
    tmt1=request.form.get('tmt1')
    tmt2=request.form.get('tmt2')
@@ -209,12 +211,20 @@ def send_score():
 
    aceColumn = ['attention1','attention2','attention3','fluency1','fluency2','memory1','memory2',
                'memory3','memory4','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
+   aceResponse=['attention2_res']
    if column in aceColumn:
         
       # Update the existing row
          cursor.execute(f"UPDATE ace SET {column}= %s WHERE session_id = %s AND email = %s", (score, sesion_key, email))
          conn.commit()
+   if source in aceResponse:
+        
+      # Update the existing row
+         # Convert the array to a JSON string
+          array_str = json.dumps(array)
 
+          cursor.execute(f"UPDATE ace SET {source} = %s WHERE session_id = %s AND email = %s", (array_str, sesion_key, email))
+          conn.commit()
 
    if column=="emoji":
       

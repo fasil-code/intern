@@ -171,11 +171,14 @@ function audioToText(i){
      url: "/send_score",
      data: { 
         score: score,
-        column: "attention2"
+        column: "attention2",
+        source:"attention2_response",
+        array:JSON.stringify(ans)
      },
      success: function(response) {
         console.log(response);
         sent=true; 
+       
         redirect(sent);     
      } 
      

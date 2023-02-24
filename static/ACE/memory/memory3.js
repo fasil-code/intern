@@ -134,16 +134,17 @@ document.getElementById("next-btn").addEventListener("click", function(event){
                column: "memory4"
             },
             success: function(response) {
-               console.log(response);
-            //    sent=true; 
-               redirect();    
-            } 
-            
-         });
-    }
-})
-function redirect(){
-    
-      window.location.href=nextUrl;
-    
-  }
+                console.log(response);
+                sent=true; 
+                redirect(sent);    
+             } 
+             
+          });
+     }
+ })
+ function redirect(sent){
+     if(sent===true){
+       window.location.href=nextUrl;
+     }
+   }
+ 
