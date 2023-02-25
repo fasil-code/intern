@@ -173,7 +173,7 @@ function audioToText(i){
         score: score,
         column: "attention2",
         source:"attention2_response",
-        array:JSON.stringify(ans)
+        user_response:JSON.stringify(ans)
      },
      success: function(response) {
         console.log(response);
