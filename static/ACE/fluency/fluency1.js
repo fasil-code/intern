@@ -113,10 +113,10 @@ function animateText() {
       score=3;           
      }           
     else if(count==2){
-      score=2
+      score=2;
     }
     else if(count==1){
-      score=1
+      score=1;
     }
     else{
       score=0;

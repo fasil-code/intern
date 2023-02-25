@@ -46,15 +46,20 @@ while (k <= 5) {
     k++;
 }
 tot = answers2.length;
+let ans=[];
+let actual=[93, 86, 79, 72, 65];
 function getCheckedValue(radioName) {
     var radios = document.getElementsByName(radioName);
     for (var y = 0; y < radios.length; y++)
-        if (radios[y].checked) return radios[y].value;
+        if (radios[y].checked) 
+          return radios[y].value;
 }
 function getScore() {
     var score = 0;
     for (var i = 0; i < tot; i++)
+       
         if (getCheckedValue("question" + i) === answers2[i]) 
+           
            score += 1;
     return score;
 }
@@ -63,12 +68,19 @@ function returnScore() {
     if (getScore() > 2) {
         console.log("Bravo");
     }
+    //mapping of actual response with user response
+    let ansMap = new Map();
+    for(let i=0;i<5;i++){
+       ansMap.set(actual[i], ans[i]);
+    }
     $.ajax({
         type: "POST",
         url: "/send_score",
         data: { 
            score: tot,
-           column: "attention3"
+           column: "attention3",
+           source:"attention3_response",
+           user_response:JSON.stringify(Object.fromEntries(ansMap))
         },
         success: function(response) {
            console.log(response);
