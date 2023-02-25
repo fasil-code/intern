@@ -50,6 +50,9 @@ def create_database():
       time_emoji_game VARCHAR(255),
       ert INT DEFAULT 0,
       time_ert VARCHAR(255),
+      correct_res JSON,
+      choosen_res JSON,
+      time_res JSON,
       session_id VARCHAR(255)     
       )'''
    )
@@ -192,7 +195,14 @@ def send_score():
    wrong_clicks=request.form.get('wrong_clicks')
    correct_clicks=request.form.get('correct_clicks')
    
+
+   array = json.loads(request.form.get('array', '[]'))
+   res_correct = json.loads(request.form.get('res_correct', '[]'))
+   res_choose = json.loads(request.form.get('res_choose', '[]'))
+   res_time = json.loads(request.form.get('res_time', '[]'))
+
    user_response = json.loads(request.form.get('user_response', '[]'))
+
    score= request.form.get("score")
    tmt1=request.form.get('tmt1')
    tmt2=request.form.get('tmt2')
@@ -243,10 +253,14 @@ def send_score():
    if column=="emoji":
       
          # Update the existing row
+        
          cursor.execute(f"UPDATE emotion SET emoji_game = %s, time_emoji_game = %s WHERE session_id = %s AND email = %s", (score, time, sesion_key, email))
          conn.commit()
    if column=="ert":
-         cursor.execute(f"UPDATE emotion SET ert = %s, time_ert = %s WHERE session_id = %s AND email = %s", (score, time, sesion_key, email))
+         res_corr = json.dumps(res_correct)
+         res_ch = json.dumps(res_choose)
+         res_ti = json.dumps(res_time)
+         cursor.execute(f"UPDATE emotion SET ert = %s,correct_res=%s,choosen_res=%s,time_res=%s, time_ert = %s WHERE session_id = %s AND email = %s", (score,res_corr,res_ch,res_ti, time, sesion_key, email))
          conn.commit()
 
    
