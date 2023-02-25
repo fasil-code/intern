@@ -26,7 +26,6 @@ let words = [
   "abundance",
   "beautiful",
   "creative",
-  "determined",
   "exciting"
 ];
 let n=words.length-1;
