@@ -46,6 +46,18 @@ while (k <= 5) {
     k++;
 }
 tot = answers2.length;
+//New Element ADDed------>
+db=[];
+dbans=[];
+i=0;
+function selectfun(ele) {
+    db.push(ele.innerText);
+}
+for(var i=0;i<db.length;i++){
+    if(i%2===0){
+        dbans.push(db[i]);
+    }
+}
 function getCheckedValue(radioName) {
     var radios = document.getElementsByName(radioName);
     for (var y = 0; y < radios.length; y++)

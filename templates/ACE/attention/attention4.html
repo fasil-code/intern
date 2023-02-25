@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='ACE/attention/attention124.css')}}">
     <title>Attention Test</title>
@@ -125,20 +127,20 @@
 
                         <ul class="choices list-group">
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(2)" name="question0" value="A" /><span
-                                        id="Cquest10">2</span></label>
+                                <label onclick="selectfun(this)" ><input type="radio" onclick="chnageFun(2)" name="question0"
+                                        value="A" /><span id="Cquest10">2</span></label>
+                            </li>
+                            <li class="list-group-item" >
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(2)" name="question0"
+                                        value="B" /><span id="Cquest11">1</span></label>
+                            </li>
+                            <li class="list-group-item" >
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(2)" name="question0"
+                                        value="C" /><span id="Cquest12">3</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(2)" name="question0" value="B" /><span
-                                        id="Cquest11">1</span></label>
-                            </li>
-                            <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(2)" name="question0" value="C" /><span
-                                        id="Cquest12">3</span></label>
-                            </li>
-                            <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(2)" name="question0" value="D" /><span
-                                        id="Cquest13">4</span></label>
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(2)" name="question0"
+                                        value="D" /><span id="Cquest13">4</span></label>
                             </li>
                         </ul>
                     </li>
@@ -146,19 +148,19 @@
                         <h4><span>Qno2:-</span>Subtract 7 again from result</h4>
                         <ul class="choices list-group">
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(3)" name="question1" value="A" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(3)" name="question1" value="A" /><span
                                         id="Cquest20">2</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(3)" name="question1" value="B" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(3)" name="question1" value="B" /><span
                                         id="Cquest21">1</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(3)" name="question1" value="C" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(3)" name="question1" value="C" /><span
                                         id="Cquest22">3</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(3)" name="question1" value="D" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(3)" name="question1" value="D" /><span
                                         id="Cquest23">4</span></label>
                             </li>
                         </ul>
@@ -167,19 +169,19 @@
                         <h4><span>Qno3:-</span>Subtract 7 again from result</h4>
                         <ul class="choices list-group">
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(4)" name="question2" value="A" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(4)" name="question2" value="A" /><span
                                         id="Cquest30">2</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(4)" name="question2" value="B" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(4)" name="question2" value="B" /><span
                                         id="Cquest31">1</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(4)" name="question2" value="C" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(4)" name="question2" value="C" /><span
                                         id="Cquest32">3</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(4)" name="question2" value="D" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(4)" name="question2" value="D" /><span
                                         id="Cquest33">4</span></label>
                             </li>
                         </ul>
@@ -188,19 +190,19 @@
                         <h4> <span>Qno4:-</span>Subtract 7 again from result</h4>
                         <ul class="choices list-group">
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(5)" name="question3" value="A" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(5)" name="question3" value="A" /><span
                                         id="Cquest40">2</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(5)" name="question3" value="B" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(5)" name="question3" value="B" /><span
                                         id="Cquest41">1</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(5)" name="question3" value="C" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(5)" name="question3" value="C" /><span
                                         id="Cquest42">3</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(5)" name="question3" value="D" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(5)" name="question3" value="D" /><span
                                         id="Cquest43">4</span></label>
                             </li>
                         </ul>
@@ -209,19 +211,19 @@
                         <h4> <span>Qno5:-</span>Subtract 7 last time</h4>
                         <ul class="choices list-group">
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(6)" name="question4" value="A" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(6)" name="question4" value="A" /><span
                                         id="Cquest50">2</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(6)" name="question4" value="B" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(6)" name="question4" value="B" /><span
                                         id="Cquest51">1</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(6)" name="question4" value="C" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(6)" name="question4" value="C" /><span
                                         id="Cquest52">3</span></label>
                             </li>
                             <li class="list-group-item">
-                                <label><input type="radio" onclick="chnageFun(6)" name="question4" value="D" /><span
+                                <label onclick="selectfun(this)"><input type="radio" onclick="chnageFun(6)" name="question4" value="D" /><span
                                         id="Cquest53">4</span></label>
                             </li>
                         </ul>
@@ -237,12 +239,13 @@
                         <button type="button" id="next-btn" class="px-4 btn btn-danger" data-bs-toggle="modal"
                             data-bs-target="#exampleModalCenter">Exit</button>
 
-                    <!-- </div>
+                        <!-- </div>
                     <div> -->
-                        <button type="button" id="next-btn" onclick="returnScore()" 
-                            class="px-4 btn  btn-primary float-right">Next</button> </div>
+                        <button type="button" id="next-btn" onclick="returnScore()"
+                            class="px-4 btn  btn-primary float-right">Next</button>
+                    </div>
 
-                </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -267,13 +270,15 @@
         </div>
         <script>
             var nextUrl = "{{url}}" + "?name=ace13";
-            </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
         <script type="text/javascript">
             window.history.forward();
             function noBack() { window.history.forward(); }
         </script>
-        <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/attention/attention4.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'ACE/attention/attention4.js') }}"></script>    
 </body>
 
 </html>
