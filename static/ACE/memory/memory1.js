@@ -67,6 +67,7 @@ function repeat(message){
     let sent=false;
    
     let arr = JSON.parse(localStorage.getItem('arr'));
+    let actual = JSON.parse(localStorage.getItem('arr'));
     for(let i=0;i<3;i++){
         let ind=arr.indexOf(ans[i]);
        if(ind!=-1){
@@ -74,12 +75,19 @@ function repeat(message){
            arr.splice(ind,1);
        }
     }
+    //mapping of actual response with user response
+    let ansMap = new Map();
+    for(let i=0;i<3;i++){
+      ansMap.set(actual[i], ans[i]);
+    }
     $.ajax({
       type: "POST",
       url: "/send_score",
       data: { 
          score: score,
-         column: "memory1"
+         column: "memory1",
+         source:"memory1_response",
+         user_response:JSON.stringify(Object.fromEntries(ansMap))
       },
       success: function(response) {
          console.log(response);

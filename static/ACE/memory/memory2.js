@@ -44,10 +44,11 @@ let objsize =Object.values(addressBook[0]).length;
 let rand=Math.floor(Math.random()*size);
 //Store the random number in local storage
 localStorage.setItem("rand", rand);
-
+let actual=[];
 for(let i=0;i<objsize;i++){
   document.getElementById("w"+i).innerHTML = Object.entries(addressBook[rand])[i][0] + ": " + Object.entries(addressBook[rand])[i][1];
-
+  actual.push(Object.entries(addressBook[rand])[i][1]);
+ 
 }
 function textToAudio(num){
   if (isRecording) {
@@ -162,12 +163,19 @@ function scoring(){
       } 
   }
     localStorage.setItem("score", score);
+    //mapping of actual response with user response
+    let ansMap = new Map();
+    for(let i=0;i<5;i++){
+      ansMap.set(actual[i], ans[i]);
+    }
     $.ajax({
       type: "POST",
       url: "/send_score",
       data: { 
          score: score,
-         column: "memory2"
+         column: "memory2",
+         source:"memory2_response",
+         user_response:JSON.stringify(Object.fromEntries(ansMap))
       },
       success: function(response) {
          console.log(response);
