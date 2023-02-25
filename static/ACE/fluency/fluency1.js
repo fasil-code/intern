@@ -3,7 +3,7 @@ const timeCount = document.querySelector(".timer .timer_sec");
 const next_btn=document.getElementById("next-btn");
 const recordButton = document.getElementById("record-btn");
 startTimer(60); //calling startTimer function
-const alphabet = "abcdefghijklmnopqrstuvwxyz";
+const alphabet = "abcdefghijklmnopqrst";
 const randomIndex = Math.floor(Math.random() * alphabet.length);
 let randomLetter = alphabet[randomIndex];
 randomLetter=randomLetter.toUpperCase();
@@ -113,10 +113,10 @@ function animateText() {
       score=3;           
      }           
     else if(count==2){
-      score=2
+      score=2;
     }
     else if(count==1){
-      score=1
+      score=1;
     }
     else{
       score=0;
@@ -127,7 +127,9 @@ function animateText() {
     url: "/send_score",
     data: { 
        score: score,
-       column: "fluency1"
+       column: "fluency1",
+       source:"fluency1_response",
+       user_response:JSON.stringify(answers)
     },
     success: function(response) {
        console.log(response);

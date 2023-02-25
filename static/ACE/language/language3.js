@@ -3,6 +3,7 @@ let idioms=["A bird in the hand is worth two in the bush","A dime a dozen","A fi
 let n=idioms.length-1;
 let arr=new Array(2);
 let ans=new Array(2);
+let actual=new Array(2);
 let isAudioPlaying = false;
 let isRecording = false;
 
@@ -14,6 +15,7 @@ function memorize(){
           r = Math.floor(Math.random() * n);
       }
             arr[i]=idioms[r].toLowerCase();
+            actual[i]=idioms[r].toLowerCase();
            
        
     }
@@ -143,13 +145,19 @@ function scoring(){
      }
   }
  
-  console.log(score);
+  //mapping of actual response with user response
+  let ansMap = new Map();
+  for(let i=0;i<2;i++){
+    ansMap.set(actual[i], ans[i]);
+  }
   $.ajax({
     type: "POST",
     url: "/send_score",
     data: { 
        score: score,
-       column: "language5"
+       column: "language5",
+       source:"language5_response",
+       user_response:JSON.stringify(Object.fromEntries(ansMap))
     },
     success: function(response) {
        console.log(response);

@@ -50,6 +50,9 @@ def create_database():
       time_emoji_game VARCHAR(255),
       ert INT DEFAULT 0,
       time_ert VARCHAR(255),
+      correct_res JSON,
+      choosen_res JSON,
+      time_res JSON,
       session_id VARCHAR(255)     
       )'''
    )
@@ -74,7 +77,22 @@ def create_database():
          language5 INT DEFAULT 0,
          visuospatial1 INT DEFAULT 0,
          visuospatial2 INT DEFAULT 0,
-         attention2_res JSON,
+         attention1_response JSON,
+         attention2_response JSON,
+         attention3_response JSON,
+         fluency1_response JSON,
+         fluency2_response JSON,
+         memory1_response JSON,
+         memory2_response JSON,
+         memory3_response JSON,
+         memory4_response JSON,
+         language1_response JSON,
+         language2_response JSON,
+         language3_response JSON,
+         language4_response JSON,
+         language5_response JSON,
+         visuospatial1_response JSON,
+         visuospatial2_response JSON,
          session_id VARCHAR(255)
          
       )'''    
@@ -177,7 +195,14 @@ def send_score():
    wrong_clicks=request.form.get('wrong_clicks')
    correct_clicks=request.form.get('correct_clicks')
    
+
    array = json.loads(request.form.get('array', '[]'))
+   res_correct = json.loads(request.form.get('res_correct', '[]'))
+   res_choose = json.loads(request.form.get('res_choose', '[]'))
+   res_time = json.loads(request.form.get('res_time', '[]'))
+
+   user_response = json.loads(request.form.get('user_response', '[]'))
+
    score= request.form.get("score")
    tmt1=request.form.get('tmt1')
    tmt2=request.form.get('tmt2')
@@ -209,7 +234,8 @@ def send_score():
 
    aceColumn = ['attention1','attention2','attention3','fluency1','fluency2','memory1','memory2',
                'memory3','memory4','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
-   aceResponse=['attention2_res']
+   aceResponse=['attention1_response','attention2_response','attention3_response','fluency1_response','fluency2_response','memory1_response','memory2_response',
+                'memory3_response','memory4_response','language1_response','language2_response','language3_response','language4_response','language5_response','visuospatial1_response','visuospatial2_response']
    if column in aceColumn:
         
       # Update the existing row
@@ -219,18 +245,22 @@ def send_score():
         
       # Update the existing row
          # Convert the array to a JSON string
-          array_str = json.dumps(array)
+          response_str = json.dumps(user_response)
 
-          cursor.execute(f"UPDATE ace SET {source} = %s WHERE session_id = %s AND email = %s", (array_str, sesion_key, email))
+          cursor.execute(f"UPDATE ace SET {source} = %s WHERE session_id = %s AND email = %s", (response_str, sesion_key, email))
           conn.commit()
 
    if column=="emoji":
       
          # Update the existing row
+        
          cursor.execute(f"UPDATE emotion SET emoji_game = %s, time_emoji_game = %s WHERE session_id = %s AND email = %s", (score, time, sesion_key, email))
          conn.commit()
    if column=="ert":
-         cursor.execute(f"UPDATE emotion SET ert = %s, time_ert = %s WHERE session_id = %s AND email = %s", (score, time, sesion_key, email))
+         res_corr = json.dumps(res_correct)
+         res_ch = json.dumps(res_choose)
+         res_ti = json.dumps(res_time)
+         cursor.execute(f"UPDATE emotion SET ert = %s,correct_res=%s,choosen_res=%s,time_res=%s, time_ert = %s WHERE session_id = %s AND email = %s", (score,res_corr,res_ch,res_ti, time, sesion_key, email))
          conn.commit()
 
    

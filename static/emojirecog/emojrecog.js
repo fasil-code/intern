@@ -9,25 +9,24 @@ let questions=[
     },
        {
 
-'options':['sad','happy','angry','neutral'],
+'options':['sad','happy','angry','disgust'],
 'answer':'sad',
 
     }
        ,
        {
-'options':['happy','angry','surprised','neutral'],
+'options':['happy','angry','surprised','fear'],
 'answer':'surprised',
 
     }
        ,
        {
             
-'options':['contempt','disgusted','scared','neutral'],
+'options':['contempt','disgusted','scared','happy'],
 'answer':'contempt',
 },
 {
-
-'options':['surprised','disgusted','fear','neutral'],  
+'options':['surprised','disgusted','fear','happy'],  
 'answer':'fear',
 },           
 {
@@ -41,24 +40,46 @@ let questions=[
 },         
                  {
             
-'options':['contempt','disgusted','fear','neutral'],
+'options':['contempt','disgusted','fear','sad'],
 'answer':'fear',
 },      
     
                           {
             
-'options':['sad','disgusted','happy','neutral'],
+'options':['sad','disgusted','happy','surprised'],
 'answer':'sad',
 },        
                               {
             
-'options':['contempt','angry','surprised','neutral'],
+'options':['contempt','angry','surprised','happy'],
 'answer':'angry',
 },        
                          
 
 ]
 
+let res_choose=new Array();
+let res_correct = new Array(questions.length);
+let res_time={};
+res_time['happy']=0
+res_time['sad']=0
+res_time['angry']=0
+res_time['surprised']=0
+res_time['contempt']=0
+res_time['disgust']=0
+res_time['fear']=0
+
+
+
+
+
+
+
+
+for (let i = 0; i < questions.length; i++) {
+  res_correct[i] = questions[i].answer;
+}
+console.log(res_correct)
 //selecting all required elements
 const starter = document.querySelector(".start_btn");
 const start_btn = document.querySelector(".start_btn button");
@@ -113,7 +134,7 @@ let timeValue =  15;
 let que_count = 0;
 let que_numb = 1;
 let userScore = 0;
-let counter;
+let counter=0;
 let counterLine;
 let widthValue = 0;
 
@@ -154,7 +175,8 @@ quit_quiz.onclick = ()=>{
 
     window.location.reload(); //reload the current window
 }
-
+var st=new Date();
+var end=new Date();
 const next_btn = document.querySelector("footer .next_btn");
 const bottom_ques_counter = document.querySelector("footer .total_que");
 
@@ -163,6 +185,7 @@ next_btn.onclick = ()=>{
     if(que_count < questions.length -1){ //if question count is less than total question length
         que_count++; //increment the que_count value
         que_numb++; //increment the que_numb value
+        st=new Date()
         showQuetions(que_count); //calling showQestions function
         queCounter(que_numb); //passing que_numb value to queCounter
         clearInterval(counter); //clear counter
@@ -177,15 +200,17 @@ next_btn.onclick = ()=>{
       let time_taken_min=Math.floor(time_taken/60000)            
       let time_taken_sec=Math.floor((time_taken%60000)/1000)
       let time=time_taken_min+":"+time_taken_sec;
-      let score_percentage=Math.floor(userScore/10*100)
+      console.log(res_time)
         $.ajax({
             type: "POST",
             url: "/send_score",
             data: { 
-               score: score_percentage,
+               score: userScore,
                column: "ert",
                time:time,
-              
+               res_correct:JSON.stringify(res_correct),
+               res_choose:JSON.stringify(res_choose),
+               res_time: JSON.stringify(res_time)
             },
             success: function(response) {
                console.log(response);     
@@ -207,6 +232,7 @@ function random(option){
 }
 // getting questions and options from array
 function showQuetions(index){
+  
     const que_text = document.querySelector(".que_text");
     const img = document.querySelector("#main-img");
     //creating a new span and div tag for question and option and passing the value using array index
@@ -228,15 +254,26 @@ function showQuetions(index){
     for(i=0; i < option.length; i++){
         option[i].setAttribute("onclick", "optionSelected(this)");
     }
+   
 }
 // creating the new div tags which for icons
 
 
 //if user clicked on option
 function optionSelected(answer){
+   
+    
+ 
     clearInterval(counter); //clear counter
     clearInterval(counterLine); //clear counterLine
     let userAns = answer.textContent; //getting user selected option
+    res_choose.push(userAns)
+    end=new Date() - st; //getting the time when user clicked on option and subtracting it
+  
+    if(res_time[userAns]<end){
+        res_time[userAns]=end
+    }
+   
     let correcAns = questions[que_count].answer; //getting correct answer from array
     const allOptions = option_list.children.length; //getting all option items
     

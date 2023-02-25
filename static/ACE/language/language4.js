@@ -4,10 +4,12 @@
         let s1=0,s2=0;
         let count=0;
         let firstLen,secondLen;
+        let first,second;
+        let ans=[];
         document.getElementById("next-btn").addEventListener("click", function(event){
             event.preventDefault();
-            let first = document.getElementById("first").value;
-            let second = document.getElementById("second").value;
+            first = document.getElementById("first").value;
+            second = document.getElementById("second").value;
             first=first.toLowerCase();
             second=second.toLowerCase();
             first=first.charAt(0).toUpperCase() + first.slice(1);
@@ -94,13 +96,17 @@
    
 function scoring(score){
    let sent=false;
-    
+    ans.push(first);
+    ans.push(second);
+   
     $.ajax({
         type: "POST",
         url: "/send_score",
         data: { 
            score: score,
-           column: "language3"
+           column: "language3",
+           source:"language3_response",
+           user_response:JSON.stringify(ans)
         },
         success: function(response) {
             console.log(response);
