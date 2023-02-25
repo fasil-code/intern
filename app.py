@@ -22,7 +22,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 # app.config['MYSQL_PASSWORD'] = '7006022139'
-app.config['MYSQL_PASSWORD'] = 'alchemist'
+app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
 # app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -425,6 +425,7 @@ def ace1():
    days=["Choose the day today","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
    seasons=["Choose the Season",'Spring','Summer','Autumn','Winter','Monsoon']
    states=['Choose the State','Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','Gujarat','Haryana','Himachal','Jammu and Kashmir','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal']
+   
    # print countries dictionary
    list=[]
    for i in countries:
