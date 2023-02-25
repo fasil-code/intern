@@ -22,8 +22,12 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 # app.config['MYSQL_PASSWORD'] = '7006022139'
+
 # app.config['MYSQL_PASSWORD'] = 'alchemist'
 app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+
+
+
 # app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -78,7 +82,22 @@ def create_database():
          language5 INT DEFAULT 0,
          visuospatial1 INT DEFAULT 0,
          visuospatial2 INT DEFAULT 0,
-         attention2_res JSON,
+         attention1_response JSON,
+         attention2_response JSON,
+         attention3_response JSON,
+         fluency1_response JSON,
+         fluency2_response JSON,
+         memory1_response JSON,
+         memory2_response JSON,
+         memory3_response JSON,
+         memory4_response JSON,
+         language1_response JSON,
+         language2_response JSON,
+         language3_response JSON,
+         language4_response JSON,
+         language5_response JSON,
+         visuospatial1_response JSON,
+         visuospatial2_response JSON,
          session_id VARCHAR(255)
          
       )'''    
@@ -181,10 +200,14 @@ def send_score():
    wrong_clicks=request.form.get('wrong_clicks')
    correct_clicks=request.form.get('correct_clicks')
    
+
    array = json.loads(request.form.get('array', '[]'))
    res_correct = json.loads(request.form.get('res_correct', '[]'))
    res_choose = json.loads(request.form.get('res_choose', '[]'))
    res_time = json.loads(request.form.get('res_time', '[]'))
+
+   user_response = json.loads(request.form.get('user_response', '[]'))
+
    score= request.form.get("score")
    tmt1=request.form.get('tmt1')
    tmt2=request.form.get('tmt2')
@@ -216,7 +239,8 @@ def send_score():
 
    aceColumn = ['attention1','attention2','attention3','fluency1','fluency2','memory1','memory2',
                'memory3','memory4','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
-   aceResponse=['attention2_res']
+   aceResponse=['attention1_response','attention2_response','attention3_response','fluency1_response','fluency2_response','memory1_response','memory2_response',
+                'memory3_response','memory4_response','language1_response','language2_response','language3_response','language4_response','language5_response','visuospatial1_response','visuospatial2_response']
    if column in aceColumn:
         
       # Update the existing row
@@ -226,9 +250,9 @@ def send_score():
         
       # Update the existing row
          # Convert the array to a JSON string
-          array_str = json.dumps(array)
+          response_str = json.dumps(user_response)
 
-          cursor.execute(f"UPDATE ace SET {source} = %s WHERE session_id = %s AND email = %s", (array_str, sesion_key, email))
+          cursor.execute(f"UPDATE ace SET {source} = %s WHERE session_id = %s AND email = %s", (response_str, sesion_key, email))
           conn.commit()
 
    if column=="emoji":
@@ -420,6 +444,7 @@ def ace1():
    days=["Choose the day today","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
    seasons=["Choose the Season",'Spring','Summer','Autumn','Winter','Monsoon']
    states=['Choose the State','Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','Gujarat','Haryana','Himachal','Jammu and Kashmir','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur','Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu','Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal']
+   
    # print countries dictionary
    list=[]
    for i in countries:
