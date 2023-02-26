@@ -58,13 +58,7 @@ function selectfun(ele) {
     
 }
  
-for(var i=0;i<db.length;i++){
-    
-    if(i%2===0){
-        dbans.push(db[i]);
-       
-    }
-}
+
 function getCheckedValue(radioName) {
     var radios = document.getElementsByName(radioName);
     for (var y = 0; y < radios.length; y++)
@@ -83,11 +77,19 @@ function returnScore() {
     if (getScore() > 2) {
         console.log("Bravo");
     }
+    
+    for(var i=0;i<db.length;i++){
+    
+        if(i%2===0){
+            dbans.push(db[i]);
+           
+        }
+    }
     //mapping of actual response with user response
     let ansMap = new Map();
     for(let i=0;i<5;i++){
       ansMap.set(actual[i], dbans[i]);
-    }
+    } 
     $.ajax({
         type: "POST",
         url: "/send_score",
