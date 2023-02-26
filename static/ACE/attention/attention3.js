@@ -26,11 +26,11 @@ let words = [
   "abundance",
   "beautiful",
   "creative",
-  "determined",
   "exciting"
 ];
 let n=words.length-1;
 let arr=new Array(3);
+let actual=new Array(3);
 let isAudioPlaying = false;
 let isRecording = false;
 function memorize(){
@@ -41,12 +41,15 @@ function memorize(){
         r = Math.floor(Math.random() * n);
     }
     arr[i]=words[r].toLowerCase();
+    actual[i]=words[r].toLowerCase();
 }
     localStorage.setItem('arr', JSON.stringify(arr));
     document.getElementById("w1").innerHTML=arr[0];
     document.getElementById("w2").innerHTML=arr[1];
     document.getElementById("w3").innerHTML=arr[2];
 }
+
+
 memorize();
 
 function textToAudio(num){
@@ -166,6 +169,11 @@ function audioToText(i){
          arr.splice(ind,1);
      }
   }
+  //mapping of actual response with user response
+  let ansMap = new Map();
+  for(let i=0;i<3;i++){
+    ansMap.set(actual[i], ans[i]);
+  }
   $.ajax({
      type: "POST",
      url: "/send_score",
@@ -173,7 +181,7 @@ function audioToText(i){
         score: score,
         column: "attention2",
         source:"attention2_response",
-        user_response:JSON.stringify(ans)
+        user_response:JSON.stringify(Object.fromEntries(ansMap))
      },
      success: function(response) {
         console.log(response);

@@ -346,6 +346,7 @@ function scoring() {
         a=7;
     }
     score=a;
+    
     $.ajax({
         type: "POST",
         url: "/send_score",

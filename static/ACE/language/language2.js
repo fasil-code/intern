@@ -3,6 +3,7 @@ let words = ["Complex","Intelligent","Statistic","Hypothesis","Metamorphosis","G
 
 let n=words.length-1;
 let arr=new Array(3);
+let actual=new Array(3);
 let isAudioPlaying = false;
 let isRecording = false;
 function memorize(){
@@ -13,6 +14,7 @@ function memorize(){
         r = Math.floor(Math.random() * n);
     }
     arr[i]=words[r].toLowerCase();
+    actual[i]=words[r].toLowerCase();
 }
 
     document.getElementById("w1").innerHTML=arr[0];
@@ -138,13 +140,19 @@ function scoring(){
          arr.splice(ind,1);
      }
   }
-  console.log(score);
+  //mapping of actual response with user response
+  let ansMap = new Map();
+  for(let i=0;i<3;i++){
+    ansMap.set(actual[i], ans[i]);
+  }
   $.ajax({
     type: "POST",
     url: "/send_score",
     data: { 
        score: score,
-       column: "language4"
+       column: "language4",
+       source:"language4_response",
+       user_response:JSON.stringify(Object.fromEntries(ansMap))
     },
 success: function(response) {
        console.log(response);

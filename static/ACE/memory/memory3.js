@@ -57,6 +57,8 @@ if(score){
 let objectSize =Object.values(addressBook[rand]).length;
 let count=0;
 let sent=false;
+let ans=[];
+let actual=[];
 document.getElementById("next-btn").addEventListener("click", function(event){
     event.preventDefault();
     count++;
@@ -65,6 +67,8 @@ document.getElementById("next-btn").addEventListener("click", function(event){
     let arr=new Array();
     for(let i=0;i<objectSize;i++){
         let answer=document.getElementById(i).value.toLowerCase();
+        ans.push(answer);
+        actual.push(Object.values(addressBook[rand])[i]);
         //if answer matches
         if(answer==Object.values(addressBook[rand])[i]){
             document.getElementById("box"+i).style.display="none";
@@ -106,12 +110,19 @@ document.getElementById("next-btn").addEventListener("click", function(event){
         score=score+correctAnswers;
         console.log(score);
         if(count==2){
+            //mapping of actual response with user response
+             let ansMap = new Map();
+              for(let i=0;i<5;i++){
+                ansMap.set(actual[i], ans[i]);
+             } 
             $.ajax({
                 type: "POST",
                 url: "/send_score",
                 data: { 
                    score: score,
-                   column: "memory3"
+                   column: "memory4",
+                   source:"memory4_response",
+                   user_response:JSON.stringify(Object.fromEntries(ansMap))
                 },
                 success: function(response) {
                    console.log(response);
@@ -126,12 +137,19 @@ document.getElementById("next-btn").addEventListener("click", function(event){
     }
     else{
         score+=5;
+        //mapping of actual response with user response
+         let ansMap = new Map();
+          for(let i=0;i<5;i++){
+            ansMap.set(actual[i], ans[i]);
+          } 
         $.ajax({
             type: "POST",
             url: "/send_score",
             data: { 
                score: score,
-               column: "memory4"
+               column: "memory4",
+               source:"memory4_response",
+               user_response:JSON.stringify(Object.fromEntries(ansMap))
             },
             success: function(response) {
                 console.log(response);
