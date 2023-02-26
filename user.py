@@ -24,7 +24,7 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 # app.config['MYSQL_PASSWORD'] = 'alchemist'
-app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
+app.config['MYSQL_PASSWORD'] = 'Zargar@123'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -57,6 +57,11 @@ def register_route():
         username=form.username.data
         email=form.email.data
         password=form.password.data
+        age=form.age.data
+        region=form.region.data
+        state=form.state.data
+        city=form.city.data
+        gender=form.gender.data
         hashed_password = hash_password(password)
          # Connect to the database
         conn = mysql.connect
@@ -67,10 +72,10 @@ def register_route():
         
         # If email already exists, show error message
         if result:
-            flash('Email already exists, please use a different email address.', 'danger')
+            flash('Email already exists, please login to continue.', 'danger')
             return redirect(url_for('register'))
         # Insert form data into the user table
-        cursor.execute("INSERT INTO user (username, email, password) VALUES (%s, %s, %s)", (username, email, hashed_password))
+        cursor.execute("INSERT INTO user (username, email, password, age, region, State, City,gender) VALUES (%s, %s, %s, %s, %s, %s, %s,%s)", (username, email, hashed_password, age, region, state, city,gender))
         conn.commit()
         
         # Close the cursor and connection
