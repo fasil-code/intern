@@ -24,7 +24,7 @@ app.config['MYSQL_USER'] = 'root'
 # app.config['MYSQL_PASSWORD'] = '7006022139'
 # app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
 # app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
-app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+app.config['MYSQL_PASSWORD'] = 'alchemist'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
