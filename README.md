@@ -35,7 +35,7 @@ Various test used to diagonise FTD:
   - Fluency Test
   - Memory Test
   - Language Test
-  - Attention test
+  - Attention Test
 * Trail Making Test
 * Pulse Tracking Test
 * VisuoSpatial Test
