@@ -108,7 +108,7 @@ let score=0
 function renderEmoji(){
       let arr=[]
       while(arr.length < 4){
-          var r = Math.floor(Math.random() *71) + 1;
+          var r = Math.floor(Math.random() *70) + 1;
           if(arr.indexOf(r) === -1 && !myset.has(r)) arr.push(r);
       }
      return arr;
@@ -207,7 +207,7 @@ else{
       let time_taken_min=Math.floor(time_taken/60000)            
       let time_taken_sec=Math.floor((time_taken%60000)/1000)
       let time=time_taken_min+":"+time_taken_sec;
-      let score_percentage=Math.floor(score/10*100)
+
       submit.innerHTML='Submit'
      scored.innerHTML= "Your score is "+score
      form.style.display='none'
@@ -215,7 +215,7 @@ else{
       type: "POST",
       url: "/send_score",
       data: { 
-         score: score_percentage,
+         score: score,
          column: "emoji",
          time:time,
         
