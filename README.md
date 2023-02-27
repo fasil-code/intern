@@ -164,7 +164,7 @@ Your environment after installing everything from `requirements.txt` will have e
 Check out [this guide](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world) for an overview of how these tools fit toghether.
 <!-- CONTRIBUTING -->
 ## Contributors
-* Moin Bashir Zargar
+* [Moin Bashir Zargar](https://github.com/MoinZargar)
 * [Faisal Shafi](https://github.com/fasil-code)
 * Fazeel Jaffer
 * [Zahoor Ahmad](https://github.com/Xahoor72)
