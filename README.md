@@ -34,7 +34,7 @@ Various test used to diagonise FTD:
 * ACE III
   - Fluency Test
   - Memory Test
-  - 
+  - Language Test
 * Trail Making Test
 * Pulse Tracking Test
 * VisuoSpatial Test
