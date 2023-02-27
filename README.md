@@ -167,7 +167,7 @@ Check out [this guide](https://blog.miguelgrinberg.com/post/the-flask-mega-tutor
 * Moin Bashir Zargar
 * Fasil Shafi
 * Fazeel Jaffer
-* Zahoor Ahmad
+* ![Zahoor Ahmad](https://github.com/Xahoor72)
 * Haseeb Hijazi Khan
 
 
