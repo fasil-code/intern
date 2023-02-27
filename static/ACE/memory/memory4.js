@@ -78,12 +78,19 @@ function scoring(){
       score+=1;
     }
   }
+  //mapping of actual response with user response
+  let ansMap = new Map();
+  for(let i=0;i<4;i++){
+    ansMap.set(l[i], ans[i]);
+  }
   $.ajax({
     type: "POST",
     url: "/send_score",
     data: { 
        score: score,
-       column: "memory3"
+       column: "memory3",
+       source:"memory3_response",
+       user_response:JSON.stringify(Object.fromEntries(ansMap))
     },
     success: function(response) {
        console.log(response);

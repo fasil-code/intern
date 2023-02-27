@@ -270,7 +270,7 @@ function audioToText(i) {
         if (message[message.length - 1] === ".") {
             message = message.slice(0, -1);
         }
-        ans.push(message)
+        
         // Check if the recognition process has completed
         if (event.results[0].isFinal) {
             // Stop recognition if the process has completed
@@ -280,6 +280,9 @@ function audioToText(i) {
     recognition.addEventListener('end', () => {
         // Display a message when recognition ends
         document.getElementById('recognition-status').textContent = '🟢 Voice Recognition ended';
+        if(ans.indexOf(message)==-1){
+            ans.push(message);
+        }
         repeat(message);
         document.getElementById("text").innerHTML = "Record next name";
         animateText();
@@ -352,7 +355,9 @@ function scoring() {
         url: "/send_score",
         data: { 
            score: score,
-           column: "fluency2"
+           column: "fluency2",
+           source:"fluency2_response",
+           user_response:JSON.stringify(ans)
         },
         success: function(response) {
            console.log(response);

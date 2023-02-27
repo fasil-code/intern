@@ -47,17 +47,18 @@ while (k <= 5) {
 }
 tot = answers2.length;
 //New Element ADDed------>
-db=[];
-dbans=[];
+let db=[];
+let dbans=[];
 i=0;
+let actual=[93,86,79,72,65];
 function selectfun(ele) {
-    db.push(ele.innerText);
+    let text=ele.innerText;
+    db.push(text);
+    // console.log(db[0]); 
+    
 }
-for(var i=0;i<db.length;i++){
-    if(i%2===0){
-        dbans.push(db[i]);
-    }
-}
+ 
+
 function getCheckedValue(radioName) {
     var radios = document.getElementsByName(radioName);
     for (var y = 0; y < radios.length; y++)
@@ -71,16 +72,32 @@ function getScore() {
     return score;
 }
 function returnScore() {
+    let sent=false;
      tot=getScore();
     if (getScore() > 2) {
         console.log("Bravo");
     }
+    
+    for(var i=0;i<db.length;i++){
+    
+        if(i%2===0){
+            dbans.push(db[i]);
+           
+        }
+    }
+    //mapping of actual response with user response
+    let ansMap = new Map();
+    for(let i=0;i<5;i++){
+      ansMap.set(actual[i], dbans[i]);
+    } 
     $.ajax({
         type: "POST",
         url: "/send_score",
         data: { 
            score: tot,
-           column: "attention3"
+           column: "attention3",
+           source:"attention3_response",
+           user_response:JSON.stringify(Object.fromEntries(ansMap))
         },
         success: function(response) {
            console.log(response);
