@@ -1,1 +1,0 @@
-app.config['MYSQL_PASSWORD'] = '7006022139'

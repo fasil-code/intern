@@ -30,9 +30,9 @@
           "correctName": "Camel"
         },
         {
-          "name": "Sickle",
-          "imageUrl": "sickle.png",
-          "correctName": "Sickle"
+          "name": "Knife",
+          "imageUrl": "knife.png",
+          "correctName": "Knife"
         },
         {
           "name": "Giraffe",
@@ -81,16 +81,58 @@
      // inputElement.style.display="none";
       result_box.style.display='none';
       quiz_box.style.display='block';
-      
-
+      let sent=false;
+     var ans= new Array;
+     var actual = ["book","spoon","goat","candle","flag","camel","knife","giraffe","timpani,drum","umbrella","pig","crocodile,alligator"]
 
 showImages(0);
 
 
     // show Images
+    function audioToText(){
+      let message="";
+      const recognition = new webkitSpeechRecognition() || window.SpeechRecognition();
+      recognition.interimResults = true;
+      recognition.lang = 'en-IN';
+     
+      // Set up event listeners for the Web Speech API
+      recognition.addEventListener('start', () => {
+        // Display a message when recognition starts
+        document.getElementById('recognition-status').textContent = '🔴 Voice Recognition started';
+      });
+      recognition.addEventListener('result', (event) => {
+        // Get the transcribed text
+        const transcript = event.results[0][0].transcript;
+     
+        // Display the transcribed text
+        document.getElementById('input_bar').value = transcript;
+        message=transcript;
+        message=message.toLowerCase();
+        if(message[message.length-1]==="."){
+        message=message.slice(0,-1);
+        }
+        //ans[i]=message;
+        // Check if the recognition process has completed
+        if (event.results[0].isFinal) {
+          // Stop recognition if the process has completed
+          recognition.stop();
+        }
+      });
+      recognition.addEventListener('end', () => {
+        // Display a message when recognition ends
+        document.getElementById('recognition-status').textContent = '🟢 Voice Recognition ended';
+        //repeat(message);
+        
+      });
+      recognition.start();
+      // Stop recognition after 5 seconds
+      setTimeout(() => {
+      recognition.stop();
+    }, 4000);
+    }
       function showImages(index){
         const img = document.querySelector("#main-img");
-        let que_tag ='<span class="rem">Type the name of object shown in image below:</span><div class="que_img"><img src="'+'</span>';
+        let que_tag ='<span class="rem">What is the name of object shown in the image below:</span><div class="que_img"><img src="'+'</span>';
         let path= diagrams[index].imageUrl;
         img.src='static/12figs/'+path;
        
@@ -110,7 +152,10 @@ showImages(0);
             inputElement.classList.remove("error");
             errorMessage.innerHTML = "";
             inputElement.value="";
-            if (inputValue.toLowerCase() === diagrams[dg_count].correctName.toLowerCase()) {
+            ans.push(inputValue.toLowerCase());
+           
+            
+            if (inputValue.toLowerCase() === diagrams[dg_count].correctName.toLowerCase() || (dg_count===8 && inputValue.toLowerCase()==='drum') ) {
                 marks++;
             } 
             
@@ -125,15 +170,23 @@ showImages(0);
             inputElement.classList.add("error");
             errorMessage.innerHTML = "Please fill the input";
           }else{
-            if (inputValue.toLowerCase() === diagrams[dg_count].correctName.toLowerCase()) {
+            if (inputValue.toLowerCase() === diagrams[dg_count].correctName.toLowerCase() || ( inputValue.toLowerCase()==='alligator') ) {
               marks++;
           } 
+        let ansMap = new Map();
+        
+        for(let i=0;i<12;i++){
+          ansMap.set(actual[i], ans[i]);
+        }
+       
           $.ajax({
             type: "POST",
             url: "/send_score",
             data: { 
                score: marks,
-               column: "language1"
+               column: "language1",
+               source:"language1_response",
+               user_response:JSON.stringify(Object.fromEntries(ansMap))
             },
             success: function(response) {
                console.log(response);
