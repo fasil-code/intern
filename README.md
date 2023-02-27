@@ -166,7 +166,7 @@ Check out [this guide](https://blog.miguelgrinberg.com/post/the-flask-mega-tutor
 ## Contributors
 * [Moin Bashir Zargar](https://github.com/MoinZargar)
 * [Faisal Shafi](https://github.com/fasil-code)
-* Fazeel Jaffer
+* [Fazeel Jaffer](https://github.com/fazeel-jaffer)
 * [Zahoor Ahmad](https://github.com/Xahoor72)
 * Haseeb Hijazi Khan
 
