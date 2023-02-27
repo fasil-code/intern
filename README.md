@@ -32,10 +32,10 @@ Frontotemporal dementia is an uncommon type of dementia that causes problems wit
 Various test used to diagonise FTD:
 * Emotion Recognition Test
 * ACE III
+  - Attention Test
   - Fluency Test
   - Memory Test
   - Language Test
-  - Attention Test
 * Trail Making Test
 * Pulse Tracking Test
 * VisuoSpatial Test
