@@ -168,7 +168,7 @@ Check out [this guide](https://blog.miguelgrinberg.com/post/the-flask-mega-tutor
 * [Faisal Shafi](https://github.com/fasil-code)
 * [Fazeel Jaffer](https://github.com/fazeel-jaffer)
 * [Zahoor Ahmad](https://github.com/Xahoor72)
-* Haseeb Hijazi Khan
+* [Haseeb Hijazi Khan](https://github.com/HaseebH-Khan)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
