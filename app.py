@@ -24,6 +24,7 @@ app.config['MYSQL_USER'] = 'root'
 # app.config['MYSQL_PASSWORD'] = '7006022139'
 app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
 # app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
+#app.config['MYSQL_PASSWORD'] = 'alchemist'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -39,7 +40,17 @@ def create_database():
    cursor.execute("CREATE DATABASE IF NOT EXISTS ftd")
    cursor.execute("USE ftd")
    cursor.execute(
-      "CREATE TABLE IF NOT EXISTS user (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(80) NOT NULL , email VARCHAR(120) NOT NULL UNIQUE, password VARCHAR(160) NOT NULL)"
+   '''CREATE TABLE IF NOT EXISTS user 
+   (id INT AUTO_INCREMENT PRIMARY KEY,
+   username VARCHAR(80) NOT NULL , email VARCHAR(120) NOT NULL
+   UNIQUE, 
+   password VARCHAR(160) NOT NULL,
+   gender VARCHAR(255) NOT NULL,
+   age INT DEFAULT 0,
+   region VARCHAR(255) NOT NULL,
+   City VARCHAR(255) NOT NULL,
+   State VARCHAR(255) NOT NULL
+   )'''
    )
    cursor.execute(
       '''CREATE TABLE IF NOT EXISTS emotion (
@@ -124,7 +135,7 @@ def create_database():
       
       
       
-   ) 
+   )
    cursor.close()
    conn.close()
 
@@ -140,7 +151,6 @@ mysql = MySQL(app)
 
    
     
-
 
 
 
@@ -184,7 +194,7 @@ def after_request(response):
 #session_id
 
 
-  
+ 
 @app.route("/send_score", methods=["POST"])
 def send_score():
 
@@ -214,7 +224,6 @@ def send_score():
 
    
 
-   
    
 
    conn   = mysql.connect

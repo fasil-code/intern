@@ -165,6 +165,7 @@ overflow: hidden;
 padding: 30px 0 20px 10px;
 }
 .navcontainer {
+z-index:999 ;
 height: calc(100vh - 70px);
 width: 250px;
 position: relative;
