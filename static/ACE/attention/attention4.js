@@ -1,11 +1,11 @@
-function chnageFun(ind){
-    let prev=ind-1;
-    if(prev<=4){
-    document.getElementById("quest"+prev).style.display="none";
-    document.getElementById("quest"+ind).style.display="block";
+function chnageFun(ind) {
+    let prev = ind - 1;
+    if (prev <= 4) {
+        document.getElementById("quest" + prev).style.display = "none";
+        document.getElementById("quest" + ind).style.display = "block";
     }
-    else{
-       document.getElementById("btn").style.display="block"; 
+    else {
+        document.getElementById("btn").style.display = "block";
     }
 }
 var str = "ABCD";
@@ -57,8 +57,6 @@ function selectfun(ele) {
     // console.log(db[0]); 
     
 }
- 
-
 function getCheckedValue(radioName) {
     var radios = document.getElementsByName(radioName);
     for (var y = 0; y < radios.length; y++)
@@ -67,11 +65,12 @@ function getCheckedValue(radioName) {
 function getScore() {
     var score = 0;
     for (var i = 0; i < tot; i++)
-        if (getCheckedValue("question" + i) === answers2[i]) 
-           score += 1;
-    return score;
+        if (getCheckedValue("question" + i) === answers2[i])
+            score += 1;
+      return score;
 }
 function returnScore() {
+    tot = getScore();
     let sent=false;
      tot=getScore();
     if (getScore() > 2) {
@@ -93,26 +92,22 @@ function returnScore() {
     $.ajax({
         type: "POST",
         url: "/send_score",
-        data: { 
-           score: tot,
-           column: "attention3",
-           source:"attention3_response",
-           user_response:JSON.stringify(Object.fromEntries(ansMap))
+        data: {
+            score: tot,
+            column: "attention3"
         },
-        success: function(response) {
-           console.log(response);
-           sent=true;
-           redirect(sent);
-        }           
+        success: function (response) {
+            console.log(response);
+            sent = true;
+            redirect(sent);
+        }
     });
 };
-        //    setTimeout(function() {
-        //      redirect(sent);
-        //    }, 5000); 
-                
-     
-   function redirect(sent){
-     if(sent===true){
-       window.location.href=nextUrl;
-     }
+//    setTimeout(function() {
+//      redirect(sent);
+//    }, 5000); 
+function redirect(sent) {
+    if (sent === true) {
+        window.location.href = nextUrl;
+    }
 }

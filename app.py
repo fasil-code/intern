@@ -21,10 +21,11 @@ import pickle
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = '7006022139'
-# app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
+
+# app.config['MYSQL_PASSWORD'] = '7006022139'
+app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
 # app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
-# app.config['MYSQL_PASSWORD'] = 'alchemist'
+#app.config['MYSQL_PASSWORD'] = 'alchemist'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -135,7 +136,7 @@ def create_database():
       
       
       
-   ) 
+   )
    cursor.close()
    conn.close()
 
@@ -151,7 +152,6 @@ mysql = MySQL(app)
 
    
     
-
 
 
 
@@ -195,7 +195,7 @@ def after_request(response):
 #session_id
 
 
-  
+ 
 @app.route("/send_score", methods=["POST"])
 def send_score():
 
@@ -225,7 +225,6 @@ def send_score():
 
    
 
-   
    
 
    conn   = mysql.connect
@@ -457,7 +456,16 @@ def ace1():
       list.append(countries[i]['name'])
    list.sort()
    list.insert(0,"Choose your country")
-   return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states,url="ace3")
+   conn = mysql.connect
+   cursor = conn.cursor()
+   email = session.get('logged_in')
+   cursor.execute('SELECT City,State from user where email=%s',[email])
+   data = cursor.fetchone() 
+   city=data[0]
+   state=data[1]
+   conn.commit()
+   conn.close()
+   return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states,state=state,city=city,url="ace3")
   
 @app.route("/ace2",methods=['GET','POST'])
 def ace2():
@@ -465,7 +473,7 @@ def ace2():
 
 @app.route("/ace3",methods=['GET','POST']) 
 def ace3():
-   return render_template('ACE/attention/attention3.html',url="ace4",home="/home") 
+   return render_template('ACE/attention/attention3.html',url="ace4") 
 @app.route("/ace4",methods=['GET','POST']) 
 def ace4():
    return render_template('ACE/attention/attention4.html',url="layout")  
