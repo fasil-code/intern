@@ -23,8 +23,8 @@ app.config['MYSQL_USER'] = 'root'
 
 
 # app.config['MYSQL_PASSWORD'] = '7006022139'
-app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
-# app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
+# app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
+app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
 #app.config['MYSQL_PASSWORD'] = 'alchemist'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
@@ -115,11 +115,15 @@ def create_database():
          id INT AUTO_INCREMENT PRIMARY KEY,
          email VARCHAR(255) NOT NULL,
          Date VARCHAR(255),
-         ptt_score INT DEFAULT 0,
          
+         ptt_score INT DEFAULT 0,
          WrongClicks INT DEFAULT 0,
          CorrectClicks INT DEFAULT 0,
-         
+         greyClicks INT DEFAULT 0,
+         successArray JSON,
+         timeStampGray JSON,
+         timeStampCorrect JSON,
+         timeStampWrong JSON,
          
          session_id VARCHAR(255)
       )'''
@@ -131,6 +135,10 @@ def create_database():
          Date VARCHAR(255),
          tmt_score1 INT DEFAULT 0,
          tmt_score2 INT DEFAULT 0,
+         wrn1 INT DEFAULT 0,
+         wrn2 INT DEFAULT 0,
+         timestamp1 JSON,
+         timestamp2 JSON,
          session_id VARCHAR(255)
       )'''
       
@@ -205,7 +213,11 @@ def send_score():
    source= request.form.get("source")
    wrong_clicks=request.form.get('wrong_clicks')
    correct_clicks=request.form.get('correct_clicks')
-   
+   grey_clicks=request.form.get('grey_clicks')
+   successArray=json.loads(request.form.get('successArray', '[]'))
+   timeStampGray=json.loads(request.form.get('timeStampGray', '[]'))
+   timeStampCorrect=json.loads(request.form.get('timeStampCorrect', '[]'))
+   timeStampWrong=json.loads(request.form.get('timeStampWrong', '[]'))
 
    array = json.loads(request.form.get('array', '[]'))
    res_correct = json.loads(request.form.get('res_correct', '[]'))
@@ -217,7 +229,12 @@ def send_score():
    score= request.form.get("score")
    tmt1=request.form.get('tmt1')
    tmt2=request.form.get('tmt2')
-   
+   wrn1=request.form.get('wrn1')
+   wrn2=request.form.get('wrn2')
+   timestamp1=json.loads(request.form.get('timestamp1', '[]'))
+   timestamp2=json.loads(request.form.get('timestamp2', '[]'))
+
+
    time=request.form.get('time')
 
    
@@ -275,17 +292,16 @@ def send_score():
 
    
    if column=="ptt":
-
-       cursor.execute(f"UPDATE ptt SET ptt_score = %s,  WrongClicks= %s,CorrectClicks=%s WHERE session_id = %s AND email = %s", (score, wrong_clicks,correct_clicks, sesion_key, email))
-       conn.commit()
+      cursor.execute(f"UPDATE ptt SET ptt_score = %s, WrongClicks= %s,CorrectClicks=%s, greyClicks=%s, successArray=%s, timeStampGray=%s, timeStampCorrect=%s, timeStampWrong=%s WHERE session_id = %s AND email = %s", (score, wrong_clicks,correct_clicks, grey_clicks, successArray, timeStampGray, timeStampCorrect, timeStampWrong,sesion_key, email))
+      conn.commit()
    
    if column=="tmt":
         if tmt1:
            
-          cursor.execute(f"UPDATE tmt SET tmt_score1 = %s WHERE session_id = %s AND email = %s", (tmt1, sesion_key, email))
+          cursor.execute(f"UPDATE tmt SET tmt_score1 = %s, wrong_clicks1=%s, timestamp1=%s WHERE session_id = %s AND email = %s", (tmt1, wrn1, timestamp1, sesion_key, email))
           conn.commit()
         if tmt2:
-           cursor.execute(f"UPDATE tmt SET tmt_score2 = %s WHERE session_id = %s AND email = %s", (tmt2, sesion_key, email))
+           cursor.execute(f"UPDATE tmt SET tmt_score2 = %s, wrong_clicks2=%s, timestamp2=%s WHERE session_id = %s AND email = %s", (tmt2, wrn2, timestamp2, sesion_key, email))
            conn.commit() 
    cursor.close()
    conn.close()
