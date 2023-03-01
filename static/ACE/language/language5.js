@@ -113,8 +113,6 @@ const diagrams= [
 function renderarr(arr){
       let ques=[]
       while(ques.length < 4){
-          var r = Math.floor(Math.random() * 11) + 1;
-         
           const randomIndex = Math.floor(Math.random() * arr.length);
           if(!ques.includes(arr[randomIndex])) 
           ques.push(arr[randomIndex]);  
@@ -122,25 +120,26 @@ function renderarr(arr){
      return ques;  
 
 }
-
+let sent=false;
 var correct;
-var ques_no;
+var ques_no=0;
 let question=4;
-
+var actual=["umbrella","candle","sickle","camel"];
+var ans= new Array;
 function loadQuestion(){
 
 const remainingQuestions = Questions.filter(q => !usedQuestions.includes(q));
 const randomIndex = Math.floor(Math.random() * remainingQuestions.length);
     const randomQuestion = remainingQuestions[randomIndex];
     usedQuestions.push(randomQuestion);
-heading.innerHTML=randomQuestion.ques1;
-ques_no=randomQuestion;
+heading.innerHTML=Questions[ques_no].ques1;
 
-const index = diagrams.findIndex((element) => element.correctName === randomQuestion.correct);
+
+const index = diagrams.findIndex((element) => element.correctName === Questions[ques_no].correct);
 let  arr=getRandomOptions(index);
 
 let ques=renderarr(arr);
-console.log(ques);
+
 option1.src=diagrams[ques[0]].imageUrl
 option2.src=diagrams[ques[1]].imageUrl
 option3.src=diagrams[ques[2]].imageUrl
@@ -199,11 +198,19 @@ buttonGroup.addEventListener("click", buttonGroupPressed);
 submit.addEventListener('click',()=>{
       if(clicked){
        const op=document.getElementById(choosen);
-         console.log(op.getAttribute("src"));
-    if(op.getAttribute("src")==="static/12figs/"+(ques_no.correct).toLowerCase()+".png"){
-    
+        
+
+         var str=op.getAttribute("src").replace("static/12figs/",'')
+         var newstr=str.replace(".png",'')
+    // if(op.getAttribute("src")==="static/12figs/"+Questions[ques_no].correct.toLowerCase()+".png"){
+    //   score++;
+    // }
+    if(newstr===Questions[ques_no].correct.toLowerCase()){
       score++;
     }
+    ans.push(newstr);
+   
+    ques_no++;
 if(question>1){
 question--;
 rem()
@@ -220,12 +227,19 @@ else{
       submit.innerHTML='Submit'
     //  scored.innerHTML= "Your score is "+score
      form.style.display='none'
+     let ansMap = new Map();
+     for(let i=0;i<4;i++){
+       ansMap.set(actual[i], ans[i]);
+     }
+    
      $.ajax({
       type: "POST",
       url: "/send_score",
       data: { 
          score: score,
          column: "language2",
+         source:"language2_response",
+        user_response:JSON.stringify(Object.fromEntries(ansMap))
         //  time:time,
         
       },

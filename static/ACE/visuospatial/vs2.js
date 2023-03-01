@@ -50,12 +50,13 @@
     // random function
     showImages(0);
     // show Images
+    var ans= new Array;
+    var actual= ["a","m","t","k"];
       function showImages(index){
         const img = document.querySelector("#main-img");
         let que_tag ='<span class="rem">Type the fragmented letter shown in picture below:</span><div class="que_img"><img src="'+'</span>';
         let path= diagrams[index].imageUrl;
         img.src='static/frag_letters/'+path;
-       
         que_text.innerHTML = que_tag;
        
       }
@@ -72,6 +73,7 @@
             inputElement.classList.remove("error");
             errorMessage.innerHTML = "";
             inputElement.value="";
+            ans.push(inputValue.toLowerCase());
             if (inputValue.toLowerCase() === diagrams[dg_count].correct_name.toLowerCase()) {
                 marks++;
             } 
@@ -92,12 +94,18 @@
               marks++;
           } 
             //  showResult();
+            let ansMap = new Map();
+            for(let i=0;i<4;i++){
+              ansMap.set(actual[i], ans[i]);
+            }
             $.ajax({
               type: "POST",
               url: "/send_score",
               data: { 
                  score: marks,
-                 column: "visuospatial2"
+                 column: "visuospatial2",
+                 source:"visuospatial2_response",
+                 user_response:JSON.stringify(Object.fromEntries(ansMap))
               },
               success: function(response) {
                  console.log(response);

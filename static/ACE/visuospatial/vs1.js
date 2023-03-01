@@ -49,7 +49,8 @@
     // }
     showImages(0);
     // random function
-   
+    var ans= new Array;
+    var actual= ["8","10","7","9"];
     // show Images
       function showImages(index){
         const img = document.querySelector("#main-img");
@@ -78,7 +79,7 @@
             } 
             
              //
-              console.log(dg_count);
+              
               dg_count++; //increment the que_count value
               showImages(dg_count);
         }
@@ -89,16 +90,23 @@
             inputElement.classList.add("error");
             errorMessage.innerHTML = "Please fill the input";
           }else{
+            ans.push(inputValue);
             if (inputValue === diagrams[dg_count].dot_count) {
               marks++;
           } 
             //  showResult();
+            let ansMap = new Map();
+            for(let i=0;i<4;i++){
+              ansMap.set(actual[i], ans[i]);
+            }
             $.ajax({
               type: "POST",
               url: "/send_score",
               data: { 
                  score: marks,
-                 column: "visuospatial1"
+                 column: "visuospatial1",
+                 source:"visuospatial1_response",
+                 user_response:JSON.stringify(Object.fromEntries(ansMap))
               },
               success: function(response) {
                  console.log(response);
@@ -109,7 +117,7 @@
            });
            } //calling showResult function
         }
-        console.log(marks);
+       
     }
     // show results box
     function showResult(){

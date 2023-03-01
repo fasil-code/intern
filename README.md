@@ -30,8 +30,12 @@ This is a research study of the web app-based cognitive assessment. Before decid
 Frontotemporal dementia is an uncommon type of dementia that causes problems with behaviour and language.Dementia is the name for problems with mental abilities caused by gradual changes and damage in the brain. Frontotemporal dementia affects the front and sides of the brain (the frontal and temporal lobes) Dementia mostly affects people over 65, but frontotemporal dementia tends to start at a younger age. Most cases are diagnosed in people aged 45-65, although it can also affect younger or older people. Like other types of dementia, frontotemporal dementia tends to develop slowly and get gradually worse over several years.
 
 Various test used to diagonise FTD:
-* Emotion Recognation Test
+* Emotion Recognition Test
 * ACE III
+  - Attention Test
+  - Fluency Test
+  - Memory Test
+  - Language Test
 * Trail Making Test
 * Pulse Tracking Test
 * VisuoSpatial Test
@@ -160,11 +164,11 @@ Your environment after installing everything from `requirements.txt` will have e
 Check out [this guide](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world) for an overview of how these tools fit toghether.
 <!-- CONTRIBUTING -->
 ## Contributors
-* Moin Bashir Zargar
-* Fasil Shafi
-* Fazeel Jaffer
-* Zahoor Ahmad
-* Haseeb Hijazi Khan
+* [Moin Bashir Zargar](https://github.com/MoinZargar)
+* [Faisal Shafi](https://github.com/fasil-code)
+* [Fazeel Jaffer](https://github.com/fazeel-jaffer)
+* [Zahoor Ahmad](https://github.com/Xahoor72)
+* [Haseeb Hijazi Khan](https://github.com/HaseebH-Khan)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
