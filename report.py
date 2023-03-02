@@ -177,88 +177,87 @@ def generate_route_pdf():
       
       
       elements.append(Spacer(1, 0.5*inch))
-      elements.append(Paragraph(' <font color="maroon">Tests related to Emotion</font>', styles['heading1']))
-      elements.append(Spacer(1, 0.2*inch))
-      elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Emotion Recognition Test</font> <br/>
-      <br/>
-      Total Correct responses detected: <font color="red" fontSize=14 >{results[5]}/10 </font><br/>                         
-      Response Time (min :sec):<font color="red" fontSize=14 > {results[6]}</font>  <br/>  
-      <br/>
-      Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient.
-      The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust were tested.
-      The user identification capacity is <font color="black" fontSize=14 >{results[5]} </font>  and the time span was <font color="black" fontSize=14 >{results[6]} minutes</font> .                                
-      ''', style=styles['para']))
-      elements.append(Spacer(1, 1.1*inch))
-      elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b) Emoji Identification Test</font> :<br/> <br/>
-      Total Correct responses : <font color="red" fontSize=14 >{results[3]}/10</font> <br/>                         
-      Response time Time (min :sec): <font color="red" fontSize=14 >{results[4]}</font>  <br/>  
-      <br/>
-      Summary: Emoji Identification test was given by the patient to test the patient's ability to recognise the emojis . 
-      The emojis related  smiley,frowny,emotion are tested.The user identification capacity is <font color="black" fontSize=14 >{results[3]} </font>  and the time span was <font color="black" fontSize=14 >{results[4]}  minutes. </font>                                          
-      ''', styles['para']))
-      elements.append(Spacer(1, 1.2*inch))
-      result_correct=json.loads(results[7])
-      result_choosen=json.loads(results[8])
-      result_time=json.loads(results[9])
-      
-      col_width=[2*inch,2*inch]
-      elements.append(Spacer(1, 0.6*inch))
-      headings=["Correct Responses","Choosen Responses"]
-      data=[]
-      for i in  range(len(result_correct)):
-          data.append([result_correct[i],result_choosen[i]])
+      if result:
+            elements.append(Paragraph(' <font color="maroon">Tests related to Emotion</font>', styles['heading1']))
+            elements.append(Spacer(1, 0.2*inch))
+            elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Emotion Recognition Test</font> <br/>
+            <br/>
+            Total Correct responses detected: <font color="red" fontSize=14 >{results[5]}/10 </font><br/>                         
+            Response Time (min :sec):<font color="red" fontSize=14 > {results[6]}</font>  <br/>  
+            <br/>
+            Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient.
+            The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust were tested.
+            The user identification capacity is <font color="black" fontSize=14 >{results[5]} </font>  and the time span was <font color="black" fontSize=14 >{results[6]} minutes</font> .                                
+            ''', style=styles['para']))
+            elements.append(Spacer(1, 1.1*inch))
+            elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b) Emoji Identification Test</font> :<br/> <br/>
+            Total Correct responses : <font color="red" fontSize=14 >{results[3]}/10</font> <br/>                         
+            Response time Time (min :sec): <font color="red" fontSize=14 >{results[4]}</font>  <br/>  
+            <br/>
+            Summary: Emoji Identification test was given by the patient to test the patient's ability to recognise the emojis . 
+            The emojis related  smiley,frowny,emotion are tested.The user identification capacity is <font color="black" fontSize=14 >{results[3]} </font>  and the time span was <font color="black" fontSize=14 >{results[4]}  minutes. </font>                                          
+            ''', styles['para']))
+            elements.append(Spacer(1, 1.2*inch))
+            result_correct=json.loads(results[7])
+            result_choosen=json.loads(results[8])
+            result_time=json.loads(results[9])
+            
+            col_width=[2*inch,2*inch]
+            elements.append(Spacer(1, 0.6*inch))
+            headings=["Correct Responses","Choosen Responses"]
+            data=[]
+            for i in  range(len(result_correct)):
+               data.append([result_correct[i],result_choosen[i]])
 
 
-      table = Table([headings]+data,colWidths=col_width)
-      table.setStyle(TableStyle([
-    ('BACKGROUND', (0,0), (-1,0), colors.black),
-    ('TEXTCOLOR',(0,0),(-1,0),colors.white),
-    ('ALIGN',(0,0),(-1,-1),'CENTER'),
-    ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
-    ('FONTSIZE', (0,0), (-1,0), 14),
-    ('BOTTOMPADDING', (0,0), (-1,0), 12),
-    ('BACKGROUND',(0,1),(-1,-1),colors.beige),
-    ('TEXTCOLOR',(0,1),(-1,-1),colors.black),
-    ('FONTNAME', (0,1), (-1,-1), 'Helvetica'),
-    ('FONTSIZE', (0,1), (-1,-1), 12),
-    ('BOTTOMPADDING', (0,1), (-1,-1), 6),
-]))
-      elements.append(table)
-      
-      elements.append(Spacer(1, 1.6*inch))
-      headings=["Emotion Type","Response Time"]
-      data=[]
-      for emotion, count in result_time.items():
-         data.append([emotion,count])
-        
+            table = Table([headings]+data,colWidths=col_width)
+            table.setStyle(TableStyle([
+         ('BACKGROUND', (0,0), (-1,0), colors.black),
+         ('TEXTCOLOR',(0,0),(-1,0),colors.white),
+         ('ALIGN',(0,0),(-1,-1),'CENTER'),
+         ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+         ('FONTSIZE', (0,0), (-1,0), 14),
+         ('BOTTOMPADDING', (0,0), (-1,0), 12),
+         ('BACKGROUND',(0,1),(-1,-1),colors.beige),
+         ('TEXTCOLOR',(0,1),(-1,-1),colors.black),
+         ('FONTNAME', (0,1), (-1,-1), 'Helvetica'),
+         ('FONTSIZE', (0,1), (-1,-1), 12),
+         ('BOTTOMPADDING', (0,1), (-1,-1), 6),
+      ]))
+            elements.append(table)
+            
+            elements.append(Spacer(1, 1.6*inch))
+            headings=["Emotion Type","Response Time"]
+            data=[]
+            for emotion, count in result_time.items():
+               data.append([emotion,count])
+            
 
 
-      table = Table([headings]+data)
-      table.setStyle(TableStyle([
-    ('BACKGROUND', (0,0), (-1,0), colors.black),
-    ('TEXTCOLOR',(0,0),(-1,0),colors.white),
-    ('ALIGN',(0,0),(-1,-1),'CENTER'),
-    ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
-    ('FONTSIZE', (0,0), (-1,0), 14),
-    ('BOTTOMPADDING', (0,0), (-1,0), 12),
-    ('BACKGROUND',(0,1),(-1,-1),colors.beige),
-    ('TEXTCOLOR',(0,1),(-1,-1),colors.black),
-    ('FONTNAME', (0,1), (-1,-1), 'Helvetica'),
-    ('FONTSIZE', (0,1), (-1,-1), 12),
-    ('BOTTOMPADDING', (0,1), (-1,-1), 6),
-]))   
-      
-      
-      
+            table = Table([headings]+data)
+            table.setStyle(TableStyle([
+         ('BACKGROUND', (0,0), (-1,0), colors.black),
+         ('TEXTCOLOR',(0,0),(-1,0),colors.white),
+         ('ALIGN',(0,0),(-1,-1),'CENTER'),
+         ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+         ('FONTSIZE', (0,0), (-1,0), 14),
+         ('BOTTOMPADDING', (0,0), (-1,0), 12),
+         ('BACKGROUND',(0,1),(-1,-1),colors.beige),
+         ('TEXTCOLOR',(0,1),(-1,-1),colors.black),
+         ('FONTNAME', (0,1), (-1,-1), 'Helvetica'),
+         ('FONTSIZE', (0,1), (-1,-1), 12),
+         ('BOTTOMPADDING', (0,1), (-1,-1), 6),
+      ]))   
+            
+            
+            
 
-# Add the table to the report
-      elements.append(table)
-
-
-
+      # Add the table to the report
+            elements.append(table)
+            elements.append(Spacer(1, 1.5*inch))
 
 
-      elements.append(Spacer(1, 0.5*inch))
+
 
       elements.append(Paragraph(' <font color="maroon">ACE-III</font>', styles['heading1'])) 
       
@@ -350,13 +349,15 @@ def generate_route_pdf():
       <font color="black" fontSize=14>Q2: The question asks the subject to generate as many names of animals as possible  starting with any letter</font><br/>
      <br/> 
       <font color="black" fontSize=14 >Total Marks: 7 </font><br/>   
-      <font color="black" fontSize=14 >Marks Secured :{results1[7]} </font><br/>
+       <font color="black" fontSize=14 >Marks Secured :{results1[7]} </font><br/>
       <br/>
       
                                   
                                   ''', style=styles['para']))
       elements.append(Spacer(1, 0.4*inch))
+ 
       elements.append(Paragraph(f''' <font color="blue" fontSize=16> (d) Language Test</font> <br/>
+      
       <br/>
       <font color="black" fontSize=14 >Total Marks: 23  </font><br/>   
       <font color="black" fontSize=14 >Marks Secured : {results1[12]+results1[13]+results1[14]+results1[15]+results1[16]} </font><br/>                      
@@ -381,13 +382,13 @@ def generate_route_pdf():
       <font color="black" fontSize=14 >Marks Secured :{results1[14]} </font><br/>
       <br/>
     
-      <font color="black" fontSize=14>Q4: The question asks the subject to repeat words like : 'caterpillar'; 'eccentricity; 'unintelligible'; 'statistician'</font><br/>
+      <font color="black" fontSize=14>Q4: The question asks the subject to repeat words</font><br/>
       <br/> 
       <font color="black" fontSize=14 >Total Marks: 3 </font><br/>   
       <font color="black" fontSize=14 >Marks Secured :{results1[15]} </font><br/>
       <br/>
       
-      <font color="black" fontSize=14>Q5: The question asks the subject to repeat idioms like : "All that glitters is not gold"</font><br/>
+      <font color="black" fontSize=14>Q5: The question asks the subject to repeat idioms </font><br/>
       <br/> 
       <font color="black" fontSize=14 >Total Marks: 2 </font><br/>   
       <font color="black" fontSize=14 >Marks Secured :{results1[16]} </font><br/>
