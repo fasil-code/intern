@@ -678,7 +678,6 @@
         correctday = listday[day];
         if (selectedday === correctday) {
           ans += 1;
-          
         }
         seasonlist = ['Spring', 'Summer', 'Monsoon', 'Autumn', 'Winter']
         season = "";
@@ -694,7 +693,6 @@
           season = "Winter";
         if (selectedseason === season) {
           ans += 1;
-          
         }
         let selectedcity=document.getElementById("city").value;
         selectedcity=selectedcity.toLowerCase();
@@ -704,8 +702,8 @@
         correctcity=correctcity.toLowerCase();
         let correctstate=document.getElementById("correctstate").innerText;
         correctstate=correctstate.toLowerCase();
-        if(selectedcity===correctcity || correctcity.includes(selectedcity) || selectedcity.includes(correctcity)){
-               ans+=2;
+        if(selectedcity===correctcity || correctcity.includes(selectedcity) || selectedcity.includes(correctcity)){  
+          ans+=2;
         }
         if(selectedstate===correctstate || correctstate.includes(selectedstate) || selectedstate.includes(correctstate) ){
           ans+=2;

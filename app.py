@@ -157,7 +157,6 @@ mysql = MySQL(app)
 
 # for emotion data
 mysql = MySQL(app)
-
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     return register_route()
