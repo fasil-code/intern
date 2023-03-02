@@ -110,7 +110,9 @@ function Game() {
   
   setTimeout(() => {
     
-    
+    let myData = new Data(greyClicks, correctClicks, wrongClicks, successArray, timeStampGray, timeStampCorrect, timeStampWrong);
+  
+    let jsonData = JSON.stringify(myData);
     result.style.display = 'flex';
     score.style.display = 'flex';
     let router = document.getElementById('container');
@@ -135,14 +137,25 @@ function Game() {
     grid.style.display = 'none';
     timerbox.style.display = 'none';
     document.getElementById('exit').style.display = 'none';
+     
+    let suc = JSON.stringify(successArray);
+    let timG = JSON.stringify(timeStampGray);
+    let timC = JSON.stringify(timeStampCorrect);
+    let timW = JSON.stringify(timeStampWrong);
 
     $.ajax({
       type: "POST",
       url: "/send_score",
       data: { 
+         jsonData: jsonData,
          score: scores,
          correct_clicks:correctClicks,
          wrong_clicks:wrongClicks,
+         grey_clicks:greyClicks,
+         successArray:suc,
+         timeStampGray:timG,
+         timeStampCorrect:timC,
+         timeStampWrong:timW,
 
          column: "ptt"
       },
