@@ -94,7 +94,9 @@ function returnScore() {
         url: "/send_score",
         data: {
             score: tot,
-            column: "attention3"
+            column: "attention3",
+            source:"attention3_response",
+            user_response:JSON.stringify(Object.fromEntries(ansMap))
         },
         success: function (response) {
             console.log(response);
