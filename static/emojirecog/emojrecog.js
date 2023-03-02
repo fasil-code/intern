@@ -344,7 +344,7 @@ function optionSelected(answer){
 }
 
 function showResult(){
-    restart_quiz.style.display="block";
+   
     quit_quiz.style.display="block";
 
     info_box.classList.remove("activeInfo"); //hide info box
@@ -414,5 +414,5 @@ function startTimerLine(time){
 function queCounter(index){
    
     let totalQueCounTag = '<span><p>'+ index +'</p> of <p>'+ questions.length +'</p> Questions</span>';
-    bottom_ques_counter.innerHTML = totalQueCounTag;  
+    bottom_ques_counter.innerHTML = totalQueCounTag; 
 }
