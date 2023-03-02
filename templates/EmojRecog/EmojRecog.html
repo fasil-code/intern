@@ -16,6 +16,13 @@
       crossorigin="anonymous"
     />
 </head>
+<style>
+
+ .info-title{
+display:flex;
+justify-content: space-between;
+ }
+</style>
 <body>
   
 
@@ -27,7 +34,10 @@
 
     <!-- Info Box -->
     <div class="info_box">
-        <div class="info-title"><span>Some Rules of this Test</span></div>
+        <div class="info-title "><span>Some Rules of this Test</span>
+        <span class="inf"  > <button onclick="repeat()" type="button" class="audio-btn btn btn-outline-primary"><i class="fa fa-volume-up" aria-hidden="true"></i></button>
+        </span> 
+      </div>
         <div class="info-list">
             <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
             <div class="info">2. Once you select your answer, it can't be undone.</div>

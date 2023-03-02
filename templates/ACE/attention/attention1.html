@@ -420,6 +420,7 @@
   {% block content %}
   <!-- For address part -->
 
+
   <!-- <div id="main" class=" main group-1">
     <div class="container container-fluid border bg-white">
       <div class="h2 mb-4 ">
@@ -501,8 +502,7 @@
             {% endfor %}
           </select>
         </label>
-        <span style="display: none;" id="correctcity">{{city}}</span>
-        <span style="display: none;" id="correctstate">{{state}}</span>
+      
         <!--  <label class="day custom-select">
           <div class="words bg-white ">
             <input class="input-t" type="text" id="first" class="form-control" name="first-sentence"
@@ -546,7 +546,7 @@
     </div>
   </div>
   {% endblock content %}
-  <script> nextUrl = "{{url}}"</script>
+  <script>  nextUrl = "{{url}}"</script>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script
@@ -648,6 +648,9 @@
     //       redirect(sent);
     //     }
       function Score() {
+        let ansMap ={};
+        let correctCity='{{city}}';
+        let correctState='{{state}}';
         let sent=false;
         let ans = 0;
         const day = new Date().getDay();
@@ -663,11 +666,16 @@
         }
         let year = new Date().getFullYear();
         let ddmmyyyy = month + "/" + date + "/" + year;
-        console.log(ddmmyyyy)
+       
         let selectdeddate = document.getElementById("fecha1").value;
         let selectedday = document.getElementById("day").value;
         let selectedcountry = document.getElementById("country").value;
         let selectedseason = document.getElementById("season").value;
+        ansMap[selectdeddate]=ddmmyyyy;
+        ansMap[selectedcountry]="india";
+       
+
+
         if (selectdeddate === ddmmyyyy) {
           ans += 3;
         }
@@ -676,6 +684,8 @@
         }
         listday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         correctday = listday[day];
+        console.log(selectedday);
+        console.log(correctday);
         if (selectedday === correctday) {
           ans += 1;
         }
@@ -691,9 +701,11 @@
           season = "Autumn";
         else
           season = "Winter";
+          
         if (selectedseason === season) {
           ans += 1;
         }
+        ansMap[selectedseason]=season;
         let selectedcity=document.getElementById("city").value;
         selectedcity=selectedcity.toLowerCase();
         let selectedstate=document.getElementById("state").value;
@@ -714,7 +726,9 @@
         url: "/send_score",
         data: { 
         score: ans,
-        column: "attention1"
+        column: "attention1",
+        source:"attention1_response",
+        user_response:JSON.stringify(ansMap)
      },
      success: function(response) {
         console.log(response);

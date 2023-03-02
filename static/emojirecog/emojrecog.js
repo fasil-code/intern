@@ -69,7 +69,42 @@ res_time['contempt']=0
 res_time['disgust']=0
 res_time['fear']=0
 
+let emojiMessage=`
+1. You will have only 15 seconds per each question.
+2. Once you select your answer, it can't be undone.
+3. You can't select any option once time goes off.
+4. You can't exit from the Test while you're opting.
+5. You'll get points on the basis of your correct answers.
+      
+      `;
+      function repeat(){
 
+        let text;
+        if (emojiMessage === "") {
+          text = "Please speak";
+        } else {
+          text =  emojiMessage;
+        }   
+      
+
+             msg = new SpeechSynthesisUtterance(text);
+         
+          
+            msg.lang = "en-IN";
+          
+          const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-IN");
+                msg.voice = voices[0];
+                msg.volume = 1;
+                msg.rate = 0.9;
+                msg.pitch = 1;
+                window.speechSynthesis.cancel(msg);
+                window.speechSynthesis.speak(msg);
+        
+                window.addEventListener("beforeunload", () => {
+                    window.speechSynthesis.cancel(msg);
+                  });
+                
+      }
 
 
 
@@ -98,6 +133,13 @@ const restart_quiz = result_box.querySelector(".buttons .restart");
 const quit_quiz = result_box.querySelector(".buttons .quit");
 restart_quiz.style.display="none";
 quit_quiz.style.display="none";
+
+    continue_btn.addEventListener("click", () => {
+    window.speechSynthesis.cancel();
+    });
+    exit_btn.addEventListener("click", () => {
+        window.speechSynthesis.cancel();
+        });
 
 // if startQuiz button clicked
 start_btn.onclick = ()=>{

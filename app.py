@@ -25,7 +25,16 @@ app.config['MYSQL_USER'] = 'root'
 # app.config['MYSQL_PASSWORD'] = '7006022139'
 app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
 # app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
+
 #app.config['MYSQL_PASSWORD'] = 'alchemist'
+# app.config['MYSQL_PASSWORD'] = 'Zargar@123'
+
+
+
+
+ 
+# app.config['MYSQL_PASSWORD'] = 'alchemist'
+
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -115,11 +124,15 @@ def create_database():
          id INT AUTO_INCREMENT PRIMARY KEY,
          email VARCHAR(255) NOT NULL,
          Date VARCHAR(255),
-         ptt_score INT DEFAULT 0,
          
+         ptt_score INT DEFAULT 0,
          WrongClicks INT DEFAULT 0,
          CorrectClicks INT DEFAULT 0,
-         
+         greyClicks INT DEFAULT 0,
+         successArray JSON,
+         timeStampGray JSON,
+         timeStampCorrect JSON,
+         timeStampWrong JSON,
          
          session_id VARCHAR(255)
       )'''
@@ -131,11 +144,12 @@ def create_database():
          Date VARCHAR(255),
          tmt_score1 INT DEFAULT 0,
          tmt_score2 INT DEFAULT 0,
+         wrn1 INT DEFAULT 0,
+         wrn2 INT DEFAULT 0,
+         timestamp1 JSON,
+         timestamp2 JSON,
          session_id VARCHAR(255)
-      )'''
-      
-      
-      
+      )'''    
    )
    cursor.close()
    conn.close()
@@ -147,13 +161,6 @@ app.config['MYSQL_DB'] = 'ftd'
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 mysql = MySQL(app)
 mysql = MySQL(app)
-
-
-
-   
-    
-
-
 
 # for emotion data
 mysql = MySQL(app)
@@ -199,52 +206,46 @@ def after_request(response):
 def send_score():
 
    
-   email=session.get('logged_in')
-   column= request.form.get("column")
-   source= request.form.get("source")
-   wrong_clicks=request.form.get('wrong_clicks')
-   correct_clicks=request.form.get('correct_clicks')
-   
+   email  = session.get('logged_in')
+   column = request.form.get("column")
+   source = request.form.get("source")
 
-   array = json.loads(request.form.get('array', '[]'))
+   wrong_clicks     = request.form.get('wrong_clicks')
+   correct_clicks   = request.form.get('correct_clicks')
+   grey_clicks      = request.form.get('grey_clicks')
+   successArray     = json.loads(request.form.get('successArray', '[]'))
+   timeStampGray    = json.loads(request.form.get('timeStampGray', '[]'))
+   timeStampCorrect = json.loads(request.form.get('timeStampCorrect', '[]'))
+   timeStampWrong   = json.loads(request.form.get('timeStampWrong', '[]'))
+
+   array       = json.loads(request.form.get('array', '[]'))
    res_correct = json.loads(request.form.get('res_correct', '[]'))
-   res_choose = json.loads(request.form.get('res_choose', '[]'))
-   res_time = json.loads(request.form.get('res_time', '[]'))
+   res_choose  = json.loads(request.form.get('res_choose', '[]'))
+   res_time    = json.loads(request.form.get('res_time', '[]'))
 
    user_response = json.loads(request.form.get('user_response', '[]'))
 
-   score= request.form.get("score")
+   score = request.form.get("score")
+
    tmt1=request.form.get('tmt1')
    tmt2=request.form.get('tmt2')
-   
+   wrn1=request.form.get('wrn1')
+   wrn2=request.form.get('wrn2')
+   timestamp1=json.loads(request.form.get('timestamp1', '[]'))
+   timestamp2=json.loads(request.form.get('timestamp2', '[]'))
+
+
    time=request.form.get('time')
-
-   
-   
-
-   
-
-   
 
    conn   = mysql.connect
    cursor = conn.cursor()
 
-   # cursor.execute(f"SELECT * FROM emotion WHERE session_id = %s AND email = %s", (sesion_key, email))
-   # result_emoji = cursor.fetchone()
 
-   # cursor.execute(f"SELECT * FROM ace WHERE session_id = %s AND email = %s", (sesion_key, email))
-   # result_ace = cursor.fetchone()
 
-   # cursor.execute(f"SELECT * FROM ptt WHERE session_id = %s AND email = %s", (sesion_key, email))
-   # result_ptt = cursor.fetchone()
-
-   # cursor.execute(f"SELECT * FROM tmt WHERE session_id = %s AND email = %s", (sesion_key, email))
-   # result_tmt = cursor.fetchone()
-
-   aceColumn = ['attention1','attention2','attention3','fluency1','fluency2','memory1','memory2',
-               'memory3','memory4','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
-   aceResponse=['attention1_response','attention2_response','attention3_response','fluency1_response','fluency2_response','memory1_response','memory2_response',
-                'memory3_response','memory4_response','language1_response','language2_response','language3_response','language4_response','language5_response','visuospatial1_response','visuospatial2_response']
+   aceColumn   = ['attention1','attention2','attention3','fluency1','fluency2','memory1','memory2',
+                  'memory3','memory4','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
+   aceResponse =['attention1_response','attention2_response','attention3_response','fluency1_response','fluency2_response','memory1_response','memory2_response',
+                 'memory3_response','memory4_response','language1_response','language2_response','language3_response','language4_response','language5_response','visuospatial1_response','visuospatial2_response']
    if column in aceColumn:
         
       # Update the existing row
@@ -267,25 +268,31 @@ def send_score():
          conn.commit()
    if column=="ert":
          res_corr = json.dumps(res_correct)
-         res_ch = json.dumps(res_choose)
-         res_ti = json.dumps(res_time)
+         res_ch   = json.dumps(res_choose)
+         res_ti   = json.dumps(res_time)
          cursor.execute(f"UPDATE emotion SET ert = %s,correct_res=%s,choosen_res=%s,time_res=%s, time_ert = %s WHERE session_id = %s AND email = %s", (score,res_corr,res_ch,res_ti, time, sesion_key, email))
          conn.commit()
 
    
-   if column=="ptt":
-
-       cursor.execute(f"UPDATE ptt SET ptt_score = %s,  WrongClicks= %s,CorrectClicks=%s WHERE session_id = %s AND email = %s", (score, wrong_clicks,correct_clicks, sesion_key, email))
-       conn.commit()
+   if column=="ptt": 
+      sucArr  = json.dumps(successArray)
+      grayArr = json.dumps(timeStampGray)
+      corArr  = json.dumps(timeStampCorrect)
+      wrnArr  = json.dumps(timeStampWrong)
+      cursor.execute(f"UPDATE ptt SET ptt_score = %s, WrongClicks= %s,CorrectClicks=%s, greyClicks=%s, successArray=%s, timeStampGray=%s, timeStampCorrect=%s, timeStampWrong=%s WHERE session_id = %s AND email = %s", (score, wrong_clicks, correct_clicks, grey_clicks, sucArr, grayArr, corArr, wrnArr, sesion_key, email))
+      conn.commit()
    
    if column=="tmt":
-        if tmt1:
-           
-          cursor.execute(f"UPDATE tmt SET tmt_score1 = %s WHERE session_id = %s AND email = %s", (tmt1, sesion_key, email))
-          conn.commit()
-        if tmt2:
-           cursor.execute(f"UPDATE tmt SET tmt_score2 = %s WHERE session_id = %s AND email = %s", (tmt2, sesion_key, email))
-           conn.commit() 
+      if tmt1:
+         score = tmt1
+         tms1  = json.dumps(timestamp1)
+         cursor.execute(f"UPDATE tmt SET tmt_score1 = %s, wrn1=%s, timestamp1=%s WHERE session_id = %s AND email = %s", (tmt1, wrn1, tms1, sesion_key, email))
+         conn.commit()
+      if tmt2:
+         score = tmt2
+         tms2  = json.dumps(timestamp2)
+         cursor.execute(f"UPDATE tmt SET tmt_score2 = %s, wrn2=%s, timestamp2=%s WHERE session_id = %s AND email = %s", (tmt2, wrn2, tms2, sesion_key, email))
+         conn.commit() 
    cursor.close()
    conn.close()
 
@@ -367,12 +374,17 @@ def dashboard():
       
       # Replace with the actual email value you want to search for
       # emotion
-      query = "SELECT * FROM emotion WHERE email = %s"
+      query = "SELECT id,email,date,emoji_game,ert FROM emotion WHERE email = %s"
       cursor.execute(query, (email,))
       results_emoji = cursor.fetchall()
       
       # ACE
-      query = "SELECT * FROM ace WHERE email = %s"
+      query = '''SELECT id,email,attention1,attention2,attention3, 
+      fluency1,fluency2,
+      memory1,memory2,memory3,memory4,
+      language1,language2,language3,language4,language5,
+      visuospatial1,visuospatial2
+      FROM ace WHERE email = %s'''
       cursor.execute(query, (email,))
       results_ace = cursor.fetchall()
       
@@ -458,13 +470,19 @@ def ace1():
    conn = mysql.connect
    cursor = conn.cursor()
    email = session.get('logged_in')
+
+   cursor.execute('SELECT City,State from user where email=%s',(email,))
+
    cursor.execute('SELECT City,State from user where email=%s',[email])
+
    data = cursor.fetchone() 
    city=data[0]
    state=data[1]
    conn.commit()
    conn.close()
-   return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states,state=state,city=city,url="ace3")
+
+   return render_template('ACE/attention/attention1.html',city=city,state=state,days=days,seasons=seasons,list=list,states=states,url="ace3")
+    
   
 @app.route("/ace2",methods=['GET','POST'])
 def ace2():
@@ -485,7 +503,7 @@ def ace6():
    return render_template('ACE/language/language2.html',url="ace7") 
 @app.route("/ace7",methods=['GET','POST']) 
 def ace7():
-   return render_template('ACE/language/language3.html',url="layout") 
+   return render_template('ACE/language/language3.html',url="ace10") 
 @app.route("/ace8",methods=['GET','POST']) 
 def ace8():
    return render_template('ACE/language/language4.html',url="ace6") 
@@ -497,7 +515,7 @@ def ace10():
    return render_template('ACE/memory/memory3.html',url="layout") 
 @app.route("/ace11",methods=['GET','POST']) 
 def ace11():
-   return render_template('ACE/memory/memory4.html',url="ace10") 
+   return render_template('ACE/memory/memory4.html',url="layout") 
 @app.route("/ace12",methods=['GET','POST']) 
 def ace12():
    return render_template('ACE/fluency/fluency2.html',url="layout")

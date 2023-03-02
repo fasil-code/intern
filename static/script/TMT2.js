@@ -9,6 +9,7 @@ let flag_num = 1;
 let num = 1;
 let alpha = 'A';
 let wrongClicks = 0;
+let timeArray = [];
 
 const timer   = document.getElementById('timer');
 for(let t=180; t>=0; t--) {
@@ -54,11 +55,14 @@ function displayResult() {
     document.getElementById('pul').innerText = verdict;
     document.getElementById('cor').innerText = timeTaken/1000;
     document.getElementById('wrn').innerText = wrongClicks;
+    let jsonArray = JSON.stringify(timeArray);
     $.ajax({
         type: "POST",
         url: "/send_score",
         data: { 
            tmt2: timeTaken,
+           wrn2: wrongClicks,
+           timestamp2: jsonArray,
            column: "tmt"
         },
         success: function(response) {
@@ -94,6 +98,7 @@ let completionInterval = setInterval(() => {
 let i = 1;
 let blinkInterval = null;
 document.addEventListener('click', function (event) {
+    timeArray.push(startTime - Date.now());
     let target = event.target;
     if(target.classList.contains(`box${i}`)) {
         target.style.backgroundColor = 'rgb(102, 182, 106)';

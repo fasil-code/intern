@@ -5,6 +5,7 @@ const thumbRule = 90;
 let startTime;
 let timeTaken;
 let wrongClicks = 0;
+let timeArray = [];
 startTime = Date.now();
 
 for (let i = 1; i <= nCircle; i++) {
@@ -15,8 +16,8 @@ for (let i = 1; i <= nCircle; i++) {
     grid.appendChild(cell);
 }
 
-const cell = document.querySelectorAll('.box');
-const timer   = document.getElementById('timer');
+const cell  = document.querySelectorAll('.box');
+const timer = document.getElementById('timer');
 
 for(let t=thumbRule; t>=0; t--) {
     setTimeout(() => {
@@ -34,9 +35,9 @@ for(let i = 0; i < cell.length; i++) {
     }
     usedCoords.add(coord.toString());
     cell[i].style.gridColumnStart = coord[0];
-    cell[i].style.gridColumnEnd = coord[0] + 1;
-    cell[i].style.gridRowStart = coord[1];
-    cell[i].style.gridRowEnd = coord[1] + 1;
+    cell[i].style.gridColumnEnd   = coord[0] + 1;
+    cell[i].style.gridRowStart    = coord[1];
+    cell[i].style.gridRowEnd      = coord[1] + 1;
 }
 
 let i = 1;
@@ -61,12 +62,16 @@ function displayResult() {
     document.getElementById('pul').innerText = verdict;
     document.getElementById('cor').innerText = timeTaken/1000;
     document.getElementById('wrn').innerText = wrongClicks;
+    let jsonArray = JSON.stringify(timeArray);
+    console.log(jsonArray);
     $.ajax({
         type: "POST",
         url: "/send_score",
         data: { 
           tmt1: timeTaken,
-           column: "tmt"
+          wrn1: wrongClicks,
+          timestamp1: jsonArray,
+          column: "tmt"
         },
         success: function(response) {
            console.log(response);    
@@ -82,6 +87,7 @@ let completionInterval = setInterval(() => {
 }, thumbRule*1000);
 
 document.addEventListener('click', function (event) {
+    timeArray.push(Date.now() - startTime);
     let target = event.target;
     if(target.classList.contains(`box${i}`)) {
         target.style.backgroundColor = 'rgb(102, 182, 106)';

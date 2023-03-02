@@ -1,14 +1,14 @@
 
 from flask import Flask,jsonify, make_response,render_template,request,session
 from flask import Flask,render_template,url_for,flash,redirect
-
+import json
 import datetime
 from reportlab.lib.colors import HexColor
 from reportlab.lib.enums import TA_CENTER,TA_RIGHT,TA_LEFT
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from io import BytesIO
 from io import BytesIO
-from reportlab.lib.pagesizes import letter, landscape
+from reportlab.lib.pagesizes import letter, landscape,A4
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle
@@ -40,7 +40,7 @@ def generate_route_pdf():
       cursor.execute(query, (id, email))
       results = cursor.fetchone()
 
-      report_id=results[7]
+      report_id=results[10]
 
 
 
@@ -58,9 +58,9 @@ def generate_route_pdf():
 
       response = make_response()
       response.headers['Content-Type'] = 'application/pdf'
-      response.headers['Content-Disposition'] = 'attachment; filename=output.pdf'
+      response.headers['Content-Disposition'] = 'attachment; filename=ftd.pdf'
       buffer = BytesIO()
-      doc = SimpleDocTemplate(buffer, pagesize=landscape(letter))   
+      doc = SimpleDocTemplate(buffer, pagesize=A4)   
       # Add decorated heading to PDF
       styles = {
          'heading': ParagraphStyle(
@@ -114,7 +114,7 @@ def generate_route_pdf():
       email = session.get('logged_in')  # Replace with the actual name value
       name = session.get('name')
       date = datetime.datetime.now().strftime('%B, %d, %Y')
-     
+      
       time = datetime.datetime.now().strftime('%I:%M %p')
       name_style = ParagraphStyle(
       'name',
@@ -151,51 +151,113 @@ def generate_route_pdf():
          'time',
          fontName='Helvetica',
          fontSize=12,
-         textColor=colors.black,
+         textColor=colors.black, 
          alignment=TA_RIGHT,
          rightIndent=0.25*inch,
          #backColor=colors.whitesmoke,
       )   
+    
+# Add the table to the report
+      
+
+# Build the PDF report
+     
+
+
 
       elements.append(Paragraph(f'<font color="brown"> Name:</font> {name}', email_style))
       elements.append(Spacer(1, 0.1*inch))
       elements.append(Paragraph(f'<font color="brown">  Email:</font> {email}', email_style))
       elements.append(Spacer(1, 0.1*inch))
       elements.append(Paragraph(f'<font color="brown"> Report Id:</font> <font color="blue">{report_id}</font> ', email_style))
+      elements.append(Spacer(1, 0.2*inch))
       elements.append(Paragraph(f'<font color="brown">Date:</font>  {date}', date_style))
       elements.append(Spacer(1, 0.1*inch))
       elements.append(Paragraph(f'<font color="brown">  Time:</font> {time}', time_style))
       
-      # Add data to table
+      
       elements.append(Spacer(1, 0.5*inch))
-      elements.append(Paragraph(' <font color="maroon">Tests related to Emotion</font>', styles['heading1']))
-      elements.append(Spacer(1, 0.2*inch))
-      elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Emotion Recognition Test</font> <br/>
-      <br/>
-      Percentage Scored : <font color="black" fontSize=14 >{results[5]} %</font><br/>                         
-      Completion Time (min :sec):<font color="black" fontSize=14 > {results[6]}</font>  <br/>  
-      <br/>
-      Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient.
-      The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust were tested.
-      The user identification capacity is <font color="black" fontSize=14 >{results[5]} %</font>  and the time span was <font color="black" fontSize=14 >{results[6]} minutes</font> .                                
-      ''', style=styles['para']))
-      elements.append(Spacer(1, 0.4*inch))
-      elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b) Emoji Identification Test</font> :<br/> <br/>
-      Percentage Scored : <font color="black" fontSize=14 >{results[3]}</font> <br/>                         
-      Completion Time (min :sec): <font color="black" fontSize=14 >{results[4]}</font>  <br/>  
-      <br/>
-      Summary: Emoji Identification test was given by the patient to test the patient's ability to recognise the emojis . 
-      The emojis related  smiley,frowny,emotion are tested.The user identification capacity is <font color="black" fontSize=14 >{results[3]} </font> % and the time span was <font color="black" fontSize=14 >{results[4]}  minutes. </font>                                          
-      ''', styles['para']))
-      elements.append(Spacer(1, 0.6*inch))
-      data = []
-  
+      if result:
+            elements.append(Paragraph(' <font color="maroon">Tests related to Emotion</font>', styles['heading1']))
+            elements.append(Spacer(1, 0.2*inch))
+            elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Emotion Recognition Test</font> <br/>
+            <br/>
+            Total Correct responses detected: <font color="red" fontSize=14 >{results[5]}/10 </font><br/>                         
+            Response Time (min :sec):<font color="red" fontSize=14 > {results[6]}</font>  <br/>  
+            <br/>
+            Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient.
+            The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust were tested.
+            The user identification capacity is <font color="black" fontSize=14 >{results[5]} </font>  and the time span was <font color="black" fontSize=14 >{results[6]} minutes</font> .                                
+            ''', style=styles['para']))
+            elements.append(Spacer(1, 1.1*inch))
+            elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b) Emoji Identification Test</font> :<br/> <br/>
+            Total Correct responses : <font color="red" fontSize=14 >{results[3]}/10</font> <br/>                         
+            Response time Time (min :sec): <font color="red" fontSize=14 >{results[4]}</font>  <br/>  
+            <br/>
+            Summary: Emoji Identification test was given by the patient to test the patient's ability to recognise the emojis . 
+            The emojis related  smiley,frowny,emotion are tested.The user identification capacity is <font color="black" fontSize=14 >{results[3]} </font>  and the time span was <font color="black" fontSize=14 >{results[4]}  minutes. </font>                                          
+            ''', styles['para']))
+            elements.append(Spacer(1, 1.2*inch))
+            result_correct=json.loads(results[7])
+            result_choosen=json.loads(results[8])
+            result_time=json.loads(results[9])
+            
+            col_width=[2*inch,2*inch]
+            elements.append(Spacer(1, 0.6*inch))
+            headings=["Correct Responses","Choosen Responses"]
+            data=[]
+            for i in  range(len(result_correct)):
+               data.append([result_correct[i],result_choosen[i]])
+
+
+            table = Table([headings]+data,colWidths=col_width)
+            table.setStyle(TableStyle([
+         ('BACKGROUND', (0,0), (-1,0), colors.black),
+         ('TEXTCOLOR',(0,0),(-1,0),colors.white),
+         ('ALIGN',(0,0),(-1,-1),'CENTER'),
+         ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+         ('FONTSIZE', (0,0), (-1,0), 14),
+         ('BOTTOMPADDING', (0,0), (-1,0), 12),
+         ('BACKGROUND',(0,1),(-1,-1),colors.beige),
+         ('TEXTCOLOR',(0,1),(-1,-1),colors.black),
+         ('FONTNAME', (0,1), (-1,-1), 'Helvetica'),
+         ('FONTSIZE', (0,1), (-1,-1), 12),
+         ('BOTTOMPADDING', (0,1), (-1,-1), 6),
+      ]))
+            elements.append(table)
+            
+            elements.append(Spacer(1, 1.6*inch))
+            headings=["Emotion Type","Response Time"]
+            data=[]
+            for emotion, count in result_time.items():
+               data.append([emotion,count])
+            
+
+
+            table = Table([headings]+data)
+            table.setStyle(TableStyle([
+         ('BACKGROUND', (0,0), (-1,0), colors.black),
+         ('TEXTCOLOR',(0,0),(-1,0),colors.white),
+         ('ALIGN',(0,0),(-1,-1),'CENTER'),
+         ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
+         ('FONTSIZE', (0,0), (-1,0), 14),
+         ('BOTTOMPADDING', (0,0), (-1,0), 12),
+         ('BACKGROUND',(0,1),(-1,-1),colors.beige),
+         ('TEXTCOLOR',(0,1),(-1,-1),colors.black),
+         ('FONTNAME', (0,1), (-1,-1), 'Helvetica'),
+         ('FONTSIZE', (0,1), (-1,-1), 12),
+         ('BOTTOMPADDING', (0,1), (-1,-1), 6),
+      ]))   
+            
+            
+            
+
+      # Add the table to the report
+            elements.append(table)
+            elements.append(Spacer(1, 1.5*inch))
 
 
 
-
-
-      elements.append(Spacer(1, 0.5*inch))
 
       elements.append(Paragraph(' <font color="maroon">ACE-III</font>', styles['heading1'])) 
       
@@ -287,13 +349,15 @@ def generate_route_pdf():
       <font color="black" fontSize=14>Q2: The question asks the subject to generate as many names of animals as possible  starting with any letter</font><br/>
      <br/> 
       <font color="black" fontSize=14 >Total Marks: 7 </font><br/>   
-      <font color="black" fontSize=14 >Marks Secured :{results1[7]} </font><br/>
+       <font color="black" fontSize=14 >Marks Secured :{results1[7]} </font><br/>
       <br/>
       
                                   
                                   ''', style=styles['para']))
       elements.append(Spacer(1, 0.4*inch))
+ 
       elements.append(Paragraph(f''' <font color="blue" fontSize=16> (d) Language Test</font> <br/>
+      
       <br/>
       <font color="black" fontSize=14 >Total Marks: 23  </font><br/>   
       <font color="black" fontSize=14 >Marks Secured : {results1[12]+results1[13]+results1[14]+results1[15]+results1[16]} </font><br/>                      
@@ -318,13 +382,13 @@ def generate_route_pdf():
       <font color="black" fontSize=14 >Marks Secured :{results1[14]} </font><br/>
       <br/>
     
-      <font color="black" fontSize=14>Q4: The question asks the subject to repeat words like : 'caterpillar'; 'eccentricity; 'unintelligible'; 'statistician'</font><br/>
+      <font color="black" fontSize=14>Q4: The question asks the subject to repeat words</font><br/>
       <br/> 
       <font color="black" fontSize=14 >Total Marks: 3 </font><br/>   
       <font color="black" fontSize=14 >Marks Secured :{results1[15]} </font><br/>
       <br/>
       
-      <font color="black" fontSize=14>Q5: The question asks the subject to repeat idioms like : "All that glitters is not gold"</font><br/>
+      <font color="black" fontSize=14>Q5: The question asks the subject to repeat idioms </font><br/>
       <br/> 
       <font color="black" fontSize=14 >Total Marks: 2 </font><br/>   
       <font color="black" fontSize=14 >Marks Secured :{results1[16]} </font><br/>
@@ -353,24 +417,24 @@ def generate_route_pdf():
      <br/>
       
                                   ''', style=styles['para']))
-      elements.append(Spacer(1, 0.2*inch))
-      elements.append(Paragraph(f''' <font color="blue" fontSize=16> (F) Pulse Tracking Test</font> <br/>
-      <br/>
-      Total Pulses Synced Properly: <font color="black" fontSize=14 > {result_ptt[3]} </font> out of <font color="black" fontSize=14 > 5 </font> <br/>                          
-      Correct Clicks: <font color="black" fontSize=14 > {result_ptt[4]} </font> <br/>
-      Extra Clicks: <font color="black" fontSize=14 > {result_ptt[4]-result_ptt[3]} </font> <br/>
-      Wrong Clicks: <font color="black" fontSize=14 > {result_ptt[5]} </font> <br/>
-      Summary: Pulse Tracking Test gamifies the diagnosis for potential repulsive behaviour in tap. It also checks whether a person is able to sync properly with abrupt changes in the pulse. The test is divided into 5 levels.                                
-      ''', style=styles['para']))
+      # elements.append(Spacer(1, 0.2*inch))
+      # elements.append(Paragraph(f''' <font color="blue" fontSize=16> (F) Pulse Tracking Test</font> <br/>
+      # <br/>
+      # Total Pulses Synced Properly: <font color="black" fontSize=14 > {result_ptt[3]} </font> out of <font color="black" fontSize=14 > 5 </font> <br/>                          
+      # Correct Clicks: <font color="black" fontSize=14 > {result_ptt[4]} </font> <br/>
+      # Extra Clicks: <font color="black" fontSize=14 > {result_ptt[4]-result_ptt[3]} </font> <br/>
+      # Wrong Clicks: <font color="black" fontSize=14 > {result_ptt[5]} </font> <br/>
+      # Summary: Pulse Tracking Test gamifies the diagnosis for potential repulsive behaviour in tap. It also checks whether a person is able to sync properly with abrupt changes in the pulse. The test is divided into 5 levels.                                
+      # ''', style=styles['para']))
       
-      elements.append(Spacer(1, 0.2*inch))
-      elements.append(Paragraph(f''' <font color="blue" fontSize=16> (g) Trail Making Test</font> <br/>
-      <br/>
-      Total Time Taken to complete the test 1: <font color="black" fontSize=14 > {result_tmt[3]}</font><br/>
-      Total Time Taken to complete the test 2: <font color="black" fontSize=14 > {result_tmt[4]}</font><br/>                          
-      Summary: Trail Making Test tests a persons ability to count the numbers in an order and his memory. It also checks whether a person is able to do it under time. The test is divided into parts.                                
-      ''', style=styles['para']))
-      elements.append(Spacer(1, 0.4*inch))
+      # elements.append(Spacer(1, 0.2*inch))
+      # elements.append(Paragraph(f''' <font color="blue" fontSize=16> (g) Trail Making Test</font> <br/>
+      # <br/>
+      # Total Time Taken to complete the test 1: <font color="black" fontSize=14 > {result_tmt[3]}</font><br/>
+      # Total Time Taken to complete the test 2: <font color="black" fontSize=14 > {result_tmt[4]}</font><br/>                          
+      # Summary: Trail Making Test tests a persons ability to count the numbers in an order and his memory. It also checks whether a person is able to do it under time. The test is divided into parts.                                
+      # ''', style=styles['para']))
+      # elements.append(Spacer(1, 0.4*inch))
   
       
       doc.build(elements)
