@@ -5,7 +5,7 @@
   if (nexturl == "emoji") {
       buttonText = "Emoji Game";
   }  else if (nexturl == "lang") {
-    var message="1. You will be shown a set of 12 images about any object,animal etc. 2. You have to type the name of object shown in picture. You can't keep it blank.  3. After this you have to answer 4 questions about these pictures.  4. You will be given 4 options for each question .  5.  For each correct answer you will get a point."
+    var message="1. You will be shown a set of 12 images about any object, animal etc. 2. You have to type the name of object shown in picture. You can't keep it blank.  3. After this you have to answer 4 questions about these pictures.  4. You will be given 4 options for each question .  5.  For each correct answer you will get a point."
     function repeat(){
 
         let text;
@@ -29,9 +29,10 @@
                 window.speechSynthesis.cancel(msg);
                 window.speechSynthesis.speak(msg);
         
-                window.addEventListener("beforeunload", () => {
-                    window.speechSynthesis.cancel(msg);
-                  });
+                const button = document.querySelector("#exit_btn");
+                button.addEventListener("click", () => {
+                window.speechSynthesis.cancel();
+                });
                 
       }
       buttonText = "Language Test";
@@ -71,6 +72,10 @@
               });
       
       }
+    const button = document.querySelector("#exit_btn");
+    button.addEventListener("click", () => {
+    window.speechSynthesis.cancel();
+    });
     buttonText = "Attention Test";
      // Rules of the test are changed
      const info = document.getElementsByClassName("info");
@@ -105,6 +110,10 @@
             window.addEventListener("beforeunload", () => {
                 window.speechSynthesis.cancel(msg);
               });
+              const button = document.querySelector("#exit_btn");
+    button.addEventListener("click", () => {
+    window.speechSynthesis.cancel();
+    });
       
       }
     buttonText = "ACE III Test";
@@ -142,6 +151,10 @@
             window.addEventListener("beforeunload", () => {
                 window.speechSynthesis.cancel(msg);
               });
+              const button = document.querySelector("#exit_btn");
+    button.addEventListener("click", () => {
+    window.speechSynthesis.cancel();
+    });
       
       }
            buttonText="Fluency Test"
@@ -179,6 +192,10 @@
             window.addEventListener("beforeunload", () => {
                 window.speechSynthesis.cancel(msg);
               });
+              const button = document.querySelector("#exit_btn");
+    button.addEventListener("click", () => {
+    window.speechSynthesis.cancel();
+    });
       
       }
         buttonText="Memory Test"
@@ -217,6 +234,10 @@ else if (nexturl == "vs1") {
             window.addEventListener("beforeunload", () => {
                 window.speechSynthesis.cancel(msg);
               });
+              const button = document.querySelector("#exit_btn");
+    button.addEventListener("click", () => {
+    window.speechSynthesis.cancel();
+    });
       
       }
     buttonText = "Visuo-Spatial Test I";
@@ -254,7 +275,10 @@ else if (nexturl == "vs2") {
             window.addEventListener("beforeunload", () => {
                 window.speechSynthesis.cancel(msg);
               });
-      
+              const button = document.querySelector("#exit_btn");
+              button.addEventListener("click", () => {
+              window.speechSynthesis.cancel();
+              });
       }
     buttonText = "Visuo-Spatial Test II";
     const info = document.getElementsByClassName("info");
@@ -291,8 +315,12 @@ else if (nexturl == "vs2") {
             window.addEventListener("beforeunload", () => {
                 window.speechSynthesis.cancel(msg);
               });
-      
+              const button = document.querySelector("#exit_btn");
+              button.addEventListener("click", () => {
+              window.speechSynthesis.cancel();
+              });
       }
+     
       /*
           // Before: Title of webpage ==> Attention Test
           // After:  Title of webpage ==> TMT Test
@@ -333,8 +361,12 @@ else if (nexturl == "vs2") {
             window.addEventListener("beforeunload", () => {
                 window.speechSynthesis.cancel(msg);
               });
-      
+              const button = document.querySelector("#exit_btn");
+              button.addEventListener("click", () => {
+              window.speechSynthesis.cancel();
+              });
       }
+     
       /*
           // Before: Title of webpage ==> Attention Test
           // After:  Title of webpage ==> TMT Test
@@ -375,8 +407,13 @@ else if (nexturl == "vs2") {
             window.addEventListener("beforeunload", () => {
                 window.speechSynthesis.cancel(msg);
               });
+              const button = document.querySelector("#exit_btn");
+    button.addEventListener("click", () => {
+    window.speechSynthesis.cancel();
+    });
       
       }
+    
       /*
           // Before: Title of webpage ==> Attention Test
           // After:  Title of webpage ==> PTT Test
