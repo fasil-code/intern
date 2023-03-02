@@ -109,17 +109,13 @@ function Game() {
 
   
   setTimeout(() => {
-    
-    let myData = new Data(greyClicks, correctClicks, wrongClicks, successArray, timeStampGray, timeStampCorrect, timeStampWrong);
-  
-    let jsonData = JSON.stringify(myData);
     result.style.display = 'flex';
     score.style.display = 'flex';
     let router = document.getElementById('container');
     router.style.display = 'flex';
     pul.innerText = pulses;
     var scores=successArray.reduce((a, b) => a + b, 0);
-    cor.innerText = scores
+    cor.innerText = scores;
     wrn.innerText = wrongClicks;
     // console.log('Gray Clicks');
     // console.log(myData.greyClicks);
@@ -147,7 +143,6 @@ function Game() {
       type: "POST",
       url: "/send_score",
       data: { 
-         jsonData: jsonData,
          score: scores,
          correct_clicks:correctClicks,
          wrong_clicks:wrongClicks,

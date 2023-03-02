@@ -140,10 +140,7 @@ def create_database():
          timestamp1 JSON,
          timestamp2 JSON,
          session_id VARCHAR(255)
-      )'''
-      
-      
-      
+      )'''    
    )
    cursor.close()
    conn.close()
@@ -155,13 +152,6 @@ app.config['MYSQL_DB'] = 'ftd'
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
 mysql = MySQL(app)
 mysql = MySQL(app)
-
-
-
-   
-    
-
-
 
 # for emotion data
 mysql = MySQL(app)
@@ -208,25 +198,27 @@ def after_request(response):
 def send_score():
 
    
-   email=session.get('logged_in')
-   column= request.form.get("column")
-   source= request.form.get("source")
-   wrong_clicks=request.form.get('wrong_clicks')
-   correct_clicks=request.form.get('correct_clicks')
-   grey_clicks=request.form.get('grey_clicks')
-   successArray=json.loads(request.form.get('successArray', '[]'))
-   timeStampGray=json.loads(request.form.get('timeStampGray', '[]'))
-   timeStampCorrect=json.loads(request.form.get('timeStampCorrect', '[]'))
-   timeStampWrong=json.loads(request.form.get('timeStampWrong', '[]'))
+   email  = session.get('logged_in')
+   column = request.form.get("column")
+   source = request.form.get("source")
 
-   array = json.loads(request.form.get('array', '[]'))
+   wrong_clicks     = request.form.get('wrong_clicks')
+   correct_clicks   = request.form.get('correct_clicks')
+   grey_clicks      = request.form.get('grey_clicks')
+   successArray     = json.loads(request.form.get('successArray', '[]'))
+   timeStampGray    = json.loads(request.form.get('timeStampGray', '[]'))
+   timeStampCorrect = json.loads(request.form.get('timeStampCorrect', '[]'))
+   timeStampWrong   = json.loads(request.form.get('timeStampWrong', '[]'))
+
+   array       = json.loads(request.form.get('array', '[]'))
    res_correct = json.loads(request.form.get('res_correct', '[]'))
-   res_choose = json.loads(request.form.get('res_choose', '[]'))
-   res_time = json.loads(request.form.get('res_time', '[]'))
+   res_choose  = json.loads(request.form.get('res_choose', '[]'))
+   res_time    = json.loads(request.form.get('res_time', '[]'))
 
    user_response = json.loads(request.form.get('user_response', '[]'))
 
-   score= request.form.get("score")
+   score = request.form.get("score")
+
    tmt1=request.form.get('tmt1')
    tmt2=request.form.get('tmt2')
    wrn1=request.form.get('wrn1')
@@ -236,13 +228,6 @@ def send_score():
 
 
    time=request.form.get('time')
-
-   
-   
-
-   
-
-   
 
    conn   = mysql.connect
    cursor = conn.cursor()
@@ -259,10 +244,10 @@ def send_score():
    # cursor.execute(f"SELECT * FROM tmt WHERE session_id = %s AND email = %s", (sesion_key, email))
    # result_tmt = cursor.fetchone()
 
-   aceColumn = ['attention1','attention2','attention3','fluency1','fluency2','memory1','memory2',
-               'memory3','memory4','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
-   aceResponse=['attention1_response','attention2_response','attention3_response','fluency1_response','fluency2_response','memory1_response','memory2_response',
-                'memory3_response','memory4_response','language1_response','language2_response','language3_response','language4_response','language5_response','visuospatial1_response','visuospatial2_response']
+   aceColumn   = ['attention1','attention2','attention3','fluency1','fluency2','memory1','memory2',
+                  'memory3','memory4','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
+   aceResponse =['attention1_response','attention2_response','attention3_response','fluency1_response','fluency2_response','memory1_response','memory2_response',
+                 'memory3_response','memory4_response','language1_response','language2_response','language3_response','language4_response','language5_response','visuospatial1_response','visuospatial2_response']
    if column in aceColumn:
         
       # Update the existing row
@@ -285,24 +270,31 @@ def send_score():
          conn.commit()
    if column=="ert":
          res_corr = json.dumps(res_correct)
-         res_ch = json.dumps(res_choose)
-         res_ti = json.dumps(res_time)
+         res_ch   = json.dumps(res_choose)
+         res_ti   = json.dumps(res_time)
          cursor.execute(f"UPDATE emotion SET ert = %s,correct_res=%s,choosen_res=%s,time_res=%s, time_ert = %s WHERE session_id = %s AND email = %s", (score,res_corr,res_ch,res_ti, time, sesion_key, email))
          conn.commit()
 
    
-   if column=="ptt":
-      cursor.execute(f"UPDATE ptt SET ptt_score = %s, WrongClicks= %s,CorrectClicks=%s, greyClicks=%s, successArray=%s, timeStampGray=%s, timeStampCorrect=%s, timeStampWrong=%s WHERE session_id = %s AND email = %s", (score, wrong_clicks,correct_clicks, grey_clicks, successArray, timeStampGray, timeStampCorrect, timeStampWrong,sesion_key, email))
+   if column=="ptt": 
+      sucArr  = json.dumps(successArray)
+      grayArr = json.dumps(timeStampGray)
+      corArr  = json.dumps(timeStampCorrect)
+      wrnArr  = json.dumps(timeStampWrong)
+      cursor.execute(f"UPDATE ptt SET ptt_score = %s, WrongClicks= %s,CorrectClicks=%s, greyClicks=%s, successArray=%s, timeStampGray=%s, timeStampCorrect=%s, timeStampWrong=%s WHERE session_id = %s AND email = %s", (score, wrong_clicks, correct_clicks, grey_clicks, sucArr, grayArr, corArr, wrnArr, sesion_key, email))
       conn.commit()
    
    if column=="tmt":
-        if tmt1:
-           
-          cursor.execute(f"UPDATE tmt SET tmt_score1 = %s, wrong_clicks1=%s, timestamp1=%s WHERE session_id = %s AND email = %s", (tmt1, wrn1, timestamp1, sesion_key, email))
-          conn.commit()
-        if tmt2:
-           cursor.execute(f"UPDATE tmt SET tmt_score2 = %s, wrong_clicks2=%s, timestamp2=%s WHERE session_id = %s AND email = %s", (tmt2, wrn2, timestamp2, sesion_key, email))
-           conn.commit() 
+      if tmt1:
+         score = tmt1
+         tms1  = json.dumps(timestamp1)
+         cursor.execute(f"UPDATE tmt SET tmt_score1 = %s, wrn1=%s, timestamp1=%s WHERE session_id = %s AND email = %s", (tmt1, wrn1, tms1, sesion_key, email))
+         conn.commit()
+      if tmt2:
+         score = tmt2
+         tms2  = json.dumps(timestamp2)
+         cursor.execute(f"UPDATE tmt SET tmt_score2 = %s, wrn2=%s, timestamp2=%s WHERE session_id = %s AND email = %s", (tmt2, wrn2, tms2, sesion_key, email))
+         conn.commit() 
    cursor.close()
    conn.close()
 
