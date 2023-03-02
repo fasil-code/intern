@@ -487,7 +487,7 @@
           </select>
         </label> -->
         <label class="day custom-select">
-          <input class="form-control" style="border:1px solid grey" type="text"
+          <input id="city" class="form-control" style="border:1px solid grey" type="text"
             placeholder="Enter City/District name" />
         </label>
         <label class="day custom-select">
@@ -504,6 +504,8 @@
             {% endfor %}
           </select>
         </label>
+        <span style="display: none;" id="correctcity">{{city}}</span>
+        <span style="display: none;" id="correctstate">{{state}}</span>
         <!--  <label class="day custom-select">
           <div class="words bg-white ">
             <input class="input-t" type="text" id="first" class="form-control" name="first-sentence"
@@ -652,36 +654,35 @@
         let sent=false;
         let ans = 0;
         const day = new Date().getDay();
-        const date = new Date().getDate();
+        let date = new Date().getDate();
         let month = new Date().getMonth();
         let mon = month;
         month = month + 1;
         if (month < 10) {
           month = "0" + month;
         }
+        if(date <10){
+          date="0"+date;
+        }
         let year = new Date().getFullYear();
         let ddmmyyyy = month + "/" + date + "/" + year;
+        console.log(ddmmyyyy)
         let selectdeddate = document.getElementById("fecha1").value;
         let selectedday = document.getElementById("day").value;
         let selectedcountry = document.getElementById("country").value;
-        // let selectedstate = document.getElementById("state").value;
         let selectedseason = document.getElementById("season").value;
         if (selectdeddate === ddmmyyyy) {
-
           ans += 3;
-         
         }
         if (selectedcountry === "India" || selectedcountry === "india") {
-          ans += 2;
-          
+          ans += 1;
         }
         listday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         correctday = listday[day];
         if (selectedday === correctday) {
-          ans += 3;
+          ans += 1;
           
         }
-
         seasonlist = ['Spring', 'Summer', 'Monsoon', 'Autumn', 'Winter']
         season = "";
         if (mon == 2 || mon == 3)
@@ -695,13 +696,24 @@
         else
           season = "Winter";
         if (selectedseason === season) {
-          ans += 2;
+          ans += 1;
           
         }
-        // var x = inpstate;
-        // if (selectedstate.includes(x) || x.includes(selectedstate)) {
-        //   ans += 1;
-        // }
+        let selectedcity=document.getElementById("city").value;
+        selectedcity=selectedcity.toLowerCase();
+        let selectedstate=document.getElementById("state").value;
+        selectedstate=selectedstate.toLowerCase();
+        let correctcity=document.getElementById("correctcity").innerText;
+        correctcity=correctcity.toLowerCase();
+        let correctstate=document.getElementById("correctstate").innerText;
+        correctstate=correctstate.toLowerCase();
+        if(selectedcity===correctcity || correctcity.includes(selectedcity) || selectedcity.includes(correctcity)){
+               ans+=2;
+        }
+        if(selectedstate===correctstate || correctstate.includes(selectedstate) || selectedstate.includes(correctstate) ){
+          ans+=2;
+        }
+        console.log(ans);
         $.ajax({
         type: "POST",
         url: "/send_score",

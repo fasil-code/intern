@@ -62,7 +62,10 @@ body{
   .box:hover {
     transform: scale(1.1);
   }
-
+  .btn-outline-info:hover {
+    /* Your CSS styles for hover state go here */
+    color:red
+  }
   /* Create the hidden pseudo-element */
   /* include the shadow for the end state */
   .box::after {

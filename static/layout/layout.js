@@ -1,22 +1,113 @@
   // type of test
-      
+   var flag=false;
+   var msg;
   let buttonText;
   if (nexturl == "emoji") {
       buttonText = "Emoji Game";
+      let emojiMessage=`
+1. You will have to choose one of the emoji based on description given.
+2. Once you select your answer, it can't be undone.
+3. You can't select any option once time goes off.
+4. You can't exit from the Test while you're opting.
+5. You'll get points on the basis of your correct answers.
+      
+      `;
+      function repeat(){
+
+        let text;
+        if (emojiMessage === "") {
+          text = "Please speak";
+        } else {
+          text =  emojiMessage;
+        }   
+      
+
+             msg = new SpeechSynthesisUtterance(text);
+         
+          
+            msg.lang = "en-IN";
+          
+          const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-IN");
+                msg.voice = voices[0];
+                msg.volume = 1;
+                msg.rate = 0.9;
+                msg.pitch = 1;
+                window.speechSynthesis.cancel(msg);
+                window.speechSynthesis.speak(msg);
+        
+                window.addEventListener("beforeunload", () => {
+                    window.speechSynthesis.cancel(msg);
+                  });
+                
+      }
+
   }  else if (nexturl == "lang") {
+    var message="1. You will be shown a set of 12 images about any object,animal etc. 2. You have to type the name of object shown in picture. You can't keep it blank.  3. After this you have to answer 4 questions about these pictures.  4. You will be given 4 options for each question .  5.  For each correct answer you will get a point."
+    function repeat(){
+
+        let text;
+        if (message === "") {
+          text = "Please speak";
+        } else {
+          text =  message;
+        }   
+      
+
+             msg = new SpeechSynthesisUtterance(text);
+         
+          
+            msg.lang = "en-IN";
+          
+          const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-IN");
+                msg.voice = voices[0];
+                msg.volume = 1;
+                msg.rate = 0.9;
+                msg.pitch = 1;
+                window.speechSynthesis.cancel(msg);
+                window.speechSynthesis.speak(msg);
+        
+                window.addEventListener("beforeunload", () => {
+                    window.speechSynthesis.cancel(msg);
+                  });
+                
+      }
       buttonText = "Language Test";
       const info = document.getElementsByClassName("info");
      info[0].innerHTML =
          "1. You will be shown a set of 12 images about any object,animal etc.";
-     info[1].innerHTML = "2. You have to type the name of object shown in picture.You can't keep it blank.";
+     info[1].innerHTML = "2. You have to type the name of object shown in picture. You can't keep it blank.";
      info[2].innerHTML =
-         "3. After this you have to answer 4 questions about the these pictures.";
+         "3. After this you have to answer 4 questions about  these pictures.";
      info[3].innerHTML =
-         "4. You will be given 4 options for each question .";
-     info[4].innerHTML = "5.For each correct answer you will get a point.";
+         "4. You will be given 4 options for each question.";
+     info[4].innerHTML = "5. For each correct answer you will get a point.";
    
   }
   else if (nexturl == "ace1") {
+    var message="1.  Read the instructions carefully, which are provided in the heading section of each page. 2. In some questions, you will have the option to respond through audio recording. 3.  Make sure there is minimal background noise, while recording. 4. Before recording, take a brief pause before speaking to ensure clear audio. 5. Once you have clicked on the Next button, you will not be able to go back. "
+    function repeat(){
+        let text;
+        if (message === "") {
+          text = "Please speak";
+        } else {
+          text =  message;
+        }   
+        const msg = new SpeechSynthesisUtterance(text);
+      
+        msg.lang = "en-IN";
+      
+      const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-IN");
+            msg.voice = voices[0];
+            msg.volume = 1;
+            msg.rate = 0.9;
+            msg.pitch = 1;
+            window.speechSynthesis.cancel(msg);
+            window.speechSynthesis.speak(msg);
+            window.addEventListener("beforeunload", () => {
+                window.speechSynthesis.cancel(msg);
+              });
+      
+      }
     buttonText = "Attention Test";
      // Rules of the test are changed
      const info = document.getElementsByClassName("info");
@@ -24,11 +115,35 @@
          "1.  Read the instructions carefully, which are provided in the heading section of each page.";
      info[1].innerHTML = "2. In some questions, you will have the option to respond through audio recording.";
      info[2].innerHTML =
-         "3.  Make sure there is minimal background noise, while recording";
+         "3.  Make sure there is minimal background noise, while recording.";
      info[3].innerHTML =
          "4. Before recording, take a brief pause before speaking to ensure clear audio.";
      info[4].innerHTML = "5. Once you have clicked on the Next button, you will not be able to go back ";
 } else if (nexturl == "ace3") {
+    var message="1.  Read the instructions carefully, which are provided in the heading section of each page. 2. In some questions, you will have the option to respond through audio recording. 3.  Make sure there is minimal background noise, while recording. 4. Before recording, take a brief pause before speaking to ensure clear audio. 5. Once you have clicked on the Next button, you will not be able to go back. "
+    function repeat(){
+        let text;
+        if (message === "") {
+          text = "Please speak";
+        } else {
+          text =  message;
+        }   
+        const msg = new SpeechSynthesisUtterance(text);
+      
+        msg.lang = "en-IN";
+      
+      const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-IN");
+            msg.voice = voices[0];
+            msg.volume = 1;
+            msg.rate = 0.9;
+            msg.pitch = 1;
+            window.speechSynthesis.cancel(msg);
+            window.speechSynthesis.speak(msg);
+            window.addEventListener("beforeunload", () => {
+                window.speechSynthesis.cancel(msg);
+              });
+      
+      }
     buttonText = "ACE III Test";
     // Rules of the test are changed
     const info = document.getElementsByClassName("info");
@@ -42,6 +157,30 @@
     info[4].innerHTML = "5. Once you have clicked on the Next button, you will not be able to go back ";
 }
   else if(nexturl=="ace13"){
+    var message="1.  Read the instructions carefully, which are provided in the heading section of each page. 2. In some questions, you will have the option to respond through audio recording. 3.  Make sure there is minimal background noise, while recording. 4. Before recording, take a brief pause before speaking to ensure clear audio. 5. Once you have clicked on the Next button, you will not be able to go back. "
+    function repeat(){
+        let text;
+        if (message === "") {
+          text = "Please speak";
+        } else {
+          text =  message;
+        }   
+        const msg = new SpeechSynthesisUtterance(text);
+      
+        msg.lang = "en-IN";
+      
+      const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-IN");
+            msg.voice = voices[0];
+            msg.volume = 1;
+            msg.rate = 0.9;
+            msg.pitch = 1;
+            window.speechSynthesis.cancel(msg);
+            window.speechSynthesis.speak(msg);
+            window.addEventListener("beforeunload", () => {
+                window.speechSynthesis.cancel(msg);
+              });
+      
+      }
            buttonText="Fluency Test"
            // Rules of the test are changed
      const info = document.getElementsByClassName("info");
@@ -55,6 +194,30 @@
      info[4].innerHTML = "5. Once you have clicked on the Next button, you will not be able to go back ";
   }
  else if(nexturl=="ace5"){
+    var message="1.  Read the instructions carefully, which are provided in the heading section of each page. 2. In some questions, you will have the option to respond through audio recording. 3.  Make sure there is minimal background noise, while recording. 4. Before recording, take a brief pause before speaking to ensure clear audio. 5. Once you have clicked on the Next button, you will not be able to go back. "
+    function repeat(){
+        let text;
+        if (message === "") {
+          text = "Please speak";
+        } else {
+          text =  message;
+        }   
+        const msg = new SpeechSynthesisUtterance(text);
+      
+        msg.lang = "en-IN";
+      
+      const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-IN");
+            msg.voice = voices[0];
+            msg.volume = 1;
+            msg.rate = 0.9;
+            msg.pitch = 1;
+            window.speechSynthesis.cancel(msg);
+            window.speechSynthesis.speak(msg);
+            window.addEventListener("beforeunload", () => {
+                window.speechSynthesis.cancel(msg);
+              });
+      
+      }
         buttonText="Memory Test"
         // Rules of the test are changed
      const info = document.getElementsByClassName("info");
@@ -69,6 +232,30 @@
    }
 
 else if (nexturl == "vs1") {
+    var message="1. First You will be shown 4 images containing some number of dots.  2. You have to type the number of dots shown in each image.  3. After this you will be shown another 4 images containing Fragmented English letters .  4.  You have to type the letter shown in each image. 5. For each correct answer you will get a point."
+    function repeat(){
+        let text;
+        if (message === "") {
+          text = "Please speak";
+        } else {
+          text =  message;
+        }   
+        const msg = new SpeechSynthesisUtterance(text);
+      
+        msg.lang = "en-IN";
+      
+      const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-IN");
+            msg.voice = voices[0];
+            msg.volume = 1;
+            msg.rate = 0.9;
+            msg.pitch = 1;
+            window.speechSynthesis.cancel(msg);
+            window.speechSynthesis.speak(msg);
+            window.addEventListener("beforeunload", () => {
+                window.speechSynthesis.cancel(msg);
+              });
+      
+      }
     buttonText = "Visuo-Spatial Test I";
     const info = document.getElementsByClassName("info");
     info[0].innerHTML =
@@ -82,6 +269,30 @@ else if (nexturl == "vs1") {
     
 }
 else if (nexturl == "vs2") {
+    var message="1. You will be shown a set of 12 images about any object,animal etc. 2. You have to type the name of object shown in picture. You can't keep it blank.  3. After this you have to answer 4 questions about these pictures.  4. You will be given 4 options for each question .  5.  For each correct answer you will get a point."
+    function repeat(){
+        let text;
+        if (message === "") {
+          text = "Please speak";
+        } else {
+          text =  message;
+        }   
+        const msg = new SpeechSynthesisUtterance(text);
+      
+        msg.lang = "en-IN";
+      
+      const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-IN");
+            msg.voice = voices[0];
+            msg.volume = 1;
+            msg.rate = 0.9;
+            msg.pitch = 1;
+            window.speechSynthesis.cancel(msg);
+            window.speechSynthesis.speak(msg);
+            window.addEventListener("beforeunload", () => {
+                window.speechSynthesis.cancel(msg);
+              });
+      
+      }
     buttonText = "Visuo-Spatial Test II";
     const info = document.getElementsByClassName("info");
     info[0].innerHTML =
@@ -95,6 +306,30 @@ else if (nexturl == "vs2") {
 } 
 
   else if (nexturl == "tmt") {
+    var message="1. You will be shown a set of 12 images about any object,animal etc. 2. You have to type the name of object shown in picture. You can't keep it blank.  3. After this you have to answer 4 questions about these pictures.  4. You will be given 4 options for each question .  5.  For each correct answer you will get a point."
+    function repeat(){
+        let text;
+        if (message === "") {
+          text = "Please speak";
+        } else {
+          text =  message;
+        }   
+        const msg = new SpeechSynthesisUtterance(text);
+      
+        msg.lang = "en-IN";
+      
+      const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-IN");
+            msg.voice = voices[0];
+            msg.volume = 1;
+            msg.rate = 0.9;
+            msg.pitch = 1;
+            window.speechSynthesis.cancel(msg);
+            window.speechSynthesis.speak(msg);
+            window.addEventListener("beforeunload", () => {
+                window.speechSynthesis.cancel(msg);
+              });
+      
+      }
       /*
           // Before: Title of webpage ==> Attention Test
           // After:  Title of webpage ==> TMT Test
@@ -113,6 +348,30 @@ else if (nexturl == "vs2") {
       info[4].innerHTML = "5. Time taken to complete the task is noted.";
   } 
   else if (nexturl == "tmt-2") {
+    var message="1. You will be shown a set of 12 images about any object,animal etc. 2. You have to type the name of object shown in picture. You can't keep it blank.  3. After this you have to answer 4 questions about these pictures.  4. You will be given 4 options for each question .  5.  For each correct answer you will get a point."
+    function repeat(){
+        let text;
+        if (message === "") {
+          text = "Please speak";
+        } else {
+          text =  message;
+        }   
+        const msg = new SpeechSynthesisUtterance(text);
+      
+        msg.lang = "en-IN";
+      
+      const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-IN");
+            msg.voice = voices[0];
+            msg.volume = 1;
+            msg.rate = 0.9;
+            msg.pitch = 1;
+            window.speechSynthesis.cancel(msg);
+            window.speechSynthesis.speak(msg);
+            window.addEventListener("beforeunload", () => {
+                window.speechSynthesis.cancel(msg);
+              });
+      
+      }
       /*
           // Before: Title of webpage ==> Attention Test
           // After:  Title of webpage ==> TMT Test
@@ -131,6 +390,30 @@ else if (nexturl == "vs2") {
           "4. You <span>will be guided</span> if you click a wrong circle.";
       info[4].innerHTML = "5. Time taken to complete the task is noted.";
   } else if (nexturl == "ptt") {
+    var message="1. You will be shown a set of 12 images about any object,animal etc. 2. You have to type the name of object shown in picture. You can't keep it blank.  3. After this you have to answer 4 questions about these pictures.  4. You will be given 4 options for each question .  5.  For each correct answer you will get a point."
+    function repeat(){
+        let text;
+        if (message === "") {
+          text = "Please speak";
+        } else {
+          text =  message;
+        }   
+        const msg = new SpeechSynthesisUtterance(text);
+      
+        msg.lang = "en-IN";
+      
+      const voices = speechSynthesis.getVoices().filter(voice => voice.lang === "en-IN");
+            msg.voice = voices[0];
+            msg.volume = 1;
+            msg.rate = 0.9;
+            msg.pitch = 1;
+            window.speechSynthesis.cancel(msg);
+            window.speechSynthesis.speak(msg);
+            window.addEventListener("beforeunload", () => {
+                window.speechSynthesis.cancel(msg);
+              });
+      
+      }
       /*
           // Before: Title of webpage ==> Attention Test
           // After:  Title of webpage ==> PTT Test
@@ -174,6 +457,7 @@ else if (nexturl == "vs2") {
       info_box.classList.remove("activeInfo"); //hide info box
       info_box.style.display = "none";
       starter.style.display = "block";
+      
   };
 
   // if continueQuiz button clicked
