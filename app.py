@@ -21,10 +21,11 @@ import pickle
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
-app.config['MYSQL_PASSWORD'] = '7006022139'
+# app.config['MYSQL_PASSWORD'] = '7006022139'
 # app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
 # app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
 # app.config['MYSQL_PASSWORD'] = 'alchemist'
+app.config['MYSQL_PASSWORD'] = 'Zargar@123'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -231,17 +232,7 @@ def send_score():
    conn   = mysql.connect
    cursor = conn.cursor()
 
-   # cursor.execute(f"SELECT * FROM emotion WHERE session_id = %s AND email = %s", (sesion_key, email))
-   # result_emoji = cursor.fetchone()
 
-   # cursor.execute(f"SELECT * FROM ace WHERE session_id = %s AND email = %s", (sesion_key, email))
-   # result_ace = cursor.fetchone()
-
-   # cursor.execute(f"SELECT * FROM ptt WHERE session_id = %s AND email = %s", (sesion_key, email))
-   # result_ptt = cursor.fetchone()
-
-   # cursor.execute(f"SELECT * FROM tmt WHERE session_id = %s AND email = %s", (sesion_key, email))
-   # result_tmt = cursor.fetchone()
 
    aceColumn = ['attention1','attention2','attention3','fluency1','fluency2','memory1','memory2',
                'memory3','memory4','language1','language2','language3','language4','language5','visuospatial1','visuospatial2']
@@ -369,12 +360,17 @@ def dashboard():
       
       # Replace with the actual email value you want to search for
       # emotion
-      query = "SELECT * FROM emotion WHERE email = %s"
+      query = "SELECT id,email,date,emoji_game,ert FROM emotion WHERE email = %s"
       cursor.execute(query, (email,))
       results_emoji = cursor.fetchall()
       
       # ACE
-      query = "SELECT * FROM ace WHERE email = %s"
+      query = '''SELECT id,email,attention1,attention2,attention3, 
+      fluency1,fluency2,
+      memory1,memory2,memory3,memory4,
+      language1,language2,language3,language4,language5,
+      visuospatial1,visuospatial2
+      FROM ace WHERE email = %s'''
       cursor.execute(query, (email,))
       results_ace = cursor.fetchall()
       
@@ -457,7 +453,16 @@ def ace1():
       list.append(countries[i]['name'])
    list.sort()
    list.insert(0,"Choose your country")
-   return render_template('ACE/attention/attention1.html',days=days,seasons=seasons,list=list,states=states,url="ace3")
+   conn = mysql.connect
+   cursor = conn.cursor()
+   email = session.get('logged_in')
+   cursor.execute('SELECT City,State from user where email=%s',(email,))
+   data = cursor.fetchone() 
+   city=data[0]
+   state=data[1]
+   conn.commit()
+   conn.close()
+   return render_template('ACE/attention/attention1.html',city=city,state=state,days=days,seasons=seasons,list=list,states=states,url="ace3")
   
 @app.route("/ace2",methods=['GET','POST'])
 def ace2():

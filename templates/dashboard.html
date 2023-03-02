@@ -105,6 +105,7 @@
 				</div>
 			</nav>
 		</div>
+
 		<div class="main">
 
 
@@ -112,14 +113,14 @@
 
 				<div class="box box1">
 					<div class="text">
-						<h2 class="topic">ACE-||| Test</h2>
+						<h2 class="topic">Emotion Recognisation Test</h2>
 					</div>
 
 				</div>
 
 				<div class="box box2">
 					<div class="text">
-						<h2 class="topic">Emotion Recognisation Test</h2>
+						<h2 class="topic">ACE III Test</h2>
 					</div>
 
 				
@@ -152,9 +153,9 @@
             <table id="test-report" class="display">
               <thead>
                 <tr class="header">
-                  <th class="header">Date-Time</th>
-                  <th class="header">Emogi Game (%)</th>
-				  <th class="header">ERT (%)</th>
+                  <th class="header">Date</th>
+                  <th class="header">Emoji Game (10) </th>
+				  <th class="header">ERT (10)</th>
                   <th colspan="5" class="header" style="text-align: center;">ACE-|||</th>
 				  <th class="header">Pulse Tracking</th>
                   <th class="header">Trail Making</th>
@@ -175,21 +176,21 @@
                 </tr>
               </thead>
               <tbody>
-				
+			
 				{% for i in range(size)   %}
 				<tr class="data">
 {% if  results[i] is not none %}
   <td class="data">{{results[i][2]}}</td>
   <td class="data">{{results[i][3]}}</td>
-  <td class="data">{{results[i][5]}}</td>
+  <td class="data">{{results[i][4]}}</td>
 {% endif %}
 {% if  (i+size)<results|length and results[i+size] is not none %}
-  <td class="data">{{results[i+size][3]+results[i+size][4]+results[i+size][5]}}</td>
-  <td class="data">{{results[i+size][6]+results[i+size][7]}}</td>
+  <td class="data">{{results[i+size][2]+results[i+size][3]+results[i+size][4]}}</td>
+  <td class="data">{{results[i+size][5]+results[i+size][6]}}</td>
 
-  <td class="data">{{results[i+size][8]+results[i+size][9]+results[i+size][10]+results[i+size][11]}}</td>
-  <td class="data">{{results[i+size][12]+results[i+size][13]+results[i+size][15]+results[i+size][14]+results[i+size][16]}}</td>
-  <td class="data">{{results[i+size][17]+results[i+size][18]}}</td>
+  <td class="data">{{results[i+size][7]+results[i+size][8]+results[i+size][9]+results[i+size][10]}}</td>
+  <td class="data">{{results[i+size][11]+results[i+size][12]+results[i+size][13]+results[i+size][14]+results[i+size][15]}}</td>
+  <td class="data">{{results[i+size][16]+results[i+size][17]}}</td>
 
 
   {% endif %}
