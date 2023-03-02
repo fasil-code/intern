@@ -24,8 +24,8 @@ app.config['MYSQL_USER'] = 'root'
 
 # app.config['MYSQL_PASSWORD'] = '7006022139'
 # app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
-app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
-#app.config['MYSQL_PASSWORD'] = 'alchemist'
+# app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
+app.config['MYSQL_PASSWORD'] = 'alchemist'
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -494,7 +494,7 @@ def ace6():
    return render_template('ACE/language/language2.html',url="ace7") 
 @app.route("/ace7",methods=['GET','POST']) 
 def ace7():
-   return render_template('ACE/language/language3.html',url="layout") 
+   return render_template('ACE/language/language3.html',url="ace10") 
 @app.route("/ace8",methods=['GET','POST']) 
 def ace8():
    return render_template('ACE/language/language4.html',url="ace6") 
@@ -506,7 +506,7 @@ def ace10():
    return render_template('ACE/memory/memory3.html',url="layout") 
 @app.route("/ace11",methods=['GET','POST']) 
 def ace11():
-   return render_template('ACE/memory/memory4.html',url="ace10") 
+   return render_template('ACE/memory/memory4.html',url="layout") 
 @app.route("/ace12",methods=['GET','POST']) 
 def ace12():
    return render_template('ACE/fluency/fluency2.html',url="layout")
