@@ -177,41 +177,54 @@ def generate_route_pdf():
       
       
       elements.append(Spacer(1, 0.5*inch))
-      if result:
-            elements.append(Paragraph(' <font color="maroon">Tests related to Emotion</font>', styles['heading1']))
-            elements.append(Spacer(1, 0.2*inch))
-            elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Emotion Recognition Test</font> <br/>
-            <br/>
-            Total Correct responses detected: <font color="red" fontSize=14 >{results[5]}/10 </font><br/>                         
-            Response Time (min :sec):<font color="red" fontSize=14 > {results[6]}</font>  <br/>  
-            <br/>
-            Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient.
-            The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust were tested.
-            The user identification capacity is <font color="black" fontSize=14 >{results[5]} </font>  and the time span was <font color="black" fontSize=14 >{results[6]} minutes</font> .                                
-            ''', style=styles['para']))
-            elements.append(Spacer(1, 1.1*inch))
-            elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b) Emoji Identification Test</font> :<br/> <br/>
-            Total Correct responses : <font color="red" fontSize=14 >{results[3]}/10</font> <br/>                         
-            Response time Time (min :sec): <font color="red" fontSize=14 >{results[4]}</font>  <br/>  
-            <br/>
-            Summary: Emoji Identification test was given by the patient to test the patient's ability to recognise the emojis . 
-            The emojis related  smiley,frowny,emotion are tested.The user identification capacity is <font color="black" fontSize=14 >{results[3]} </font>  and the time span was <font color="black" fontSize=14 >{results[4]}  minutes. </font>                                          
-            ''', styles['para']))
-            elements.append(Spacer(1, 1.2*inch))
-            result_correct=json.loads(results[7])
-            result_choosen=json.loads(results[8])
-            result_time=json.loads(results[9])
+      
+      elements.append(Paragraph(' <font color="maroon">Tests related to Emotion</font>', styles['heading1']))
+      elements.append(Spacer(1, 0.2*inch))
+      elements.append(Paragraph(f''' <font color="blue" fontSize=16> (a) Emotion Recognition Test</font> <br/>
+      <br/>
+      Total Correct responses detected: <font color="red" fontSize=14 >{results[5]}/10 </font><br/>                         
+      Response Time (min :sec):<font color="red" fontSize=14 > {results[6]}</font>  <br/>  
+      <br/>
+      Summary: Emotion recognisation test was given by the patient to test the patient's ability to recognise the emotions of the patient.
+      The emotions of  happy,sad,anger. contempt,neutral,surprise,fear,and disgust were tested.
+      The user identification capacity is <font color="black" fontSize=14 >{results[5]} </font>  and the time span was <font color="black" fontSize=14 >{results[6]} minutes</font> .                                
+      ''', style=styles['para']))
+      elements.append(Spacer(1, 1.1*inch))
+      elements.append(Paragraph(f''' <font color="blue" fontSize=16  >(b) Emoji Identification Test</font> :<br/> <br/>
+      Total Correct responses : <font color="red" fontSize=14 >{results[3]}/10</font> <br/>                         
+       Response time Time (min :sec): <font color="red" fontSize=14 >{results[4]}</font>  <br/>  
+      <br/>
+      Summary: Emoji Identification test was given by the patient to test the patient's ability to recognise the emojis . 
+      The emojis related  smiley,frowny,emotion are tested.The user identification capacity is <font color="black" fontSize=14 >{results[3]} </font>  and the time span was <font color="black" fontSize=14 >{results[4]}  minutes. </font>                                          
+      ''', styles['para']))
+      elements.append(Spacer(1, 1.2*inch))
+      result_correct=[]
+      
+      try:
+        result_correct = json.loads(results[7])
+      except TypeError:
+       result_correct = []
+      try:
+        result_choosen=json.loads(results[8])
+      except TypeError:
+       result_choosen = []
+      try:
+        result_time=json.loads(results[9])
+      except TypeError:
+       result_time ={}
+      
+      
             
-            col_width=[2*inch,2*inch]
-            elements.append(Spacer(1, 0.6*inch))
-            headings=["Correct Responses","Choosen Responses"]
-            data=[]
-            for i in  range(len(result_correct)):
+      col_width=[2*inch,2*inch]
+      elements.append(Spacer(1, 0.6*inch))
+      headings=["Correct Responses","Choosen Responses"]
+      data=[]
+      for i in  range(len(result_correct)):
                data.append([result_correct[i],result_choosen[i]])
 
 
-            table = Table([headings]+data,colWidths=col_width)
-            table.setStyle(TableStyle([
+      table = Table([headings]+data,colWidths=col_width)
+      table.setStyle(TableStyle([
          ('BACKGROUND', (0,0), (-1,0), colors.black),
          ('TEXTCOLOR',(0,0),(-1,0),colors.white),
          ('ALIGN',(0,0),(-1,-1),'CENTER'),
@@ -224,18 +237,19 @@ def generate_route_pdf():
          ('FONTSIZE', (0,1), (-1,-1), 12),
          ('BOTTOMPADDING', (0,1), (-1,-1), 6),
       ]))
-            elements.append(table)
+      if len(result_correct)>0:
+          elements.append(table)
             
-            elements.append(Spacer(1, 1.6*inch))
-            headings=["Emotion Type","Response Time"]
-            data=[]
-            for emotion, count in result_time.items():
+          elements.append(Spacer(1, 1.6*inch))
+      headings=["Emotion Type","Response Time"]
+      data=[]
+      for emotion, count in result_time.items():
                data.append([emotion,count])
             
 
 
-            table = Table([headings]+data)
-            table.setStyle(TableStyle([
+      table = Table([headings]+data)
+      table.setStyle(TableStyle([
          ('BACKGROUND', (0,0), (-1,0), colors.black),
          ('TEXTCOLOR',(0,0),(-1,0),colors.white),
          ('ALIGN',(0,0),(-1,-1),'CENTER'),
@@ -253,8 +267,9 @@ def generate_route_pdf():
             
 
       # Add the table to the report
-            elements.append(table)
-            elements.append(Spacer(1, 1.5*inch))
+      if(len(result_time)>0):
+         elements.append(table)
+         elements.append(Spacer(1, 1.5*inch))
 
 
 
