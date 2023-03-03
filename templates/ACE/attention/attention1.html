@@ -671,6 +671,7 @@
         let selectdeddate = document.getElementById("fecha1").value;
         let selectedday = document.getElementById("day").value;
         let selectedcountry = document.getElementById("country").value;
+    
         let selectedseason = document.getElementById("season").value;
         ansMap[selectdeddate]=ddmmyyyy;
         ansMap[selectedcountry]="india";
@@ -713,13 +714,17 @@
         let selectedcity=document.getElementById("city").value;
         selectedcity=selectedcity.toLowerCase();
         let selectedstate=document.getElementById("state").value;
+        console.log(selectedstate)
         selectedstate=selectedstate.toLowerCase();
+
         correctCity=correctCity.toLowerCase();
         correctState=correctState.toLowerCase();
         if(selectedcity==correctCity){
           ans+=2;
         }
+        console.log(selectedstate,correctState)
         if(selectedstate==correctState){
+          console.log(selectedstate,correctState)
           ans+=2;
         }
         ansMap[selectedcity]=correctCity;
@@ -736,7 +741,7 @@
      },
      success: function(response) {
         console.log(response);
-         sent=true;
+         sent=false;
         redirect(sent);     
      } 
      
