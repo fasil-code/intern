@@ -21,17 +21,17 @@ const pul      = document.getElementById('pul');
 const cor      = document.getElementById('cor');
 const wrn      = document.getElementById('wrn');
 
-class Data {
-  constructor(greyClicks, correctClicks, wrongClicks, successArray, timeStampGray, timeStampCorrect, timeStampWrong) {
-    this.greyClicks       = greyClicks;
-    this.correctClicks    = correctClicks;
-    this.wrongClicks      = wrongClicks;
-    this.successArray     = successArray;
-    this.timeStampGray    = timeStampGray;
-    this.timeStampCorrect = timeStampCorrect;
-    this.timeStampWrong   = timeStampWrong;
-  }
-}
+// class Data {
+//   constructor(greyClicks, correctClicks, wrongClicks, successArray, timeStampGray, timeStampCorrect, timeStampWrong) {
+//     this.greyClicks       = greyClicks;
+//     this.correctClicks    = correctClicks;
+//     this.wrongClicks      = wrongClicks;
+//     this.successArray     = successArray;
+//     this.timeStampGray    = timeStampGray;
+//     this.timeStampCorrect = timeStampCorrect;
+//     this.timeStampWrong   = timeStampWrong;
+//   }
+// }
 
 let greyClicks       = 0;
 let timeStampGray    = [];
@@ -41,11 +41,13 @@ let wrongClicks      = 0;
 let timeStampWrong   = [];
 let successArray     = [];
 let isClicked        = false;
+let startTime;
 
 document.getElementById('proceed').addEventListener('click', function () {
   box1.style.display = 'flex';
   box2.style.display = 'flex';
   Game();
+  startTime = Date.now();
   document.getElementById('prompt').style.display = 'none';
 });
 
@@ -53,13 +55,13 @@ document.getElementById('proceed').addEventListener('click', function () {
 function handleClicks() {
   isClicked = true;
   correctClicks++;
-  let time = Date.now();
+  let time = Date.now() - startTime;
   timeStampCorrect.push(time);
 }
 
 function penaliseClicks() {
   wrongClicks++;
-  let time = Date.now();
+  let time = Date.now() - startTime;
   timeStampWrong.push(time);
 }
 function Game() {
@@ -98,7 +100,7 @@ function Game() {
   setTimeout(() => {
     box2.addEventListener('click', () => {
       greyClicks++;
-      let time = Date.now();
+      let time = Date.now() - startTime;
       timeStampGray.push(time);
     });
     box1.style.backgroundColor = 'gray';

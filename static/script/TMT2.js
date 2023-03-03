@@ -98,7 +98,7 @@ let completionInterval = setInterval(() => {
 let i = 1;
 let blinkInterval = null;
 document.addEventListener('click', function (event) {
-    timeArray.push(startTime - Date.now());
+    timeArray.push(Date.now()-startTime);
     let target = event.target;
     if(target.classList.contains(`box${i}`)) {
         target.style.backgroundColor = 'rgb(102, 182, 106)';
