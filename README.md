@@ -37,7 +37,7 @@ Various test used to diagonise FTD:
   - Memory Test
   - Language Test
 * Trail Making Test:-This test is a neuropsychological assessment that involves connecting numbered and lettered circles in order as quickly and accurately as possible.
-* Pulse Tracking Test
+* Pulse Tracking Test:-This test is a psychophysiological measure used to assess the accuracy and speed of an individual's responses to a series of auditory or visual stimuli.
 * VisuoSpatial Test:-This test is a type of cognitive assessment that evaluates an individual's ability to understand and manipulate visual information in space. It typically involves tasks such as spatial perception, and pattern recognition.
 
 
