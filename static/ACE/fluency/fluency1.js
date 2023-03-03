@@ -133,8 +133,8 @@ function animateText() {
     },
     success: function(response) {
        console.log(response);
-       sent=true; 
-       redirect(sent);     
+      //  sent=true; 
+       redirect();     
     } 
     
  });
@@ -142,9 +142,9 @@ function animateText() {
 }
 
 function redirect(sent){
-  if(sent===true){
+  // if(sent===true){
     window.location.href=nextUrl;
-  }
+  // }
 }
 
 //timer functions 
