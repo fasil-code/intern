@@ -38,7 +38,7 @@ Various test used to diagonise FTD:
   - Language Test
 * Trail Making Test
 * Pulse Tracking Test
-* VisuoSpatial Test
+* VisuoSpatial Test:-This test is a type of cognitive assessment that evaluates an individual's ability to understand and manipulate visual information in space. It typically involves tasks such as spatial perception, and pattern recognition.
 
 
 
