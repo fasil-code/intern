@@ -483,11 +483,6 @@ def ace1():
 
    return render_template('ACE/attention/attention1.html',city=city,state=state,days=days,seasons=seasons,list=list,states=states,url="ace3")
     
-  
-@app.route("/ace2",methods=['GET','POST'])
-def ace2():
-   return render_template('ACE/attention/attention2.html')
-
 @app.route("/ace3",methods=['GET','POST']) 
 def ace3():
    return render_template('ACE/attention/attention3.html',url="ace4") 
