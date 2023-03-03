@@ -723,7 +723,7 @@
           ans+=2;
         }
         console.log(selectedstate,correctState)
-        if(selectedstate==correctState){
+        if(selectedstate==correctState || correctState.includes(selectedstate) || selectedstate.includes(correctState)){
           console.log(selectedstate,correctState)
           ans+=2;
         }

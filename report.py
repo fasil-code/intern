@@ -294,7 +294,7 @@ def generate_route_pdf():
       <font color="black" fontSize=14 > Q1: This question asks for information about the date and season, specifically the day, date, month, year, season and address </font><br/>
       
       <br/>
-      <font color="black" fontSize=14 >Total Marks: 11 </font><br/>   
+      <font color="black" fontSize=14 >Total Marks: 10 </font><br/>   
       <font color="black" fontSize=14 >Marks Secured : {results1[3]} </font><br/>                      
      
       <br/>
