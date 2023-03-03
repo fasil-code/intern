@@ -442,7 +442,7 @@ def generate_route_pdf():
       Summary: Pulse Tracking Test gamifies the diagnosis for potential repulsive behaviour in tap. It also checks whether a person is able to sync properly with abrupt changes in the pulse. The test is divided into 5 levels.                                
       ''', style=styles['para']))
       elements.append(Spacer(1, 0.2*inch))
-      success=[]
+      
       try:
         success = json.loads(result_ptt[7])
       except TypeError:
@@ -602,9 +602,9 @@ def generate_route_pdf():
       ]))
       if len(timestamp1)>0:
           elements.append(table)
-
+          elements.append(Spacer(1, 0.6*inch))
       col_width=[2*inch,2*inch]
-      elements.append(Spacer(1, 0.6*inch))
+     
       headings=["Sr. No.","Part II"]
       data=[]
       for i in  range(len(timestamp2)):

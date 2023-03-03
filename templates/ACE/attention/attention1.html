@@ -418,6 +418,7 @@
 
 
   {% block content %}
+
   <!-- For address part -->
 
 
@@ -546,7 +547,7 @@
     </div>
   </div>
   {% endblock content %}
-  <script>  nextUrl = "{{url}}"</script>
+  <script> nextUrl = "{{url}}"</script>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script
@@ -687,7 +688,9 @@
         console.log(selectedday);
         console.log(correctday);
         if (selectedday === correctday) {
+          
           ans += 1;
+          
         }
         seasonlist = ['Spring', 'Summer', 'Monsoon', 'Autumn', 'Winter']
         season = "";
@@ -704,22 +707,23 @@
           
         if (selectedseason === season) {
           ans += 1;
+          
         }
         ansMap[selectedseason]=season;
         let selectedcity=document.getElementById("city").value;
         selectedcity=selectedcity.toLowerCase();
         let selectedstate=document.getElementById("state").value;
         selectedstate=selectedstate.toLowerCase();
-        let correctcity=document.getElementById("correctcity").innerText;
-        correctcity=correctcity.toLowerCase();
-        let correctstate=document.getElementById("correctstate").innerText;
-        correctstate=correctstate.toLowerCase();
-        if(selectedcity===correctcity || correctcity.includes(selectedcity) || selectedcity.includes(correctcity)){  
+        correctCity=correctCity.toLowerCase();
+        correctState=correctState.toLowerCase();
+        if(selectedcity==correctCity){
           ans+=2;
         }
-        if(selectedstate===correctstate || correctstate.includes(selectedstate) || selectedstate.includes(correctstate) ){
+        if(selectedstate==correctState){
           ans+=2;
         }
+        ansMap[selectedcity]=correctCity;
+        ansMap[selectedstate]=correctState;
         console.log(ans);
         $.ajax({
         type: "POST",
@@ -732,7 +736,7 @@
      },
      success: function(response) {
         console.log(response);
-        sent=true;
+         sent=true;
         redirect(sent);     
      } 
      
