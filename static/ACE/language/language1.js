@@ -104,13 +104,14 @@ showImages(0);
         // Get the transcribed text
         const transcript = event.results[0][0].transcript;
      
-        // Display the transcribed text
-        document.getElementById('input_bar').value = transcript;
+       
         message=transcript;
         message=message.toLowerCase();
         if(message[message.length-1]==="."){
         message=message.slice(0,-1);
         }
+         // Display the transcribed text
+         document.getElementById('input_bar').value = message;
         //ans[i]=message;
         // Check if the recognition process has completed
         if (event.results[0].isFinal) {
