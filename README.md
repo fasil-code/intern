@@ -30,15 +30,15 @@ This is a research study of the web app-based cognitive assessment. Before decid
 Frontotemporal dementia is an uncommon type of dementia that causes problems with behaviour and language.Dementia is the name for problems with mental abilities caused by gradual changes and damage in the brain. Frontotemporal dementia affects the front and sides of the brain (the frontal and temporal lobes) Dementia mostly affects people over 65, but frontotemporal dementia tends to start at a younger age. Most cases are diagnosed in people aged 45-65, although it can also affect younger or older people. Like other types of dementia, frontotemporal dementia tends to develop slowly and get gradually worse over several years.
 
 Various test used to diagonise FTD:
-* Emotion Recognition Test
-* ACE III
+* Emotion Recognition Test:-This test is used to  assess an individual's ability to recognize emotions in facial expressions. Users are presented with a series of images and asked to identify the corresponding emotion.
+* ACE III:-This test is used to assess and improve the cognitive skills. It offers a range of interactive exercises to enhance memory, attention, problem-solving, and other mental abilities.It includes:-
   - Attention Test
   - Fluency Test
   - Memory Test
   - Language Test
-* Trail Making Test
-* Pulse Tracking Test
-* VisuoSpatial Test
+* Trail Making Test:-This test is a neuropsychological assessment that involves connecting numbered and lettered circles in order as quickly and accurately as possible.
+* Pulse Tracking Test:-This test is a psychophysiological measure used to assess the accuracy and speed of an individual's responses to a series of auditory or visual stimuli.
+* VisuoSpatial Test:-This test is a type of cognitive assessment that evaluates an individual's ability to understand and manipulate visual information in space. It typically involves tasks such as spatial perception, and pattern recognition.
 
 
 
