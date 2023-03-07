@@ -1,5 +1,5 @@
        
-        console.log(api);
+     
         let firstErrorMessage = "";
         let secondErrorMessage = "";
         let s1=0,s2=0;
