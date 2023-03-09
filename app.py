@@ -16,8 +16,8 @@ import pymysql
 from flask import render_template
 from user import register_route,login_route,logout_route,reset_password_route,set_password_route
 import json
-import pickle
 
+import bcrypt
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
@@ -307,14 +307,15 @@ def send_score():
 
    return "Score received: " + score + " for " + column   
         
-   
+
 @app.route("/home", methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
 def home():
    if 'logged_in' in session:
          conn = mysql.connect
          cursor = conn.cursor()
-         API='b1ae5b8ab7mshdae051681457ddep1fbd4cjsn1a204c61719d'
+         API='a3hwhhje'+'b1ae5b8ab7mshdae051681457ddep1fbd4cjsn1a204c61719d'+'ewixba123edbdjq'
+         
          cursor.execute("SELECT* from api where id=%s",(1,))
          result=cursor.fetchone()
          if not result:
@@ -527,8 +528,9 @@ def ace8():
     
    cursor.execute("SELECT Api FROM api WHERE id = %s", (1,))
    api1=cursor.fetchone()
-
-   return render_template('ACE/language/language4.html',url="ace6",api=api1[0]) 
+   api=api1[0]
+   api1 =api[8:56]  
+   return render_template('ACE/language/language4.html',url="ace6",api=api1) 
 @app.route("/ace9",methods=['GET','POST']) 
 def ace9():
    return render_template('ACE/memory/memory2.html',url="ace11") 
