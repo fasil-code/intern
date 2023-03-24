@@ -17,8 +17,8 @@ import pymysql
 from flask import render_template
 from user import register_route,login_route,logout_route,reset_password_route,set_password_route
 import json
-import pickle
 
+import bcrypt
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
@@ -152,6 +152,13 @@ def create_database():
          session_id VARCHAR(255)
       )'''    
    )
+   cursor.execute(
+      '''CREATE TABLE IF NOT EXISTS api (
+         id INT AUTO_INCREMENT PRIMARY KEY,
+         Api VARCHAR(255)
+      )'''
+   ) 
+   
    cursor.close()
    conn.close()
 
@@ -165,6 +172,8 @@ mysql = MySQL(app)
 
 # for emotion data
 mysql = MySQL(app)
+
+
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     return register_route()
@@ -299,11 +308,23 @@ def send_score():
 
    return "Score received: " + score + " for " + column   
         
-   
+
 @app.route("/home", methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
 def home():
    if 'logged_in' in session:
+         conn = mysql.connect
+         cursor = conn.cursor()
+         API='a3hwhhje'+'b1ae5b8ab7mshdae051681457ddep1fbd4cjsn1a204c61719d'+'ewixba123edbdjq'
+         
+         cursor.execute("SELECT* from api where id=%s",(1,))
+         result=cursor.fetchone()
+         if not result:
+            cursor.execute(f"INSERT INTO api (id, Api) VALUES (%s, %s)", (1,API))
+            conn.commit()
+         
+         cursor.close()
+         conn.close()
          name=session.get('name')
          # Generate a new session ID
          return render_template('navbar.html',name=name,  logged_in=True)         
@@ -502,7 +523,15 @@ def ace7():
    return render_template('ACE/language/language3.html',url="ace10") 
 @app.route("/ace8",methods=['GET','POST']) 
 def ace8():
-   return render_template('ACE/language/language4.html',url="ace6") 
+   
+   conn = mysql.connect
+   cursor = conn.cursor()
+    
+   cursor.execute("SELECT Api FROM api WHERE id = %s", (1,))
+   api1=cursor.fetchone()
+   api=api1[0]
+   api1 =api[8:56]  
+   return render_template('ACE/language/language4.html',url="ace6",api=api1) 
 @app.route("/ace9",methods=['GET','POST']) 
 def ace9():
    return render_template('ACE/memory/memory2.html',url="ace11") 

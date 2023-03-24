@@ -1,4 +1,5 @@
-
+       
+     
         let firstErrorMessage = "";
         let secondErrorMessage = "";
         let s1=0,s2=0;
@@ -110,6 +111,7 @@ function scoring(score){
         },
         success: function(response) {
             console.log(response);
+           
             // sent=true;
             redirect();
  }

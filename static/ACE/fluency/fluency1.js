@@ -3,7 +3,7 @@ const timeCount = document.querySelector(".timer .timer_sec");
 const next_btn=document.getElementById("next-btn");
 const recordButton = document.getElementById("record-btn");
 startTimer(60); //calling startTimer function
-const alphabet = "abcdefghijklmnopqrst";
+const alphabet = "abdefghklmnoprst";
 const randomIndex = Math.floor(Math.random() * alphabet.length);
 let randomLetter = alphabet[randomIndex];
 randomLetter=randomLetter.toUpperCase();
@@ -121,7 +121,11 @@ function animateText() {
     else{
       score=0;
     }
-  
+   //mapping of actual response with user response
+   let ansMap = new Map();
+   for(let i=0;i<answers.length;i++){
+     ansMap.set(randomLetter, answers);
+   }
   $.ajax({
     type: "POST",
     url: "/send_score",
@@ -129,7 +133,7 @@ function animateText() {
        score: score,
        column: "fluency1",
        source:"fluency1_response",
-       user_response:JSON.stringify(answers)
+       user_response:JSON.stringify(Object.fromEntries(ansMap))
     },
     success: function(response) {
        console.log(response);
