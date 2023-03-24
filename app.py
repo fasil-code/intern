@@ -1,6 +1,7 @@
 from flask import Flask,jsonify,abort, make_response,render_template,request,session
 from flask import Flask,render_template,url_for,flash,redirect
 import geonamescache
+
 import os
 import uuid
 import datetime
@@ -22,11 +23,11 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 
 
-# app.config['MYSQL_PASSWORD'] = '7006022139'
+app.config['MYSQL_PASSWORD'] = '7006022139'
 # app.config['MYSQL_PASSWORD'] = 'Fazeel@1234'
 # app.config['MYSQL_PASSWORD'] = '#1Openupsesame'
 
-app.config['MYSQL_PASSWORD'] = 'alchemist'
+# app.config['MYSQL_PASSWORD'] = 'alchemist'
 # app.config['MYSQL_PASSWORD'] = 'Zargar@123'
 
 
